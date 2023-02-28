@@ -17,6 +17,7 @@ dependencies:
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
   dio: ^5.0.1
+  shared_preferences: ^2.0.18
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family:  BottomBarIcons
+      fonts:
+        - asset: fonts/icons/BottomBarIcons.ttf
 
 flutter_intl:
   enabled: true
