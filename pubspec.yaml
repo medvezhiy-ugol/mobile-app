@@ -29,7 +29,7 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family:  BottomBarIcons
+    - family: BottomBarIcons
       fonts:
         - asset: fonts/icons/BottomBarIcons.ttf
 

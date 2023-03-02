@@ -3,8 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
-import 'generated/l10n.dart';
-import 'pages/main/main_page.dart';
 import 'utils/app_colors.dart';
 import 'utils/module_container.dart';
 
@@ -24,13 +22,13 @@ class UgolApp extends StatelessWidget {
     return MaterialApp(
       title: 'Медвежий угол',
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
+      // localizationsDelegates: const [
+      //   S.delegate,
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
+      // supportedLocales: S.delegate.supportedLocales,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.color111216,
