@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
+
+import 'pages/auth/bloc/auth_bloc.dart';
 import 'utils/app_colors.dart';
 import 'utils/module_container.dart';
 
@@ -32,10 +34,17 @@ class UgolApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.color111216,
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Colors.white,
+              displayColor: Colors.white,
+            ),
         bottomNavigationBarTheme: themeService.bottomNavigationBarTheme(),
       ),
       themeMode: ThemeMode.dark,
-      home: AuthPage(),
+      home: BlocProvider(
+        create: (context) => AuthBloc(),
+        child: AuthPage(),
+      ),
     );
   }
 }
