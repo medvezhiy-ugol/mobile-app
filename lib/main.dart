@@ -6,8 +6,8 @@ import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
 import 'pages/main/main_page.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
-import 'utils/module_container.dart';
-import 'utils/routes.dart';
+import 'common_setup/module_container.dart';
+import 'common_setup/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
