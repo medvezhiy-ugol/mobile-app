@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
-import 'package:medvezhiy_ugol/services/theme_service.dart';
 
-import 'pages/auth/bloc/auth_bloc.dart';
+import 'pages/main/main_page.dart';
+import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
 import 'utils/module_container.dart';
+import 'utils/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,7 @@ class UgolApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Медвежий угол',
       debugShowCheckedModeBanner: false,
       // localizationsDelegates: const [
@@ -41,9 +42,18 @@ class UgolApp extends StatelessWidget {
         bottomNavigationBarTheme: themeService.bottomNavigationBarTheme(),
       ),
       themeMode: ThemeMode.dark,
-      home: BlocProvider(
-        create: (context) => AuthBloc(),
-        child: AuthPage(),
+      routerConfig: GoRouter(
+        initialLocation: Routes.auth,
+        routes: [
+          GoRoute(
+            path: Routes.auth,
+            builder: (context, state) => AuthPage(),
+          ),
+          GoRoute(
+            path: Routes.main,
+            builder: (context, state) => MainPage(),
+          ),
+        ],
       ),
     );
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
+import '../../utils/routes.dart';
 import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatelessWidget {
@@ -58,7 +60,7 @@ class AuthPage extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: buildGetCodeButton(),
+                              child: buildGetCodeButton(context),
                             ),
                             const Spacer(),
                             Center(
@@ -99,7 +101,7 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  Container buildGetCodeButton() {
+  Container buildGetCodeButton(BuildContext context) {
     return Container(
       height: 50,
       width: double.infinity,
@@ -107,7 +109,7 @@ class AuthPage extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: () => context.go(Routes.main),
           child: Align(
             alignment: Alignment.center,
             child: Text(
