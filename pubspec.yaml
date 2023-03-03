@@ -56,6 +56,14 @@ flutter:
       fonts:
         - asset: fonts/icons/BottomBarIcons.ttf
 
+    - family: SocialIcons
+      fonts:
+        - asset: fonts/icons/SocialIcons.ttf
+
+    - family: MorePageIcons
+      fonts:
+        - asset: fonts/icons/MorePageIcons.ttf
+
 flutter_intl:
   enabled: true
   main_locale: ru
