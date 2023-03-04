@@ -57,7 +57,7 @@ class DetailPage extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                ChoseComponents(),
+                ChoiceComponents(),
                 SizedBox(
                   height: 25,
                 ),
@@ -120,7 +120,7 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget ChoseComponents() {
+  Widget ChoiceComponents() {
     bool _ch = false;
     return Wrap(
       direction: Axis.horizontal,
