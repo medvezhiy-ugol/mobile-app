@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/bottom_bar_icons_icons.dart';
+import '../menu/detail_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,9 +16,16 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: _buildBody(_selectedIndex),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
+  }
+
+  Widget _buildBody(int index) {
+    switch (index) {
+      case 0: return DetailPage();
+      default: return Container();
+    }
   }
 
   Widget _buildBottomNavigationBar() {
