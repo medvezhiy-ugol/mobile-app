@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 
+import '../../generated/l10n.dart';
+import '../../services/theme_service.dart';
 import '../../ui/buttons.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+  DetailPage({
+    super.key,
+    required this.productCoast,
+    required this.productName,
+  });
+
+  final ThemeService themeService = Injector().get<ThemeService>();
+
+  final int productCoast;
+  final String productName;
+
+  static List<String> inputProductIngredients = [
+    'куриное бедро',
+    'помидор',
+    'огурец',
+    'айсберг',
+    'кинза',
+    'базилик',
+    'соус на выбор'
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final String outputProductIngredients = inputProductIngredients.join(', ');
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.color151515,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -21,7 +45,7 @@ class DetailPage extends StatelessWidget {
                     width: 48,
                     height: 4,
                     decoration: BoxDecoration(
-                        color: AppColors.colorD9D9D9,
+                        color: AppColors.colorD9D9D9.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(9)),
                   ),
                 ),
@@ -29,42 +53,68 @@ class DetailPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Image.asset(A.assetsDetailPageProductImg),
                 ),
-                Text('Донер с курицей'),
-                SizedBox(
+                Row(
+                  children: [
+                    Text(
+                      productName,
+                      style: ThemeService.detailPageTitleProductTextStyle(),
+                    ),
+                  ],
+                ),
+                const SizedBox(
                   height: 30,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: PrimaryButton(
-                    height: 50,
-                    text: '220 Р Добавить',
+                PrimaryButton(
+                  height: 50,
+                  text:
+                      '$productCoast ₽ ${S.current.mealScreenDeleteAddTitleText}',
+                  textStyle: ThemeService.detailPageAddButtonTextStyle(),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          outputProductIngredients,
+                          style: ThemeService
+                              .detailPageProductIngredientsTextStyle(),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
-                SizedBox(
-                  child: Text('sostav'),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: 15),
                 StatsBarWidget(),
-                SizedBox(
-                  height: 15,
+                const SizedBox(height: 15),
+                Row(
+                  children: [
+                    Text(
+                      S.current.mealScreenDeleteIngredientsTitleText,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
-                Text('убрать элемента'),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 ChoiceComponents(),
-                SizedBox(
-                  height: 25,
+                const SizedBox(height: 25),
+                Row(
+                  children: [
+                    Text(
+                      S.current.mealScreenDeleteAddTitleText,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
-                Text('Добавить'),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 AddProduct(),
               ],
             ),
@@ -77,21 +127,28 @@ class DetailPage extends StatelessWidget {
   Widget StatsBarWidget() {
     return Row(
       children: <Widget>[
-        StatusBarItemWidget(title: 'Вес', data: '300 г', width: 56),
-        SizedBox(
-          width: 8,
-        ),
-        StatusBarItemWidget(title: 'Ккал', data: '588 г', width: 46),
-        Spacer(),
-        StatusBarItemWidget(title: 'Белки', data: '23 г', width: 46),
-        SizedBox(
-          width: 8,
-        ),
-        StatusBarItemWidget(title: 'Жири', data: '24 г', width: 46),
-        SizedBox(
-          width: 8,
-        ),
-        StatusBarItemWidget(title: 'Углеводы', data: '68 г', width: 61),
+        StatusBarItemWidget(
+            title: S.current.mealScreenWeightTitleText,
+            data: '300 г',
+            width: 56),
+        const SizedBox(width: 8),
+        StatusBarItemWidget(
+            title: S.current.mealScreenCaloriesTitleText,
+            data: '588 г',
+            width: 46),
+        const Spacer(),
+        StatusBarItemWidget(
+            title: S.current.mealScreenProteinTitleText,
+            data: '23 г',
+            width: 46),
+        const SizedBox(width: 8),
+        StatusBarItemWidget(
+            title: S.current.mealScreenFatsTitleText, data: '24 г', width: 46),
+        const SizedBox(width: 8),
+        StatusBarItemWidget(
+            title: S.current.mealScreenCarbohydratesTitleText,
+            data: '68 г',
+            width: 61),
       ],
     );
   }
@@ -105,21 +162,28 @@ class DetailPage extends StatelessWidget {
     return Column(
       children: [
         Center(
-          child: Text(title),
+          child: Text(
+            title,
+            style: ThemeService.detailPageStatusBarItemTextStyle(),
+          ),
         ),
-        SizedBox(height: 2),
+        const SizedBox(height: 2),
         Container(
           alignment: Alignment.center,
           height: height,
           width: width,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           color: AppColors.color191A1F,
-          child: Text(data),
+          child: Text(
+            data,
+            style: ThemeService.detailPageStatusBarItemCountTextStyle(),
+          ),
         ),
       ],
     );
   }
 
+  //тестовый вариант
   Widget ChoiceComponents() {
     bool _ch = false;
     return Wrap(
@@ -131,33 +195,33 @@ class DetailPage extends StatelessWidget {
           label: Text(
             'Luk',
             style: (_ch
-                ? TextStyle(decoration: TextDecoration.lineThrough)
-                : TextStyle()),
+                ? const TextStyle(decoration: TextDecoration.lineThrough)
+                : const TextStyle()),
           ),
           onPressed: () {
             _ch = !_ch;
           },
         ),
         Chip(
-          avatar: Icon(
+          avatar: const Icon(
             Icons.close,
             size: 9,
             color: Colors.white,
           ),
-          label: Text(
+          label: const Text(
             'Luk',
             style: TextStyle(
               decoration: TextDecoration.lineThrough,
             ),
           ),
-          deleteIcon: Icon(
+          deleteIcon: const Icon(
             Icons.close,
             size: 9,
             color: Colors.white,
           ),
           onDeleted: () {},
         ),
-        Chip(
+        const Chip(
           avatar: Icon(
             Icons.close,
             size: 9,
@@ -165,7 +229,7 @@ class DetailPage extends StatelessWidget {
           ),
           label: Text('Luk'),
         ),
-        Chip(
+        const Chip(
           avatar: Icon(
             Icons.close,
             size: 9,
@@ -196,17 +260,20 @@ class DetailPage extends StatelessWidget {
     return Column(
       children: [
         OptionalProduct(
-            name: 'sTomat sous',
-            price: 20,
-            imgPath: A.assetsDetailPageOptionalProductImg),
+          name: S.current.detailScreenTomatoSauceText,
+          price: 20,
+          imgPath: A.assetsDetailPageOptionalProductImg,
+        ),
         OptionalProduct(
-            name: 'Chees sous',
-            price: 20,
-            imgPath: A.assetsDetailPageOptionalProductImg),
+          name: S.current.detailScreenCheeseSauceText,
+          price: 20,
+          imgPath: A.assetsDetailPageOptionalProductImg,
+        ),
         OptionalProduct(
-            name: 'Chees sous',
-            price: 20,
-            imgPath: A.assetsDetailPageOptionalProductImg),
+          name: S.current.detailScreenCheeseSauceText,
+          price: 20,
+          imgPath: A.assetsDetailPageOptionalProductImg,
+        ),
       ],
     );
   }
@@ -240,13 +307,13 @@ class _OptionalProductState extends State<OptionalProduct> {
           });
         },
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           height: 65,
           color: AppColors.color191A1F,
           child: Row(
             children: [
               Image.asset(widget.imgPath),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Column(
@@ -257,17 +324,22 @@ class _OptionalProductState extends State<OptionalProduct> {
                   Text('+ ${widget.price} Р'),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                 height: 20,
                 width: 20,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (_isToogle
-                          ? AppColors.colorFF9900
-                          : AppColors.color5D6377)),
-                  child: (_isToogle ? Icon(Icons.done, size: 15,) : null),
-                  ),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (_isToogle
+                        ? AppColors.colorFF9900
+                        : AppColors.color5D6377)),
+                child: (_isToogle
+                    ? const Icon(
+                        Icons.done,
+                        size: 15,
+                      )
+                    : null),
+              ),
             ],
           ),
         ),
@@ -298,7 +370,7 @@ class _DishComponentState extends State<DishComponent> {
           });
         },
         child: Container(
-          constraints: BoxConstraints(maxWidth: 170),
+          constraints: const BoxConstraints(maxWidth: 170),
           height: 38,
           alignment: Alignment.center,
           color: AppColors.color26282F,
@@ -308,12 +380,12 @@ class _DishComponentState extends State<DishComponent> {
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.close,
                         size: 9,
                         color: Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(widget.text),
@@ -321,7 +393,7 @@ class _DishComponentState extends State<DishComponent> {
                   )
                 : Text(
                     widget.text,
-                    style: TextStyle(
+                    style: const TextStyle(
                       decoration: TextDecoration.lineThrough,
                     ),
                   )),

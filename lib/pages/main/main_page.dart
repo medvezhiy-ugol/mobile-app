@@ -23,7 +23,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildBody(int index) {
     switch (index) {
-      case 0: return DetailPage();
+      case 0: return DetailPage(productCoast: 220, productName: 'Донер с курицей');
       default: return Container();
     }
   }

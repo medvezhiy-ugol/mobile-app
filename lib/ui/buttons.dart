@@ -7,18 +7,20 @@ class PrimaryButton extends StatelessWidget {
     required this.text,
     this.height = 50,
     this.width = double.infinity,
+    this.textStyle,
   });
 
   final double height;
   final double width;
   final String text;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.color26282F,
       height: height,
-              width: width,
+      width: width,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -26,6 +28,7 @@ class PrimaryButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
+              style: textStyle,
             ),
           ),
         ),

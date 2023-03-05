@@ -65,5 +65,5 @@ flutter:
         - asset: fonts/icons/MorePageIcons.ttf
 
 flutter_intl:
-  enabled: true
   main_locale: ru
+  enabled: true

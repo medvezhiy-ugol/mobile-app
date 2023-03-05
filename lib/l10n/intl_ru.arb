@@ -43,7 +43,7 @@
     "mealScreenCaloriesTitleText": "Ккал",
     "mealScreenProteinTitleText": "Белки",
     "mealScreenFatsTitleText": "Жиры",
-    "mealScreenСarbohydratesTitleText": "Углеводы",
+    "mealScreenCarbohydratesTitleText": "Углеводы",
     "mealScreenDeleteIngredientsTitleText": "Убрать ингредиенты",
     "mealScreenDeleteAddTitleText": "Добавить",
     "mealScreenOnionOption": "Лук",
@@ -85,5 +85,8 @@
     "authScreenEnterPhoneNumberText": "Введите номер мобильного телефона",
     "authScreenReceiveCodeButtonText": "Получить код",
     "authScreenTermsOfUseNoLink": "Нажимая “получить код”, вы принимаете условия ",
-    "authScreenTermsOfUseWithLink": "Пользовательского соглашения"
+    "authScreenTermsOfUseWithLink": "Пользовательского соглашения",
+
+    "detailScreenTomatoSauceText": "Томатный соус",
+    "detailScreenCheeseSauceText": "Сырный соус"
 }
