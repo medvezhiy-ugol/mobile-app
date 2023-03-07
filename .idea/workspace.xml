@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6600c8e-8314-47a6-9fc7-aa0d87c5d820" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/icons/MorePageIcons.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/fonts/icons/MorePageIcons.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/main/main_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/main/main_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/main/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/main/more/more_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/main/more/registated_profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/main/more/registated_profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/more_page_icons.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/more_page_icons.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

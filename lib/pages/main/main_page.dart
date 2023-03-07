@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/main/more/more_page.dart';
-import 'package:medvezhiy_ugol/pages/main/more/registated_profile_page.dart';
 
 import '../../utils/bottom_bar_icons.dart';
 
@@ -17,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RegisteredPage(),//MorePage(),
+      body: MorePage(),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
