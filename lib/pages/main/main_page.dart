@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/pages/main/more/more_page.dart';
 
-import '../../utils/bottom_bar_icons_icons.dart';
+import '../../utils/bottom_bar_icons.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: MorePage(),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
