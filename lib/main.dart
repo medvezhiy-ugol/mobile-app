@@ -43,15 +43,15 @@ class UgolApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       routerConfig: GoRouter(
-        initialLocation: Routes.auth,
+        initialLocation: Routes.main,
         routes: [
-          GoRoute(
-            path: Routes.auth,
-            builder: (context, state) => AuthPage(),
-          ),
           GoRoute(
             path: Routes.main,
             builder: (context, state) => MainPage(),
+          ),
+          GoRoute(
+            path: Routes.auth,
+            builder: (context, state) => AuthPage(),
           ),
         ],
       ),
