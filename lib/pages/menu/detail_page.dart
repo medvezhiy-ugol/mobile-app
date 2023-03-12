@@ -8,16 +8,14 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
 class DetailPage extends StatelessWidget {
-  DetailPage({
-    super.key,
-    required this.productCoast,
-    required this.productName,
-  });
+  DetailPage({super.key, required this.id});
 
   final ThemeService themeService = Injector().get<ThemeService>();
 
-  final int productCoast;
-  final String productName;
+  final String? id;
+
+  final int productCoast = 220;
+  final String productName = 'Doner';
 
   static List<String> inputProductIngredients = [
     'куриное бедро',

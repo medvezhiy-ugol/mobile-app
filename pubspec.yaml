@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl_utils: ^2.8.2
+  intl: ^0.17.0
 
   cupertino_icons: ^1.0.2
   flutter_simple_dependency_injection: ^2.0.0
@@ -68,5 +70,5 @@ flutter:
         - asset: fonts/icons/MorePageIcons.ttf
 
 flutter_intl:
-  main_locale: ru
   enabled: true
+  main_locale: ru

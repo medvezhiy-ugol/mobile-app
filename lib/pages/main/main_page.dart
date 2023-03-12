@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/common_setup/routes.dart';
 import 'package:medvezhiy_ugol/pages/main/more/more_page.dart';
 
-import '../../utils/bottom_bar_icons_icons.dart';
+import '../../utils/bottom_bar_icons.dart';
 import '../menu/detail_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -24,8 +26,18 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildBody(int index) {
     switch (index) {
-      case 0: return DetailPage(productCoast: 220, productName: 'Донер с курицей');
-      default: return Container();
+      case 0:
+        return TempPage();
+      // case 1:
+      //   return StocksPage();
+      // case 2:
+      //   return MenuPage();
+      // case 3:
+      //   return MapPage();
+      // case 4:
+      //   return OtherPage();
+      default:
+        return Container();
     }
   }
 
@@ -70,6 +82,35 @@ class _MainPageState extends State<MainPage> {
             _selectedIndex = i;
           }),
           currentIndex: _selectedIndex,
+        ),
+      ),
+    );
+  }
+}
+
+
+//exapmle redirect to detail page
+class TempPage extends StatelessWidget {
+  const TempPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: InkWell(
+          onTap: () {
+            context.push(
+              Uri(
+                path: Routes.detail,
+                queryParameters: {'id': '001'},
+              ).toString(),
+            );
+          },
+          child: Container(
+            height: 80,
+            color: Colors.blue,
+            child: Center(child: Text('Detail page')),
+          ),
         ),
       ),
     );

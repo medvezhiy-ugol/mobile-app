@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
+import 'package:medvezhiy_ugol/pages/menu/detail_page.dart';
 
 import 'generated/l10n.dart';
 import 'pages/main/main_page.dart';
@@ -54,6 +55,11 @@ class UgolApp extends StatelessWidget {
           GoRoute(
             path: Routes.auth,
             builder: (context, state) => AuthPage(),
+          ),
+          GoRoute(
+            path: Routes.detail,
+            builder: (context, state) =>
+                DetailPage(id: state.params['id']),
           ),
         ],
       ),
