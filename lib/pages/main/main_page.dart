@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/pages/main/more/more_page.dart';
 
 import '../../utils/bottom_bar_icons_icons.dart';
 import '../menu/detail_page.dart';

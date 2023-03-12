@@ -55,6 +55,9 @@ flutter:
     - family: BottomBarIcons
       fonts:
         - asset: fonts/icons/BottomBarIcons.ttf
+    - family:  MorePageIcons
+      fonts:
+        - asset: fonts/icons/MorePageIcons.ttf
 
     - family: SocialIcons
       fonts:
