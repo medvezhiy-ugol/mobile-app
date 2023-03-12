@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
+import 'package:medvezhiy_ugol/pages/menu/detail_page.dart';
 
+import 'generated/l10n.dart';
 import 'pages/main/main_page.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
@@ -25,13 +28,13 @@ class UgolApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Медвежий угол',
       debugShowCheckedModeBanner: false,
-      // localizationsDelegates: const [
-      //   S.delegate,
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      //   GlobalCupertinoLocalizations.delegate,
-      // ],
-      // supportedLocales: S.delegate.supportedLocales,
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.color111216,
@@ -52,6 +55,11 @@ class UgolApp extends StatelessWidget {
           GoRoute(
             path: Routes.auth,
             builder: (context, state) => AuthPage(),
+          ),
+          GoRoute(
+            path: Routes.detail,
+            builder: (context, state) =>
+                DetailPage(id: state.params['id']),
           ),
         ],
       ),
