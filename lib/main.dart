@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/pages/more/auth/auth_page.dart';
 
 import 'generated/l10n.dart';
-import 'pages/main/main_page.dart';
-import 'pages/main/more/auth/auth_page.dart';
+import 'pages/main_page.dart';
 import 'pages/menu/detail_page.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
