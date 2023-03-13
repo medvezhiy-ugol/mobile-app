@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/auth/auth_page.dart';
-import 'package:medvezhiy_ugol/pages/menu/detail_page.dart';
 
 import 'generated/l10n.dart';
 import 'pages/main/main_page.dart';
+import 'pages/main/more/auth/auth_page.dart';
+import 'pages/menu/detail_page.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
 import 'common_setup/module_container.dart';
@@ -28,7 +28,7 @@ class UgolApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Медвежий угол',
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -58,8 +58,7 @@ class UgolApp extends StatelessWidget {
           ),
           GoRoute(
             path: Routes.detail,
-            builder: (context, state) =>
-                DetailPage(id: state.params['id']),
+            builder: (context, state) => DetailPage(id: state.params['id']),
           ),
         ],
       ),

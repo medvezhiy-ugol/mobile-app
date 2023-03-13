@@ -34,8 +34,6 @@ class _MainPageState extends State<MainPage> {
       //   return MenuPage();
       // case 3:
       //   return MapPage();
-      case 4:
-        return MorePage();
       default:
         return Container();
     }
@@ -87,7 +85,6 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
 
 //exapmle redirect to detail page
 class TempPage extends StatelessWidget {

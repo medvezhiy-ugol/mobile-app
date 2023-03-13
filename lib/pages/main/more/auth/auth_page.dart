@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-import '../../common_setup/routes.dart';
-import '../../utils/app_fonts.dart';
+import '../../../../common_setup/routes.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_fonts.dart';
 import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatelessWidget {
@@ -110,7 +110,7 @@ class AuthPage extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => context.go(Routes.main),
+          onTap: () => context.pop(),
           child: Align(
             alignment: Alignment.center,
             child: Text(
