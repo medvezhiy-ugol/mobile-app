@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/stock/stock_page.dart';
 
 import 'generated/l10n.dart';
 import 'pages/home/home_page.dart';
 import 'pages/main_page.dart';
 import 'pages/map/map_page.dart';
+import 'pages/menu/detail_page.dart';
 import 'pages/menu/menu_page.dart';
 import 'pages/more/auth/auth_page.dart';
 import 'pages/more/more_page.dart';
@@ -97,10 +97,6 @@ class UgolApp extends StatelessWidget {
           GoRoute(
             path: Routes.detail,
             builder: (context, state) => DetailPage(id: state.params['id']),
-          ),
-          GoRoute(
-            path: Routes.stock,
-            builder: (context, state) => StockPage(),
           ),
         ],
       ),

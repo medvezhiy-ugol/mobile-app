@@ -33,6 +33,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/detail_page/
+    - assets/images/stock_page/
 
   fonts:
     - family: Unbounded
