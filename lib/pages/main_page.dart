@@ -9,8 +9,9 @@ import 'more/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {
   final Widget child;
+  final String location;
 
-  const MainPage({required this.child, super.key});
+  const MainPage({required this.child, required this.location, super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -18,7 +19,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int get _currentIndex => MenuRoute.values
-      .firstWhere((e) => GoRouter.of(context).location.contains(e.path))
+      .firstWhere((e) => widget.location.contains(e.path))
       .index;
 
   @override

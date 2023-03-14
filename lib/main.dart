@@ -7,6 +7,7 @@ import 'generated/l10n.dart';
 import 'pages/home/home_page.dart';
 import 'pages/main_page.dart';
 import 'pages/map/map_page.dart';
+import 'pages/menu/detail_page.dart';
 import 'pages/menu/menu_page.dart';
 import 'pages/more/auth/auth_page.dart';
 import 'pages/more/more_page.dart';
@@ -57,6 +58,7 @@ class UgolApp extends StatelessWidget {
           ShellRoute(
             builder: (context, state, child) {
               return MainPage(
+                location: state.location,
                 child: child,
               );
             },
@@ -92,6 +94,11 @@ class UgolApp extends StatelessWidget {
             parentNavigatorKey: _rootNavigatorKey,
             path: Routes.moreAuth,
             builder: (context, state) => AuthPage(),
+          ),
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: Routes.detail,
+            builder: (context, state) => DetailPage(id: state.params['id']),
           ),
         ],
       ),
