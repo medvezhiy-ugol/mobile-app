@@ -1,5 +1,4 @@
 class Routes {
-  static const String auth = '/auth';
   static const String main = '/';
   static const String detail = '/detail';
   static const String home = '/home';
@@ -7,12 +6,16 @@ class Routes {
   static const String menu = '/menu';
   static const String map = '/map';
   static const String more = '/more';
+  static const String moreAuth = '/more/auth';
 }
 
-enum MainRoute {
-  home,
-  stock,
-  menu,
-  map,
-  more,
+enum MenuRoute {
+  home('/home'),
+  stock('/stock'),
+  menu('/menu'),
+  map('/map'),
+  more('/more');
+
+  final String path;
+  const MenuRoute(this.path);
 }

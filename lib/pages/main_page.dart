@@ -1,74 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/common_setup/routes.dart';
-import 'package:medvezhiy_ugol/pages/home/home_page.dart';
-import 'package:medvezhiy_ugol/pages/map/map_page.dart';
-import 'package:medvezhiy_ugol/pages/menu/menu_page.dart';
-import 'package:medvezhiy_ugol/pages/more/more_page.dart';
-import 'package:medvezhiy_ugol/pages/stock/stock_page.dart';
 
+import '../common_setup/routes.dart';
 import '../utils/bottom_bar_icons.dart';
-import 'menu/detail_page.dart';
+import 'more/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final Widget child;
+
+  const MainPage({required this.child, super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-
-  int _selectedIndex = MainRoute.home.index;
-  MainRoute _screen = MainRoute.home;
+  int get _currentIndex => MenuRoute.values
+      .firstWhere((e) => e.path == GoRouter.of(context).location)
+      .index;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildBody(),
+      body: BlocProvider(
+        create: (context) => MoreBloc(),
+        child: widget.child,
+      ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(
-      () {
-        _selectedIndex = index;
-        switch (index) {
-          case 0:
-            _screen = MainRoute.home;
-            break;
-          case 1:
-            _screen = MainRoute.stock;
-            break;
-          case 2:
-            _screen = MainRoute.menu;
-            break;
-          case 3:
-            _screen = MainRoute.map;
-            break;
-          case 4:
-            _screen = MainRoute.more;
-            break;
-        }
-      },
-    );
-  }
-
-  Widget _buildBody() {
-    switch (_screen) {
-      case MainRoute.home:
-        return const HomePage();
-      case MainRoute.stock:
-        return const StockPage();
-      case MainRoute.menu:
-        return const MenuPage();
-      case MainRoute.map:
-        return const MapPage();
-      case MainRoute.more:
-        return const MorePage();
-      default:
-        return const HomePage();
+  void _onItemTapped(BuildContext context, MenuRoute menuRoute) {
+    if (menuRoute.index != _currentIndex) {
+      context.go(menuRoute.path);
     }
   }
 
@@ -109,8 +74,8 @@ class _MainPageState extends State<MainPage> {
                 ),
                 label: 'Еще')
           ],
-          onTap: _onItemTapped,
-          currentIndex: _selectedIndex,
+          onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),
+          currentIndex: _currentIndex,
         ),
       ),
     );

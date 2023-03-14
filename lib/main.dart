@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/more/auth/auth_page.dart';
+import 'package:medvezhiy_ugol/pages/home/home_page.dart';
+import 'package:medvezhiy_ugol/pages/map/map_page.dart';
+import 'package:medvezhiy_ugol/pages/menu/menu_page.dart';
+import 'package:medvezhiy_ugol/pages/more/more_page.dart';
+import 'package:medvezhiy_ugol/pages/stock/stock_page.dart';
 
 import 'generated/l10n.dart';
 import 'pages/main_page.dart';
-import 'pages/menu/detail_page.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
 import 'common_setup/module_container.dart';
@@ -46,20 +49,41 @@ class UgolApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       routerConfig: GoRouter(
-        initialLocation: Routes.main,
+        initialLocation: Routes.home,
         routes: [
-          GoRoute(
-            path: Routes.main,
-            builder: (context, state) => MainPage(),
-          ),
-          GoRoute(
-            path: Routes.auth,
-            builder: (context, state) => AuthPage(),
-          ),
-          GoRoute(
-            path: Routes.detail,
-            builder: (context, state) => DetailPage(id: state.params['id']),
-          ),
+          ShellRoute(
+              builder: (context, state, child) {
+                return MainPage(
+                  child: child,
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: Routes.home,
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: HomePage()),
+                ),
+                GoRoute(
+                  path: Routes.stock,
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: StockPage()),
+                ),
+                GoRoute(
+                  path: Routes.menu,
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: MenuPage()),
+                ),
+                GoRoute(
+                  path: Routes.map,
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: MapPage()),
+                ),
+                GoRoute(
+                  path: Routes.more,
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: MorePage()),
+                ),
+              ])
         ],
       ),
     );

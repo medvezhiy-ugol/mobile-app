@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import 'package:medvezhiy_ugol/utils/social_icons_icons.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/common_setup/routes.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/more_page_icons.dart';
+import '../../utils/app_fonts.dart';
+import '../../utils/social_icons_icons.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
@@ -12,53 +14,52 @@ class MorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MoreBloc(),
-      child: Scaffold(
-        body: BlocBuilder<MoreBloc, MoreState>(
-          builder: (context, state) {
-            return SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    (state is MoreDefaultState) ? _buildAuthRow() : Container(),
-                    SizedBox(
-                      height: (state is MoreDefaultState) ? 16 : 0,
-                    ),
-                    (state is MoreRegisteredState)
-                        ? _buildProfileWidget()
-                        : Container(),
-                    SizedBox(
-                      height: (state is MoreRegisteredState) ? 84 : 0,
-                    ),
-                    (state is MoreRegisteredState)
-                        ? _buildRegisteredRow()
-                        : Container(),
-                    SizedBox(
-                      height: (state is MoreRegisteredState) ? 10 : 0,
-                    ),
-                    _buildDefaultRows(),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    (state is MoreRegisteredState)
-                        ? _buildOurSocials()
-                        : Container()
-                  ],
-                ),
+    return Scaffold(
+      body: BlocBuilder<MoreBloc, MoreState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  (state is MoreDefaultState)
+                      ? _buildAuthRow(context)
+                      : Container(),
+                  SizedBox(
+                    height: (state is MoreDefaultState) ? 16 : 0,
+                  ),
+                  (state is MoreRegisteredState)
+                      ? _buildProfileWidget()
+                      : Container(),
+                  SizedBox(
+                    height: (state is MoreRegisteredState) ? 84 : 0,
+                  ),
+                  (state is MoreRegisteredState)
+                      ? _buildRegisteredRow()
+                      : Container(),
+                  SizedBox(
+                    height: (state is MoreRegisteredState) ? 10 : 0,
+                  ),
+                  _buildDefaultRows(),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  (state is MoreRegisteredState)
+                      ? _buildOurSocials()
+                      : Container()
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  Column _buildAuthRow() {
+  Column _buildAuthRow(BuildContext context) {
     return Column(
       children: <Widget>[
         const Text(
@@ -73,11 +74,11 @@ class MorePage extends StatelessWidget {
           height: 26,
         ),
         Container(
-          color: AppColors.color1C1C1C,
+          color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () => context.go(Routes.moreAuth),
               child: Container(
                 padding: const EdgeInsets.all(17),
                 child: Row(
@@ -123,7 +124,7 @@ class MorePage extends StatelessWidget {
 
   Container _buildOurSocials() {
     return Container(
-      color: AppColors.color1C1C1C,
+      color: AppColors.color191A1F,
       padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +187,7 @@ class MorePage extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          color: AppColors.color1C1C1C,
+          color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -216,7 +217,7 @@ class MorePage extends StatelessWidget {
           ),
         ),
         Container(
-          color: AppColors.color1C1C1C,
+          color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -246,7 +247,7 @@ class MorePage extends StatelessWidget {
           ),
         ),
         Container(
-          color: AppColors.color1C1C1C,
+          color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -276,7 +277,7 @@ class MorePage extends StatelessWidget {
           ),
         ),
         Container(
-          color: AppColors.color1C1C1C,
+          color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -311,10 +312,11 @@ class MorePage extends StatelessWidget {
 
   Row _buildRegisteredRow() {
     return Row(
-      children: [
+      children: <Widget>[
         Expanded(
           child: Container(
-            color: AppColors.color1C1C1C,
+            height: 100,
+            color: AppColors.color191A1F,
             child: Material(
               color: Colors.transparent,
               child: InkWell(
@@ -355,7 +357,8 @@ class MorePage extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            color: AppColors.color1C1C1C,
+            height: 100,
+            color: AppColors.color191A1F,
             child: Material(
               color: Colors.transparent,
               child: InkWell(
