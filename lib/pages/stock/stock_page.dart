@@ -22,135 +22,176 @@ class StockPage extends StatelessWidget {
                 color: Colors.white
               ),),
               const SizedBox(height: 10,),
-              Container(
-                height: 127,
-                color: AppColors.color191A1F,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset('assets/images/stock_page/pizza.png', height: 127,),
-                    const SizedBox(width: 10,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              Stack(
+                children: [
+                  Container(
+                    height: 127,
+                    color: AppColors.color191A1F,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 15,),
-                        Container(
-                          width: 166,
-                          child: 
-                          const Text("Две лучше, чем одна", style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.clip,
-                            height: 1,
-                          ),),
-                        ),
-                        const SizedBox(height: 8,),
-                        const Text("Скидка на вторую пиццу 20%", style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w500,
-                        ),),
-                        const Expanded(child: SizedBox(),),
-                        const Text("Действует до 07.04.2023 г.", style: TextStyle(
-                          fontSize: 10,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w400,
-                        ),),
-                        const SizedBox(height: 9,),
-                      ],
-                    )
-                  ],
+                        Image.asset('assets/images/stock_page/pizza.png', height: 127,),
+                        const SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 15,),
+                            Container(
+                              width: 166,
+                              child: 
+                              const Text("Две лучше, чем одна", style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.clip,
+                                height: 1,
+                              ),),
+                            ),
+                            const SizedBox(height: 8,),
+                            const Text("Скидка на вторую пиццу 20%", style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.color808080,
+                              fontWeight: FontWeight.w500,
+                            ),),
+                            const Expanded(child: SizedBox(),),
+                            const Text("Действует до 07.04.2023 г.", style: TextStyle(
+                              fontSize: 10,
+                              color: AppColors.color808080,
+                              fontWeight: FontWeight.w400,
+                            ),),
+                            const SizedBox(height: 9,),
+                        ],
+                      ),
+                              
+                    ],
+                  ),
                 ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: (){print('Акция №2');},
+                      child: Container(
+                        height: 127,
+                      ),
+                    ),
+                  ),
+                  
+                ]
               ),
               const SizedBox(height: 8,),
-              Container(
-                height: 127,
-                color: AppColors.color191A1F,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset('assets/images/stock_page/pizza.png', height: 127,),
-                    const SizedBox(width: 10,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              Stack(
+                children: [
+                  Container(
+                    height: 127,
+                    color: AppColors.color191A1F,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 15,),
-                        Container(
-                          width: 166,
-                          child: 
-                          const Text("Две лучше, чем одна", style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.clip,
-                            height: 1,
-                          ),),
-                        ),
-                        const SizedBox(height: 8,),
-                        const Text("Скидка на вторую пиццу 20%", style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w500,
-                        ),),
-                        const Expanded(child: SizedBox(),),
-                        const Text("Действует до 07.04.2023 г.", style: TextStyle(
-                          fontSize: 10,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w400,
-                        ),),
-                        const SizedBox(height: 9,),
-                      ],
-                    ),
-
-                  ],
+                        Image.asset('assets/images/stock_page/pizza.png', height: 127,),
+                        const SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 15,),
+                            Container(
+                              width: 166,
+                              child: 
+                              const Text("Две лучше, чем одна", style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.clip,
+                                height: 1,
+                              ),),
+                            ),
+                            const SizedBox(height: 8,),
+                            const Text("Скидка на вторую пиццу 20%", style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.color808080,
+                              fontWeight: FontWeight.w500,
+                            ),),
+                            const Expanded(child: SizedBox(),),
+                            const Text("Действует до 07.04.2023 г.", style: TextStyle(
+                              fontSize: 10,
+                              color: AppColors.color808080,
+                              fontWeight: FontWeight.w400,
+                            ),),
+                            const SizedBox(height: 9,),
+                        ],
+                      ),
+                              
+                    ],
+                  ),
                 ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: (){print('Акция №2');},
+                      child: Container(
+                        height: 127,
+                      ),
+                    ),
+                  ),
+                  
+                ]
               ),
               const SizedBox(height: 8,),
-              Container(
-                height: 127,
-                color: AppColors.color191A1F,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset('assets/images/stock_page/pizza.png', height: 127,),
-                    const SizedBox(width: 10,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              Stack(
+                children: [
+                  Container(
+                    height: 127,
+                    color: AppColors.color191A1F,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 15,),
-                        Container(
-                          width: 166,
-                          child: 
-                          const Text("Две лучше, чем одна", style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.clip,
-                            height: 1,
-                          ),),
-                        ),
-                        const SizedBox(height: 8,),
-                        const Text("Скидка на вторую пиццу 20%", style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w500,
-                        ),),
-                        const Expanded(child: SizedBox(),),
-                        const Text("Действует до 07.04.2023 г.", style: TextStyle(
-                          fontSize: 10,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w400,
-                        ),),
-                        const SizedBox(height: 9,),
-                      ],
+                        Image.asset('assets/images/stock_page/pizza.png', height: 127,),
+                        const SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 15,),
+                            Container(
+                              width: 166,
+                              child: 
+                              const Text("Две лучше, чем одна", style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.clip,
+                                height: 1,
+                              ),),
+                            ),
+                            const SizedBox(height: 8,),
+                            const Text("Скидка на вторую пиццу 20%", style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.color808080,
+                              fontWeight: FontWeight.w500,
+                            ),),
+                            const Expanded(child: SizedBox(),),
+                            const Text("Действует до 07.04.2023 г.", style: TextStyle(
+                              fontSize: 10,
+                              color: AppColors.color808080,
+                              fontWeight: FontWeight.w400,
+                            ),),
+                            const SizedBox(height: 9,),
+                        ],
+                      ),
+                              
+                    ],
+                  ),
+                ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: (){print('Акция №2');},
+                      child: Container(
+                        height: 127,
+                      ),
                     ),
-              
-              
-
-            ],
-          ),
-        )
+                  ),
+                  
+                ]
+              ),
             ]
           ),
         )
