@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../common_setup/routes.dart';
 import '../utils/bottom_bar_icons.dart';
+import 'more/auth/bloc/auth_bloc.dart';
 import 'more/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,14 +18,18 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int get _currentIndex => MenuRoute.values
-      .firstWhere((e) => e.path == GoRouter.of(context).location)
+      .firstWhere((e) => GoRouter.of(context).location.contains(e.path))
       .index;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => MoreBloc(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => MoreBloc(),
+          ),
+        ],
         child: widget.child,
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
