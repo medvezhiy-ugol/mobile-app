@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../common_setup/routes.dart';
-import '../utils/bottom_bar_icons.dart';
-import 'more/auth/bloc/auth_bloc.dart';
+import '../utils/icons/bottom_bar_icons.dart';
 import 'more/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/more_page_icons.dart';
 import '../../common_setup/routes.dart';
 import '../../utils/app_fonts.dart';
-import '../../utils/social_icons_icons.dart';
+import '../../utils/icons/more_page_icons.dart';
+import '../../utils/icons/social_icons_icons.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {

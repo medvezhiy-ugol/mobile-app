@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
+
+import '../utils/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
