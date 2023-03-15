@@ -9,6 +9,7 @@ class StockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.color151515,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(10),

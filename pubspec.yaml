@@ -34,6 +34,7 @@ flutter:
   assets:
     - assets/images/detail_page/
     - assets/images/stock_page/
+    - assets/images/stock_inside_page/
 
   fonts:
     - family: Unbounded
