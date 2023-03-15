@@ -86,28 +86,4 @@ class IndicatorWidget extends AnimatedWidget {
   }
 }
 
-          // Material(
-          //   color: backgroundColor,
-          //   child: Container(
-          //     padding: const EdgeInsets.only(left: 20),
-          //     child: ScaleTabBar(
-          //       tabs: tabs,
-          //       isScrollable: true,
-          //       indicatorSize: TabBarIndicatorSize.tab,
-          //       labelStyle:
-          //           const TextStyle(fontSize: 24, fontFamily: 'Unbounded'),
-          //       unselectedLabelStyle:
-          //           const TextStyle(fontSize: 16, fontFamily: 'Unbounded'),
-          //       unselectedLabelColor: Colors.grey,
-          //       overlayColor:
-          //           MaterialStateProperty.all<Color>(Colors.transparent),
-          //       indicator: ContainerTabIndicator(
-          //         height: 2,
-          //         radius: BorderRadius.circular(20),
-          //         color: Colors.white,
-          //         padding: const EdgeInsets.only(top: 19),
-          //       ),
-          //       // indicatorPadding: EdgeInsets.only(bottom: 4),
-          //     ),
-          //   ),
-          // ),
+
