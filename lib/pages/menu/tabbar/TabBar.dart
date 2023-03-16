@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:container_tab_indicator/container_tab_indicator.dart';
+import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_card_widget.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/scale_tabbar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'dart:math' as math;
+
+import '../../../utils/app_colors.dart';
 
 class PrimaryTabBar extends StatefulWidget {
   final int initialIndex;
@@ -29,45 +32,27 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
   late List<List<int>> indexList;
   final maxCount = 4;
 
-  final GlobalKey _cardKey = GlobalKey();
-  Size? cardSize;
-  Offset? cardPosition;
+  bool _isRunning = true;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(
-        initialIndex: widget.initialIndex,
-        length: widget.tabs.length,
-        vsync: this);
+      initialIndex: widget.initialIndex,
+      length: widget.tabs.length,
+      vsync: this,
+    );
     listController = AutoScrollController(
-        viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-        axis: scrollDirection); // indexList =
-  WidgetsBinding.instance.addPostFrameCallback((_) => getSizeAndPosition());
-  
-  }
-
-  getSizeAndPosition() {
-    // RenderObject? _cardBox = _cardKey.currentContext!.findRenderObject();
-    // cardSize = _cardBox;
-    // cardPosition = _cardBox?.localToGlobal(Offset.zero);
-    // print(cardSize);
-    // print(cardPosition);
-    // setState(() {});
+      viewportBoundaryGetter: () =>
+          Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      axis: scrollDirection,
+    );
+    getMenuSelectionPosition();
   }
 
   @override
   Widget build(BuildContext context) {
-    int activeTabIndex = 0;
-    final int length = widget.tabs.length;
-    final maxCount = 20;
-
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _scrollToCounter(4),
-      //   child: Icon(Icons.accessible_rounded),
-      // ),
       body: Column(
         children: [
           Material(
@@ -76,10 +61,8 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
               padding: const EdgeInsets.only(left: 20),
               child: ScaleTabBar(
                 onTap: (value) {
-                  // activeTabIndex = listController.;
                   _scrollToCounter(value);
-                  // tabController.index = value;
-                  print(activeTabIndex);
+                  tabController.index = value;
                 },
                 controller: tabController,
                 tabs: widget.tabs,
@@ -95,7 +78,7 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
                 indicator: ContainerTabIndicator(
                   height: 2,
                   radius: BorderRadius.circular(20),
-                  color: Colors.white,
+                  color: AppColors.colorFF9900,
                   padding: const EdgeInsets.only(top: 19),
                 ),
                 // indicatorPadding: EdgeInsets.only(bottom: 4),
@@ -107,19 +90,12 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
               scrollDirection: scrollDirection,
               controller: listController,
               children: <Widget>[
-                ...List.generate(maxCount, (index) {
+                ...List.generate(4, (index) {
                   return AutoScrollTag(
                     key: ValueKey(index),
                     controller: listController,
                     index: index,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        height: 100,
-                        color: Colors.red,
-                        child: Center(child: Text('$index')),
-                      ),
-                    ),
+                    child: _createSection(index),
                   );
                 })
               ],
@@ -130,20 +106,62 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
     );
   }
 
+  Map<int, String> menuSectionTitles = {
+    0: 'Донер',
+  };
+
+  Map<int, Widget> menuSectionWidgets = {
+    0: MenuCardWidget(),
+  };
+
+  Widget _createSection(int index) {
+    if (index < 0 && index > menuSectionTitles.length - 1) {
+      return Container();
+    }
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(menuSectionTitles[0]!),
+          ],
+        ),
+        SizedBox(height: 10,),
+        menuSectionWidgets[0]!
+      ],
+    );
+  }
+
   Future _scrollToCounter(int index) async {
     await listController.scrollToIndex(index,
         preferPosition: AutoScrollPosition.begin);
   }
-}
 
-class _Card extends StatelessWidget {
-  const _Card({super.key});
+  void getMenuSelectionPosition() async {
+    const double menuSelectionHeight = 300;
+    const int tabLengh = 3;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      color: Colors.red,
-    );
+    while (_isRunning) {
+      if (listController.hasClients) {
+        int tabSelectionChangeIndex = 0;
+        double position = 0;
+
+        position = listController.position.pixels;
+        print('POSITION - ${position}');
+
+        tabSelectionChangeIndex = (position / menuSelectionHeight).toInt();
+
+        if (tabSelectionChangeIndex <= tabLengh &&
+            !(tabController.indexIsChanging)) {
+          tabController.animateTo(tabSelectionChangeIndex);
+        }
+      }
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+
+    @override
+    void dispose() {
+      _isRunning = false;
+      super.dispose();
+    }
   }
 }
