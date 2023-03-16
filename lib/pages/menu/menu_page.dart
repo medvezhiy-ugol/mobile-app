@@ -11,11 +11,9 @@ class MenuPage extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          context.push(
-            Uri(
-              path: Routes.detail,
-              queryParameters: {'id': '001'},
-            ).toString(),
+          context.pushNamed(
+            Routes.detailName,
+            params: {'id': '2'},
           );
         },
         child: Container(

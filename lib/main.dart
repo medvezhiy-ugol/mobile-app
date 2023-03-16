@@ -98,10 +98,41 @@ class UgolApp extends StatelessWidget {
           GoRoute(
             parentNavigatorKey: _rootNavigatorKey,
             path: Routes.detail,
-            builder: (context, state) => DetailPage(id: state.params['id']),
+            name: Routes.detailName,
+            pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
+              context: context,
+              state: state,
+              child: DetailPage(id: state.params['id'] ?? '1'),
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  CustomTransitionPage buildPageWithPopupTransition<T>({
+    required BuildContext context,
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CustomTransitionPage<T>(
+      opaque: false,
+      key: state.pageKey,
+      child: child,
+      reverseTransitionDuration: Duration.zero,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }
