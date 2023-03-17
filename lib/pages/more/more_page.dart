@@ -14,48 +14,46 @@ class MorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<MoreBloc, MoreState>(
-        builder: (context, state) {
-          return SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  (state is MoreDefaultState)
-                      ? _buildAuthRow(context)
-                      : Container(),
-                  SizedBox(
-                    height: (state is MoreDefaultState) ? 16 : 0,
-                  ),
-                  (state is MoreRegisteredState)
-                      ? _buildProfileWidget()
-                      : Container(),
-                  SizedBox(
-                    height: (state is MoreRegisteredState) ? 84 : 0,
-                  ),
-                  (state is MoreRegisteredState)
-                      ? _buildRegisteredRow()
-                      : Container(),
-                  SizedBox(
-                    height: (state is MoreRegisteredState) ? 10 : 0,
-                  ),
-                  _buildDefaultRows(),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  (state is MoreRegisteredState)
-                      ? _buildOurSocials()
-                      : Container()
-                ],
-              ),
+    return BlocBuilder<MoreBloc, MoreState>(
+      builder: (context, state) {
+        return SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                (state is MoreDefaultState)
+                    ? _buildAuthRow(context)
+                    : Container(),
+                SizedBox(
+                  height: (state is MoreDefaultState) ? 16 : 0,
+                ),
+                (state is MoreRegisteredState)
+                    ? _buildProfileWidget()
+                    : Container(),
+                SizedBox(
+                  height: (state is MoreRegisteredState) ? 84 : 0,
+                ),
+                (state is MoreRegisteredState)
+                    ? _buildRegisteredRow()
+                    : Container(),
+                SizedBox(
+                  height: (state is MoreRegisteredState) ? 10 : 0,
+                ),
+                _buildDefaultRows(),
+                const SizedBox(
+                  height: 7,
+                ),
+                (state is MoreRegisteredState)
+                    ? _buildOurSocials()
+                    : Container()
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

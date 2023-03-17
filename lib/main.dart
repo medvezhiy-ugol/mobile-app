@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/stock/stock_inside_page.dart';
 
-
+import 'common_setup/module_container.dart';
+import 'common_setup/routes.dart';
 import 'generated/l10n.dart';
 import 'pages/home/home_page.dart';
 import 'pages/main_page.dart';
 import 'pages/map/map_page.dart';
-import 'pages/menu/detail_page.dart';
+import 'pages/menu/detail_menu_page.dart';
 import 'pages/menu/menu_page.dart';
 import 'pages/more/auth/auth_page.dart';
 import 'pages/more/more_page.dart';
 import 'pages/stock/stock_page.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
-import 'common_setup/module_container.dart';
-import 'common_setup/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -104,7 +102,7 @@ class UgolApp extends StatelessWidget {
             pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
               context: context,
               state: state,
-              child: DetailPage(id: state.params['id'] ?? '1'),
+              child: DetailMenuPage(id: state.params['id'] ?? '1'),
             ),
           ),
         ],

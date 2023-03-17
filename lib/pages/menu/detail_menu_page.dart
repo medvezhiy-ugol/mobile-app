@@ -8,8 +8,8 @@ import '../../services/theme_service.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
-class DetailPage extends StatelessWidget {
-  DetailPage({super.key, required this.id});
+class DetailMenuPage extends StatelessWidget {
+  DetailMenuPage({super.key, required this.id});
 
   final ThemeService themeService = Injector().get<ThemeService>();
 
@@ -292,17 +292,17 @@ class DetailPage extends StatelessWidget {
         OptionalProduct(
           name: S.current.detailScreenTomatoSauceText,
           price: 20,
-          imgPath: A.assetsDetailPageOptionalProductImg,
+          imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
         OptionalProduct(
           name: S.current.detailScreenCheeseSauceText,
           price: 20,
-          imgPath: A.assetsDetailPageOptionalProductImg,
+          imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
         OptionalProduct(
           name: S.current.detailScreenCheeseSauceText,
           price: 20,
-          imgPath: A.assetsDetailPageOptionalProductImg,
+          imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
       ],
     );
