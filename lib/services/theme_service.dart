@@ -14,7 +14,6 @@ class ThemeService {
       elevation: 0,
     );
   }
-
   static TextStyle detailPageTitleProductTextStyle() {
     return const TextStyle(
       fontSize: 24,
