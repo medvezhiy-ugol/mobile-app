@@ -49,4 +49,26 @@ class ThemeService {
       color: Colors.white
     );
   }
+  static TextStyle tabBarCardWeightTextStyle() {
+    return const TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+      color: AppColors.color808080
+    );
+  }
+  static TextStyle tabBarCardIngrTextStyle() {
+    return const TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      color: AppColors.color808080
+    );
+  }
+    static TextStyle tabBarTitleSectionTextStyle() {
+    return const TextStyle(
+       fontFamily: 'Unbounded',
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      color: AppColors.colorE3E3E3
+    );
+  }
 }

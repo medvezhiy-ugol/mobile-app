@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/tabbar_widget.dart';
+import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../common_setup/routes.dart';
@@ -17,7 +18,7 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: PrimaryTabBar(
-        backgroundColor: Colors.black.withOpacity(0.9),
+        backgroundColor:AppColors.color111216,
         tabs: tabs,
         pages: pages,
       ),
@@ -33,10 +34,10 @@ class _MenuPageState extends State<MenuPage> {
       text: 'Суши',
     ),
     const Tab(
-      text: 'Круасон',
+      text: 'Снеки',
     ),
     const Tab(
-      text: 'Пицца',
+      text: 'Напитки',
     ),
   ];
 

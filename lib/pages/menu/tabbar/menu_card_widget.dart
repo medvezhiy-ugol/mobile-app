@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
+import '../../../services/theme_service.dart';
+
 class MenuCardWidget extends StatelessWidget {
   const MenuCardWidget({
     super.key,
     this.id = 0,
+    required this.onTap,
   });
 
   final int id;
+  final VoidCallback onTap;
 
   final String title = 'Донер c курицей';
   final String weight = '300';
@@ -17,51 +21,93 @@ class MenuCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {},
-        child: Container(
-          height: 300,
-          decoration: BoxDecoration(
-            color: AppColors.color191A1F,
-            border: Border.all(color: Colors.blue, width: 1),
-          ),
-          child: Column(
-            children: [
-              // NetworkImg(),
-              Container(height: 100,),
-              Text('$title'),
-              SizedBox(
-                height: 8,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.color191A1F,
+      ),
+      child: Stack(
+        children: [
+          Column(
+            children: <Widget>[
+              Image.network(
+                'https://www.crushpixel.com/big-static14/preview4/doner-kebab-on-wooden-table-1746165.jpg',
+                height: 125,
+                fit: BoxFit.fitHeight,
               ),
-              Text('$weight г.'),
-              SizedBox(
-                height: 40,
-              ),
-              Container(
-                child: Row(
+              Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 6),
+                child: Column(
                   children: [
-                    Flexible(
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
                       child: Text(
-                        ingredients,
-                        // style: ThemeService
-                        //     .detailPageProductIngredientsTextStyle(),
+                        '$title',
+                        style: ThemeService.detailPageAddButtonTextStyle(),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '$weight г.',
+                        style: ThemeService.tabBarCardWeightTextStyle(),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              ingredients,
+                              style: ThemeService.tabBarCardIngrTextStyle(),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        width: 74,
+                        height: 30,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColors.color26282F,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Text(
+                          '$coast ₽',
+                          style: ThemeService
+                              .detailPageStatusBarItemCountTextStyle(),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Container(
-                child: Text('$coast ₽'),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: AppColors.color26282F,
-                    borderRadius: BorderRadius.circular(30)),
               )
             ],
           ),
-        ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  onTap;
+                  print('REaLLY WORK');
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -31,6 +31,7 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
   final scrollDirection = Axis.vertical;
   late AutoScrollController listController;
   late List<List<int>> indexList;
+
   final maxCount = 4;
 
   bool _isRunning = true;
@@ -59,7 +60,7 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
           Material(
             color: widget.backgroundColor,
             child: Container(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: ScaleTabBar(
                 onTap: (value) {
                   _scrollToCounter(value);
@@ -96,7 +97,14 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
                     key: ValueKey(index),
                     controller: listController,
                     index: index,
-                    child: menuSections[index],
+                    child: Column(
+                      children: <Widget>[
+                        menuSections[index],
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   );
                 })
               ],
@@ -106,15 +114,15 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
       ),
     );
   }
-  
+
   Future _scrollToCounter(int index) async {
     await listController.scrollToIndex(index,
         preferPosition: AutoScrollPosition.begin);
   }
 
   void getMenuSelectionPosition() async {
-    const double menuSelectionHeight = 300;
-    const int tabLengh = 3;
+    const double menuSelectionHeight = 300 + 300 + 10 + 10;
+    const int tabLengh = 4;
 
     while (_isRunning) {
       if (listController.hasClients) {
@@ -126,12 +134,12 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
 
         tabSelectionChangeIndex = (position / menuSelectionHeight).toInt();
 
-        if (tabSelectionChangeIndex <= tabLengh &&
+        if (tabSelectionChangeIndex <= tabLengh - 1 &&
             !(tabController.indexIsChanging)) {
           tabController.animateTo(tabSelectionChangeIndex);
         }
       }
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 50));
     }
 
     @override
