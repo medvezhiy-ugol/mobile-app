@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
+import '../../../common_setup/routes.dart';
 import '../../../services/theme_service.dart';
 
 class MenuCardWidget extends StatelessWidget {
@@ -101,6 +103,10 @@ class MenuCardWidget extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
+                  context.pushNamed(
+                    Routes.detailMenuName,
+                    params: {'id': '2'},
+                  );
                   onTap;
                   print('REaLLY WORK');
                 },
