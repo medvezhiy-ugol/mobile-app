@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
 import '../../generated/l10n.dart';
 import '../../services/theme_service.dart';
-import '../../ui/buttons.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
@@ -12,10 +13,10 @@ class DetailPage extends StatelessWidget {
 
   final ThemeService themeService = Injector().get<ThemeService>();
 
-  final String? id;
+  final String id;
 
   final int productCoast = 220;
-  final String productName = 'Doner';
+  final String productName = 'Донер ';
 
   static List<String> inputProductIngredients = [
     'куриное бедро',
@@ -30,14 +31,19 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String outputProductIngredients = inputProductIngredients.join(', ');
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.color151515,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              children: [
+    return Dismissible(
+      direction: DismissDirection.vertical,
+      onDismissed: (_) => context.pop(),
+      key: UniqueKey(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 22.0),
+        child: SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 12,
+                ),
                 Center(
                   child: Container(
                     width: 48,
@@ -47,73 +53,112 @@ class DetailPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(9)),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Image.asset(A.assetsDetailPageProductImg),
+                const SizedBox(
+                  height: 16,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      productName,
-                      style: ThemeService.detailPageTitleProductTextStyle(),
+                Expanded(
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(A.assetsDetailPageProductImg),
+                          const SizedBox(
+                            height: 38,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Text(
+                                      productName + id,
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: AppFonts.unbounded,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 32,
+                                ),
+                                Container(
+                                  color: AppColors.color26282F,
+                                  height: 50,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () => Navigator.pop(context),
+                                      child: Center(
+                                        child: Text(
+                                          '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        outputProductIngredients,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.color808080,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 15),
+                                buildStatsBar(),
+                                const SizedBox(height: 15),
+                                Row(
+                                  children: [
+                                    Text(
+                                      S.current
+                                          .mealScreenDeleteIngredientsTitleText,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                buildChoiceComponent(),
+                                const SizedBox(height: 25),
+                                Row(
+                                  children: [
+                                    Text(
+                                      S.current.mealScreenDeleteAddTitleText,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                buildAddProduct(),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                PrimaryButton(
-                  height: 50,
-                  text:
-                      '$productCoast ₽ ${S.current.mealScreenDeleteAddTitleText}',
-                  textStyle: ThemeService.detailPageAddButtonTextStyle(),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: Text(
-                          outputProductIngredients,
-                          style: ThemeService
-                              .detailPageProductIngredientsTextStyle(),
-                        ),
-                      )
-                    ],
                   ),
                 ),
-                const SizedBox(height: 15),
-                StatsBarWidget(),
-                const SizedBox(height: 15),
-                Row(
-                  children: [
-                    Text(
-                      S.current.mealScreenDeleteIngredientsTitleText,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                ChoiceComponents(),
-                const SizedBox(height: 25),
-                Row(
-                  children: [
-                    Text(
-                      S.current.mealScreenDeleteAddTitleText,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                AddProduct(),
               ],
             ),
           ),
@@ -122,67 +167,57 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget StatsBarWidget() {
+  Row buildStatsBar() {
     return Row(
       children: <Widget>[
-        StatusBarItemWidget(
-            title: S.current.mealScreenWeightTitleText,
-            data: '300 г',
-            width: 56),
+        buildStatsBarItem(S.current.mealScreenWeightTitleText, '300 г'),
         const SizedBox(width: 8),
-        StatusBarItemWidget(
-            title: S.current.mealScreenCaloriesTitleText,
-            data: '588 г',
-            width: 46),
+        buildStatsBarItem(S.current.mealScreenCaloriesTitleText, '588 г'),
         const Spacer(),
-        StatusBarItemWidget(
-            title: S.current.mealScreenProteinTitleText,
-            data: '23 г',
-            width: 46),
+        buildStatsBarItem(S.current.mealScreenProteinTitleText, '23 г'),
         const SizedBox(width: 8),
-        StatusBarItemWidget(
-            title: S.current.mealScreenFatsTitleText, data: '24 г', width: 46),
+        buildStatsBarItem(S.current.mealScreenFatsTitleText, '24 г'),
         const SizedBox(width: 8),
-        StatusBarItemWidget(
-            title: S.current.mealScreenCarbohydratesTitleText,
-            data: '68 г',
-            width: 61),
+        buildStatsBarItem(S.current.mealScreenCarbohydratesTitleText, '68 г'),
       ],
     );
   }
 
-  Widget StatusBarItemWidget({
-    required String title,
-    required String data,
-    double? height = 38,
-    double? width,
-  }) {
-    return Column(
-      children: [
-        Center(
-          child: Text(
+  Widget buildStatsBarItem(String title, String value) {
+    return IntrinsicWidth(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
             title,
-            style: ThemeService.detailPageStatusBarItemTextStyle(),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: AppColors.color808080,
+            ),
           ),
-        ),
-        const SizedBox(height: 2),
-        Container(
-          alignment: Alignment.center,
-          height: height,
-          width: width,
-          padding: const EdgeInsets.all(10),
-          color: AppColors.color191A1F,
-          child: Text(
-            data,
-            style: ThemeService.detailPageStatusBarItemCountTextStyle(),
+          const SizedBox(height: 2),
+          Container(
+            alignment: Alignment.center,
+            height: 38,
+            padding: const EdgeInsets.all(10),
+            color: AppColors.color191A1F,
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  //тестовый вариант
-  Widget ChoiceComponents() {
+  Widget buildChoiceComponent() {
     bool _ch = false;
     return Wrap(
       direction: Axis.horizontal,
@@ -192,9 +227,6 @@ class DetailPage extends StatelessWidget {
         RawChip(
           label: Text(
             'Luk',
-            style: (_ch
-                ? const TextStyle(decoration: TextDecoration.lineThrough)
-                : const TextStyle()),
           ),
           onPressed: () {
             _ch = !_ch;
@@ -254,7 +286,7 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget AddProduct() {
+  Widget buildAddProduct() {
     return Column(
       children: [
         OptionalProduct(
