@@ -18,9 +18,11 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: PrimaryTabBar(
-        backgroundColor:AppColors.color111216,
+        backgroundColor: AppColors.color111216,
         tabs: tabs,
-        pages: pages,
+        onAddressTap: () {
+          print('ADDRESS TAPED');
+        },
       ),
     );
   }
@@ -40,43 +42,4 @@ class _MenuPageState extends State<MenuPage> {
       text: 'Напитки',
     ),
   ];
-
-  List<Widget> pages = <Widget>[
-    Container(
-        color: Colors.black.withOpacity(0.9),
-        child: GridView.count(
-            childAspectRatio: 0.7,
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 20,
-            crossAxisCount: 2,
-            children:
-                List.generate(10, (index) => Container(color: Colors.red)))),
-    GridView.count(
-        childAspectRatio: 0.7,
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 20,
-        crossAxisCount: 2,
-        children: List.generate(10, (index) => Container(color: Colors.red))),
-    GridView.count(
-        childAspectRatio: 0.7,
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 20,
-        crossAxisCount: 2,
-        children: List.generate(10, (index) => Container(color: Colors.red))),
-    GridView.count(
-        childAspectRatio: 0.7,
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 20,
-        crossAxisCount: 2,
-        children: List.generate(10, (index) => Container(color: Colors.red)))
-  ];
-
 }

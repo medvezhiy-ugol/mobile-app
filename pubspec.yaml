@@ -25,6 +25,7 @@ dependencies:
   container_tab_indicator: ^0.3.0
   scroll_to_index: ^3.0.1
   flutter_layout_grid: ^2.0.1
+  flutter_toggle_tab: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,10 @@ flutter:
     - family: MorePageIcons
       fonts:
         - asset: fonts/icons/MorePageIcons.ttf
+
+    - family: ToggleSwitcherIcons
+      fonts:
+        - asset: fonts/icons/ToggleSwitcherIcons.ttf
 
 flutter_intl:
   enabled: true
