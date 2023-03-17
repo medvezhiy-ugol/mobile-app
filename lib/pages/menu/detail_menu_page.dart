@@ -31,137 +31,143 @@ class DetailMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String outputProductIngredients = inputProductIngredients.join(', ');
-    return Dismissible(
-      direction: DismissDirection.vertical,
-      onDismissed: (_) => context.pop(),
-      key: UniqueKey(),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 22.0),
-        child: SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 12,
-                ),
-                Center(
-                  child: Container(
-                    width: 48,
-                    height: 4,
-                    decoration: BoxDecoration(
-                        color: AppColors.colorD9D9D9.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(9)),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Expanded(
-                  child: Scrollbar(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(A.assetsDetailPageProductImg),
-                          const SizedBox(
-                            height: 38,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: [
-                                    Text(
-                                      productName + id,
-                                      style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: AppFonts.unbounded,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 32,
-                                ),
-                                Container(
-                                  color: AppColors.color26282F,
-                                  height: 50,
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: InkWell(
-                                      onTap: () => Navigator.pop(context),
-                                      child: Center(
-                                        child: Text(
-                                          '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Row(
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        outputProductIngredients,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.color808080,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
-                                buildStatsBar(),
-                                const SizedBox(height: 15),
-                                Row(
-                                  children: [
-                                    Text(
-                                      S.current
-                                          .mealScreenDeleteIngredientsTitleText,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                buildChoiceComponent(),
-                                const SizedBox(height: 25),
-                                Row(
-                                  children: [
-                                    Text(
-                                      S.current.mealScreenDeleteAddTitleText,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                buildAddProduct(),
-                              ],
-                            ),
-                          )
-                        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  context.pop();
+                },
+                customBorder: const CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.grey),
+                      child: const Icon(
+                        Icons.close,
+                        size: 18,
                       ),
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+            const SizedBox(
+              height: 8,
+            ),
+            Expanded(
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(A.assetsDetailPageProductImg),
+                      const SizedBox(
+                        height: 38,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: [
+                                Text(
+                                  productName + id,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: AppFonts.unbounded,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            Container(
+                              color: AppColors.color26282F,
+                              height: 50,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Center(
+                                    child: Text(
+                                      '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    outputProductIngredients,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.color808080,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 15),
+                            buildStatsBar(),
+                            const SizedBox(height: 15),
+                            Row(
+                              children: [
+                                Text(
+                                  S.current
+                                      .mealScreenDeleteIngredientsTitleText,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            buildChoiceComponent(),
+                            const SizedBox(height: 25),
+                            Row(
+                              children: [
+                                Text(
+                                  S.current.mealScreenDeleteAddTitleText,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            buildAddProduct(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

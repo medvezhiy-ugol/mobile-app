@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
 
 import 'common_setup/module_container.dart';
 import 'common_setup/routes.dart';
@@ -97,12 +98,22 @@ class UgolApp extends StatelessWidget {
           ),
           GoRoute(
             parentNavigatorKey: _rootNavigatorKey,
-            path: Routes.detail,
-            name: Routes.detailName,
+            path: Routes.detailMenu,
+            name: Routes.detailMenuName,
             pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
               context: context,
               state: state,
               child: DetailMenuPage(id: state.params['id'] ?? '1'),
+            ),
+          ),
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: Routes.detailStock,
+            name: Routes.detailStockName,
+            pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
+              context: context,
+              state: state,
+              child: DetailStockPage(id: state.params['id'] ?? '1'),
             ),
           ),
         ],
@@ -119,7 +130,6 @@ class UgolApp extends StatelessWidget {
       opaque: false,
       key: state.pageKey,
       child: child,
-      reverseTransitionDuration: Duration.zero,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;

@@ -12,7 +12,7 @@ class MenuPage extends StatelessWidget {
       child: InkWell(
         onTap: () {
           context.pushNamed(
-            Routes.detailName,
+            Routes.detailMenuName,
             params: {'id': '2'},
           );
         },

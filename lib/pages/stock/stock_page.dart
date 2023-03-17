@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
+import '../../common_setup/routes.dart';
 import '../../utils/app_assets.dart';
 
 class StockPage extends StatelessWidget {
@@ -30,22 +32,22 @@ class StockPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            _buildStockItem(),
+            _buildStockItem(context, '1'),
             const SizedBox(
               height: 8,
             ),
-            _buildStockItem(),
+            _buildStockItem(context, '2'),
             const SizedBox(
               height: 8,
             ),
-            _buildStockItem(),
+            _buildStockItem(context, '3'),
           ],
         ),
       ),
     );
   }
 
-  Stack _buildStockItem() {
+  Stack _buildStockItem(BuildContext context, String id) {
     return Stack(
       children: [
         Container(
@@ -61,46 +63,51 @@ class StockPage extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'Две лучше, чем одна',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: AppFonts.unbounded,
-                      overflow: TextOverflow.clip,
-                      height: 1,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 15,
                     ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    "Скидка на вторую пиццу 20%",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.color808080,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      'Две лучше, чем одна $id',
+                      maxLines: 2,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: AppFonts.unbounded,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  Spacer(),
-                  Text(
-                    'Действует до 07.04.2023 г.',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: AppColors.color808080,
+                    const SizedBox(
+                      height: 8,
                     ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                ],
+                    const Text(
+                      "Скидка на вторую пиццу 20%",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.color808080,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      'Действует до 07.04.2023 г.',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: AppColors.color808080,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                width: 10,
               ),
             ],
           ),
@@ -108,7 +115,12 @@ class StockPage extends StatelessWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(
+                Routes.detailStockName,
+                params: {'id': id},
+              );
+            },
             child: Container(
               height: 127,
             ),
