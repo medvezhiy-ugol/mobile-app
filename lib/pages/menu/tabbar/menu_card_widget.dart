@@ -22,19 +22,15 @@ class MenuCardWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: Container(
+          height: 300,
           decoration: BoxDecoration(
             color: AppColors.color191A1F,
             border: Border.all(color: Colors.blue, width: 1),
           ),
           child: Column(
             children: [
-              Container(
-                height: 126,
-                color: Colors.blueAccent,
-              ),
-              SizedBox(
-                height: 8,
-              ),
+              // NetworkImg(),
+              Container(height: 100,),
               Text('$title'),
               SizedBox(
                 height: 8,
@@ -60,14 +56,40 @@ class MenuCardWidget extends StatelessWidget {
                 child: Text('$coast ₽'),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: AppColors.color26282F,
-                  borderRadius: BorderRadius.circular(30)
-                ),
+                    color: AppColors.color26282F,
+                    borderRadius: BorderRadius.circular(30)),
               )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class NetworkImg extends StatelessWidget {
+  const NetworkImg({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      'https://img.freepik.com/free-photo/side-view-chicken-roll-grilled-chicken-lettuce-cucumber-tomato-and-mayo-in-pita_141793-4849.jpg',
+      height: 125,
+      fit: BoxFit.fill,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+                : null,
+          ),
+        );
+      },
+      errorBuilder: (context, error, stackTrace) {
+        return const Placeholder();
+      },
     );
   }
 }

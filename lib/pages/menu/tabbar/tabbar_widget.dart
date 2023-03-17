@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:container_tab_indicator/container_tab_indicator.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_card_widget.dart';
-import 'package:medvezhiy_ugol/pages/menu/tabbar/scale_tabbar.dart';
+import 'package:medvezhiy_ugol/pages/menu/tabbar/scale_tabbar_module.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'dart:math' as math;
 
 import '../../../utils/app_colors.dart';
+import 'menu_sections_widgets.dart';
 
 class PrimaryTabBar extends StatefulWidget {
   final int initialIndex;
@@ -95,7 +96,7 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
                     key: ValueKey(index),
                     controller: listController,
                     index: index,
-                    child: _createSection(index),
+                    child: menuSections[index],
                   );
                 })
               ],
@@ -105,32 +106,7 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
       ),
     );
   }
-
-  Map<int, String> menuSectionTitles = {
-    0: 'Донер',
-  };
-
-  Map<int, Widget> menuSectionWidgets = {
-    0: MenuCardWidget(),
-  };
-
-  Widget _createSection(int index) {
-    if (index < 0 && index > menuSectionTitles.length - 1) {
-      return Container();
-    }
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(menuSectionTitles[0]!),
-          ],
-        ),
-        SizedBox(height: 10,),
-        menuSectionWidgets[0]!
-      ],
-    );
-  }
-
+  
   Future _scrollToCounter(int index) async {
     await listController.scrollToIndex(index,
         preferPosition: AutoScrollPosition.begin);
