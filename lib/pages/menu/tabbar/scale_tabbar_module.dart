@@ -83,7 +83,7 @@ class _TabStyle extends AnimatedWidget {
         : Color.lerp(unselectedColor, selectedColor, animation.value)!;
 
     const double fontSizeCorrection = 1;
-    const double magnificationCorrection = 1;
+    const double magnificationCorrection = 0.9;
 
     final double magnification =
         (labelStyle!.fontSize! / unselectedLabelStyle!.fontSize!) *
