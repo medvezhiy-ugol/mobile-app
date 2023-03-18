@@ -117,6 +117,16 @@ class UgolApp extends StatelessWidget {
               child: DetailStockPage(id: state.params['id'] ?? '1'),
             ),
           ),
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: Routes.basket,
+            name: Routes.basketMenuName,
+            pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
+              context: context,
+              state: state,
+              child: ActiveOrderPage(),
+            ),
+          ),
         ],
       ),
     );

@@ -5,6 +5,8 @@ class Routes {
   static const String detailStock = '/detailStock/:id';
   static const String detailStockName = 'detailStock';
   static const String home = '/home';
+  static const String basket = '/home/basket';
+  static const String basketMenuName = 'basketMenu';
   static const String stock = '/stock';
   static const String menu = '/menu';
   static const String map = '/map';
