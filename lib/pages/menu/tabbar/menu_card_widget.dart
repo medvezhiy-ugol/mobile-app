@@ -102,14 +102,7 @@ class MenuCardWidget extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {
-                  context.pushNamed(
-                    Routes.detailMenuName,
-                    params: {'id': '2'},
-                  );
-                  onTap;
-                  print('REaLLY WORK');
-                },
+                onTap: onTap,
               ),
             ),
           ),

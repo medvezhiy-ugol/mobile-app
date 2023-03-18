@@ -74,6 +74,10 @@ flutter:
       fonts:
         - asset: fonts/icons/MorePageIcons.ttf
 
+    - family: ToggleSwitcherIcons
+      fonts:
+        - asset: fonts/icons/ToggleSwitcherIcons.ttf
+
 flutter_intl:
   enabled: true
   main_locale: ru

@@ -14,6 +14,7 @@ class ThemeService {
       elevation: 0,
     );
   }
+
   static TextStyle detailPageTitleProductTextStyle() {
     return const TextStyle(
       fontSize: 24,
@@ -21,53 +22,86 @@ class ThemeService {
       fontFamily: 'Unbounded',
     );
   }
+
   static TextStyle detailPageAddButtonTextStyle() {
     return const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,
     );
   }
+
   static TextStyle detailPageProductIngredientsTextStyle() {
     return const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w600,
-      color: AppColors.color808080
+      color: AppColors.color808080,
     );
   }
+
   static TextStyle detailPageStatusBarItemTextStyle() {
     return const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: AppColors.color808080
+      color: AppColors.color808080,
     );
   }
+
   static TextStyle detailPageStatusBarItemCountTextStyle() {
     return const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: Colors.white
+      color: Colors.white,
     );
   }
+
   static TextStyle tabBarCardWeightTextStyle() {
     return const TextStyle(
       fontSize: 10,
       fontWeight: FontWeight.w400,
-      color: AppColors.color808080
+      color: AppColors.color808080,
     );
   }
+
   static TextStyle tabBarCardIngrTextStyle() {
     return const TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: AppColors.color808080
+      color: AppColors.color808080,
     );
   }
-    static TextStyle tabBarTitleSectionTextStyle() {
+
+  static TextStyle tabBarTitleSectionTextStyle() {
     return const TextStyle(
-       fontFamily: 'Unbounded',
+      fontFamily: 'Unbounded',
       fontSize: 20,
       fontWeight: FontWeight.w600,
-      color: AppColors.colorE3E3E3
+      color: AppColors.colorE3E3E3,
+    );
+  }
+
+  static TextStyle selectedToggleSwitcherTextStyle() {
+    return const TextStyle(
+      fontFamily: 'Unbounded',
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    );
+  }
+
+  static TextStyle unselectedToggleSwitcherTextStyle() {
+    return TextStyle(
+      fontFamily: 'Unbounded',
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: Colors.white.withOpacity(0.3),
+    );
+  }
+
+  static TextStyle addressButtonTextStyle() {
+    return const TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      color: AppColors.colorEFEFEF,
     );
   }
 }
