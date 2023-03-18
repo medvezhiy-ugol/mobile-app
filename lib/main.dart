@@ -83,7 +83,7 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.map,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: ActiveOrderPage()),
+                    NoTransitionPage(child: MapPage()),
               ),
               GoRoute(
                 path: Routes.more,
