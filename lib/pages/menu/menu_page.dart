@@ -20,9 +20,7 @@ class _MenuPageState extends State<MenuPage> {
       child: PrimaryTabBar(
         backgroundColor: AppColors.color111216,
         tabs: tabs,
-        onAddressTap: () {
-          print('ADDRESS TAPED');
-        },
+        onAddressTap: () {},
       ),
     );
   }

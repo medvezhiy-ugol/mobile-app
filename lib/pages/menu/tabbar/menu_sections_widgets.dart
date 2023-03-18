@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
+import '../../../common_setup/routes.dart';
 import 'menu_card_widget.dart';
 
 List<Widget> menuSections = [
@@ -24,7 +26,13 @@ class DonerSection extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Align(alignment: Alignment.centerLeft, child: Text('Донеры', style: ThemeService.tabBarTitleSectionTextStyle(),),),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Донеры',
+                style: ThemeService.tabBarTitleSectionTextStyle(),
+              ),
+            ),
           ),
           SizedBox(
             height: 5,
@@ -36,9 +44,24 @@ class DonerSection extends StatelessWidget {
             rowGap: 10,
             children: [
               //здесь ставь открытие деталки
-              MenuCardWidget(onTap: (){}),
-              MenuCardWidget(onTap: (){}),
-              MenuCardWidget(onTap: (){}),
+              MenuCardWidget(onTap: () {
+                context.pushNamed(
+                  Routes.detailMenuName,
+                  params: {'id': '2'},
+                );
+              }),
+              MenuCardWidget(onTap: () {
+                context.pushNamed(
+                  Routes.detailMenuName,
+                  params: {'id': '2'},
+                );
+              }),
+              MenuCardWidget(onTap: () {
+                context.pushNamed(
+                  Routes.detailMenuName,
+                  params: {'id': '2'},
+                );
+              }),
             ],
           ),
         ],

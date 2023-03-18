@@ -118,53 +118,67 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
             color: widget.backgroundColor,
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              child: ScaleTabBar(
-                onTap: (value) {
-                  _scrollToCounter(value);
-                  tabController.index = value;
-                },
-                controller: tabController,
-                tabs: widget.tabs,
-                isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.tab,
-                labelStyle:
-                    const TextStyle(fontSize: 24, fontFamily: 'Unbounded'),
-                unselectedLabelStyle:
-                    const TextStyle(fontSize: 16, fontFamily: 'Unbounded'),
-                unselectedLabelColor: Colors.grey,
-                overlayColor:
-                    MaterialStateProperty.all<Color>(Colors.transparent),
-                indicator: ContainerTabIndicator(
-                  height: 2,
-                  radius: BorderRadius.circular(20),
-                  color: AppColors.colorFF9900,
-                  padding: const EdgeInsets.only(top: 19),
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.fromSwatch(
+                    accentColor: AppColors.color191A1F,
+                  ),
                 ),
-                // indicatorPadding: EdgeInsets.only(bottom: 4),
+                child: ScaleTabBar(
+                  onTap: (value) {
+                    _scrollToCounter(value);
+                    tabController.index = value;
+                  },
+                  controller: tabController,
+                  tabs: widget.tabs,
+                  isScrollable: true,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  labelStyle:
+                      const TextStyle(fontSize: 24, fontFamily: 'Unbounded'),
+                  unselectedLabelStyle:
+                      const TextStyle(fontSize: 16, fontFamily: 'Unbounded'),
+                  unselectedLabelColor: Colors.grey,
+                  overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                  indicator: ContainerTabIndicator(
+                    height: 2,
+                    radius: BorderRadius.circular(20),
+                    color: AppColors.colorFF9900,
+                    padding: const EdgeInsets.only(top: 19),
+                  ),
+                  // indicatorPadding: EdgeInsets.only(bottom: 4),
+                ),
               ),
             ),
           ),
           Expanded(
-            child: ListView(
-              scrollDirection: scrollDirection,
-              controller: listController,
-              children: <Widget>[
-                ...List.generate(4, (index) {
-                  return AutoScrollTag(
-                    key: ValueKey(index),
-                    controller: listController,
-                    index: index,
-                    child: Column(
-                      children: <Widget>[
-                        menuSections[index],
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                  );
-                })
-              ],
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColors.color191A1F,
+                ),
+              ),
+              child: ListView(
+                scrollDirection: scrollDirection,
+                controller: listController,
+                children: <Widget>[
+                  ...List.generate(4, (index) {
+                    return AutoScrollTag(
+                      key: ValueKey(index),
+                      controller: listController,
+                      index: index,
+                      child: Column(
+                        children: <Widget>[
+                          menuSections[index],
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    );
+                  })
+                ],
+              ),
             ),
           ),
         ],
