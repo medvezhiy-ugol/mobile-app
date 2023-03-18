@@ -38,6 +38,7 @@ flutter:
     - assets/images/detail_menu_page/
     - assets/images/stock_page/
     - assets/images/detail_stock_page/
+    - assets/images/active_order_page/
 
   fonts:
     - family: Unbounded

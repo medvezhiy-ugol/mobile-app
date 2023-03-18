@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/pages/active-order/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
 
 import 'common_setup/module_container.dart';
@@ -82,7 +83,7 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.map,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: MapPage()),
+                    NoTransitionPage(child: ActiveOrderPage()),
               ),
               GoRoute(
                 path: Routes.more,
