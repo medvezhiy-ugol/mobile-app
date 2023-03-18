@@ -7,4 +7,6 @@ abstract class A {
       'assets/images/stock_page/pizza.png';
   static const String assetsDetailStockPageItemImg =
       'assets/images/detail_stock_page/scribble.png';
+  static const String assetsActiveOrderPageButtonsImg =
+      'assets/images/active_order_page/middle_buttons.png';
 }
