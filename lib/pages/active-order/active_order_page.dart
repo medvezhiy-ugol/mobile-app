@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_assets.dart';
+import '../../generated/l10n.dart';
 
 class ActiveOrderPage extends StatelessWidget {
   const ActiveOrderPage({super.key});
@@ -62,9 +63,9 @@ class ActiveOrderPage extends StatelessWidget {
                   const SizedBox(
                     height: 3,
                   ),
-                  const Text(
-                    'Ваш заказ',
-                    style: TextStyle(
+                  Text(
+                    S.current.activeOrderScreenYourOrder,//'Ваш заказ',
+                    style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.w600),
@@ -90,9 +91,9 @@ class ActiveOrderPage extends StatelessWidget {
                   const SizedBox(
                     height: 17,
                   ),
-                  const Text(
-                    'Заказ принят',
-                    style: TextStyle(
+                  Text(
+                    S.current.activeOrderScreenOrderAccepted,//'Заказ принят'
+                    style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
@@ -222,15 +223,15 @@ class ActiveOrderPage extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 22, right: 27),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
-                          'Сумма заказа',
-                          style: TextStyle(
+                          S.current.orderSumText, //'Сумма заказа'
+                          style: const TextStyle(
                               color: AppColors.color808080,
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
-                        Text(
+                        const Text(
                           '971 ₽',
                           style: TextStyle(
                               color: Colors.white,
@@ -247,15 +248,15 @@ class ActiveOrderPage extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 22, right: 27),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
-                          'Сервисный сбор',
-                          style: TextStyle(
+                          S.current.serviceFeeText,//'Сервисный сбор'
+                          style: const TextStyle(
                               color: AppColors.color808080,
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
-                        Text(
+                        const Text(
                           '30 ₽',
                           style: TextStyle(
                               color: Colors.white,
@@ -272,16 +273,16 @@ class ActiveOrderPage extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 22, right: 27),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
-                          'Итого',
-                          style: TextStyle(
+                          S.current.activeOrderScreenInTotal,//'Итого'
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Text(
+                        const Text(
                           '971 ₽',
                           style: TextStyle(
                             color: Colors.white,

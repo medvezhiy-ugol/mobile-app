@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
+import '../../generated/l10n.dart';
 
 import '../../common_setup/routes.dart';
 import '../../utils/app_assets.dart';
@@ -20,9 +21,9 @@ class StockPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              'Акции и комбо',
-              style: TextStyle(
+            Text(
+              S.current.stocksScreenStocksTitleText,//'Акции и комбо',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 fontFamily: AppFonts.unbounded,

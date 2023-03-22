@@ -3,6 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
+import '../../../generated/l10n.dart';
 
 import '../../../common_setup/routes.dart';
 import 'menu_card_widget.dart';
@@ -29,12 +30,12 @@ class DonerSection extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Донеры',
+                S.current.menuScreenDoners,//'Донеры',
                 style: ThemeService.tabBarTitleSectionTextStyle(),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           LayoutGrid(

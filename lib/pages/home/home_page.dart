@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:go_router/go_router.dart';
+import '../../generated/l10n.dart';
 
 import '../../common_setup/routes.dart';
 import '../../utils/app_colors.dart';
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      'Корзина',
+                      S.current.trashBucketScreenBucketTitleText,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

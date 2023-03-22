@@ -1,7 +1,10 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
 import '../../utils/app_fonts.dart';
@@ -60,9 +63,9 @@ class MorePage extends StatelessWidget {
   Column _buildAuthRow(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Text(
-          'Профиль',
-          style: TextStyle(
+        Text(
+          S.of(context).profileScreenProfileTitleText,//'Профиль',
+          style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -90,20 +93,20 @@ class MorePage extends StatelessWidget {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          'Войти',
-                          style: TextStyle(
+                          S.of(context).profileScreenSingIn,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 3,
                         ),
                         Text(
-                          'Чтобы стать ближе, получать бонусы',
-                          style: TextStyle(
+                          S.current.profileScreenSlogan,//'Чтобы стать ближе, получать бонусы',
+                          style: const TextStyle(
                             color: AppColors.color808080,
                             fontSize: 14,
                           ),
@@ -129,9 +132,9 @@ class MorePage extends StatelessWidget {
         children: [
           Column(
             children: [
-              const Text(
-                'Наши соцсети',
-                style: TextStyle(
+              Text(
+                S.current.profileScreenSocialNetworksTitle,
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w600),
@@ -193,17 +196,17 @@ class MorePage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       MorePageIcons.settings,
                       size: 28,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 26,
                     ),
                     Text(
-                      'Настройки',
-                      style: TextStyle(
+                      S.current.profileScreenSettings,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
@@ -223,17 +226,17 @@ class MorePage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
-                  children: const [
-                    Icon(
+                  children:  [
+                    const Icon(
                       MorePageIcons.car,
                       size: 28,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 26,
                     ),
                     Text(
-                      'Условия доставки',
-                      style: TextStyle(
+                      S.current.profileScreenDeliveryConditions,//'Условия доставки',
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
@@ -251,19 +254,19 @@ class MorePage extends StatelessWidget {
             child: InkWell(
               onTap: () {},
               child: Container(
-                padding: const EdgeInsets.all(18),
+                padding: EdgeInsets.all(18),
                 child: Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       MorePageIcons.star,
                       size: 28,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 26,
                     ),
                     Text(
-                      'Связаться с нами',
-                      style: TextStyle(
+                      S.current.profileScreenContactUs,//'Связаться с нами',
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
@@ -283,17 +286,17 @@ class MorePage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       MorePageIcons.info,
                       size: 28,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 26,
                     ),
                     Text(
-                      'О приложении',
-                      style: TextStyle(
+                      S.current.profileScreenAboutApp,//'О приложении',
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
@@ -326,17 +329,17 @@ class MorePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             MorePageIcons.location,
                             size: 24,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 14,
                           ),
                           Text(
-                            'Адреса',
-                            style: TextStyle(
+                            S.current.profileScreenAddresses,//'Адреса',
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
@@ -368,17 +371,17 @@ class MorePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             MorePageIcons.loyal,
                             size: 28,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 14,
                           ),
                           Text(
-                            'Лояльность',
-                            style: TextStyle(
+                            S.current.profileScreenLoyalty,//'Лояльность',
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),

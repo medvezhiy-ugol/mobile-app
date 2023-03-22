@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../generated/l10n.dart';
 
 import '../common_setup/routes.dart';
 import '../utils/icons/bottom_bar_icons.dart';
@@ -47,37 +48,37 @@ class _MainPageState extends State<MainPage> {
       child: SizedBox(
         height: 76,
         child: BottomNavigationBar(
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Padding(
+                icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.main),
                 ),
-                label: 'Главная'),
+                label: S.current.bottomBarMainText), //'Главная'
             BottomNavigationBarItem(
-                icon: Padding(
+                icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.stock),
                 ),
-                label: 'Акции'),
+                label: S.current.bottomBarStockText), //'Акции'
             BottomNavigationBarItem(
-                icon: Padding(
+                icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.menu),
                 ),
-                label: 'Меню'),
+                label: S.current.bottomBarMenuText), //'Меню'
             BottomNavigationBarItem(
-                icon: Padding(
+                icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.map),
                 ),
-                label: 'Карта'),
+                label: S.current.bottomBarMapText), //'Карта'
             BottomNavigationBarItem(
-                icon: Padding(
+                icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.more),
                 ),
-                label: 'Еще')
+                label: S.current.bottomBarMoreText) // 'Еще'
           ],
           onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),
           currentIndex: _currentIndex,
