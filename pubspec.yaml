@@ -25,6 +25,7 @@ dependencies:
   container_tab_indicator: ^0.3.0
   scroll_to_index: ^3.0.1
   flutter_layout_grid: ^2.0.1
+  yandex_mapkit: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +40,7 @@ flutter:
     - assets/images/stock_page/
     - assets/images/detail_stock_page/
     - assets/images/active_order_page/
+    - assets/images/map_page/
 
   fonts:
     - family: Unbounded
