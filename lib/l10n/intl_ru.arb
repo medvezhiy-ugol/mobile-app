@@ -5,6 +5,8 @@
     "pickUpButtonText": "Самовывоз",
 
     "menuScreenPizza": "Пицца",
+    "menuScreenSushi": "Суши",
+    "menuScreenSnacks": "Снеки",
     "menuScreenDrinks": "Напитки",
     "menuScreenDoners": "Донеры",
     "bottomBarMainText": "Главная",
@@ -12,6 +14,7 @@
     "bottomBarMenuText": "Меню",
     "bottomBarMapText": "Карта",
     "bottomBarMoreText": "Еще",
+
 
     "driveButtonText": "Драйв",
     "updateAddressScreenWorkingNowButtonText": "Работает сейчас",
@@ -25,7 +28,12 @@
     "fullCafeCheckScreenOptionsHintText": "Особенности",
     "fullCafeCheckScreenPhoneNumberHintText": "Телефон",
     "fullCafeCheckScreenBuildRouteButtonText": "Построить маршрут",
-    
+
+    "activeOrderScreenYourOrder": "Ваш заказ",
+    "activeOrderScreenOrderAccepted": "Заказ принят",
+    "activeOrderScreenServiceTax": "Сервисный сбор",
+    "activeOrderScreenInTotal": "Итого",
+
     "updateAddress1ScreenYourAddressTitleText": "Ваш адрес",
     "deliverHereButtonText": "Доставить сюда",
 
@@ -54,8 +62,8 @@
 
     "trashBucketScreenBucketTitleText": "Корзина",
     "trashBucketScreenEnterPromocodeHintText": "Введите промокод",
-    "trashBucketScreenOrderSumText": "Сумма заказа",
-    "trashBucketScreenServiceFeeText": "Сервисный сбор",
+    "orderSumText": "Сумма заказа",
+    "serviceFeeText": "Сервисный сбор",
     "trashBucketScreenInTotalText": "Итого",
     "trashBucketScreenCheckoutButtonText": "Оформить заказ",
     "deleteTrashBucketScreenDeleteSwipeText": "Удалить",
@@ -78,7 +86,8 @@
     "profileScreenAboutApp": "О приложении",
     "profileScreenAddresses": "Адреса",
     "profileScreenLoyalty": "Лояльность",
-    "profileScreenSocialNetworksTitle": "Наши соц.сети",
+    "profileScreenSocialNetworksTitle": "Наши соцсети",
+    "profileScreenSlogan": "Чтобы стать ближе, получать бонусы",
 
     
     "authScreenAuthTitle": "Авторизация",
@@ -88,5 +97,7 @@
     "authScreenTermsOfUseWithLink": "Пользовательского соглашения",
 
     "detailScreenTomatoSauceText": "Томатный соус",
-    "detailScreenCheeseSauceText": "Сырный соус"
+    "detailScreenCheeseSauceText": "Сырный соус",
+
+    "detailStockScreenToUseButtonText": "Воспользоваться"
 }

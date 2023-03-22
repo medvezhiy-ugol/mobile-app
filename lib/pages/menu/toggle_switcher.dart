@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/menu/toggle_switcher/module_toggle_switcher.dart';
-
+import '../../generated/l10n.dart';
 
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
@@ -16,8 +16,8 @@ class _ToggleSwitcherState extends State<ToggleSwitcher> {
   int _tabTextIndexSelected = 1;
 
   List<String> _listTextTabToggle = [
-    'Доставка',
-    'Самовывоз',
+    S.current.deliveryButtonText,//'Доставка',
+    S.current.pickUpButtonText//'Самовывоз',
   ];
 
   @override

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/tabbar_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import '../../generated/l10n.dart';
 
 import '../../common_setup/routes.dart';
 
@@ -27,17 +28,17 @@ class _MenuPageState extends State<MenuPage> {
 
 //Ne otnosyasheesya k auto scroll
   List<Widget> tabs = <Widget>[
-    const Tab(
-      text: 'Пицца',
+    Tab(
+      text: S.current.menuScreenPizza,//'Пицца',
     ),
-    const Tab(
-      text: 'Суши',
+    Tab(
+      text: S.current.menuScreenSushi,//'Суши',
     ),
-    const Tab(
-      text: 'Снеки',
+    Tab(
+      text: S.current.menuScreenSnacks//'Снеки',
     ),
-    const Tab(
-      text: 'Напитки',
+    Tab(
+      text: S.current.menuScreenDrinks//'Напитки',
     ),
   ];
 }

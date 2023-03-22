@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
+import '../../generated/l10n.dart';
 
 import '../../utils/app_assets.dart';
 
@@ -80,10 +81,10 @@ class DetailStockPage extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () => Navigator.pop(context),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'Воспользоваться',
-                              style: TextStyle(
+                            S.current.detailStockScreenToUseButtonText,//'Воспользоваться'
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
