@@ -4,7 +4,6 @@ import '../../../../utils/app_colors.dart';
 
 class FullViewRestaurantWidget extends StatelessWidget {
   FullViewRestaurantWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MediaQuery.removePadding(
@@ -132,7 +131,7 @@ class FullViewRestaurantWidget extends StatelessWidget {
                 onTap: () {},
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               PrimaryButton(
                 color: AppColors.colorFFB627,

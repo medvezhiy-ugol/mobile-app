@@ -10,6 +10,7 @@ import '../menu/toggle_switcher.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
+  static PageController pageController = PageController();
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -41,20 +42,32 @@ class _MapPageState extends State<MapPage> {
             controller: _pc,
             color: AppColors.color111216,
             panelBuilder: (sc) {
-              // return SlidingPanelWidget();
-              // return ViewRestaurantWidget();
-              return FullViewRestaurantWidget();
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.fromSwatch(
+                    accentColor: AppColors.color191A1F,
+                  ),
+                ),
+                child: PageView(
+                  controller: MapPage.pageController,
+                  children: <Widget>[
+                    SlidingPanelWidget(),
+                    ViewRestaurantWidget(),
+                    FullViewRestaurantWidget(),
+                  ],
+                ),
+              );
             },
             body: MapWidget(
               onTap: () {},
             ),
           ),
-    
+
           // Positioned(
           //   bottom: 100,
           //   child: RestaurantFilter(),
           // ),
-    
+
           Positioned(
             top: 50,
             right: 20,
