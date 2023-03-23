@@ -104,4 +104,12 @@ class ThemeService {
       color: AppColors.colorEFEFEF,
     );
   }
+
+  static TextStyle choiceRestaurantButtonTextStyle() {
+    return const TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+      color: AppColors.colorEFEFEF,
+    );
+  }
 }
