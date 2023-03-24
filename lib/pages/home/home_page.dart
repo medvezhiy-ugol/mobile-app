@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 var response = await APIService.getRequest(
                   request: 'v1/whoiam',
                 );
-                print(GetMenu.fromJson(response).externalMenus[0].id);
+                print(response);
 
 //Get Menu
                 // var response = await APIService.getRequest(
