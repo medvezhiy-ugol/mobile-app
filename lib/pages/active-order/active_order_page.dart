@@ -322,6 +322,7 @@ class ActiveOrderPage extends StatelessWidget {
 }
 
 SizedBox orderStages({int progressValue=1}){
+  // progressValue принимает от 1 до 3 включительно
   return SizedBox(
       width: 148,
       child: Row(
