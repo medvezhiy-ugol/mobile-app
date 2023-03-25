@@ -116,7 +116,7 @@ class ActiveOrderPage extends StatelessWidget {
                     height: 10,
                   ),
                   // Image.asset(A.assetsActiveOrderPageButtonsImg),
-                  const OrderStages(progressValue: 2,),
+                  orderStages(progressValue: 2,), //SizedBox with content
                   const SizedBox(
                     height: 49,
                   ),
@@ -321,32 +321,20 @@ class ActiveOrderPage extends StatelessWidget {
   }
 }
 
-class OrderStages extends StatefulWidget {
-  const OrderStages({super.key, required this.progressValue});
-
-  final int progressValue;
-
-  @override
-  State<OrderStages> createState() => _OrderStagesState();
-}
-
-class _OrderStagesState extends State<OrderStages> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+SizedBox orderStages({int progressValue=1}){
+  return SizedBox(
       width: 148,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(A.assetsActiveOrderPageForming, width: 32,),
-          (widget.progressValue > 1) 
+          (progressValue > 1) 
             ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
             : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
-          (widget.progressValue == 3) 
+          (progressValue == 3) 
             ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
             : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
         ]
       ),
     );
-  }
 }
