@@ -18,4 +18,5 @@ abstract class A {
       'assets/images/active_order_page/delivery_off.png';
   static const String assetsActiveOrderPageDeliveryOn =
       'assets/images/active_order_page/delivery_on.png';
-}
+  static const String assetsMapPagePointImg = 'assets/images/map_page/point.png';
+
