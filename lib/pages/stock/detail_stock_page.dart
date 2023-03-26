@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
@@ -18,30 +19,8 @@ class DetailStockPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  context.pop();
-                },
-                customBorder: const CircleBorder(),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.grey),
-                      child: const Icon(
-                        Icons.close,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            CloseCircleButton(
+              onTap: () => context.pop(),
             ),
             SingleChildScrollView(
               child: Column(

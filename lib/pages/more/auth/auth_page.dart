@@ -111,30 +111,6 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  Container buildGetCodeButton(BuildContext context) {
-    return Container(
-      height: 50,
-      width: double.infinity,
-      color: AppColors.color26282F,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => context.pop(),
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(
-              'Получить код',
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Container buildTextField(BuildContext context, AuthState state) {
     return Container(
       height: 63,

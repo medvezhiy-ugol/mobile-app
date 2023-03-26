@@ -5,6 +5,7 @@ import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../ui/close_circle_button.dart';
 
 class ActiveOrderPage extends StatelessWidget {
   const ActiveOrderPage({super.key});
@@ -30,30 +31,8 @@ class ActiveOrderPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            context.pop();
-                          },
-                          customBorder: const CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: Colors.grey),
-                                child: const Icon(
-                                  Icons.close,
-                                  size: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      CloseCircleButton(
+                        onTap: () => context.pop(),
                       ),
                       const SizedBox(
                         width: 19,
