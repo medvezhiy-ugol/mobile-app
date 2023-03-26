@@ -126,7 +126,7 @@ class FullViewRestaurantWidget extends StatelessWidget {
                 height: 30,
               ),
               PrimaryButton(
-                // color: AppColors.colorFFB627,
+                color: AppColors.colorFFB627,
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(

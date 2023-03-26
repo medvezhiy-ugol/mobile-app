@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
 import '../../generated/l10n.dart';
@@ -92,22 +93,13 @@ class DetailMenuPage extends StatelessWidget {
                             const SizedBox(
                               height: 32,
                             ),
-                            Container(
-                              color: AppColors.color26282F,
-                              height: 50,
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () => Navigator.pop(context),
-                                  child: Center(
-                                    child: Text(
-                                      '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
+                            PrimaryButton(
+                              onTap: () => context.pop(),
+                              child: Text(
+                                '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),

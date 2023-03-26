@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
+import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import '../../generated/l10n.dart';
 
+import '../../generated/l10n.dart';
 import '../../utils/app_assets.dart';
 
 class DetailStockPage extends StatelessWidget {
@@ -73,27 +73,17 @@ class DetailStockPage extends StatelessWidget {
                     height: 14,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      color: AppColors.color26282F,
-                      height: 50,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context),
-                          child: Center(
-                            child: Text(
-                            S.current.detailStockScreenToUseButtonText,//'Воспользоваться'
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: PrimaryButton(
+                        onTap: () => context.pop(),
+                        child: Text(
+                          S.current.detailStockScreenToUseButtonText,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
+                      )),
                 ],
               ),
             ),

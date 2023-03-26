@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../../services/theme_service.dart';
 import '../../../../utils/app_colors.dart';
 import '../../map_page.dart';
 
 class SlidingPanelWidget extends StatefulWidget {
-  SlidingPanelWidget({super.key});
+  const SlidingPanelWidget({super.key});
+
   @override
   State<SlidingPanelWidget> createState() => _SlidingPanelWidgetState();
 }
@@ -189,25 +191,17 @@ class RestaurantInfo extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Container(
-            color: AppColors.color26282F,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: onTap,
-                child: Container(
-                  width: 75,
-                  height: 28,
-                  child: Center(
-                    child: Text(
-                      'Выбрать',
-                      style: ThemeService.choiceRestaurantButtonTextStyle(),
-                    ),
-                  ),
-                ),
+          SizedBox(
+            width: 75,
+            child: PrimaryButton(
+              onTap: () {},
+              height: 28,
+              child: Text(
+                'Выбрать',
+                style: ThemeService.choiceRestaurantButtonTextStyle(),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
