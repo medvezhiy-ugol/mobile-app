@@ -4,7 +4,7 @@ import 'package:medvezhiy_ugol/utils/app_assets.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 
 class ActiveOrderPage extends StatelessWidget {
   const ActiveOrderPage({super.key});
