@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_fonts.dart';
@@ -60,7 +61,16 @@ class AuthPage extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: buildGetCodeButton(context),
+                              child: PrimaryButton(
+                                onTap: () => context.pop(),
+                                child: const Text(
+                                  'Получить код',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
                             ),
                             const Spacer(),
                             Center(

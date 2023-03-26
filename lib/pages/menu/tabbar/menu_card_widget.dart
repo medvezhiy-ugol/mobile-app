@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-import '../../../common_setup/routes.dart';
 import '../../../services/theme_service.dart';
 
 class MenuCardWidget extends StatelessWidget {
@@ -24,33 +22,36 @@ class MenuCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
       child: Stack(
         children: [
           Column(
             children: <Widget>[
-              Image.network(
-                'https://www.crushpixel.com/big-static14/preview4/doner-kebab-on-wooden-table-1746165.jpg',
-                height: 125,
-                fit: BoxFit.fitHeight,
+              SizedBox(
+                width: double.infinity,
+                child: Image.network(
+                  'https://www.crushpixel.com/big-static14/preview4/doner-kebab-on-wooden-table-1746165.jpg',
+                  height: 125,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 6),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '$title',
+                        title,
                         style: ThemeService.detailPageAddButtonTextStyle(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
@@ -60,22 +61,20 @@ class MenuCardWidget extends StatelessWidget {
                         style: ThemeService.tabBarCardWeightTextStyle(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
-                    Container(
-                      child: Row(
-                        children: [
-                          Flexible(
-                            child: Text(
-                              ingredients,
-                              style: ThemeService.tabBarCardIngrTextStyle(),
-                            ),
-                          )
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            ingredients,
+                            style: ThemeService.tabBarCardIngrTextStyle(),
+                          ),
+                        )
+                      ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Container(

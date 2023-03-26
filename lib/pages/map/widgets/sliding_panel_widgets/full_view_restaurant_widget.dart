@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 
 class FullViewRestaurantWidget extends StatelessWidget {
@@ -109,24 +110,15 @@ class FullViewRestaurantWidget extends StatelessWidget {
               SizedBox(
                 height: 24,
               ),
-              PrimaryButton(
-                color: AppColors.color26282F,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.map),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'Построить маршрут',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
+              PrimaryButton.icon(
+                icon: Icons.map,
+                label: Text(
+                  'Построить маршрут',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
                 onTap: () {},
               ),
@@ -134,7 +126,7 @@ class FullViewRestaurantWidget extends StatelessWidget {
                 height: 30,
               ),
               PrimaryButton(
-                color: AppColors.colorFFB627,
+                // color: AppColors.colorFFB627,
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(
@@ -198,25 +190,25 @@ class FullViewRestaurantWidget extends StatelessWidget {
     );
   }
 
-  Widget PrimaryButton({
-    required Color color,
-    required Widget child,
-    required VoidCallback onTap,
-  }) {
-    return Container(
-      height: 50,
-      color: color,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          child: Container(
-            child: Center(child: child),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget PrimaryButton({
+  //   required Color color,
+  //   required Widget child,
+  //   required VoidCallback onTap,
+  // }) {
+  //   return Container(
+  //     height: 50,
+  //     color: color,
+  //     child: Material(
+  //       color: Colors.transparent,
+  //       child: InkWell(
+  //         onTap: onTap,
+  //         child: Container(
+  //           child: Center(child: child),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget InfoBox({required String title, required Widget child}) {
     return Container(

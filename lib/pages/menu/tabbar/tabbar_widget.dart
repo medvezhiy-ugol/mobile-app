@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:container_tab_indicator/container_tab_indicator.dart';
-import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_card_widget.dart';
+import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/scale_tabbar_module.dart';
 import 'package:medvezhiy_ugol/utils/icons/toggle_switcher_icons_icons.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'dart:math' as math;
 
 import '../../../services/theme_service.dart';
 import '../../../utils/app_colors.dart';
@@ -169,10 +167,10 @@ class _PrimaryTabBarState extends State<PrimaryTabBar>
                       index: index,
                       child: Column(
                         children: <Widget>[
-                          menuSections[index],
                           SizedBox(
-                            height: 10,
+                            height: 24,
                           ),
+                          menuSections[index],
                         ],
                       ),
                     );
