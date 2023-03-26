@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_assets.dart';
+import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
+
 import '../../generated/l10n.dart';
 
 class ActiveOrderPage extends StatelessWidget {
@@ -65,7 +64,7 @@ class ActiveOrderPage extends StatelessWidget {
                     height: 3,
                   ),
                   Text(
-                    S.current.activeOrderScreenYourOrder,//'Ваш заказ',
+                    S.current.activeOrderScreenYourOrder, //'Ваш заказ',
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -74,39 +73,44 @@ class ActiveOrderPage extends StatelessWidget {
                   const SizedBox(
                     height: 18,
                   ),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SimpleCircularProgressBar(
-                        size: 217,
-                        progressStrokeWidth: 12,
-                        backStrokeWidth: 12,
-                        backColor: AppColors.color191A1F,
-                        animationDuration: 0,
-                        progressColors: const [AppColors.colorFF9900],
-                        maxValue: 100,// Макс значение бара
-                        valueNotifier: ValueNotifier(80),// Значение бара 
-                      ),
-                      Column(children: const [
-                        Text('D-72', style: TextStyle(
-                          fontSize: 48,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600
-                        ),),
-                        SizedBox(height: 10,),
-                        Text('24:38', style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300
-                        ),)
-                      ],)
-                    ]
-                  ),
+                  Stack(alignment: Alignment.center, children: [
+                    SimpleCircularProgressBar(
+                      size: 217,
+                      progressStrokeWidth: 12,
+                      backStrokeWidth: 12,
+                      backColor: AppColors.color191A1F,
+                      animationDuration: 0,
+                      progressColors: const [AppColors.colorFF9900],
+                      maxValue: 100, // Макс значение бара
+                      valueNotifier: ValueNotifier(80), // Значение бара
+                    ),
+                    Column(
+                      children: const [
+                        Text(
+                          'D-72',
+                          style: TextStyle(
+                              fontSize: 48,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          '24:38',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300),
+                        )
+                      ],
+                    )
+                  ]),
                   const SizedBox(
                     height: 17,
                   ),
                   Text(
-                    S.current.activeOrderScreenOrderAccepted,//'Заказ принят'
+                    S.current.activeOrderScreenOrderAccepted, //'Заказ принят'
                     style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -116,7 +120,9 @@ class ActiveOrderPage extends StatelessWidget {
                     height: 10,
                   ),
                   // Image.asset(A.assetsActiveOrderPageButtonsImg),
-                  orderStages(progressValue: 2,), //SizedBox with content
+                  orderStages(
+                    progressValue: 2,
+                  ), //SizedBox with content
                   const SizedBox(
                     height: 49,
                   ),
@@ -265,7 +271,7 @@ class ActiveOrderPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          S.current.serviceFeeText,//'Сервисный сбор'
+                          S.current.serviceFeeText, //'Сервисный сбор'
                           style: const TextStyle(
                               color: AppColors.color808080,
                               fontSize: 16,
@@ -290,7 +296,7 @@ class ActiveOrderPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          S.current.activeOrderScreenInTotal,//'Итого'
+                          S.current.activeOrderScreenInTotal, //'Итого'
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -321,21 +327,21 @@ class ActiveOrderPage extends StatelessWidget {
   }
 }
 
-SizedBox orderStages({int progressValue=1}){
+SizedBox orderStages({int progressValue = 1}) {
   // progressValue принимает от 1 до 3 включительно
   return SizedBox(
-      width: 148,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(A.assetsActiveOrderPageForming, width: 32,),
-          (progressValue > 1) 
-            ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
-            : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
-          (progressValue == 3) 
-            ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
-            : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
-        ]
+    width: 148,
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Image.asset(
+        A.assetsActiveOrderPageForming,
+        width: 32,
       ),
-    );
+      (progressValue > 1)
+          ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
+          : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
+      (progressValue == 3)
+          ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
+          : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
+    ]),
+  );
 }
