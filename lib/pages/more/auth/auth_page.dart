@@ -7,6 +7,7 @@ import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_fonts.dart';
+import '../../../ui/close_circle_button.dart';
 import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatelessWidget {
@@ -27,8 +28,14 @@ class AuthPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: CloseCircleButton(
+                        onTap: () => context.pop(),
+                      ),
+                    ),
                     SizedBox(
-                      height: screenSize.height * 0.1,
+                      height: screenSize.height * 0.05,
                     ),
                     Text(
                       'Авторизация',
