@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../map_page.dart';
 
@@ -66,7 +67,6 @@ class ViewRestaurantWidget extends StatelessWidget {
               ),
               PrimaryButton(
                 onTap: () {},
-                color: AppColors.colorFFB627,
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(
