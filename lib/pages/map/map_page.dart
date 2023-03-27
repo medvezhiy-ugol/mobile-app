@@ -6,6 +6,7 @@ import 'package:medvezhiy_ugol/pages/map/widget/sliding_panel_widget/view_restau
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../utils/app_colors.dart';
+import '../main_page.dart';
 import '../menu/toggle_switcher/toggle_switcher_widget.dart';
 
 class MapPage extends StatefulWidget {
@@ -24,34 +25,25 @@ class _MapPageState extends State<MapPage> {
   bool _isDrag = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    double _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
-    double _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
+    final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
+    final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
+    final _mapHeight = MediaQuery.of(context).size.height - _minSlidingPanelHeight - MainPage.navBarHeight;
+
     return Stack(
       alignment: Alignment.topCenter,
       children: <Widget>[
-        Column(
-          children: [
-            Expanded(
-              child: MapWidget(
-                onTap: () {},
-              ),
-            ),
-            SizedBox(
-              height: _minSlidingPanelHeight,
-            ),
-          ],
+        SizedBox(
+          height: _mapHeight,
+          child: MapWidget(),
         ),
         SlidingUpPanel(
           onPanelSlide: (double point) {
             setState(() {
               _isDrag = false;
-              if ((!_isDrag == true) && MapPage.pageController.page == 1.0 && point > 0.5) {
+              if ((!_isDrag == true) &&
+                  MapPage.pageController.page == 1.0 &&
+                  point > 0.5) {
                 MapPage.pageController.animateToPage(
                   2,
                   duration: Duration(milliseconds: 300),
@@ -59,7 +51,9 @@ class _MapPageState extends State<MapPage> {
                 );
                 _isDrag = true;
               }
-              if ((!_isDrag == true) && MapPage.pageController.page == 2.0 && point < 0.5) {
+              if ((!_isDrag == true) &&
+                  MapPage.pageController.page == 2.0 &&
+                  point < 0.5) {
                 MapPage.pageController.animateToPage(
                   1,
                   duration: Duration(milliseconds: 300),
@@ -119,64 +113,7 @@ class _MapPageState extends State<MapPage> {
           top: 80,
           child: ToggleSwitcher(),
         ),
-        // Positioned(
-        //   bottom: 100,
-        //   child: _buildRestaurantFilter(),
-        // ),
       ],
     );
   }
-
-  // Widget _buildRestaurantFilter() {
-  //   if (_showRestFilter) {
-  //     return Container(
-  //       height: 38,
-  //       child: ListView.separated(
-  //         shrinkWrap: true,
-  //         scrollDirection: Axis.horizontal,
-  //         separatorBuilder: (context, index) => SizedBox(
-  //           width: 10,
-  //         ),
-  //         itemCount: 5,
-  //         itemBuilder: (ctx, index) =>
-  //             Container(height: 38, child: listRestaurantFilters[index]),
-  //       ),
-  //     );
-  //   } else {
-  //     return Container();
-  //   }
-  // }
-
-  // List<Widget> listRestaurantFilters = [
-  //   Container(
-  //     color: Colors.red,
-  //     child: Center(
-  //       child: Text('Draiv'),
-  //     ),
-  //   ),
-  //   Container(
-  //     color: Colors.red,
-  //     child: Center(
-  //       child: Text('American'),
-  //     ),
-  //   ),
-  //   Container(
-  //     color: Colors.red,
-  //     child: Center(
-  //       child: Text('Psycho'),
-  //     ),
-  //   ),
-  //   Container(
-  //     color: Colors.red,
-  //     child: Center(
-  //       child: Text('Fight'),
-  //     ),
-  //   ),
-  //   Container(
-  //     color: Colors.red,
-  //     child: Center(
-  //       child: Text('Club'),
-  //     ),
-  //   ),
-  // ];
 }

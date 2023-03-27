@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../../services/theme_service.dart';
 import '../../../../utils/app_colors.dart';
@@ -221,7 +220,7 @@ class RestaurantInfo extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

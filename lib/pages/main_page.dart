@@ -13,6 +13,8 @@ class MainPage extends StatefulWidget {
 
   const MainPage({required this.child, required this.location, super.key});
 
+  static const double navBarHeight = 76.0;
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -47,7 +49,7 @@ class _MainPageState extends State<MainPage> {
   Widget _buildBottomNavigationBar() {
     return SafeArea(
       child: SizedBox(
-        height: 76,
+        height: MainPage.navBarHeight,
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(

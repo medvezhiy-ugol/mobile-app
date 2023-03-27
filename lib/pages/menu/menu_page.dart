@@ -1,10 +1,12 @@
 import 'package:container_tab_indicator/container_tab_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_sections_widget.dart';
 import 'package:medvezhiy_ugol/pages/menu/tabbar/scale_tabbar_module.dart';
 import 'package:medvezhiy_ugol/pages/menu/toggle_switcher/toggle_switcher_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import '../../common_setup/routes.dart';
 import '../../generated/l10n.dart';
 import '../../utils/icons/toggle_switcher_icons_icons.dart';
 
@@ -23,9 +25,16 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
 
   final int initialIndex = 0;
   final Color taBarBackgroundColor = AppColors.color111216;
-  final VoidCallback onAddressTap = () {};
 
   final maxCount = 4;
+
+  int goIndex() {
+    return 1;
+  }
+
+  void onAddressTap() {
+    context.go(Routes.map);
+  }
 
 // customize
   final double menuSelectionHeight = 300 + 300 + 10 + 10;
@@ -103,9 +112,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                       color: Colors.transparent,
                       shape: const CircleBorder(),
                       child: InkWell(
-                        onTap: () {
-                          onAddressTap;
-                        },
+                        onTap: onAddressTap,
                         customBorder: const CircleBorder(),
                         child: Ink(
                           decoration:
@@ -202,7 +209,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
       ),
     );
   }
-
   Future _scrollToCounter(int index) async {
     await listController.scrollToIndex(index,
         preferPosition: AutoScrollPosition.begin);

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../map_page.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
-  const ViewRestaurantWidget({super.key});
+  ViewRestaurantWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +81,6 @@ class ViewRestaurantWidget extends StatelessWidget {
       ),
     );
   }
-
   Widget RestaurantAttributes() {
     return Container(
       height: 30,

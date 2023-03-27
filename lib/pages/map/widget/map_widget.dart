@@ -5,14 +5,12 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 import '../../../utils/app_assets.dart';
 
 class MapWidget extends StatefulWidget {
-  final VoidCallback onTap;
   final double? height;
   final double latitude;
   final double longitude;
 
   const MapWidget({
     Key? key,
-    required this.onTap,
     this.height,
     this.latitude = 57.693521,
     this.longitude = 39.772742,
