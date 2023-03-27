@@ -110,7 +110,6 @@ class FullViewRestaurantWidget extends StatelessWidget {
                 height: 30,
               ),
               PrimaryButton(
-                
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(

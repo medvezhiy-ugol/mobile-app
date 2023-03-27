@@ -209,7 +209,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
       ),
     );
   }
-
   Future _scrollToCounter(int index) async {
     await listController.scrollToIndex(index,
         preferPosition: AutoScrollPosition.begin);

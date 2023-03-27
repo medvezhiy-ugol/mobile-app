@@ -24,7 +24,6 @@ class _MapPageState extends State<MapPage> {
 
   bool _isDrag = false;
 
-
   @override
   Widget build(BuildContext context) {
     final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
