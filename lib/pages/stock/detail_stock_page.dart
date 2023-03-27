@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
+import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
+import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import '../../generated/l10n.dart';
 
+import '../../generated/l10n.dart';
 import '../../utils/app_assets.dart';
 
 class DetailStockPage extends StatelessWidget {
@@ -18,30 +19,8 @@ class DetailStockPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  context.pop();
-                },
-                customBorder: const CircleBorder(),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.grey),
-                      child: const Icon(
-                        Icons.close,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            CloseCircleButton(
+              onTap: () => context.pop(),
             ),
             SingleChildScrollView(
               child: Column(
@@ -74,22 +53,13 @@ class DetailStockPage extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      color: AppColors.color26282F,
-                      height: 50,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context),
-                          child: Center(
-                            child: Text(
-                            S.current.detailStockScreenToUseButtonText,//'Воспользоваться'
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
+                    child: PrimaryButton(
+                      onTap: () => context.pop(),
+                      child: Text(
+                        S.current.detailStockScreenToUseButtonText,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),

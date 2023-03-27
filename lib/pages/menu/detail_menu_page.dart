@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
 import '../../generated/l10n.dart';
 import '../../services/theme_service.dart';
+import '../../ui/close_circle_button.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
@@ -36,30 +38,8 @@ class DetailMenuPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  context.pop();
-                },
-                customBorder: const CircleBorder(),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.grey),
-                      child: const Icon(
-                        Icons.close,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            CloseCircleButton(
+              onTap: () => context.pop(),
             ),
             const SizedBox(
               height: 8,
@@ -92,22 +72,13 @@ class DetailMenuPage extends StatelessWidget {
                             const SizedBox(
                               height: 32,
                             ),
-                            Container(
-                              color: AppColors.color26282F,
-                              height: 50,
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () => Navigator.pop(context),
-                                  child: Center(
-                                    child: Text(
-                                      '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
+                            PrimaryButton(
+                              onTap: () => context.pop(),
+                              child: Text(
+                                '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -128,37 +99,34 @@ class DetailMenuPage extends StatelessWidget {
                                 )
                               ],
                             ),
-                            const SizedBox(height: 15),
+                            const SizedBox(height: 24),
                             buildStatsBar(),
-                            const SizedBox(height: 15),
-                            Row(
-                              children: [
-                                Text(
-                                  S.current
-                                      .mealScreenDeleteIngredientsTitleText,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                            const SizedBox(height: 32),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                S.current.mealScreenDeleteIngredientsTitleText,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ],
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            buildChoiceComponent(),
-                            const SizedBox(height: 25),
-                            Row(
-                              children: [
-                                Text(
-                                  S.current.mealScreenDeleteAddTitleText,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                            _buildChoiceComponent(),
+                            const SizedBox(height: 24),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                S.current.mealScreenDeleteAddTitleText,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ],
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            buildAddProduct(),
+                            _buildAddProduct(),
                           ],
                         ),
                       )
@@ -223,7 +191,7 @@ class DetailMenuPage extends StatelessWidget {
     );
   }
 
-  Widget buildChoiceComponent() {
+  Widget _buildChoiceComponent() {
     bool _ch = false;
     return Wrap(
       direction: Axis.horizontal,
@@ -292,18 +260,24 @@ class DetailMenuPage extends StatelessWidget {
     );
   }
 
-  Widget buildAddProduct() {
+  Widget _buildAddProduct() {
     return Column(
-      children: [
+      children: <Widget>[
         OptionalProduct(
           name: S.current.detailScreenTomatoSauceText,
           price: 20,
           imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
+        const SizedBox(
+          height: 2,
+        ),
         OptionalProduct(
           name: S.current.detailScreenCheeseSauceText,
           price: 20,
           imgPath: A.assetsDetailMenuPageOptionalProductImg,
+        ),
+        const SizedBox(
+          height: 2,
         ),
         OptionalProduct(
           name: S.current.detailScreenCheeseSauceText,
@@ -332,51 +306,54 @@ class OptionalProduct extends StatefulWidget {
 
 class _OptionalProductState extends State<OptionalProduct> {
   bool _isToogle = false;
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            _isToogle = !_isToogle;
-          });
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          height: 65,
-          color: AppColors.color191A1F,
-          child: Row(
-            children: [
-              Image.asset(widget.imgPath),
-              const SizedBox(
-                width: 10,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.name),
-                  Text('+ ${widget.price} Р'),
-                ],
-              ),
-              const Spacer(),
-              Container(
-                height: 20,
-                width: 20,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: (_isToogle
-                        ? AppColors.colorFF9900
-                        : AppColors.color5D6377)),
-                child: (_isToogle
-                    ? const Icon(
-                        Icons.done,
-                        size: 15,
-                      )
-                    : null),
-              ),
-            ],
+    return Container(
+      height: 65,
+      color: AppColors.color191A1F,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              _isToogle = !_isToogle;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: <Widget>[
+                Image.asset(widget.imgPath),
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.name),
+                    Text('+ ${widget.price} Р'),
+                  ],
+                ),
+                const Spacer(),
+                Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (_isToogle
+                          ? AppColors.colorFF9900
+                          : AppColors.color5D6377)),
+                  child: (_isToogle
+                      ? const Icon(
+                          Icons.done,
+                          size: 15,
+                        )
+                      : null),
+                ),
+              ],
+            ),
           ),
         ),
       ),
