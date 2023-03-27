@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../utils/app_colors.dart';
+import '../../map_page.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
   ViewRestaurantWidget({super.key});
@@ -22,22 +23,6 @@ class ViewRestaurantWidget extends StatelessWidget {
           ),
           child: ListView(
             children: <Widget>[
-              SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 48,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.colorD9D9D9,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 27,
               ),
@@ -139,7 +124,12 @@ class ViewRestaurantWidget extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            //GO TO MENU
+            // GO TO MENU
+            MapPage.pageController.animateToPage(
+              0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear,
+            );
           },
           child: Container(
             child: Center(

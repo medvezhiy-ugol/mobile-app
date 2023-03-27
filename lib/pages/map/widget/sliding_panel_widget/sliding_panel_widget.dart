@@ -5,7 +5,7 @@ import '../../../../utils/app_colors.dart';
 import '../../map_page.dart';
 
 class SlidingPanelWidget extends StatefulWidget {
-  SlidingPanelWidget({super.key});
+  const SlidingPanelWidget({super.key});
   @override
   State<SlidingPanelWidget> createState() => _SlidingPanelWidgetState();
 }
@@ -39,30 +39,17 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
               SizedBox(
                 height: 12,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 48,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.colorD9D9D9,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 12,
-              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 height: 50,
                 color: AppColors.color191A1F,
                 child: TextField(
+                  onTap: () {
+                    MapPage.panelController.open();
+                    print('${MapPage.pageController.page}');
+                  },
                   cursorColor: AppColors.colorFFB627,
                   controller: controller,
-                  // ignore: prefer_const_constructors
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.search,
@@ -114,10 +101,16 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
       adress: 'Ул. Свободы, д. 46/3',
       index: 0,
       onTap: () {
+        if (MapPage.panelController.isAttached) {
+          MapPage.panelController.animatePanelToPosition(
+            0,
+            duration: const Duration(milliseconds: 300),
+          );
+        }
         MapPage.pageController.animateToPage(
           1,
-          duration: const Duration(milliseconds: 50),
-          curve: Curves.bounceIn,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.linear,
         );
       },
     ),
@@ -129,7 +122,7 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
       onTap: () {
         MapPage.pageController.animateToPage(
           1,
-          duration: const Duration(milliseconds: 50),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.bounceIn,
         );
       },
@@ -142,7 +135,7 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
       onTap: () {
         MapPage.pageController.animateToPage(
           1,
-          duration: const Duration(milliseconds: 50),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.bounceIn,
         );
       },
@@ -177,9 +170,25 @@ class RestaurantInfo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                '$openInfo - $distance',
-                style: ThemeService.choiceRestaurantButtonTextStyle(),
+              Row(
+                children: [
+                  Text(
+                    '$openInfo',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.color32CD43,
+                    ),
+                  ),
+                  Text(
+                    ' - $distance',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.colorEFEFEF,
+                    ),
+                  ),
+                ],
               ),
               Spacer(),
               Text(
@@ -201,7 +210,11 @@ class RestaurantInfo extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Выбрать',
-                      style: ThemeService.choiceRestaurantButtonTextStyle(),
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.colorEFEFEF,
+                      ),
                     ),
                   ),
                 ),
