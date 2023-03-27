@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
+import '../../map_page.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
-  const ViewRestaurantWidget({super.key});
+  ViewRestaurantWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +23,6 @@ class ViewRestaurantWidget extends StatelessWidget {
           ),
           child: ListView(
             children: <Widget>[
-              SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 48,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.colorD9D9D9,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 27,
               ),
@@ -80,17 +64,7 @@ class ViewRestaurantWidget extends StatelessWidget {
               SizedBox(
                 height: 22,
               ),
-              PrimaryButton(
-                onTap: () {},
-                color: AppColors.colorFFB627,
-                child: Text(
-                  'Посмотреть меню',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
-              ),
+              PrimaryButton(),
             ],
           ),
         ),
@@ -138,6 +112,37 @@ class ViewRestaurantWidget extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget PrimaryButton() {
+    return Container(
+      height: 50,
+      color: AppColors.colorFFB627,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            // GO TO MENU
+            MapPage.pageController.animateToPage(
+              0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear,
+            );
+          },
+          child: Container(
+            child: Center(
+              child: Text(
+                'Посмотреть меню',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

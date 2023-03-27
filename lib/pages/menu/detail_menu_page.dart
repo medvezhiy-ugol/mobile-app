@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
 import '../../generated/l10n.dart';
 import '../../services/theme_service.dart';
-import '../../ui/close_circle_button.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
@@ -38,8 +36,30 @@ class DetailMenuPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            CloseCircleButton(
-              onTap: () => context.pop(),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  context.pop();
+                },
+                customBorder: const CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.grey),
+                      child: const Icon(
+                        Icons.close,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 8,
@@ -72,13 +92,22 @@ class DetailMenuPage extends StatelessWidget {
                             const SizedBox(
                               height: 32,
                             ),
-                            PrimaryButton(
-                              onTap: () => context.pop(),
-                              child: Text(
-                                '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                            Container(
+                              color: AppColors.color26282F,
+                              height: 50,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Center(
+                                    child: Text(
+                                      '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

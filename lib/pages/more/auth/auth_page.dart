@@ -7,7 +7,6 @@ import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_fonts.dart';
-import '../../../ui/close_circle_button.dart';
 import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatelessWidget {
@@ -20,6 +19,7 @@ class AuthPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             return SafeArea(
@@ -28,14 +28,8 @@ class AuthPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: CloseCircleButton(
-                        onTap: () => context.pop(),
-                      ),
-                    ),
                     SizedBox(
-                      height: screenSize.height * 0.05,
+                      height: screenSize.height * 0.1,
                     ),
                     Text(
                       'Авторизация',
@@ -113,6 +107,30 @@ class AuthPage extends StatelessWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Container buildGetCodeButton(BuildContext context) {
+    return Container(
+      height: 50,
+      width: double.infinity,
+      color: AppColors.color26282F,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => context.pop(),
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Получить код',
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
+          ),
         ),
       ),
     );

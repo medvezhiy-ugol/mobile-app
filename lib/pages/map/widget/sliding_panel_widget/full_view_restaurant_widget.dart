@@ -23,22 +23,6 @@ class FullViewRestaurantWidget extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 48,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.colorD9D9D9,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
                 height: 27,
               ),
               Text(
@@ -126,13 +110,13 @@ class FullViewRestaurantWidget extends StatelessWidget {
                 height: 30,
               ),
               PrimaryButton(
-                color: AppColors.colorFFB627,
+                
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 onTap: () {},

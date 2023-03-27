@@ -3,13 +3,7 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
-    super.key,
-    required this.onTap,
-    required this.child,
-    this.color = AppColors.color26282F,
-    this.height = 50,
-  });
+  const PrimaryButton({super.key, required this.onTap, required this.child});
 
   factory PrimaryButton.icon(
       {Key? key,
@@ -19,19 +13,17 @@ class PrimaryButton extends StatelessWidget {
 
   final VoidCallback? onTap;
   final Widget child;
-  final Color color;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
+      height: 50,
       width: double.infinity,
-      color: color,
+      color: AppColors.color26282F,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: onTap,
+          onTap: () => onTap,
           child: Align(alignment: Alignment.center, child: child),
         ),
       ),
