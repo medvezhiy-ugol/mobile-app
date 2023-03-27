@@ -44,7 +44,7 @@ class _MapWidgetState extends State<MapWidget> {
       isDraggable: false,
       icon: PlacemarkIcon.single(
         PlacemarkIconStyle(
-          scale: 0.8,
+          scale: 0.7,
           image: BitmapDescriptor.fromAssetImage(A.assetsMapPagePointImg),
           rotationType: RotationType.noRotation,
           anchor: Offset(0.5, 1),
@@ -54,7 +54,7 @@ class _MapWidgetState extends State<MapWidget> {
         print(point);
         await controller.moveCamera(
           CameraUpdate.newCameraPosition(
-            CameraPosition(target: point, zoom: 17),
+            CameraPosition(target: point, zoom: 16),
           ),
           animation: animation,
         );

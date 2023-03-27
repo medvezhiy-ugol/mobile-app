@@ -97,19 +97,4 @@ class ThemeService {
     );
   }
 
-  static TextStyle addressButtonTextStyle() {
-    return const TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      color: AppColors.colorEFEFEF,
-    );
-  }
-
-  static TextStyle choiceRestaurantButtonTextStyle() {
-    return const TextStyle(
-      fontSize: 10,
-      fontWeight: FontWeight.w400,
-      color: AppColors.colorEFEFEF,
-    );
-  }
 }

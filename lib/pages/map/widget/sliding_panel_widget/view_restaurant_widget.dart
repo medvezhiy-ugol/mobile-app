@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
+import '../../map_page.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
   const ViewRestaurantWidget({super.key});
@@ -23,22 +24,6 @@ class ViewRestaurantWidget extends StatelessWidget {
           ),
           child: ListView(
             children: <Widget>[
-              SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 48,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.colorD9D9D9,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 27,
               ),
