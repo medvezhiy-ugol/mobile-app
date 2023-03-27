@@ -52,17 +52,18 @@ class DetailStockPage extends StatelessWidget {
                     height: 14,
                   ),
                   Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: PrimaryButton(
-                        onTap: () => context.pop(),
-                        child: Text(
-                          S.current.detailStockScreenToUseButtonText,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: PrimaryButton(
+                      onTap: () => context.pop(),
+                      child: Text(
+                        S.current.detailStockScreenToUseButtonText,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
