@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +24,7 @@ class DetailMenuPage extends StatelessWidget {
   final String productName = 'Донер ';
 
   static List<String> inputProductIngredients = [
-    'куриное бедро',
+    'Аллергены: бедро',
     'помидор',
     'огурец',
     'айсберг',
@@ -113,7 +116,9 @@ class DetailMenuPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            _buildChoiceComponent(),
+                            SizedBox(
+                                width: double.infinity,
+                                child: _buildChoiceComponent()),
                             const SizedBox(height: 24),
                             Align(
                               alignment: Alignment.centerLeft,
@@ -192,70 +197,17 @@ class DetailMenuPage extends StatelessWidget {
   }
 
   Widget _buildChoiceComponent() {
-    bool _ch = false;
     return Wrap(
       direction: Axis.horizontal,
-      spacing: 3,
-      runSpacing: 3,
-      children: [
-        RawChip(
-          label: Text(
-            'Luk',
-          ),
-          onPressed: () {
-            _ch = !_ch;
-          },
-        ),
-        Chip(
-          avatar: const Icon(
-            Icons.close,
-            size: 9,
-            color: Colors.white,
-          ),
-          label: const Text(
-            'Luk',
-            style: TextStyle(
-              decoration: TextDecoration.lineThrough,
-            ),
-          ),
-          deleteIcon: const Icon(
-            Icons.close,
-            size: 9,
-            color: Colors.white,
-          ),
-          onDeleted: () {},
-        ),
-        const Chip(
-          avatar: Icon(
-            Icons.close,
-            size: 9,
-            color: Colors.white,
-          ),
-          label: Text('Luk'),
-        ),
-        const Chip(
-          avatar: Icon(
-            Icons.close,
-            size: 9,
-            color: Colors.white,
-          ),
-          label: Text('Luk'),
-        ),
-        // DishComponent(
-        //   text: 'Лук',
-        // ),
-        // DishComponent(
-        //   text: 'Слат',
-        // ),
-        // DishComponent(
-        //   text: 'Огурцы маринованные',
-        // ),
-        // DishComponent(
-        //   text: 'Соус',
-        // ),
-        // DishComponent(
-        //   text: 'Томаты',
-        // ),
+      alignment: WrapAlignment.start,
+      spacing: 8,
+      runSpacing: 8,
+      children: const <Widget>[
+        ChipComponent(label: 'Лук'),
+        ChipComponent(label: 'Чеснок'),
+        ChipComponent(label: 'Огурцы маринованные'),
+        ChipComponent(label: 'Томаты'),
+        ChipComponent(label: 'Соус'),
       ],
     );
   }
@@ -285,6 +237,65 @@ class DetailMenuPage extends StatelessWidget {
           imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
       ],
+    );
+  }
+}
+
+class ChipComponent extends StatefulWidget {
+  const ChipComponent({super.key, required this.label});
+
+  final String label;
+
+  @override
+  State<ChipComponent> createState() => _ChipComponentState();
+}
+
+class _ChipComponentState extends State<ChipComponent> {
+  bool _isDeleted = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.color26282F,
+      height: 36,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              _isDeleted = !_isDeleted;
+            });
+          },
+          child: IntrinsicWidth(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(
+                  width: 10,
+                ),
+                Icon(
+                  (_isDeleted) ? Icons.add : Icons.close,
+                  size: 16,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  widget.label,
+                  style: TextStyle(
+                    decoration:
+                        (_isDeleted) ? TextDecoration.lineThrough : null,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
