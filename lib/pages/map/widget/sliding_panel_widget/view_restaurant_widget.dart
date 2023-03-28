@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../ui/close_circle_button.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../map_page.dart';
@@ -27,14 +28,29 @@ class ViewRestaurantWidget extends StatelessWidget {
               SizedBox(
                 height: 27,
               ),
-              Text(
-                'Медвежий угол Свободы Ярославль',
-                style: TextStyle(
-                  fontFamily: 'Unbounded',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+              Row(
+                children: [
+                  Container(
+                    child: Flexible(
+                      child: Text(
+                        'Медвежий угол Свободы Ярославль',
+                        style: TextStyle(
+                          fontFamily: 'Unbounded',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  CloseCircleButton(
+                    onTap: () => MapPage.pageController.animateToPage(
+                    0,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 15,
@@ -67,6 +83,7 @@ class ViewRestaurantWidget extends StatelessWidget {
               ),
               PrimaryButton(
                 onTap: () {},
+                color: AppColors.colorFFB627,
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(
@@ -81,6 +98,7 @@ class ViewRestaurantWidget extends StatelessWidget {
       ),
     );
   }
+
   Widget RestaurantAttributes() {
     return Container(
       height: 30,

@@ -107,15 +107,16 @@ class FullViewRestaurantWidget extends StatelessWidget {
                 onTap: () {},
               ),
               SizedBox(
-                height: 30,
+                height: 24,
               ),
               PrimaryButton(
+                color: AppColors.colorFFB627,
                 child: Text(
                   'Посмотреть меню',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 onTap: () {},
