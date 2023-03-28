@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../utils/app_assets.dart';
+import '../map_page.dart';
 
 class MapWidget extends StatefulWidget {
   final double? height;
@@ -25,7 +25,7 @@ class _MapWidgetState extends State<MapWidget> {
 
   final List<MapObject> mapObjects = [];
 
-  final animation = MapAnimation(type: MapAnimationType.smooth, duration: 1.5);
+  final animation = MapAnimation(type: MapAnimationType.linear, duration: 1.5);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,6 @@ class _MapWidgetState extends State<MapWidget> {
       mapId: MapObjectId('normal_icon_placemark'),
       point: point,
       opacity: 1,
-      direction: 90,
       isDraggable: false,
       icon: PlacemarkIcon.single(
         PlacemarkIconStyle(
@@ -49,10 +48,14 @@ class _MapWidgetState extends State<MapWidget> {
         ),
       ),
       onTap: (mapObject, point) async {
-        print(point);
+        MapPage.pageController.animateToPage(
+          1,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.linear,
+        );
         await controller.moveCamera(
           CameraUpdate.newCameraPosition(
-            CameraPosition(target: point, zoom: 16),
+            CameraPosition(target: point, zoom: 17),
           ),
           animation: animation,
         );
@@ -63,15 +66,16 @@ class _MapWidgetState extends State<MapWidget> {
       nightModeEnabled: true,
       onMapCreated: (YandexMapController yandexMapController) async {
         controller = yandexMapController;
-        await controller.moveCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(target: point, zoom: 17),
-          ),
-        );
         setState(
           () {
             mapObjects.add(mapObject);
           },
+        );
+
+        await controller.moveCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(target: point, zoom: 17),
+          ),
         );
       },
     );

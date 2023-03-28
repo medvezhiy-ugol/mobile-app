@@ -28,92 +28,96 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
     final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
-    final _mapHeight = MediaQuery.of(context).size.height - _minSlidingPanelHeight - MainPage.navBarHeight;
 
-    return Stack(
-      alignment: Alignment.topCenter,
-      children: <Widget>[
-        SizedBox(
-          height: _mapHeight,
-          child: MapWidget(),
-        ),
-        SlidingUpPanel(
-          onPanelSlide: (double point) {
-            setState(() {
-              _isDrag = false;
-              if ((!_isDrag == true) &&
-                  MapPage.pageController.page == 1.0 &&
-                  point > 0.5) {
-                MapPage.pageController.animateToPage(
-                  2,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.linear,
-                );
-                _isDrag = true;
-              }
-              if ((!_isDrag == true) &&
-                  MapPage.pageController.page == 2.0 &&
-                  point < 0.5) {
-                MapPage.pageController.animateToPage(
-                  1,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.linear,
-                );
-                _isDrag = true;
-              }
-            });
-          },
-          defaultPanelState: PanelState.CLOSED,
-          minHeight: _minSlidingPanelHeight,
-          maxHeight: _maxSlidingPanelHeight,
-          controller: MapPage.panelController,
-          color: AppColors.color111216,
-          panelBuilder: (sc) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.fromSwatch(
-                  accentColor: AppColors.color191A1F,
+    final _mapHeight = MediaQuery.of(context).size.height -
+        _minSlidingPanelHeight -
+        MainPage.navBarHeight;
+
+    return SafeArea(
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: <Widget>[
+          SlidingUpPanel(
+            body: SizedBox(
+              child: MapWidget(),
+            ),
+            onPanelSlide: (double point) {
+              setState(() {
+                _isDrag = false;
+                if ((!_isDrag == true) &&
+                    MapPage.pageController.page == 1.0 &&
+                    point > 0.5) {
+                  MapPage.pageController.animateToPage(
+                    2,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  );
+                  _isDrag = true;
+                }
+                if ((!_isDrag == true) &&
+                    MapPage.pageController.page == 2.0 &&
+                    point < 0.5) {
+                  MapPage.pageController.animateToPage(
+                    1,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  );
+                  _isDrag = true;
+                }
+              });
+            },
+            defaultPanelState: PanelState.CLOSED,
+            minHeight: _minSlidingPanelHeight,
+            maxHeight: _maxSlidingPanelHeight,
+            controller: MapPage.panelController,
+            color: AppColors.color111216,
+            panelBuilder: (sc) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.fromSwatch(
+                    accentColor: AppColors.color191A1F,
+                  ),
                 ),
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 48,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: AppColors.colorD9D9D9,
-                          borderRadius: BorderRadius.circular(9),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: PageView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: MapPage.pageController,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SlidingPanelWidget(),
-                        ViewRestaurantWidget(),
-                        FullViewRestaurantWidget(),
+                        Container(
+                          width: 48,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorD9D9D9,
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        const Positioned(
-          top: 80,
-          child: ToggleSwitcher(),
-        ),
-      ],
+                    Expanded(
+                      child: PageView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: MapPage.pageController,
+                        children: <Widget>[
+                          SlidingPanelWidget(),
+                          ViewRestaurantWidget(),
+                          FullViewRestaurantWidget(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          const Positioned(
+            top: 80,
+            child: ToggleSwitcher(),
+          ),
+        ],
+      ),
     );
   }
 }

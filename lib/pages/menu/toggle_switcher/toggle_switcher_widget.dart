@@ -41,7 +41,7 @@ class _ToggleSwitcherState extends State<ToggleSwitcher> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  'Доставка в данный момент недоступна!',
+                  'Доставка в данный момент недоступна',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.color111216,
