@@ -11,14 +11,15 @@ import '../menu/toggle_switcher/toggle_switcher_widget.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({super.key});
-  static PageController pageController = PageController();
+  static final PageController pageController = PageController();
   static final PanelController panelController = PanelController();
+  static bool fullViewIsVisible = true;
 
   @override
   State<MapPage> createState() => _MapPageState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   // bool _showRestFilter = true;
   // bool _isRunning = true;
 
@@ -33,6 +34,19 @@ class _MapPageState extends State<MapPage> {
         _minSlidingPanelHeight -
         MainPage.navBarHeight;
 
+//BETA
+    int currentFadeIndex = 0;
+    late final AnimationController _animationController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+    late final Animation<double> _animation =
+        Tween<double>(begin: 0, end: 1).animate(_animationController);
+    List<Widget> _pages = [
+      ViewRestaurantWidget(),
+      FullViewRestaurantWidget(),
+    ];
+
     return SafeArea(
       child: Stack(
         alignment: Alignment.topCenter,
@@ -42,29 +56,28 @@ class _MapPageState extends State<MapPage> {
               child: MapWidget(),
             ),
             onPanelSlide: (double point) {
-              setState(() {
-                _isDrag = false;
-                if ((!_isDrag == true) &&
-                    MapPage.pageController.page == 1.0 &&
-                    point > 0.5) {
-                  MapPage.pageController.animateToPage(
-                    2,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.linear,
-                  );
-                  _isDrag = true;
-                }
-                if ((!_isDrag == true) &&
-                    MapPage.pageController.page == 2.0 &&
-                    point < 0.5) {
-                  MapPage.pageController.animateToPage(
-                    1,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.linear,
-                  );
-                  _isDrag = true;
-                }
-              });
+              print('$currentFadeIndex - fade');
+              _isDrag = false;
+              if ((!_isDrag == true) &&
+                  MapPage.pageController.page == 1.0 &&
+                  point > 0.5) {
+                // _animationController.forward();
+                // MapPage.pageController.jumpToPage(2);
+                setState(() {
+                  currentFadeIndex = 1;
+                });
+                _isDrag = true;
+                
+              }
+              if ((!_isDrag == true) &&
+                  MapPage.pageController.page == 2.0 &&
+                  point < 0.5) {
+                // _animationController.reverse();
+                setState(() {
+                  currentFadeIndex = 0;
+                });
+                // MapPage.pageController.jumpToPage(1);
+              }
             },
             defaultPanelState: PanelState.CLOSED,
             minHeight: _minSlidingPanelHeight,
@@ -102,8 +115,18 @@ class _MapPageState extends State<MapPage> {
                         controller: MapPage.pageController,
                         children: <Widget>[
                           SlidingPanelWidget(),
-                          ViewRestaurantWidget(),
-                          FullViewRestaurantWidget(),
+                          AnimatedSwitcher(
+                            duration: Duration(
+                                milliseconds:
+                                    300), // You can change this to the desired animation duration.
+                            transitionBuilder:
+                                (Widget child, Animation<double> animation) {
+                              return FadeTransition(
+                                  child: child, opacity: animation);
+                            },
+                            child: _pages[
+                                currentFadeIndex], // The current page to display.
+                          ),
                         ],
                       ),
                     ),
