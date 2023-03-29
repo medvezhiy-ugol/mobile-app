@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
+import '../../map_page.dart';
 
-class FullViewRestaurantWidget extends StatelessWidget {
+class FullViewRestaurantWidget extends StatefulWidget {
   FullViewRestaurantWidget({super.key});
+
+  @override
+  State<FullViewRestaurantWidget> createState() => _FullViewRestaurantWidgetState();
+}
+
+class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
   @override
   Widget build(BuildContext context) {
     return MediaQuery.removePadding(
@@ -175,25 +182,6 @@ class FullViewRestaurantWidget extends StatelessWidget {
   }
 
   // Widget PrimaryButton({
-  //   required Color color,
-  //   required Widget child,
-  //   required VoidCallback onTap,
-  // }) {
-  //   return Container(
-  //     height: 50,
-  //     color: color,
-  //     child: Material(
-  //       color: Colors.transparent,
-  //       child: InkWell(
-  //         onTap: onTap,
-  //         child: Container(
-  //           child: Center(child: child),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget InfoBox({required String title, required Widget child}) {
     return Container(
       height: 65,
@@ -219,4 +207,28 @@ class FullViewRestaurantWidget extends StatelessWidget {
       ),
     );
   }
+
+// @override
+// Widget build(BuildContext context) {
+//   return Scaffold(
+//     appBar: AppBar(title: Text('Fade Transition Example')),
+//     body: Center(
+//       child: 
+
+    // ),
+//     floatingActionButton: FloatingActionButton(
+//       onPressed: () {
+//         setState(() {
+//           currentIndex = (currentIndex + 1) % pages.length; // Increment the current index and wrap it around the list.
+//         });
+//       },
+//       child: Icon(Icons.navigate_next),
+//     ),
+//   );
+// }
+
+
+
+
+
 }
