@@ -23,7 +23,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   // bool _showRestFilter = true;
   // bool _isRunning = true;
 
-  bool _isDrag = false;
+  bool _isDraged = false;
+  bool isFadeAnimated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
 
     final _mapHeight = MediaQuery.of(context).size.height -
-        _minSlidingPanelHeight -
-        MainPage.navBarHeight;
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom -
+        MainPage.navBarHeight -
+        _minSlidingPanelHeight;
 
 //BETA
     int currentFadeIndex = 0;
@@ -42,41 +45,33 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     );
     late final Animation<double> _animation =
         Tween<double>(begin: 0, end: 1).animate(_animationController);
-    List<Widget> _pages = [
-      ViewRestaurantWidget(),
-      FullViewRestaurantWidget(),
-    ];
 
     return SafeArea(
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
+          SizedBox(
+            height: _mapHeight,
+            child: MapWidget(),
+          ),
           SlidingUpPanel(
-            body: SizedBox(
-              child: MapWidget(),
-            ),
             onPanelSlide: (double point) {
-              print('$currentFadeIndex - fade');
-              _isDrag = false;
-              if ((!_isDrag == true) &&
-                  MapPage.pageController.page == 1.0 &&
-                  point > 0.5) {
-                // _animationController.forward();
-                // MapPage.pageController.jumpToPage(2);
+              isFadeAnimated = false;
+              _isDraged = false;
+              if ((MapPage.pageController.page == 1.0) &&
+                  (!_isDraged == true) &&
+                  (point > 0.0)) {
                 setState(() {
-                  currentFadeIndex = 1;
+                  isFadeAnimated = true;
                 });
-                _isDrag = true;
-                
+                _isDraged = true;
               }
-              if ((!_isDrag == true) &&
-                  MapPage.pageController.page == 2.0 &&
-                  point < 0.5) {
-                // _animationController.reverse();
+              if ((MapPage.pageController.page == 1.0) &&
+                  (_isDraged == true) &&
+                  (point < 0.3)) {
                 setState(() {
-                  currentFadeIndex = 0;
+                  isFadeAnimated = false;
                 });
-                // MapPage.pageController.jumpToPage(1);
               }
             },
             defaultPanelState: PanelState.CLOSED,
@@ -116,16 +111,19 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         children: <Widget>[
                           SlidingPanelWidget(),
                           AnimatedSwitcher(
-                            duration: Duration(
-                                milliseconds:
-                                    300), // You can change this to the desired animation duration.
+                            duration: const Duration(milliseconds: 200),
+                            switchInCurve: Curves.easeInOut,
+                            switchOutCurve: Curves.easeInOut,
                             transitionBuilder:
                                 (Widget child, Animation<double> animation) {
                               return FadeTransition(
-                                  child: child, opacity: animation);
+                                opacity: animation,
+                                child: child,
+                              );
                             },
-                            child: _pages[
-                                currentFadeIndex], // The current page to display.
+                            child: !isFadeAnimated
+                                ? ViewRestaurantWidget()
+                                : FullViewRestaurantWidget(),
                           ),
                         ],
                       ),
@@ -136,7 +134,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             },
           ),
           const Positioned(
-            top: 80,
+            top: 30,
             child: ToggleSwitcher(),
           ),
         ],
