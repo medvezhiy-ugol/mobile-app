@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 import 'package:medvezhiy_ugol/pages/map/widget/map_widget.dart';
 import 'package:medvezhiy_ugol/pages/map/widget/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/pages/map/widget/sliding_panel_widget/sliding_panel_widget.dart';
@@ -31,11 +32,22 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
     final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
 
-    final _mapHeight = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
-        MediaQuery.of(context).padding.bottom -
-        MainPage.navBarHeight -
-        _minSlidingPanelHeight;
+    const double _iosCorrectionMapHeight = 10;
+
+    double _getMapHeight(context) {
+      if (!Platform.isIOS) {
+        return MediaQuery.of(context).size.height -
+            MainPage.navBarHeight -
+            _minSlidingPanelHeight;
+      } else {
+        return MediaQuery.of(context).size.height -
+            MainPage.navBarHeight -
+            _minSlidingPanelHeight -
+            _iosCorrectionMapHeight;
+      }
+    }
+
+    final double _mapHeight = _getMapHeight(context);
 
 //BETA
     int currentFadeIndex = 0;
@@ -46,99 +58,97 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     late final Animation<double> _animation =
         Tween<double>(begin: 0, end: 1).animate(_animationController);
 
-    return SafeArea(
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          SizedBox(
-            height: _mapHeight,
-            child: MapWidget(),
-          ),
-          SlidingUpPanel(
-            onPanelSlide: (double point) {
-              isFadeAnimated = false;
-              _isDraged = false;
-              if ((MapPage.pageController.page == 1.0) &&
-                  (!_isDraged == true) &&
-                  (point > 0.0)) {
-                setState(() {
-                  isFadeAnimated = true;
-                });
-                _isDraged = true;
-              }
-              if ((MapPage.pageController.page == 1.0) &&
-                  (_isDraged == true) &&
-                  (point < 0.3)) {
-                setState(() {
-                  isFadeAnimated = false;
-                });
-              }
-            },
-            defaultPanelState: PanelState.CLOSED,
-            minHeight: _minSlidingPanelHeight,
-            maxHeight: _maxSlidingPanelHeight,
-            controller: MapPage.panelController,
-            color: AppColors.color111216,
-            panelBuilder: (sc) {
-              return Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.fromSwatch(
-                    accentColor: AppColors.color191A1F,
-                  ),
+    return Stack(
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        SizedBox(
+          height: _mapHeight,
+          child: MapWidget(),
+        ),
+        SlidingUpPanel(
+          onPanelSlide: (double point) {
+            isFadeAnimated = false;
+            _isDraged = false;
+            if ((MapPage.pageController.page == 1.0) &&
+                (!_isDraged == true) &&
+                (point > 0.0)) {
+              setState(() {
+                isFadeAnimated = true;
+              });
+              _isDraged = true;
+            }
+            if ((MapPage.pageController.page == 1.0) &&
+                (_isDraged == true) &&
+                (point < 0.3)) {
+              setState(() {
+                isFadeAnimated = false;
+              });
+            }
+          },
+          defaultPanelState: PanelState.CLOSED,
+          minHeight: _minSlidingPanelHeight,
+          maxHeight: _maxSlidingPanelHeight,
+          controller: MapPage.panelController,
+          color: AppColors.color111216,
+          panelBuilder: (sc) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColors.color191A1F,
                 ),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 48,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: AppColors.colorD9D9D9,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: MapPage.pageController,
                       children: <Widget>[
-                        Container(
-                          width: 48,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorD9D9D9,
-                            borderRadius: BorderRadius.circular(9),
-                          ),
+                        SlidingPanelWidget(),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 200),
+                          switchInCurve: Curves.easeInOut,
+                          switchOutCurve: Curves.easeInOut,
+                          transitionBuilder:
+                              (Widget child, Animation<double> animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
+                          child: !isFadeAnimated
+                              ? ViewRestaurantWidget()
+                              : FullViewRestaurantWidget(),
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: PageView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: MapPage.pageController,
-                        children: <Widget>[
-                          SlidingPanelWidget(),
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 200),
-                            switchInCurve: Curves.easeInOut,
-                            switchOutCurve: Curves.easeInOut,
-                            transitionBuilder:
-                                (Widget child, Animation<double> animation) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                            child: !isFadeAnimated
-                                ? ViewRestaurantWidget()
-                                : FullViewRestaurantWidget(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          const Positioned(
-            top: 30,
-            child: ToggleSwitcher(),
-          ),
-        ],
-      ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        const Positioned(
+          top: 60,
+          child: ToggleSwitcher(),
+        ),
+      ],
     );
   }
 }
