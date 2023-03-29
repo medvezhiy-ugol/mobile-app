@@ -32,7 +32,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
     final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
 
-    const double _iosCorrectionMapHeight = 10;
+    const double _iosCorrectionMapHeight = 35;
 
     double _getMapHeight(context) {
       if (!Platform.isIOS) {
