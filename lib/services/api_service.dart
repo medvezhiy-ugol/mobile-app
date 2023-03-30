@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class APIService {
   static const url = 'http://94.131.97.26';
@@ -12,12 +11,12 @@ class APIService {
     try {
       var response = await Dio()
           .post('$url/$request', queryParameters: queryParameters, data: data);
-      print(response.data);
+      debugPrint(response.data);
       if (response.statusCode == 200) {
         return response.data;
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return '';
     }
     return '';
@@ -29,12 +28,12 @@ class APIService {
     try {
       var response =
           await Dio().get('$url/$request', queryParameters: queryParameters);
-      print(response.data);
+      debugPrint(response.data);
       if (response.statusCode == 200) {
         return response.data;
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return '';
     }
     return '';

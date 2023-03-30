@@ -36,7 +36,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     context.go(Routes.map);
   }
 
-// customize
   final double menuSelectionHeight = 300 + 300 + 10 + 10;
   final int tabLengh = 4;
 
@@ -209,6 +208,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
       ),
     );
   }
+
   Future _scrollToCounter(int index) async {
     await listController.scrollToIndex(index,
         preferPosition: AutoScrollPosition.begin);
@@ -221,10 +221,8 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         double position = 0;
 
         position = listController.position.pixels;
-        //for debug position
-        //print('POSITION - ${position}');
 
-        tabSelectionChangeIndex = (position / menuSelectionHeight).toInt();
+        tabSelectionChangeIndex = position ~/ menuSelectionHeight;
 
         if (tabSelectionChangeIndex <= tabLengh - 1 &&
             !(tabController.indexIsChanging)) {
