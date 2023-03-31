@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/pages/menu/bloc/menu_bloc.dart';
+import 'package:medvezhiy_ugol/services/menu_service.dart';
 import '../generated/l10n.dart';
 
 import '../common_setup/routes.dart';
@@ -24,6 +27,8 @@ class _MainPageState extends State<MainPage> {
       .firstWhere((e) => widget.location.contains(e.path))
       .index;
 
+  final MenuService menuService = Injector().get<MenuService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +38,9 @@ class _MainPageState extends State<MainPage> {
           BlocProvider(
             create: (context) => MoreBloc(),
           ),
+          BlocProvider(
+            create: (context) => MenuBloc(menuService: menuService),
+          )
         ],
         child: widget.child,
       ),

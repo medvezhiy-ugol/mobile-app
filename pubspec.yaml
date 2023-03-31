@@ -28,6 +28,7 @@ dependencies:
   simple_circular_progress_bar: ^1.0.2
   yandex_mapkit: ^3.2.0
   sliding_up_panel: ^2.0.0+1
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

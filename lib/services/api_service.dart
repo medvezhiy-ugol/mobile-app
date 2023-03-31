@@ -11,15 +11,15 @@ class APIService {
     try {
       var response = await Dio()
           .post('$url/$request', queryParameters: queryParameters, data: data);
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }
     } catch (e) {
       debugPrint(e.toString());
-      return '';
+      return null;
     }
-    return '';
+    return null;
   }
 
   static Future<dynamic> getRequest(
@@ -28,14 +28,14 @@ class APIService {
     try {
       var response =
           await Dio().get('$url/$request', queryParameters: queryParameters);
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }
     } catch (e) {
       debugPrint(e.toString());
-      return '';
+      return null;
     }
-    return '';
+    return null;
   }
 }

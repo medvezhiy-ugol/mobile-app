@@ -1,14 +1,17 @@
 import 'package:container_tab_indicator/container_tab_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_sections_widget.dart';
-import 'package:medvezhiy_ugol/pages/menu/tabbar/scale_tabbar_module.dart';
-import 'package:medvezhiy_ugol/pages/menu/toggle_switcher/toggle_switcher_widget.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+
 import '../../common_setup/routes.dart';
-import '../../generated/l10n.dart';
+import '../../utils/app_colors.dart';
 import '../../utils/icons/toggle_switcher_icons_icons.dart';
+import 'bloc/menu_bloc.dart';
+import 'tabbar/menu_sections_widget.dart';
+import 'tabbar/scale_tabbar_module.dart';
+import 'toggle_switcher/toggle_switcher_widget.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -18,12 +21,7 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
-  late TabController tabController;
-  late AutoScrollController listController;
-  final scrollDirection = Axis.vertical;
   late List<List<int>> indexList;
-
-  final int initialIndex = 0;
   final Color taBarBackgroundColor = AppColors.color111216;
 
   final maxCount = 4;
@@ -36,200 +34,184 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     context.go(Routes.map);
   }
 
-  final double menuSelectionHeight = 300 + 300 + 10 + 10;
-  final int tabLengh = 4;
-
-  final bool _isRunning = true;
-
-  final List<Widget> tabs = <Widget>[
-    Tab(
-      text: S.current.menuScreenPizza, //'Пицца',
-    ),
-    Tab(
-      text: S.current.menuScreenSushi, //'Суши',
-    ),
-    Tab(text: S.current.menuScreenSnacks //'Снеки',
-        ),
-    Tab(text: S.current.menuScreenDrinks //'Напитки',
-        ),
-  ];
-
   @override
   void initState() {
-    tabController = TabController(
-      initialIndex: initialIndex,
-      length: tabs.length,
-      vsync: this,
+    context.read<MenuBloc>().tabController = TabController(
+        length: context.read<MenuBloc>().menu.length, vsync: this);
+    context.read<MenuBloc>().listController = AutoScrollController(
+      viewportBoundaryGetter: () =>
+          Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      axis: Axis.vertical,
     );
-    listController = AutoScrollController(
-        viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-        axis: scrollDirection);
-    getMenuSelectionPosition();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 5,
-            ),
-            const ToggleSwitcher(),
-            const SizedBox(
-              height: 6,
-            ),
-            GestureDetector(
-              onTap: onAddressTap,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // ignore: prefer_const_constructors
-                  Icon(
-                    ToggleSwitcherIcons.vector,
-                    size: 12,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Ул. Свободы, д. 46/3',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.colorEFEFEF,
+    return BlocConsumer<MenuBloc, MenuState>(
+      listener: (context, state) {
+        if (state is MenuLoadedState) {
+          context.read<MenuBloc>().tabController = TabController(
+            length: state.menu.length,
+            vsync: this,
+          );
+        }
+      },
+      builder: (context, state) {
+        return SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 5,
+              ),
+              const ToggleSwitcher(),
+              const SizedBox(
+                height: 6,
+              ),
+              GestureDetector(
+                onTap: onAddressTap,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // ignore: prefer_const_constructors
+                    Icon(
+                      ToggleSwitcherIcons.vector,
+                      size: 12,
                     ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
+                    const SizedBox(
+                      width: 10,
                     ),
-                    child: Material(
-                      color: Colors.transparent,
-                      shape: const CircleBorder(),
-                      child: InkWell(
-                        onTap: onAddressTap,
-                        customBorder: const CircleBorder(),
-                        child: Ink(
-                          decoration:
-                              const BoxDecoration(shape: BoxShape.circle),
-                          height: 20,
-                          width: 20,
-                          child: const Icon(
-                            Icons.chevron_right,
-                            size: 20,
+                    Text(
+                      'Ул. Свободы, д. 46/3',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.colorEFEFEF,
+                      ),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: onAddressTap,
+                          customBorder: const CircleBorder(),
+                          child: Ink(
+                            decoration:
+                                const BoxDecoration(shape: BoxShape.circle),
+                            height: 20,
+                            width: 20,
+                            child: const Icon(
+                              Icons.chevron_right,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Material(
-              color: taBarBackgroundColor,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Theme(
-                  data: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.fromSwatch(
-                      accentColor: AppColors.color191A1F,
-                    ),
-                  ),
-                  child: ScaleTabBar(
-                    onTap: (value) {
-                      _scrollToCounter(value);
-                      tabController.index = value;
-                    },
-                    controller: tabController,
-                    tabs: tabs,
-                    isScrollable: true,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelStyle: const TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Unbounded',
-                        fontWeight: FontWeight.w600),
-                    unselectedLabelStyle: const TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Unbounded',
-                        fontWeight: FontWeight.w600),
-                    unselectedLabelColor: Colors.grey,
-                    overlayColor:
-                        MaterialStateProperty.all<Color>(Colors.transparent),
-                    indicator: ContainerTabIndicator(
-                      height: 2,
-                      radius: BorderRadius.circular(20),
-                      color: AppColors.colorFF9900,
-                      padding: const EdgeInsets.only(top: 19),
-                    ),
-                    // indicatorPadding: EdgeInsets.only(bottom: 4),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.fromSwatch(
-                    accentColor: AppColors.color191A1F,
-                  ),
-                ),
-                child: ListView(
-                  scrollDirection: scrollDirection,
-                  controller: listController,
-                  children: <Widget>[
-                    ...List.generate(4, (index) {
-                      return AutoScrollTag(
-                        key: ValueKey(index),
-                        controller: listController,
-                        index: index,
-                        child: Column(
-                          children: <Widget>[
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            menuSections[index],
-                          ],
-                        ),
-                      );
-                    })
+                    )
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              (state is MenuLoadedState)
+                  ? _buildTabBar(context, state)
+                  : const SizedBox(),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: (state is MenuLoadedState)
+                    ? Theme(
+                        data: Theme.of(context).copyWith(
+                          colorScheme: ColorScheme.fromSwatch(
+                            accentColor: AppColors.color191A1F,
+                          ),
+                        ),
+                        child: ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          controller: context.read<MenuBloc>().listController,
+                          itemCount: state.menu.length,
+                          separatorBuilder: (context, i) {
+                            return const SizedBox(
+                              height: 15,
+                            );
+                          },
+                          itemBuilder: (context, i) {
+                            return AutoScrollTag(
+                              key: ValueKey(i),
+                              controller:
+                                  context.read<MenuBloc>().listController,
+                              index: i,
+                              child: DonerSection(
+                                menuCategory: state.menu[i],
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    : const Center(
+                        child: CupertinoActivityIndicator(),
+                      ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Material _buildTabBar(BuildContext context, MenuLoadedState state) {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.fromSwatch(
+              accentColor: AppColors.color191A1F,
             ),
-          ],
+          ),
+          child: ScaleTabBar(
+            onTap: (value) {
+              _scrollToCounter(value);
+              context.read<MenuBloc>().tabController.index = value;
+            },
+            controller: context.read<MenuBloc>().tabController,
+            tabs: state.menuTabs,
+            isScrollable: true,
+            indicatorSize: TabBarIndicatorSize.tab,
+            labelStyle: const TextStyle(
+                fontSize: 24,
+                fontFamily: 'Unbounded',
+                fontWeight: FontWeight.w600),
+            unselectedLabelStyle: const TextStyle(
+                fontSize: 16,
+                fontFamily: 'Unbounded',
+                fontWeight: FontWeight.w600),
+            unselectedLabelColor: Colors.grey,
+            overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+            indicator: ContainerTabIndicator(
+              height: 2,
+              radius: BorderRadius.circular(20),
+              color: AppColors.colorFF9900,
+              padding: const EdgeInsets.only(top: 19),
+            ),
+            // indicatorPadding: EdgeInsets.only(bottom: 4),
+          ),
         ),
       ),
     );
   }
 
   Future _scrollToCounter(int index) async {
-    await listController.scrollToIndex(index,
-        preferPosition: AutoScrollPosition.begin);
-  }
-
-  void getMenuSelectionPosition() async {
-    while (_isRunning) {
-      if (listController.hasClients) {
-        int tabSelectionChangeIndex = 0;
-        double position = 0;
-
-        position = listController.position.pixels;
-
-        tabSelectionChangeIndex = position ~/ menuSelectionHeight;
-
-        if (tabSelectionChangeIndex <= tabLengh - 1 &&
-            !(tabController.indexIsChanging)) {
-          tabController.animateTo(tabSelectionChangeIndex);
-        }
-      }
-      await Future.delayed(const Duration(milliseconds: 50));
-    }
+    await context
+        .read<MenuBloc>()
+        .listController
+        .scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
   }
 }

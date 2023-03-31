@@ -1,23 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../../services/theme_service.dart';
 
 class MenuCardWidget extends StatelessWidget {
-  const MenuCardWidget({
-    super.key,
-    this.id = 0,
-    required this.onTap,
-  });
-
-  final int id;
+  final MenuProduct menuProduct;
   final VoidCallback onTap;
 
-  final String title = 'Донер c курицей';
-  final String weight = '300';
-  final String coast = '220';
-  final String ingredients =
-      'куриное бедро, помидор, огурец, айсберг, кинза, базилик, соус на выбор';
+  const MenuCardWidget({
+    super.key,
+    required this.onTap,
+    required this.menuProduct,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +27,14 @@ class MenuCardWidget extends StatelessWidget {
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
-                child: Image.network(
-                  'https://www.crushpixel.com/big-static14/preview4/doner-kebab-on-wooden-table-1746165.jpg',
+                child: CachedNetworkImage(
+                  imageUrl: menuProduct.itemSizes.first.buttonImageUrl ?? '',
+                  placeholder: (context, url) => Container(
+                    color: AppColors.color26282F,
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: AppColors.color26282F,
+                  ),
                   height: 125,
                   fit: BoxFit.fitWidth,
                 ),
@@ -47,7 +49,7 @@ class MenuCardWidget extends StatelessWidget {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        title,
+                        menuProduct.name,
                         style: ThemeService.detailPageAddButtonTextStyle(),
                       ),
                     ),
@@ -57,7 +59,7 @@ class MenuCardWidget extends StatelessWidget {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '$weight г.',
+                        '${menuProduct.itemSizes.first.portionWeightGrams} г.',
                         style: ThemeService.tabBarCardWeightTextStyle(),
                       ),
                     ),
@@ -68,7 +70,9 @@ class MenuCardWidget extends StatelessWidget {
                       children: [
                         Flexible(
                           child: Text(
-                            ingredients,
+                            menuProduct.description == ''
+                                ? 'Описание отсутствует'
+                                : menuProduct.description,
                             style: ThemeService.tabBarCardIngrTextStyle(),
                           ),
                         )
@@ -86,7 +90,7 @@ class MenuCardWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Text(
-                          '$coast ₽',
+                          '${menuProduct.itemSizes.first.prices.first.price.toInt()} ₽',
                           style: ThemeService
                               .detailPageStatusBarItemCountTextStyle(),
                         ),

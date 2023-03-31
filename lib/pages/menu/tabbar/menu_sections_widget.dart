@@ -1,23 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
-import 'package:medvezhiy_ugol/utils/app_colors.dart';
-import '../../../generated/l10n.dart';
 
 import '../../../common_setup/routes.dart';
+import '../../../generated/l10n.dart';
 import 'menu_card_widget.dart';
 
-List<Widget> menuSections = [
-  DonerSection(),
-  DonerSection(),
-  DonerSection(),
-  DonerSection(),
-  DonerSection(),
-];
-
 class DonerSection extends StatelessWidget {
-  const DonerSection({super.key});
+  final MenuCategory menuCategory;
+
+  const DonerSection({
+    Key? key,
+    required this.menuCategory,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class DonerSection extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                S.current.menuScreenDoners,//'Донеры',
+                menuCategory.name,
                 style: ThemeService.tabBarTitleSectionTextStyle(),
               ),
             ),
@@ -40,30 +39,22 @@ class DonerSection extends StatelessWidget {
           ),
           LayoutGrid(
             columnSizes: [1.fr, 1.fr],
-            rowSizes: [auto, auto],
+            rowSizes: List.generate(
+                menuCategory.items.length ~/ 2 + 1, (index) => auto),
             columnGap: 10,
             rowGap: 10,
-            children: [
-              //здесь ставь открытие деталки
-              MenuCardWidget(onTap: () {
-                context.pushNamed(
-                  Routes.detailMenuName,
-                  params: {'id': '2'},
-                );
-              }),
-              MenuCardWidget(onTap: () {
-                context.pushNamed(
-                  Routes.detailMenuName,
-                  params: {'id': '2'},
-                );
-              }),
-              MenuCardWidget(onTap: () {
-                context.pushNamed(
-                  Routes.detailMenuName,
-                  params: {'id': '2'},
-                );
-              }),
-            ],
+            children: List.generate(
+              menuCategory.items.length,
+              (i) => MenuCardWidget(
+                menuProduct: menuCategory.items[i],
+                onTap: () {
+                  context.pushNamed(
+                    Routes.detailMenuName,
+                    params: {'id': menuCategory.items[i].id},
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
