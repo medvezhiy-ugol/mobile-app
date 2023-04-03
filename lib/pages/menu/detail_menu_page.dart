@@ -59,12 +59,14 @@ class DetailMenuPage extends StatelessWidget {
                           children: <Widget>[
                             Row(
                               children: [
-                                Text(
-                                  productName + id,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: AppFonts.unbounded,
+                                Flexible(
+                                  child: Text(
+                                    productName + id,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: AppFonts.unbounded,
+                                    ),
                                   ),
                                 ),
                               ],

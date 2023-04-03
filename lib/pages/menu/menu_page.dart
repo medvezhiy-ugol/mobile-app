@@ -147,7 +147,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                               controller:
                                   context.read<MenuBloc>().listController,
                               index: i,
-                              child: DonerSection(
+                              child: MenuSection(
                                 menuCategory: state.menu[i],
                               ),
                             );
