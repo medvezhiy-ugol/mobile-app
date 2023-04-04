@@ -8,6 +8,7 @@ import '../generated/l10n.dart';
 
 import '../common_setup/routes.dart';
 import '../utils/icons/bottom_bar_icons.dart';
+import 'menu/bloc/menu_detail_bloc.dart';
 import 'more/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {

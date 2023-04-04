@@ -21,6 +21,18 @@ class MenuService {
     return [];
   }
 
+  Future<MenuProduct?> getProductById(String id) async {
+    final response = await APIService.getRequest(
+      request: 'v1/menu/product/$id',
+    );
+
+    if (response != null) {
+      return MenuProduct.fromJson(response);
+    }
+
+    return null;
+  }
+
   void getListOfOrgs() {}
 
   Future<List<ExternalMenu>> _getAllMenus() async {
