@@ -1,162 +1,193 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 
 import '../../generated/l10n.dart';
+import '../../services/menu_service.dart';
 import '../../services/theme_service.dart';
 import '../../ui/close_circle_button.dart';
 import '../../ui/primary_button.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
+import 'bloc/menu_detail_bloc.dart';
 
 class DetailMenuPage extends StatelessWidget {
   DetailMenuPage({super.key, required this.id});
 
   final ThemeService themeService = Injector().get<ThemeService>();
+  final MenuService menuService = Injector().get<MenuService>();
 
   final String id;
 
-  final int productCoast = 220;
-  final String productName = 'Донер ';
-
-  static List<String> inputProductIngredients = [
-    'Аллергены: бедро',
-    'помидор',
-    'огурец',
-    'айсберг',
-    'кинза',
-    'базилик',
-    'соус на выбор'
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final String outputProductIngredients = inputProductIngredients.join(', ');
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            CloseCircleButton(
-              onTap: () => context.pop(),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(A.assetsDetailPageProductImg),
-                      const SizedBox(
-                        height: 38,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
+    return BlocProvider(
+      create: (context) => MenuDetailBloc(menuService: menuService, id: id),
+      child: BlocBuilder<MenuDetailBloc, MenuDetailState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: Scaffold(
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  CloseCircleButton(
+                    onTap: () => context.pop(),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Expanded(
+                    child: Scrollbar(
+                      child: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    productName + id,
+                            CachedNetworkImage(
+                              imageUrl: (state is MenuDetailLoadedState)
+                                  ? state.menuProduct.itemSizes.first
+                                          .buttonImageUrl ??
+                                      ''
+                                  : '',
+                              placeholder: (context, url) => Container(
+                                height: 200,
+                                color: AppColors.color26282F,
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                height: 200,
+                                color: AppColors.color26282F,
+                              ),
+                              fit: BoxFit.fitWidth,
+                            ),
+                            const SizedBox(
+                              height: 38,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    (state is MenuDetailLoadedState)
+                                        ? state.menuProduct.name
+                                        : '',
                                     style: const TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.w600,
                                       fontFamily: AppFonts.unbounded,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 32,
-                            ),
-                            PrimaryButton(
-                              onTap: () => context.pop(),
-                              child: Text(
-                                '$productCoast ₽   ${S.current.mealScreenDeleteAddTitleText}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    outputProductIngredients,
+                                  const SizedBox(
+                                    height: 32,
+                                  ),
+                                  PrimaryButton(
+                                    onTap: () => context.pop(),
+                                    child: Text(
+                                      (state is MenuDetailLoadedState)
+                                          ? '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}'
+                                          : '',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    (state is MenuDetailLoadedState)
+                                        ? state.menuProduct.description == ''
+                                            ? 'Состав отсутствует'
+                                            : state.menuProduct.description
+                                        : '',
                                     style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
                                       color: AppColors.color808080,
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 24),
-                            buildStatsBar(),
-                            const SizedBox(height: 32),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                S.current.mealScreenDeleteIngredientsTitleText,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                  const SizedBox(height: 24),
+                                  (state is MenuDetailLoadedState)
+                                      ? buildStatsBar(
+                                          state.menuProduct.itemSizes.first
+                                              .portionWeightGrams
+                                              .toString(),
+                                          state.menuProduct.itemSizes.first
+                                              .nutritionPerHundredGrams.energy
+                                              .toString(),
+                                          state.menuProduct.itemSizes.first
+                                              .nutritionPerHundredGrams.proteins
+                                              .toString(),
+                                          state.menuProduct.itemSizes.first
+                                              .nutritionPerHundredGrams.fats
+                                              .toString(),
+                                          state.menuProduct.itemSizes.first
+                                              .nutritionPerHundredGrams.carbs
+                                              .toString())
+                                      : const SizedBox(),
+                                  const SizedBox(height: 32),
+                                  // Align(
+                                  //   alignment: Alignment.centerLeft,
+                                  //   child: Text(
+                                  //     S.current
+                                  //         .mealScreenDeleteIngredientsTitleText,
+                                  //     style: const TextStyle(
+                                  //       fontSize: 16,
+                                  //       fontWeight: FontWeight.w600,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(height: 10),
+                                  // SizedBox(
+                                  //     width: double.infinity,
+                                  //     child: _buildChoiceComponent()),
+                                  // const SizedBox(height: 24),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      S.current.mealScreenDeleteAddTitleText,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  _buildAddProduct(),
+                                ],
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                                width: double.infinity,
-                                child: _buildChoiceComponent()),
-                            const SizedBox(height: 24),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                S.current.mealScreenDeleteAddTitleText,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            _buildAddProduct(),
+                            )
                           ],
                         ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-  Row buildStatsBar() {
+  Row buildStatsBar(String weight, String calories, String protein, String fats,
+      String carbohydrates) {
     return Row(
       children: <Widget>[
-        buildStatsBarItem(S.current.mealScreenWeightTitleText, '300 г'),
+        buildStatsBarItem(S.current.mealScreenWeightTitleText, '$weight г'),
         const SizedBox(width: 8),
-        buildStatsBarItem(S.current.mealScreenCaloriesTitleText, '588 г'),
+        buildStatsBarItem(S.current.mealScreenCaloriesTitleText, '$calories г'),
         const Spacer(),
-        buildStatsBarItem(S.current.mealScreenProteinTitleText, '23 г'),
+        buildStatsBarItem(S.current.mealScreenProteinTitleText, '$protein г'),
         const SizedBox(width: 8),
-        buildStatsBarItem(S.current.mealScreenFatsTitleText, '24 г'),
+        buildStatsBarItem(S.current.mealScreenFatsTitleText, '$fats г'),
         const SizedBox(width: 8),
-        buildStatsBarItem(S.current.mealScreenCarbohydratesTitleText, '68 г'),
+        buildStatsBarItem(
+            S.current.mealScreenCarbohydratesTitleText, '$carbohydrates г'),
       ],
     );
   }

@@ -63,7 +63,7 @@ class MenuCardWidget extends StatelessWidget {
                         Flexible(
                           child: Text(
                             menuProduct.description == ''
-                                ? 'Описание отсутствует'
+                                ? 'Состав отсутствует'
                                 : menuProduct.description,
                             style: ThemeService.tabBarCardIngrTextStyle(),
                           ),
