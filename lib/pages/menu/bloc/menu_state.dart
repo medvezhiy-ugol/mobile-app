@@ -15,3 +15,10 @@ class MenuLoadedState extends MenuState {
     required this.menuTabs,
   });
 }
+
+class MenuLoadingErrorState extends MenuState {
+  final String error;
+
+  MenuLoadingErrorState({required this.error});
+  
+}

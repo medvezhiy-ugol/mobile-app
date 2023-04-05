@@ -17,27 +17,20 @@ class MenuCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(menuProduct.itemSizes.first.buttonImageUrl);
     return Container(
+      height: 272,
       decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
       child: Stack(
         children: [
           Column(
+            
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
-                child: CachedNetworkImage(
-                  imageUrl: menuProduct.itemSizes.first.buttonImageUrl ?? '',
-                  placeholder: (context, url) => Container(
-                    color: AppColors.color26282F,
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    color: AppColors.color26282F,
-                  ),
-                  height: 125,
-                  fit: BoxFit.fitWidth,
-                ),
+                child: _buildCachedImg(),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
@@ -63,9 +56,8 @@ class MenuCardWidget extends StatelessWidget {
                         style: ThemeService.tabBarCardWeightTextStyle(),
                       ),
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+
+                    
                     Row(
                       children: [
                         Flexible(
@@ -112,6 +104,31 @@ class MenuCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildCachedImg() {
+    if (menuProduct.itemSizes.first.buttonImageUrl != null) {
+      return CachedNetworkImage(
+        imageUrl: menuProduct.itemSizes.first.buttonImageUrl ?? '',
+        placeholder: (context, url) => Container(
+          color: AppColors.color26282F,
+        ),
+        errorWidget: (context, url, error) => Container(
+          color: AppColors.color26282F,
+        ),
+        height: 125,
+        fit: BoxFit.fitWidth,
+      );
+    } else {
+      return Container(
+        height: 125,
+        child: Center(
+          child: Text(
+            'no img',
+          ),
+        ),
+      );
+    }
   }
 }
 

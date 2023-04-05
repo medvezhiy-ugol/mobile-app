@@ -26,7 +26,7 @@ const double _kDefaultUnselectLableFontSize = 14;
 
 class _TabStyle extends AnimatedWidget {
   const _TabStyle({
-      required Animation<double> animation,
+    required Animation<double> animation,
     required this.selected,
     required this.labelColor,
     required this.unselectedLabelColor,
@@ -58,13 +58,12 @@ class _TabStyle extends AnimatedWidget {
     final TextStyle defaultStyle =
         (labelStyle ?? tabBarTheme.labelStyle ?? defaults.labelStyle!)
             .copyWith(inherit: true);
-     //UNselected
+    //UNselected
     final TextStyle defaultUnselectedStyle = (unselectedLabelStyle ??
             tabBarTheme.unselectedLabelStyle ??
             labelStyle ??
             defaults.unselectedLabelStyle!)
         .copyWith(inherit: true);
-
 
     final TextStyle textStyle = selected
         ? TextStyle.lerp(defaultStyle, defaultUnselectedStyle, animation.value)!
@@ -95,7 +94,6 @@ class _TabStyle extends AnimatedWidget {
     return DefaultTextStyle(
       style: textStyle.copyWith(
         color: color,
-        ///钉死文字大小
         fontSize: unselectedLabelStyle!.fontSize! * fontSizeCorrection,
       ),
       child: IconTheme.merge(
@@ -103,7 +101,6 @@ class _TabStyle extends AnimatedWidget {
           size: 24.0,
           color: color,
         ),
-        ///添加一个缩放外壳
         child: Transform.scale(
           scale: scale,
           child: child,
@@ -290,6 +287,7 @@ class _IndicatorPainter extends CustomPainter {
         break;
     }
 
+//TABSIZE
     if (indicatorSize == TabBarIndicatorSize.label) {
       final double tabWidth = tabKeys[tabIndex].currentContext!.size!.width;
       final double delta = ((tabRight - tabLeft) - tabWidth) / 2.0;
@@ -378,8 +376,6 @@ class _ChangeAnimation extends Animation<double>
   @override
   double get value => _indexChangeProgress(controller);
 }
-
-
 
 class _DragAnimation extends Animation<double>
     with AnimationWithParentMixin<double> {
@@ -1446,6 +1442,7 @@ class TabPageSelector extends StatelessWidget {
   /// [DefaultTabController.of] will be used.
   final TabController? controller;
   static TabController? controllerInfo;
+
   /// The indicator circle's diameter (the default value is 12.0).
   final double indicatorSize;
 
