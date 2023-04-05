@@ -19,12 +19,14 @@ class MenuCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print(menuProduct.itemSizes.first.buttonImageUrl);
     return Container(
+      height: 272,
       decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
       child: Stack(
         children: [
           Column(
+            
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
@@ -54,9 +56,8 @@ class MenuCardWidget extends StatelessWidget {
                         style: ThemeService.tabBarCardWeightTextStyle(),
                       ),
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+
+                    
                     Row(
                       children: [
                         Flexible(

@@ -17,53 +17,65 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   List<MenuCategory> _menu = [];
   AutoScrollController listController = AutoScrollController();
   late TabController tabController;
-  double menuSelectionHeight = 0;
+
   int menuTabCount = 0;
+  List<double> menuSelectionHeight = [];
 
   List<MenuCategory> get menu => _menu;
 
   MenuBloc({
     required this.menuService,
   }) : super(MenuLoadingState()) {
-    _initMenu();
-    _updaterForMenuSelectionPosition();
     on<MenuEvent>((event, emit) {
       if (event is MenuLoadedEvent) {
         emit(MenuLoadedState(menu: menu, menuTabs: event.menuTabs));
+      } else if (event is MenuLoadingErrorEvent) {
+        emit(MenuLoadingErrorState(error: 'Ошибка, повторите вновь'));
+      } else if (event is MenuLoadingEvent) {
+        _initMenu();
       }
     });
+    add(MenuLoadingEvent());
+    _updaterForMenuSelectionPosition();
   }
 
   Future<void> _initMenu() async {
+    double accumulationHeight = 0.0;
+
     _menu = await Isolate.run(menuService.getFullMenu);
-    add(MenuLoadedEvent(
-      menuTabs: List.generate(menu.length, (index) {
-        return Tab(text: menu[index].name);
-      }),
-    ));
-    menuTabCount = menu.length;
-    for (int i = 0; i < menu.length; i++) {
-      print('$i - ${menu[i].items.length}');
-      menuSelectionHeight +=
-          (menu[i].items.length / 2).ceil() * (272.0 + 10) - 150;
+
+    if (!_menu.isEmpty) {
+      add(MenuLoadedEvent(
+        menuTabs: List.generate(menu.length, (index) {
+          return Tab(text: menu[index].name);
+        }),
+      ));
+      menuTabCount = menu.length;
+      for (int i = 0; i < menu.length; i++) {
+        accumulationHeight += (menu[i].items.length / 2).ceil() * (272.0 + 10);
+        // print('$i - ${(menu[i].items.length / 2).ceil()} - $accumulationHeight');
+        menuSelectionHeight.add(accumulationHeight);
+      }
+    } else {
+      add(MenuLoadingErrorEvent());
     }
   }
 
   void _updaterForMenuSelectionPosition() async {
-    // final List<double> menuSelectionHeight =
-    //     List.generate(menu.length, (index) {
-    //   print(menu[index].items.length);
-    //   return (menu[index].items.length ~/ 2) * 60.0;
-    // });
-
-//Смена индекса при прокруткек
+//Смена индекса при прокрутке
     while (true) {
       if (listController.hasClients) {
+        int tabSectionChangeIndex = 0;
         double position = listController.position.pixels + 0.01;
-        int tabSectionChangeIndex =
-            ((menuTabCount * position) / menuSelectionHeight).toInt();
-        print(
-            '$position - $menuSelectionHeight - ${((menuTabCount * position) / menuSelectionHeight).toInt()}');
+        for (int i = 1; i < _menu.length; i++) {
+          if ((position >= menuSelectionHeight[i - 1]) &&
+              (position <= menuSelectionHeight[i])) {
+            print(
+                '$position - ${menuSelectionHeight[i - 1]} - ${menuSelectionHeight[i]}');
+            tabSectionChangeIndex = i;
+          }
+        }
+        print('$position - $tabSectionChangeIndex');
         if (tabSectionChangeIndex <= menu.length - 1 &&
             !(tabController.indexIsChanging)) {
           tabController.animateTo(tabSectionChangeIndex);
