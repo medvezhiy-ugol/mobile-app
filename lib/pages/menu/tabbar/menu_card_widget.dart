@@ -19,7 +19,7 @@ class MenuCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print(menuProduct.itemSizes.first.buttonImageUrl);
     return Container(
-      height: 272,
+      height: 270,
       decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
@@ -57,7 +57,7 @@ class MenuCardWidget extends StatelessWidget {
                       ),
                     ),
 
-                    
+
                     Row(
                       children: [
                         Flexible(

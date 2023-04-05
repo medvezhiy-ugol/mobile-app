@@ -44,26 +44,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     super.initState();
   }
 
-  Widget _loadingBuildBody() {
-    return const Center(
-      child: CupertinoActivityIndicator(),
-    );
-  }
-
-  Widget _loadingErrorBuildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.change_circle_outlined,
-          ),
-        )
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MenuBloc, MenuState>(
@@ -189,17 +169,37 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     );
   }
 
+  Widget _loadingBuildBody() {
+    return const Center(
+      child: CupertinoActivityIndicator(),
+    );
+  }
+
+  Widget _loadingErrorBuildBody() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.change_circle_outlined,
+          ),
+        )
+      ],
+    );
+  }
+
   Material _buildTabBar(BuildContext context, MenuLoadedState state) {
     return Material(
       color: Colors.transparent,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.fromSwatch(
-              accentColor: AppColors.color191A1F,
-            ),
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.fromSwatch(
+            accentColor: AppColors.color191A1F,
           ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 10),
           child: ScaleTabBar(
             onTap: (value) {
               _scrollToCounter(value);
@@ -208,23 +208,29 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             controller: context.read<MenuBloc>().tabController,
             tabs: state.menuTabs,
             isScrollable: true,
-            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorSize: TabBarIndicatorSize.label,
             labelStyle: const TextStyle(
-                fontSize: 24,
-                fontFamily: 'Unbounded',
-                fontWeight: FontWeight.w600),
+              fontSize: 24,
+              fontFamily: 'Unbounded',
+              fontWeight: FontWeight.w600,
+            ),
+            labelPadding: const EdgeInsets.symmetric(horizontal: 20),
             unselectedLabelStyle: const TextStyle(
-                fontSize: 16,
-                fontFamily: 'Unbounded',
-                fontWeight: FontWeight.w600),
+              fontSize: 16,
+              fontFamily: 'Unbounded',
+              fontWeight: FontWeight.w600,
+            ),
             unselectedLabelColor: Colors.grey,
             overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
             indicator: ContainerTabIndicator(
               height: 2,
               radius: BorderRadius.circular(20),
               color: AppColors.colorFF9900,
-              padding: const EdgeInsets.only(top: 19),
+              padding: const EdgeInsets.only(
+                top: 20,
+              ),
             ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             // indicatorPadding: EdgeInsets.only(bottom: 4),
           ),
         ),

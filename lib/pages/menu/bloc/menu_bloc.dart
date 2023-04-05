@@ -40,9 +40,14 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }
 
   Future<void> _initMenu() async {
-    double accumulationHeight = 0.0;
-
-    _menu = await Isolate.run(menuService.getFullMenu);
+    double accumulationHeight = 10;
+    int gapCount = 0;
+    int rowCount = 0;
+    try {
+      _menu = await Isolate.run(menuService.getFullMenu);
+    } catch (e) {
+      _menu = [];
+    }
 
     if (!_menu.isEmpty) {
       add(MenuLoadedEvent(
@@ -52,13 +57,26 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       ));
       menuTabCount = menu.length;
       for (int i = 0; i < menu.length; i++) {
-        accumulationHeight += (menu[i].items.length / 2).ceil() * (272.0 + 10);
+        gapCount = getGapCount((menu[i].items.length / 2).ceil()); 
+        rowCount = getRowCount(i);
+        accumulationHeight += (10 + 5 + (rowCount * 270.0) + (gapCount * 10) + 15);
         // print('$i - ${(menu[i].items.length / 2).ceil()} - $accumulationHeight');
         menuSelectionHeight.add(accumulationHeight);
       }
     } else {
       add(MenuLoadingErrorEvent());
     }
+  }
+
+  int getRowCount(int index) {
+    return (menu[index].items.length / 2).ceil();
+  }
+
+  int getGapCount(int rowCount) {
+    if (rowCount >= 2) {
+      return (rowCount - 1);
+    } 
+return 1;
   }
 
   void _updaterForMenuSelectionPosition() async {
