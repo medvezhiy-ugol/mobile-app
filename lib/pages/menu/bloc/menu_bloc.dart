@@ -17,6 +17,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   List<MenuCategory> _menu = [];
   AutoScrollController listController = AutoScrollController();
   late TabController tabController;
+  double menuSelectionHeight = 0;
+  int menuTabCount = 0;
 
   List<MenuCategory> get menu => _menu;
 
@@ -39,23 +41,32 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
         return Tab(text: menu[index].name);
       }),
     ));
+    menuTabCount = menu.length;
+    for (int i = 0; i < menu.length; i++) {
+      print('$i - ${menu[i].items.length}');
+      menuSelectionHeight +=
+          (menu[i].items.length / 2).ceil() * (272.0 + 10) - 150;
+    }
   }
 
   void _updaterForMenuSelectionPosition() async {
-    const double menuSelectionHeight = 300 + 300 + 10 + 10;
+    // final List<double> menuSelectionHeight =
+    //     List.generate(menu.length, (index) {
+    //   print(menu[index].items.length);
+    //   return (menu[index].items.length ~/ 2) * 60.0;
+    // });
 
+//Смена индекса при прокруткек
     while (true) {
       if (listController.hasClients) {
-        int tabSelectionChangeIndex = 0;
-        double position = 0;
-
-        position = listController.position.pixels;
-
-        tabSelectionChangeIndex = position ~/ menuSelectionHeight;
-
-        if (tabSelectionChangeIndex <= _menu.length - 1 &&
+        double position = listController.position.pixels + 0.01;
+        int tabSectionChangeIndex =
+            ((menuTabCount * position) / menuSelectionHeight).toInt();
+        print(
+            '$position - $menuSelectionHeight - ${((menuTabCount * position) / menuSelectionHeight).toInt()}');
+        if (tabSectionChangeIndex <= menu.length - 1 &&
             !(tabController.indexIsChanging)) {
-          tabController.animateTo(tabSelectionChangeIndex);
+          tabController.animateTo(tabSectionChangeIndex);
         }
       }
       await Future.delayed(const Duration(milliseconds: 50));

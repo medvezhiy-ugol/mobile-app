@@ -24,8 +24,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   late List<List<int>> indexList;
   final Color taBarBackgroundColor = AppColors.color111216;
 
-  final maxCount = 4;
-
   int goIndex() {
     return 1;
   }

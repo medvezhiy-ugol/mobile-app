@@ -22,11 +22,9 @@ class MenuCardWidget extends StatelessWidget {
       decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {},
-          child: Column(
+      child: Stack(
+        children: [
+          Column(
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
@@ -94,7 +92,15 @@ class MenuCardWidget extends StatelessWidget {
               )
             ],
           ),
-        ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
