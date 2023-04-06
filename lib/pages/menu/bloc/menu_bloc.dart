@@ -26,7 +26,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   MenuBloc({
     required this.menuService,
   }) : super(MenuLoadingState()) {
-    on<MenuEvent>((event, emit) {
+    on<MenuEvent>((event, emit) async {
       if (event is MenuLoadedEvent) {
         emit(MenuLoadedState(menu: menu, menuTabs: event.menuTabs));
       } else if (event is MenuLoadingErrorEvent) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../common_setup/routes.dart';
 import '../../utils/app_colors.dart';
@@ -167,8 +168,58 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   }
 
   Widget _loadingBuildBody() {
-    return const Center(
-      child: CupertinoActivityIndicator(),
+    return SafeArea(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 5,
+          ),
+          const ToggleSwitcher(),
+          const SizedBox(
+            height: 6,
+          ),
+          Shimmer.fromColors(
+            baseColor: AppColors.color111216,
+            highlightColor: AppColors.color5D6377.withOpacity(0.5),
+            child: Container(
+              height: 50,
+              color: AppColors.color26282F,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColors.color191A1F,
+                ),
+              ),
+              child: ListView.separated(
+                scrollDirection: Axis.vertical,
+                controller: context.read<MenuBloc>().listController,
+                itemCount: 3,
+                separatorBuilder: (context, i) {
+                  return const SizedBox(
+                    height: 15,
+                  );
+                },
+                itemBuilder: (context, i) {
+                  return Shimmer.fromColors(
+                    baseColor: AppColors.color111216,
+                    highlightColor: AppColors.color5D6377.withOpacity(0.5),
+                    child: Container(
+                      height: 200,
+                      color: AppColors.color26282F,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

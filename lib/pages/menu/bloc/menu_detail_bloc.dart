@@ -19,6 +19,7 @@ class MenuDetailBloc extends Bloc<MenuDetailEvent, MenuDetailState> {
   }) : super(MenuDetailLoadingState()) {
     on<MenuDetailEvent>((event, emit) async {
       if (event is MenuDetailLoadedEvent) {
+        await Future.delayed(const Duration(seconds : 1));
         emit(MenuDetailLoadedState(menuProduct: event.menuProduct));
       } else if (event is MenuDetailErrorEvent) {
         emit(MenuDetailErrorState(error: 'Ошибка, повторите вновь'));

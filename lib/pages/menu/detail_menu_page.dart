@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../generated/l10n.dart';
 import '../../services/menu_service.dart';
@@ -34,7 +35,7 @@ class DetailMenuPage extends StatelessWidget {
           } else if (state is MenuDetailErrorState) {
             return _buildErrorBody(context);
           } else if (state is MenuDetailLoadingState) {
-            return _buildLoadingBody();
+            return _buildLoadingBody(context);
           } else {
             return Container();
           }
@@ -43,10 +44,92 @@ class DetailMenuPage extends StatelessWidget {
     );
   }
 
-   Widget _buildLoadingBody() {
-    return Scaffold(
-      body: const Center(
-        child: CupertinoActivityIndicator(),
+  Widget _buildLoadingBody(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            CloseCircleButton(
+              onTap: () => context.pop(),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Expanded(
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Shimmer.fromColors(
+                        baseColor: AppColors.color111216,
+                        highlightColor: AppColors.color5D6377.withOpacity(0.5),
+                        child: Container(
+                          height: 220,
+                          color: AppColors.color26282F,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 28,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Shimmer.fromColors(
+                              baseColor: AppColors.color111216,
+                              highlightColor:
+                                  AppColors.color5D6377.withOpacity(0.5),
+                              child: Container(
+                                height: 35,
+                                color: AppColors.color26282F,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            Shimmer.fromColors(
+                              baseColor: AppColors.color111216,
+                              highlightColor:
+                                  AppColors.color5D6377.withOpacity(0.5),
+                              child: Container(
+                                height: 50,
+                                color: AppColors.color26282F,
+                              ),
+                            ),
+                            Container(
+                              height: 25,
+                            ),
+                            Shimmer.fromColors(
+                              baseColor: AppColors.color111216,
+                              highlightColor:
+                                  AppColors.color5D6377.withOpacity(0.5),
+                              child: Container(
+                                height: 60,
+                                color: AppColors.color26282F,
+                              ),
+                            ),
+                            const SizedBox(height: 32),
+                            Shimmer.fromColors(
+                              baseColor: AppColors.color111216,
+                              highlightColor:
+                                  AppColors.color5D6377.withOpacity(0.5),
+                              child: Container(
+                                height: 100,
+                                color: AppColors.color26282F,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -77,11 +160,8 @@ class DetailMenuPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            
                             Text(
-                              (state is MenuDetailLoadedState)
-                                  ? state.menuProduct.name
-                                  : '',
+                              state.menuProduct.name,
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
@@ -94,9 +174,7 @@ class DetailMenuPage extends StatelessWidget {
                             PrimaryButton(
                               onTap: () => context.pop(),
                               child: Text(
-                                (state is MenuDetailLoadedState)
-                                    ? '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}'
-                                    : '',
+                                '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}',
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -107,11 +185,9 @@ class DetailMenuPage extends StatelessWidget {
                               height: 16,
                             ),
                             Text(
-                              (state is MenuDetailLoadedState)
-                                  ? state.menuProduct.description == ''
-                                      ? 'Состав отсутствует'
-                                      : state.menuProduct.description
-                                  : '',
+                              state.menuProduct.description == ''
+                                  ? 'Состав отсутствует'
+                                  : state.menuProduct.description,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -119,24 +195,23 @@ class DetailMenuPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 24),
-                            (state is MenuDetailLoadedState)
-                                ? buildStatsBar(
-                                    state.menuProduct.itemSizes.first
-                                        .portionWeightGrams
-                                        .toString(),
-                                    state.menuProduct.itemSizes.first
-                                        .nutritionPerHundredGrams.energy
-                                        .toString(),
-                                    state.menuProduct.itemSizes.first
-                                        .nutritionPerHundredGrams.proteins
-                                        .toString(),
-                                    state.menuProduct.itemSizes.first
-                                        .nutritionPerHundredGrams.fats
-                                        .toString(),
-                                    state.menuProduct.itemSizes.first
-                                        .nutritionPerHundredGrams.carbs
-                                        .toString())
-                                : const SizedBox(),
+                            buildStatsBar(
+                              state.menuProduct.itemSizes.first
+                                  .portionWeightGrams
+                                  .toString(),
+                              state.menuProduct.itemSizes.first
+                                  .nutritionPerHundredGrams.energy
+                                  .toString(),
+                              state.menuProduct.itemSizes.first
+                                  .nutritionPerHundredGrams.proteins
+                                  .toString(),
+                              state.menuProduct.itemSizes.first
+                                  .nutritionPerHundredGrams.fats
+                                  .toString(),
+                              state.menuProduct.itemSizes.first
+                                  .nutritionPerHundredGrams.carbs
+                                  .toString(),
+                            ),
                             const SizedBox(height: 32),
                             Align(
                               alignment: Alignment.centerLeft,
@@ -230,9 +305,7 @@ class DetailMenuPage extends StatelessWidget {
   Widget _buildCachedImg(MenuDetailLoadedState state) {
     if (state.menuProduct.itemSizes.first.buttonImageUrl != null) {
       return CachedNetworkImage(
-        imageUrl: (state is MenuDetailLoadedState)
-            ? state.menuProduct.itemSizes.first.buttonImageUrl ?? ''
-            : '',
+        imageUrl: state.menuProduct.itemSizes.first.buttonImageUrl ?? '',
         placeholder: (context, url) => Container(
           height: 200,
           color: AppColors.color26282F,
@@ -245,9 +318,9 @@ class DetailMenuPage extends StatelessWidget {
       );
     } else {
       return Container(
-          height: 200,
-          color: AppColors.color26282F,
-        );
+        height: 200,
+        color: AppColors.color26282F,
+      );
     }
   }
 
