@@ -287,9 +287,9 @@ class _IndicatorPainter extends CustomPainter {
         break;
     }
 
-//TABSIZE
+//TABIndicatorSIZE
     if (indicatorSize == TabBarIndicatorSize.label) {
-      final double tabWidth = tabKeys[tabIndex].currentContext!.size!.width * 1.4;
+      final double tabWidth = tabKeys[tabIndex].currentContext!.size!.width * 1.3;
       final double delta = ((tabRight - tabLeft) - tabWidth) / 2;
       tabLeft += delta;
       tabRight -= delta;

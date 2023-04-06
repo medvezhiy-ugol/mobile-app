@@ -54,9 +54,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             vsync: this,
           );
         }
-        if (state is MenuLoadingErrorState) {
-          _showSnackBar(context: context, text: state.error);
-        }
       },
       builder: (context, state) {
         if (state is MenuLoadedState) {
@@ -66,7 +63,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         } else if (state is MenuLoadingErrorState) {
           return _loadingErrorBuildBody();
         } else {
-          return Container();
+          return const SizedBox();
         }
       },
     );
@@ -176,16 +173,26 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   }
 
   Widget _loadingErrorBuildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.change_circle_outlined,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Ошибка, попробуйте повторить.'),
+          IconButton(
+            onPressed: () {
+              context.read<MenuBloc>().add(MenuLoadingEvent());
+            },
+            icon: const Icon(
+              color: AppColors.color808080,
+              Icons.refresh_rounded,
+            ),
+            highlightColor: AppColors.color191A1F,
+            splashColor: AppColors.color191A1F,
+            splashRadius: 20,
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 
@@ -243,15 +250,5 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         .read<MenuBloc>()
         .listController
         .scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
-  }
-
-  _showSnackBar({required BuildContext context, required String text}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        text,
-        textAlign: TextAlign.center,
-      ),
-      behavior: SnackBarBehavior.floating,
-    ));
   }
 }

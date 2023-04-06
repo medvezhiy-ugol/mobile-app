@@ -59,7 +59,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       for (int i = 0; i < menu.length; i++) {
         gapCount = getGapCount((menu[i].items.length / 2).ceil()); 
         rowCount = getRowCount(i);
-        accumulationHeight += (10 + 5 + (rowCount * 270.0) + (gapCount * 10) + 15);
+        accumulationHeight += (10 + 5 + (rowCount * 300.0) + (gapCount * 10) + 15);
         // print('$i - ${(menu[i].items.length / 2).ceil()} - $accumulationHeight');
         menuSelectionHeight.add(accumulationHeight);
       }
@@ -88,12 +88,12 @@ return 1;
         for (int i = 1; i < _menu.length; i++) {
           if ((position >= menuSelectionHeight[i - 1]) &&
               (position <= menuSelectionHeight[i])) {
-            print(
-                '$position - ${menuSelectionHeight[i - 1]} - ${menuSelectionHeight[i]}');
+            // print(
+                // '$position - ${menuSelectionHeight[i - 1]} - ${menuSelectionHeight[i]}');
             tabSectionChangeIndex = i;
           }
         }
-        print('$position - $tabSectionChangeIndex');
+        // print('$position - $tabSectionChangeIndex');
         if (tabSectionChangeIndex <= menu.length - 1 &&
             !(tabController.indexIsChanging)) {
           tabController.animateTo(tabSectionChangeIndex);

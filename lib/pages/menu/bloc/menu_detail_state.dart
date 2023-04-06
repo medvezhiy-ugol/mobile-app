@@ -11,4 +11,8 @@ class MenuDetailLoadedState extends MenuDetailState {
   MenuDetailLoadedState({required this.menuProduct});
 }
 
-class MenuDetailErrorState extends MenuDetailState {}
+class MenuDetailErrorState extends MenuDetailState {
+  final String error;
+
+  MenuDetailErrorState({required this.error});
+}

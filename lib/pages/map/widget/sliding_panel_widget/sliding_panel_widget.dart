@@ -46,7 +46,6 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
                 child: TextField(
                   onTap: () {
                     MapPage.panelController.open();
-                    print('${MapPage.pageController.page}');
                   },
                   cursorColor: AppColors.colorFFB627,
                   controller: controller,

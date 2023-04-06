@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -28,150 +29,226 @@ class DetailMenuPage extends StatelessWidget {
       create: (context) => MenuDetailBloc(menuService: menuService, id: id),
       child: BlocBuilder<MenuDetailBloc, MenuDetailState>(
         builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  CloseCircleButton(
-                    onTap: () => context.pop(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Expanded(
-                    child: Scrollbar(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            CachedNetworkImage(
-                              imageUrl: (state is MenuDetailLoadedState)
-                                  ? state.menuProduct.itemSizes.first
-                                          .buttonImageUrl ??
-                                      ''
-                                  : '',
-                              placeholder: (context, url) => Container(
-                                height: 200,
-                                color: AppColors.color26282F,
-                              ),
-                              errorWidget: (context, url, error) => Container(
-                                height: 200,
-                                color: AppColors.color26282F,
-                              ),
-                              fit: BoxFit.fitWidth,
-                            ),
-                            const SizedBox(
-                              height: 38,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    (state is MenuDetailLoadedState)
-                                        ? state.menuProduct.name
-                                        : '',
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: AppFonts.unbounded,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 32,
-                                  ),
-                                  PrimaryButton(
-                                    onTap: () => context.pop(),
-                                    child: Text(
-                                      (state is MenuDetailLoadedState)
-                                          ? '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}'
-                                          : '',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Text(
-                                    (state is MenuDetailLoadedState)
-                                        ? state.menuProduct.description == ''
-                                            ? 'Состав отсутствует'
-                                            : state.menuProduct.description
-                                        : '',
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.color808080,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  (state is MenuDetailLoadedState)
-                                      ? buildStatsBar(
-                                          state.menuProduct.itemSizes.first
-                                              .portionWeightGrams
-                                              .toString(),
-                                          state.menuProduct.itemSizes.first
-                                              .nutritionPerHundredGrams.energy
-                                              .toString(),
-                                          state.menuProduct.itemSizes.first
-                                              .nutritionPerHundredGrams.proteins
-                                              .toString(),
-                                          state.menuProduct.itemSizes.first
-                                              .nutritionPerHundredGrams.fats
-                                              .toString(),
-                                          state.menuProduct.itemSizes.first
-                                              .nutritionPerHundredGrams.carbs
-                                              .toString())
-                                      : const SizedBox(),
-                                  const SizedBox(height: 32),
-                                  // Align(
-                                  //   alignment: Alignment.centerLeft,
-                                  //   child: Text(
-                                  //     S.current
-                                  //         .mealScreenDeleteIngredientsTitleText,
-                                  //     style: const TextStyle(
-                                  //       fontSize: 16,
-                                  //       fontWeight: FontWeight.w600,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // const SizedBox(height: 10),
-                                  // SizedBox(
-                                  //     width: double.infinity,
-                                  //     child: _buildChoiceComponent()),
-                                  // const SizedBox(height: 24),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      S.current.mealScreenDeleteAddTitleText,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  _buildAddProduct(),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+          if (state is MenuDetailLoadedState) {
+            return _buildLoadedBody(context, state);
+          } else if (state is MenuDetailErrorState) {
+            return _buildErrorBody(context);
+          } else if (state is MenuDetailLoadingState) {
+            return _buildLoadingBody();
+          } else {
+            return Container();
+          }
         },
       ),
     );
+  }
+
+   Widget _buildLoadingBody() {
+    return Scaffold(
+      body: const Center(
+        child: CupertinoActivityIndicator(),
+      ),
+    );
+  }
+
+  Widget _buildLoadedBody(BuildContext context, MenuDetailLoadedState state) {
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            CloseCircleButton(
+              onTap: () => context.pop(),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Expanded(
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      _buildCachedImg(state),
+                      const SizedBox(
+                        height: 38,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            
+                            Text(
+                              (state is MenuDetailLoadedState)
+                                  ? state.menuProduct.name
+                                  : '',
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: AppFonts.unbounded,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            PrimaryButton(
+                              onTap: () => context.pop(),
+                              child: Text(
+                                (state is MenuDetailLoadedState)
+                                    ? '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}'
+                                    : '',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              (state is MenuDetailLoadedState)
+                                  ? state.menuProduct.description == ''
+                                      ? 'Состав отсутствует'
+                                      : state.menuProduct.description
+                                  : '',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.color808080,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            (state is MenuDetailLoadedState)
+                                ? buildStatsBar(
+                                    state.menuProduct.itemSizes.first
+                                        .portionWeightGrams
+                                        .toString(),
+                                    state.menuProduct.itemSizes.first
+                                        .nutritionPerHundredGrams.energy
+                                        .toString(),
+                                    state.menuProduct.itemSizes.first
+                                        .nutritionPerHundredGrams.proteins
+                                        .toString(),
+                                    state.menuProduct.itemSizes.first
+                                        .nutritionPerHundredGrams.fats
+                                        .toString(),
+                                    state.menuProduct.itemSizes.first
+                                        .nutritionPerHundredGrams.carbs
+                                        .toString())
+                                : const SizedBox(),
+                            const SizedBox(height: 32),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                S.current.mealScreenDeleteAddTitleText,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            _buildAddProduct(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorBody(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height / 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Ошибка, попробуйте повторить.',
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 70),
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                          onPressed: () {
+                            context.read<MenuDetailBloc>().add(
+                                  MenuDetailLoadingEvent(),
+                                );
+                          },
+                          icon: const Icon(
+                            color: AppColors.color808080,
+                            Icons.refresh_rounded,
+                          ),
+                          highlightColor: AppColors.color191A1F,
+                          splashColor: AppColors.color191A1F,
+                          splashRadius: 20,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          icon: const Icon(
+                            color: AppColors.color808080,
+                            Icons.arrow_back_rounded,
+                          ),
+                          highlightColor: AppColors.color191A1F,
+                          splashColor: AppColors.color191A1F,
+                          splashRadius: 20,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCachedImg(MenuDetailLoadedState state) {
+    if (state.menuProduct.itemSizes.first.buttonImageUrl != null) {
+      return CachedNetworkImage(
+        imageUrl: (state is MenuDetailLoadedState)
+            ? state.menuProduct.itemSizes.first.buttonImageUrl ?? ''
+            : '',
+        placeholder: (context, url) => Container(
+          height: 200,
+          color: AppColors.color26282F,
+        ),
+        errorWidget: (context, url, error) => Container(
+          height: 200,
+          color: AppColors.color26282F,
+        ),
+        fit: BoxFit.fitWidth,
+      );
+    } else {
+      return Container(
+          height: 200,
+          color: AppColors.color26282F,
+        );
+    }
   }
 
   Row buildStatsBar(String weight, String calories, String protein, String fats,

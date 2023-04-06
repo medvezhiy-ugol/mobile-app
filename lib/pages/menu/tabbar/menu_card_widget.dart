@@ -17,78 +17,90 @@ class MenuCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(menuProduct.itemSizes.first.buttonImageUrl);
     return Container(
-      height: 270,
+      height: 300,
       decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
       child: Stack(
         children: [
           Column(
-            
             children: <Widget>[
               SizedBox(
+                height: 125,
                 width: double.infinity,
                 child: _buildCachedImg(),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        menuProduct.name,
-                        style: ThemeService.detailPageAddButtonTextStyle(),
+                child: SizedBox(
+                  height: 175 - 6,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 8,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '${menuProduct.itemSizes.first.portionWeightGrams} г.',
-                        style: ThemeService.tabBarCardWeightTextStyle(),
-                      ),
-                    ),
-
-
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            menuProduct.description == ''
-                                ? 'Состав отсутствует'
-                                : menuProduct.description,
-                            style: ThemeService.tabBarCardIngrTextStyle(),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        width: 74,
-                        height: 30,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: AppColors.color26282F,
-                          borderRadius: BorderRadius.circular(30),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                menuProduct.name,
+                                maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                                style:
+                                    ThemeService.detailPageAddButtonTextStyle(),
+                              ),
+                            ),
+                          ],
                         ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
                         child: Text(
-                          '${menuProduct.itemSizes.first.prices.first.price.toInt()} ₽',
-                          style: ThemeService
-                              .detailPageStatusBarItemCountTextStyle(),
+                          '${menuProduct.itemSizes.first.portionWeightGrams} г.',
+                          style: ThemeService.tabBarCardWeightTextStyle(),
                         ),
                       ),
-                    ),
-                  ],
+                      const Spacer(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              menuProduct.description == ''
+                                  ? 'Состав отсутствует'
+                                  : menuProduct.description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: ThemeService.tabBarCardIngrTextStyle(),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          width: 74,
+                          height: 30,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: AppColors.color26282F,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Text(
+                            '${menuProduct.itemSizes.first.prices.first.price.toInt()} ₽',
+                            style: ThemeService
+                                .detailPageStatusBarItemCountTextStyle(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -109,7 +121,7 @@ class MenuCardWidget extends StatelessWidget {
   Widget _buildCachedImg() {
     if (menuProduct.itemSizes.first.buttonImageUrl != null) {
       return CachedNetworkImage(
-        imageUrl: menuProduct.itemSizes.first.buttonImageUrl ?? '',
+        imageUrl: menuProduct.itemSizes.first.buttonImageUrl!,
         placeholder: (context, url) => Container(
           color: AppColors.color26282F,
         ),
@@ -117,16 +129,11 @@ class MenuCardWidget extends StatelessWidget {
           color: AppColors.color26282F,
         ),
         height: 125,
-        fit: BoxFit.fitWidth,
+        fit: BoxFit.fill,
       );
     } else {
       return Container(
-        height: 125,
-        child: Center(
-          child: Text(
-            'no img',
-          ),
-        ),
+        color: AppColors.color26282F,
       );
     }
   }
