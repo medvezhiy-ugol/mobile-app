@@ -287,10 +287,10 @@ class _IndicatorPainter extends CustomPainter {
         break;
     }
 
-//TABSIZE
+//TABIndicatorSIZE
     if (indicatorSize == TabBarIndicatorSize.label) {
-      final double tabWidth = tabKeys[tabIndex].currentContext!.size!.width;
-      final double delta = ((tabRight - tabLeft) - tabWidth) / 2.0;
+      final double tabWidth = tabKeys[tabIndex].currentContext!.size!.width * 1.3;
+      final double delta = ((tabRight - tabLeft) - tabWidth) / 2;
       tabLeft += delta;
       tabRight -= delta;
     }
@@ -1047,7 +1047,7 @@ class _ScaleTabBarState extends State<ScaleTabBar> {
     }
 
     return clampDouble(
-        tabCenter + paddingStart - viewportWidth / 2.0, minExtent, maxExtent);
+        tabCenter + paddingStart - viewportWidth / 2.0 , minExtent, maxExtent);
   }
 
   double _tabCenteredScrollOffset(int index) {

@@ -3,8 +3,16 @@ part of 'menu_detail_bloc.dart';
 @immutable
 abstract class MenuDetailEvent {}
 
-class MenuDetailLoadProductByIdEvent extends MenuDetailEvent {
-  final MenuProduct? menuProduct;
+class MenuDetailLoadingEvent extends MenuDetailEvent {
+  MenuDetailLoadingEvent();
+}
 
-  MenuDetailLoadProductByIdEvent({required this.menuProduct});
+class MenuDetailLoadedEvent extends MenuDetailEvent {
+  final MenuProduct menuProduct;
+
+  MenuDetailLoadedEvent({required this.menuProduct});
+}
+
+class MenuDetailErrorEvent extends MenuDetailEvent {
+  MenuDetailErrorEvent();
 }

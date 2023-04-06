@@ -17,21 +17,29 @@ class MenuDetailBloc extends Bloc<MenuDetailEvent, MenuDetailState> {
     required this.menuService,
     required this.id,
   }) : super(MenuDetailLoadingState()) {
-    _initProduct();
     on<MenuDetailEvent>((event, emit) async {
-      if (event is MenuDetailLoadProductByIdEvent) {
-        emit(
-          (event.menuProduct != null)
-              ? MenuDetailLoadedState(menuProduct: event.menuProduct!)
-              : MenuDetailErrorState(),
-        );
+      if (event is MenuDetailLoadedEvent) {
+        await Future.delayed(const Duration(seconds : 1));
+        emit(MenuDetailLoadedState(menuProduct: event.menuProduct));
+      } else if (event is MenuDetailErrorEvent) {
+        emit(MenuDetailErrorState(error: 'Ошибка, повторите вновь'));
+      } else if (event is MenuDetailLoadingEvent) {
+        _initProduct();
       }
     });
+    add(MenuDetailLoadingEvent());
   }
 
   Future<void> _initProduct() async {
-    MenuProduct? menuProduct =
-        await Isolate.run(() => menuService.getProductById(id));
-    add(MenuDetailLoadProductByIdEvent(menuProduct: menuProduct));
+    MenuProduct? menuProduct = await runMyIsolate(menuService, id);
+    if (menuProduct != null) {
+      add(MenuDetailLoadedEvent(menuProduct: menuProduct));
+    } else {
+      add(MenuDetailErrorEvent());
+    }
   }
+}
+
+Future<MenuProduct?> runMyIsolate(MenuService menuService, String id) async {
+  return await Isolate.run(() => menuService.getProductById(id));
 }

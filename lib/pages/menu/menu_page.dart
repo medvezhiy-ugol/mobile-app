@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../common_setup/routes.dart';
 import '../../utils/app_colors.dart';
@@ -44,26 +45,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     super.initState();
   }
 
-  Widget _loadingBuildBody() {
-    return const Center(
-      child: CupertinoActivityIndicator(),
-    );
-  }
-
-  Widget _loadingErrorBuildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.change_circle_outlined,
-          ),
-        )
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MenuBloc, MenuState>(
@@ -74,9 +55,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             vsync: this,
           );
         }
-        if (state is MenuLoadingErrorState) {
-          _showSnackBar(context: context, text: state.error);
-        }
       },
       builder: (context, state) {
         if (state is MenuLoadedState) {
@@ -86,7 +64,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         } else if (state is MenuLoadingErrorState) {
           return _loadingErrorBuildBody();
         } else {
-          return Container();
+          return const SizedBox();
         }
       },
     );
@@ -189,17 +167,97 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     );
   }
 
+  Widget _loadingBuildBody() {
+    return SafeArea(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 5,
+          ),
+          const ToggleSwitcher(),
+          const SizedBox(
+            height: 6,
+          ),
+          Shimmer.fromColors(
+            baseColor: AppColors.color111216,
+            highlightColor: AppColors.color5D6377.withOpacity(0.5),
+            child: Container(
+              height: 50,
+              color: AppColors.color26282F,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColors.color191A1F,
+                ),
+              ),
+              child: ListView.separated(
+                scrollDirection: Axis.vertical,
+                controller: context.read<MenuBloc>().listController,
+                itemCount: 3,
+                separatorBuilder: (context, i) {
+                  return const SizedBox(
+                    height: 15,
+                  );
+                },
+                itemBuilder: (context, i) {
+                  return Shimmer.fromColors(
+                    baseColor: AppColors.color111216,
+                    highlightColor: AppColors.color5D6377.withOpacity(0.5),
+                    child: Container(
+                      height: 200,
+                      color: AppColors.color26282F,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _loadingErrorBuildBody() {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Ошибка, попробуйте повторить.'),
+          IconButton(
+            onPressed: () {
+              context.read<MenuBloc>().add(MenuLoadingEvent());
+            },
+            icon: const Icon(
+              color: AppColors.color808080,
+              Icons.refresh_rounded,
+            ),
+            highlightColor: AppColors.color191A1F,
+            splashColor: AppColors.color191A1F,
+            splashRadius: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
   Material _buildTabBar(BuildContext context, MenuLoadedState state) {
     return Material(
       color: Colors.transparent,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.fromSwatch(
-              accentColor: AppColors.color191A1F,
-            ),
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.fromSwatch(
+            accentColor: AppColors.color191A1F,
           ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 10),
           child: ScaleTabBar(
             onTap: (value) {
               _scrollToCounter(value);
@@ -208,23 +266,29 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             controller: context.read<MenuBloc>().tabController,
             tabs: state.menuTabs,
             isScrollable: true,
-            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorSize: TabBarIndicatorSize.label,
             labelStyle: const TextStyle(
-                fontSize: 24,
-                fontFamily: 'Unbounded',
-                fontWeight: FontWeight.w600),
+              fontSize: 24,
+              fontFamily: 'Unbounded',
+              fontWeight: FontWeight.w600,
+            ),
+            labelPadding: const EdgeInsets.symmetric(horizontal: 20),
             unselectedLabelStyle: const TextStyle(
-                fontSize: 16,
-                fontFamily: 'Unbounded',
-                fontWeight: FontWeight.w600),
+              fontSize: 16,
+              fontFamily: 'Unbounded',
+              fontWeight: FontWeight.w600,
+            ),
             unselectedLabelColor: Colors.grey,
             overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
             indicator: ContainerTabIndicator(
               height: 2,
               radius: BorderRadius.circular(20),
               color: AppColors.colorFF9900,
-              padding: const EdgeInsets.only(top: 19),
+              padding: const EdgeInsets.only(
+                top: 20,
+              ),
             ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             // indicatorPadding: EdgeInsets.only(bottom: 4),
           ),
         ),
@@ -237,15 +301,5 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         .read<MenuBloc>()
         .listController
         .scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
-  }
-
-  _showSnackBar({required BuildContext context, required String text}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        text,
-        textAlign: TextAlign.center,
-      ),
-      behavior: SnackBarBehavior.floating,
-    ));
   }
 }
