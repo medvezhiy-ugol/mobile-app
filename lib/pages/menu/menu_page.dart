@@ -182,8 +182,25 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             baseColor: AppColors.color111216,
             highlightColor: AppColors.color5D6377.withOpacity(0.5),
             child: Container(
-              height: 50,
-              color: AppColors.color26282F,
+              height: 20,
+              width: 2 * 70 + 30,
+              decoration: BoxDecoration(
+                  color: AppColors.color26282F,
+                  borderRadius: BorderRadius.circular(20)),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Shimmer.fromColors(
+            baseColor: AppColors.color111216,
+            highlightColor: AppColors.color5D6377.withOpacity(0.5),
+            child: Container(
+              height: 25,
+              decoration: BoxDecoration(
+                color: AppColors.color26282F,
+                // borderRadius: BorderRadius.circular(20),
+              ),
             ),
           ),
           const SizedBox(

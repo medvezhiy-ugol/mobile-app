@@ -4,6 +4,8 @@ import 'dart:isolate';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
+import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_card_widget.dart';
+import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_sections_widget.dart';
 import 'package:meta/meta.dart';
 
 import 'package:medvezhiy_ugol/services/menu_service.dart';
@@ -28,6 +30,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }) : super(MenuLoadingState()) {
     on<MenuEvent>((event, emit) async {
       if (event is MenuLoadedEvent) {
+      //  await Future.delayed(const Duration(seconds: 10));
         emit(MenuLoadedState(menu: menu, menuTabs: event.menuTabs));
       } else if (event is MenuLoadingErrorEvent) {
         emit(MenuLoadingErrorState(error: 'Ошибка, повторите вновь'));
@@ -49,7 +52,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       _menu = [];
     }
 
-    if (!_menu.isEmpty) {
+    if (_menu.isNotEmpty) {
       add(MenuLoadedEvent(
         menuTabs: List.generate(menu.length, (index) {
           return Tab(text: menu[index].name);
@@ -59,7 +62,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       for (int i = 0; i < menu.length; i++) {
         gapCount = getGapCount((menu[i].items.length / 2).ceil()); 
         rowCount = getRowCount(i);
-        accumulationHeight += (10 + 5 + (rowCount * 300.0) + (gapCount * 10) + 15);
+        accumulationHeight += (10 + 5 + (rowCount * MenuCardWidget.menuCardWidgetHeight) + (gapCount * MenuSection.menuSectionWidgetGapValue) + 15);
         // print('$i - ${(menu[i].items.length / 2).ceil()} - $accumulationHeight');
         menuSelectionHeight.add(accumulationHeight);
       }

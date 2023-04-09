@@ -8,6 +8,7 @@ import '../../../services/theme_service.dart';
 class MenuCardWidget extends StatelessWidget {
   final MenuProduct menuProduct;
   final VoidCallback onTap;
+  static const double menuCardWidgetHeight = 300;
 
   const MenuCardWidget({
     super.key,
@@ -18,7 +19,7 @@ class MenuCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: menuCardWidgetHeight,
       decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
@@ -48,7 +49,7 @@ class MenuCardWidget extends StatelessWidget {
                               child: Text(
                                 menuProduct.name,
                                 maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
+                                overflow: TextOverflow.ellipsis,
                                 style:
                                     ThemeService.detailPageAddButtonTextStyle(),
                               ),

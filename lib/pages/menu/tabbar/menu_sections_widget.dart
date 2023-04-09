@@ -12,6 +12,7 @@ import 'menu_card_widget.dart';
 
 class MenuSection extends StatelessWidget {
   final MenuCategory menuCategory;
+  static const double menuSectionWidgetGapValue = 10;
 
   const MenuSection({
     Key? key,
@@ -44,7 +45,7 @@ class MenuSection extends StatelessWidget {
               (index) => auto,
             ),
             columnGap: 10,
-            rowGap: 10,
+            rowGap: menuSectionWidgetGapValue,
             children: List.generate(
               menuCategory.items.length,
               (i) => MenuCardWidget(
