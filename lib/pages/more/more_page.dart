@@ -103,7 +103,7 @@ class MorePage extends StatelessWidget {
                         const SizedBox(
                           height: 3,
                         ),
-                        Container(
+                        SizedBox(
                           width: screenWidth * 0.6,
                           // color: Colors.blue,
                           child: Text(
@@ -256,9 +256,9 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () => context.push(Routes.contactUs),
               child: Container(
-                padding: EdgeInsets.all(18),
+                padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
                     const Icon(
@@ -286,7 +286,7 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () => context.push(Routes.aboutApp),
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(

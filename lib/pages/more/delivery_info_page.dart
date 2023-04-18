@@ -287,7 +287,8 @@ class DeliveryInfoPage extends StatelessWidget {
                           )
                     ],),
                   ),
-                )
+                ),
+                const SizedBox(height: 22,),
       
               ]),
             )
