@@ -9,9 +9,9 @@ class TermsOfServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.color1E1E1E,
-      body: SafeArea(
+    return Container(
+       color: AppColors.color111216,
+      child: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),

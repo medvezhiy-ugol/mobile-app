@@ -30,6 +30,7 @@ dependencies:
   yandex_mapkit: ^3.2.0
   sliding_up_panel: ^2.0.0+1
   cached_network_image: ^3.2.3
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

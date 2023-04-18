@@ -97,22 +97,38 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.deliveryInfo,
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: DeliveryInfoPage()),
+                    buildPageWithPopupTransition<void>(
+                  context: context,
+                  state: state,
+                  child: DeliveryInfoPage(),
+                ),
               ),
               GoRoute(
                 path: Routes.aboutApp,
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: AboutAppPage()),
+                    buildPageWithPopupTransition<void>(
+                  context: context,
+                  state: state,
+                  child: AboutAppPage(),
+                ),
               ),
               GoRoute(
                 path: Routes.termsOfService,
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: TermsOfServicePage()),
+                    buildPageWithPopupTransition<void>(
+                  context: context,
+                  state: state,
+                  child: TermsOfServicePage(),
+                ),
               ),
               GoRoute(
                 path: Routes.contactUs,
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: ContactUsPage()),
+                    buildPageWithPopupTransition<void>(
+                  context: context,
+                  state: state,
+                  child: ContactUsPage(),
+                ),
               ),
             ],
           ),
@@ -128,7 +144,9 @@ class UgolApp extends StatelessWidget {
             pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
               context: context,
               state: state,
-              child: DetailMenuPage(id: state.params['id'] ?? '1'),
+              child: DetailMenuPage(
+                id: state.params['id'] ?? '1',
+              ),
             ),
           ),
           GoRoute(
@@ -138,7 +156,9 @@ class UgolApp extends StatelessWidget {
             pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
               context: context,
               state: state,
-              child: DetailStockPage(id: state.params['id'] ?? '1'),
+              child: DetailStockPage(
+                id: state.params['id'] ?? '1',
+              ),
             ),
           ),
           GoRoute(
