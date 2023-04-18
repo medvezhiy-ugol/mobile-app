@@ -7,7 +7,7 @@ class MenuService {
   Future<List<MenuCategory>> getFullMenu() async {
     final List<ExternalMenu> externalMenus = await _getAllMenus();
     final response = await APIService.postRequest(
-      request: 'v1/menu/iiko/by_id/${externalMenus[1].id}',
+      request: 'v1/menu/iiko/by_id/${externalMenus[3].id}',
     );
 
     if (response != null) {

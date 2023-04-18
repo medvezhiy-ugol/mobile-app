@@ -5,7 +5,18 @@ import 'package:flutter/material.dart';
 import 'module_slot_machine.dart';
 
 class SlotMachineWidget extends StatefulWidget {
-  const SlotMachineWidget({super.key});
+  const SlotMachineWidget({
+    super.key,
+    this.height = 96,
+    this.reelWidth = 50,
+    this.reelHeight = 96,
+    this.reelItemExtent = 70,
+  });
+
+  final double height;
+  final double reelWidth;
+  final double reelHeight;
+  final double reelItemExtent;
 
   @override
   State<SlotMachineWidget> createState() => _SlotMachineWidgetState();
@@ -48,7 +59,7 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
               },
               onFinished: (resultIndexes) {
                 print('Result: $resultIndexes');
-              },
+              }
             ),
           ],
         ),
@@ -60,9 +71,7 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
               onTap: () {
                 _controller.go(index: 123123);
               },
-              child: Container(
-                height: 30,
-              ),
+              child: Container(),
             ),
           ),
         ),
