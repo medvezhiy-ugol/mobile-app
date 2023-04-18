@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/pages/stock/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import '../../generated/l10n.dart';
@@ -21,8 +22,29 @@ class StockPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Розыгрыш', //'Акции и комбо',
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: AppFonts.unbounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SlotMachineWidget(),
+            SizedBox(
+              height: 10,
+            ),
             Text(
-              S.current.stocksScreenStocksTitleText,//'Акции и комбо',
+              S.current.stocksScreenStocksTitleText, //'Акции и комбо',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

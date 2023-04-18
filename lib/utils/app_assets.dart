@@ -20,7 +20,12 @@ abstract class A {
       'assets/images/active_order_page/delivery_on.png';
   static const String assetsMapPagePointImg =
       'assets/images/map_page/point.png';
-
+  static const String assetsHomePageLoyaltyCardBackgroundImg =
+      'assets/images/home_page/loyalty_card.png';
+  static const String assetsHomePageLoyaltyCardBearIconImg =
+      'assets/images/home_page/loyalty_card_bear_icon.png';
+static const String assetsHomePagePromoImg =
+      'assets/images/home_page/promo_img.png';
   static const String assetsDelveryInfoPageScooter =
       'assets/images/delivery_info_page/scooter.png';
 }

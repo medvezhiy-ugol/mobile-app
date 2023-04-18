@@ -234,26 +234,26 @@ class ActiveOrderPage extends StatelessWidget {
       ),
     );
   }
-}
 
-SizedBox orderStages({int progressValue = 1}) {
-  // progressValue принимает от 1 до 3 включительно
-  return SizedBox(
-    width: 148,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Image.asset(
-          A.assetsActiveOrderPageForming,
-          width: 32,
-        ),
-        (progressValue > 1)
-            ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
-            : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
-        (progressValue == 3)
-            ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
-            : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
-      ],
-    ),
-  );
+  Widget orderStages({int progressValue = 1}) {
+    // progressValue принимает от 1 до 3 включительно
+    return SizedBox(
+      width: 148,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            A.assetsActiveOrderPageForming,
+            width: 32,
+          ),
+          (progressValue > 1)
+              ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
+              : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
+          (progressValue == 3)
+              ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
+              : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
+        ],
+      ),
+    );
+  }
 }
