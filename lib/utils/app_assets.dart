@@ -20,4 +20,7 @@ abstract class A {
       'assets/images/active_order_page/delivery_on.png';
   static const String assetsMapPagePointImg =
       'assets/images/map_page/point.png';
+
+  static const String assetsDelveryInfoPageScooter =
+      'assets/images/delivery_info_page/scooter.png';
 }

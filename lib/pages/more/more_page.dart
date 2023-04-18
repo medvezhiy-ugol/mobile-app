@@ -43,7 +43,7 @@ class MorePage extends StatelessWidget {
                 SizedBox(
                   height: (state is MoreRegisteredState) ? 10 : 0,
                 ),
-                _buildDefaultRows(),
+                _buildDefaultRows(context),
                 const SizedBox(
                   height: 7,
                 ),
@@ -59,6 +59,7 @@ class MorePage extends StatelessWidget {
   }
 
   Column _buildAuthRow(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
         Text(
@@ -102,11 +103,15 @@ class MorePage extends StatelessWidget {
                         const SizedBox(
                           height: 3,
                         ),
-                        Text(
-                          S.current.profileScreenSlogan,//'Чтобы стать ближе, получать бонусы',
-                          style: const TextStyle(
-                            color: AppColors.color808080,
-                            fontSize: 14,
+                        Container(
+                          width: screenWidth * 0.6,
+                          // color: Colors.blue,
+                          child: Text(
+                            S.current.profileScreenSlogan,//'Чтобы стать ближе, получать бонусы',
+                            style: const TextStyle(
+                              color: AppColors.color808080,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],
@@ -182,7 +187,7 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Column _buildDefaultRows() {
+  Column _buildDefaultRows(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
@@ -190,7 +195,8 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: (){},
+              
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
@@ -220,7 +226,7 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () => context.push(Routes.deliveryInfo),
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(

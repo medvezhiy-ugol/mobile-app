@@ -12,6 +12,7 @@ class Routes {
   static const String map = '/map';
   static const String more = '/more';
   static const String moreAuth = '/more/auth';
+  static const String deliveryInfo = '/more/deliveryInfo';
 }
 
 enum MenuRoute {
