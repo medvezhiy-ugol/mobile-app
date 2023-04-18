@@ -59,6 +59,7 @@ class MorePage extends StatelessWidget {
   }
 
   Column _buildAuthRow(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
         Text(
@@ -102,11 +103,15 @@ class MorePage extends StatelessWidget {
                         const SizedBox(
                           height: 3,
                         ),
-                        Text(
-                          S.current.profileScreenSlogan,//'Чтобы стать ближе, получать бонусы',
-                          style: const TextStyle(
-                            color: AppColors.color808080,
-                            fontSize: 14,
+                        Container(
+                          width: screenWidth * 0.6,
+                          // color: Colors.blue,
+                          child: Text(
+                            S.current.profileScreenSlogan,//'Чтобы стать ближе, получать бонусы',
+                            style: const TextStyle(
+                              color: AppColors.color808080,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],
