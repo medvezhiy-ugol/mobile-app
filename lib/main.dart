@@ -3,7 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
+import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
+import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
+import 'package:medvezhiy_ugol/pages/more/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
 
 import 'common_setup/module_container.dart';
@@ -69,17 +72,17 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.home,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: HomePage()),
+                    const NoTransitionPage(child: HomePage()),
               ),
               GoRoute(
                 path: Routes.stock,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: StockPage()),
+                    const NoTransitionPage(child: StockPage()),
               ),
               GoRoute(
                 path: Routes.menu,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: MenuPage()),
+                    const NoTransitionPage(child: MenuPage()),
               ),
               GoRoute(
                 path: Routes.map,
@@ -89,19 +92,34 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.more,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: MorePage()),
+                    const NoTransitionPage(child: MorePage()),
               ),
               GoRoute(
                 path: Routes.deliveryInfo,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: DeliveryInfoPage()),
+                    const NoTransitionPage(child: DeliveryInfoPage()),
+              ),
+              GoRoute(
+                path: Routes.aboutApp,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: AboutAppPage()),
+              ),
+              GoRoute(
+                path: Routes.termsOfService,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: TermsOfServicePage()),
+              ),
+              GoRoute(
+                path: Routes.contactUs,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: ContactUsPage()),
               ),
             ],
           ),
           GoRoute(
             parentNavigatorKey: _rootNavigatorKey,
             path: Routes.moreAuth,
-            builder: (context, state) => AuthPage(),
+            builder: (context, state) => const AuthPage(),
           ),
           GoRoute(
             parentNavigatorKey: _rootNavigatorKey,
@@ -130,7 +148,7 @@ class UgolApp extends StatelessWidget {
             pageBuilder: (context, state) => buildPageWithPopupTransition<void>(
               context: context,
               state: state,
-              child: ActiveOrderPage(),
+              child: const ActiveOrderPage(),
             ),
           ),
         ],
