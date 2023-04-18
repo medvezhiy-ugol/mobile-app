@@ -18,7 +18,7 @@ class TermsOfServicePage extends StatelessWidget {
             child: Center(child: 
             Column(
               children: [
-                const SizedBox(height: 12,),
+                const SizedBox(height: 22,),
 
                 //Button
                 Row(

@@ -26,7 +26,7 @@ class AboutAppPage extends StatelessWidget {
                     CloseCircleButton(
                       onTap: () => context.pop(),
                     ),
-                    const SizedBox(width: 12,)
+                    const SizedBox(width: 2,)
                   ],
                 ),
 
