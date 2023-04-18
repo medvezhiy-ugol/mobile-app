@@ -26,5 +26,6 @@ abstract class A {
       'assets/images/home_page/loyalty_card_bear_icon.png';
 static const String assetsHomePagePromoImg =
       'assets/images/home_page/promo_img.png';
-
+  static const String assetsDelveryInfoPageScooter =
+      'assets/images/delivery_info_page/scooter.png';
 }
