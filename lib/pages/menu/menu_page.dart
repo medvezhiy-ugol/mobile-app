@@ -1,5 +1,4 @@
 import 'package:container_tab_indicator/container_tab_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -93,7 +92,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                 const SizedBox(
                   width: 10,
                 ),
-                Text(
+                const Text(
                   'Ул. Свободы, д. 46/3',
                   style: TextStyle(
                     fontSize: 12,
@@ -129,7 +128,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
           const SizedBox(
             height: 10,
           ),
-          _buildTabBar(context, state as MenuLoadedState),
+          _buildTabBar(context, state),
           const SizedBox(
             height: 10,
           ),
@@ -162,6 +161,44 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
+          Container(
+            color: AppColors.colorFFB627,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => context.push(Routes.basket),
+                child: SizedBox(
+                  height: 56,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.5, vertical: 17.5),
+                    child: Center(
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Оформить заказ', style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black
+                          ),),
+                          Text('220 ₽·', style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black
+                          ),),
+                          Text('25-30 мин', style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.color808080
+                          ),),
+                          
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -229,7 +266,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Ошибка, попробуйте повторить.'),
+          const Text('Ошибка, попробуйте повторить.'),
           IconButton(
             onPressed: () {
               context.read<MenuBloc>().add(MenuLoadingEvent());
