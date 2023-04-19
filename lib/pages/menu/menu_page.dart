@@ -180,7 +180,8 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                             fontWeight: FontWeight.w600,
                             color: Colors.black
                           ),),
-                          Text('220 ₽·', style: TextStyle(
+                          Expanded(child: SizedBox()),
+                          Text('220 ₽ · ', style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Colors.black
