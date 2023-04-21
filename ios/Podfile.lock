@@ -14,6 +14,8 @@ PODS:
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
+  - url_launcher_ios (0.0.1):
+    - Flutter
   - yandex_mapkit (0.0.1):
     - Flutter
     - YandexMapsMobile (= 4.2.2-full)
@@ -25,6 +27,7 @@ DEPENDENCIES:
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - yandex_mapkit (from `.symlinks/plugins/yandex_mapkit/ios`)
 
 SPEC REPOS:
@@ -43,6 +46,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
   yandex_mapkit:
     :path: ".symlinks/plugins/yandex_mapkit/ios"
 
@@ -53,9 +58,10 @@ SPEC CHECKSUMS:
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   yandex_mapkit: 3431f8997d36bc0df753407ef282565c09163766
   YandexMapsMobile: 1fd5f86bc368ad6ba528b199f9477e4a26796567
 
 PODFILE CHECKSUM: 70ea28cff1f2955cd01a84fb810daa89d33306ba
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.11.3
