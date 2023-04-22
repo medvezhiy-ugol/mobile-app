@@ -161,45 +161,53 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Container(
-            color: AppColors.colorFFB627,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () => context.push(Routes.basket),
-                child: SizedBox(
-                  height: 56,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.5, vertical: 17.5),
-                    child: Center(
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text('Оформить заказ', style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black
-                          ),),
-                          Expanded(child: SizedBox()),
-                          Text('220 ₽ · ', style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black
-                          ),),
-                          Text('25-30 мин', style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.color808080
-                          ),),
-                          
-                        ],
+          (state.order.isNotEmpty)
+              ? Container(
+                  color: AppColors.colorFFB627,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () => context.push(Routes.basket),
+                      child: SizedBox(
+                        height: 56,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.5, vertical: 17.5),
+                          child: Center(
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Оформить заказ',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                Text(
+                                  '${state.orderSum.toInt()} ₽ · ',
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                const Text(
+                                  '25-30 мин',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.color808080),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          )
+                )
+              : const SizedBox()
         ],
       ),
     );

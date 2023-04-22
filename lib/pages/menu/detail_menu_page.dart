@@ -14,6 +14,7 @@ import '../../ui/close_circle_button.dart';
 import '../../ui/primary_button.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
+import 'bloc/menu_bloc.dart';
 import 'bloc/menu_detail_bloc.dart';
 
 class DetailMenuPage extends StatelessWidget {
@@ -172,7 +173,12 @@ class DetailMenuPage extends StatelessWidget {
                               height: 32,
                             ),
                             PrimaryButton(
-                              onTap: () => context.pop(),
+                              onTap: () {
+                                context.read<MenuBloc>().add(
+                                    MenuAddToOrderEvent(
+                                        menuProduct: state.menuProduct));
+                                context.pop();
+                              },
                               child: Text(
                                 '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}',
                                 style: const TextStyle(
