@@ -17,6 +17,9 @@ part 'menu_state.dart';
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final MenuService menuService;
   List<MenuCategory> _menu = [];
+  List<Widget> _menuTabs = [];
+  List<MenuProduct> _order = [];
+  double _orderSum = 0;
   AutoScrollController listController = AutoScrollController();
   late TabController tabController;
 
@@ -30,12 +33,23 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }) : super(MenuLoadingState()) {
     on<MenuEvent>((event, emit) async {
       if (event is MenuLoadedEvent) {
-      //  await Future.delayed(const Duration(seconds: 10));
-        emit(MenuLoadedState(menu: menu, menuTabs: event.menuTabs));
+        emit(MenuLoadedState(
+            menu: menu,
+            menuTabs: _menuTabs,
+            order: _order,
+            orderSum: _orderSum));
       } else if (event is MenuLoadingErrorEvent) {
         emit(MenuLoadingErrorState(error: 'Ошибка, повторите вновь'));
       } else if (event is MenuLoadingEvent) {
         _initMenu();
+      } else if (event is MenuAddToOrderEvent) {
+        _order.add(event.menuProduct);
+        _orderSum += event.menuProduct.itemSizes.first.prices.first.price;
+        emit(MenuLoadedState(
+            menu: menu,
+            menuTabs: _menuTabs,
+            order: _order,
+            orderSum: _orderSum));
       }
     });
     add(MenuLoadingEvent());
@@ -53,16 +67,19 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     }
 
     if (_menu.isNotEmpty) {
-      add(MenuLoadedEvent(
-        menuTabs: List.generate(menu.length, (index) {
-          return Tab(text: menu[index].name);
-        }),
-      ));
+      _menuTabs = List.generate(menu.length, (index) {
+        return Tab(text: menu[index].name);
+      });
+      add(MenuLoadedEvent());
       menuTabCount = menu.length;
       for (int i = 0; i < menu.length; i++) {
-        gapCount = getGapCount((menu[i].items.length / 2).ceil()); 
+        gapCount = getGapCount((menu[i].items.length / 2).ceil());
         rowCount = getRowCount(i);
-        accumulationHeight += (10 + 5 + (rowCount * MenuCardWidget.menuCardWidgetHeight) + (gapCount * MenuSection.menuSectionWidgetGapValue) + 15);
+        accumulationHeight += (10 +
+            5 +
+            (rowCount * MenuCardWidget.menuCardWidgetHeight) +
+            (gapCount * MenuSection.menuSectionWidgetGapValue) +
+            15);
         // print('$i - ${(menu[i].items.length / 2).ceil()} - $accumulationHeight');
         menuSelectionHeight.add(accumulationHeight);
       }
@@ -78,12 +95,12 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   int getGapCount(int rowCount) {
     if (rowCount >= 2) {
       return (rowCount - 1);
-    } 
-return 1;
+    }
+    return 1;
   }
 
   void _updaterForMenuSelectionPosition() async {
-//Смена индекса при прокрутке
+    //Смена индекса при прокрутке
     while (true) {
       if (listController.hasClients) {
         int tabSectionChangeIndex = 0;
@@ -92,7 +109,7 @@ return 1;
           if ((position >= menuSelectionHeight[i - 1]) &&
               (position <= menuSelectionHeight[i])) {
             // print(
-                // '$position - ${menuSelectionHeight[i - 1]} - ${menuSelectionHeight[i]}');
+            // '$position - ${menuSelectionHeight[i - 1]} - ${menuSelectionHeight[i]}');
             tabSectionChangeIndex = i;
           }
         }

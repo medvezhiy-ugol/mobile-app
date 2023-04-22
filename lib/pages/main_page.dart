@@ -28,8 +28,6 @@ class _MainPageState extends State<MainPage> {
       .firstWhere((e) => widget.location.contains(e.path))
       .index;
 
-  final MenuService menuService = Injector().get<MenuService>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +37,6 @@ class _MainPageState extends State<MainPage> {
           BlocProvider(
             create: (context) => MoreBloc(),
           ),
-          BlocProvider(
-            create: (context) => MenuBloc(menuService: menuService),
-          )
         ],
         child: widget.child,
       ),
