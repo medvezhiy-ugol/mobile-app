@@ -195,9 +195,10 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                                 const Text(
                                   '25-30 мин',
                                   style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.color808080),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.color808080,
+                                  ),
                                 ),
                               ],
                             ),
