@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/backet/basket_page.dart';
+
 import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
+import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
@@ -178,7 +179,7 @@ class UgolApp extends StatelessWidget {
                   buildPageWithPopupTransition<void>(
                 context: context,
                 state: state,
-                child: const BasketPage(),
+                child: BasketPage(),
               ),
             ),
           ],
