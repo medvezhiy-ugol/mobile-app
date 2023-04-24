@@ -1,12 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/generated/l10n.dart';
 
 import '../../ui/close_circle_button.dart';
 import '../../ui/primary_button.dart';
-import '../../ui/slidable_panel_widget.dart';
 import '../../utils/app_colors.dart';
+import 'bloc/menu_bloc.dart';
 
 class BasketPage extends StatefulWidget {
   BasketPage({super.key});
@@ -16,10 +18,35 @@ class BasketPage extends StatefulWidget {
 }
 
 class _BasketPageState extends State<BasketPage> {
-  final TextEditingController _textPromoCodeController =
-      TextEditingController();
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<MenuBloc, MenuState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state is MenuLoadedState) {
+          return _buildLoadedBody(state: state);
+        } else {
+          return const SizedBox();
+        }
+      },
+    );
+  }
+
+  final TextEditingController _textPromoCodeController =
+      TextEditingController();
+  Widget _buildLoadedBody({required MenuLoadedState state}) {
+    var elements = List<String>.generate(
+      state.order.length,
+      (int index) => state.order[index].id,
+    );
+    var mapQuantity = Map();
+    elements.forEach((element) {
+      if (!mapQuantity.containsKey(element)) {
+        mapQuantity[element] = 1;
+      } else {
+        mapQuantity[element] += 1;
+      }
+    });
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -43,7 +70,7 @@ class _BasketPageState extends State<BasketPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
@@ -55,32 +82,28 @@ class _BasketPageState extends State<BasketPage> {
                   color: AppColors.color808080,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 14,
               ),
-              ListView(
+              ListView.builder(
+                itemCount: state.order.length,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  SlidableWidget(
-                    itemPrice: 100,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return _buildSlidableElement(
+                    state: state,
+                    itemOrderIndex: index,
+                    itemPrice: state
+                        .order[index].itemSizes.first.prices.first.price
+                        .toInt(),
                     quantity: 10,
-                    imgUrl: '', itemName: '',
-
-                  ),
-                  SlidableWidget(
-                    itemPrice: 100,
-                    quantity: 10,
-                    imgUrl: '', itemName: '',
-                  ),
-                  SlidableWidget(
-                    itemPrice: 100,
-                    quantity: 10,
-                    imgUrl: '', itemName: '',
-                  ),
-                ],
+                    imgUrl: state.order[index].itemSizes.first.buttonImageUrl
+                        .toString(),
+                    itemName: state.order[index].name,
+                  );
+                },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -105,37 +128,44 @@ class _BasketPageState extends State<BasketPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: ChooseDeliveryType(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: _buildChooseTimeDelivery(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: _buildChooseTimeDelivery(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 45,
               ),
-              _buildSubsumRow('Сумма заказа', 200),
-              _buildSubsumRow('Сервисный сбор', 30),
-              SizedBox(
+              _buildSubsumRow(
+                title: 'Сумма заказа',
+                sum: state.orderSum.toInt(),
+              ),
+              _buildSubsumRow(title: 'Сервисный сбор', sum: 30),
+              const SizedBox(
                 height: 56,
               ),
-              _buildSubsumRow('При самовывозе', 768),
-              _buildTotalRow(),SizedBox(
+              _buildSubsumRow(
+                title: 'При самовывозе',
+                sum: state.orderSum.toInt(),
+              ),
+              _buildTotalRow(sum: state.orderSum.toInt() + 30),
+              const SizedBox(
                 height: 33,
               ),
               PrimaryButton(
@@ -153,14 +183,15 @@ class _BasketPageState extends State<BasketPage> {
                     Text(
                       'Построить маршрут',
                       style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 33,
               ),
               PrimaryButton(
@@ -183,7 +214,133 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  Container _buildTotalRow() {
+  Widget _buildSlidableElement({
+    required String itemName,
+    required String imgUrl,
+    required int quantity,
+    required int itemPrice,
+    required int itemOrderIndex,
+    required MenuLoadedState state,
+  }) {
+    return Slidable(
+      key: const ValueKey(0),
+      endActionPane: ActionPane(
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (BuildContext conteext) {
+              setState(() {
+                state.order.removeAt(itemOrderIndex);
+              });
+            },
+            backgroundColor: const Color(0xFFE64646),
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Удалить',
+          ),
+        ],
+      ),
+      child: Container(
+        // constraints: BoxConstraints(
+        //   minHeight: 100,
+        // ),
+        child: Row(
+          children: [
+            _buildCachedImg(imgUrl),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('${itemName}'),
+                  ],
+                ),
+                SizedBox(
+                  child: Row(
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _buildCirleButton(
+                            onTap: () {},
+                            icon: Icons.remove,
+                          ),
+                          // Text('${_counter}'),
+                          _buildCirleButton(
+                            onTap: () {},
+                            icon: Icons.add,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        '${itemPrice}',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCirleButton(
+      {required VoidCallback onTap, required IconData icon}) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        customBorder: const CircleBorder(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: 24,
+            height: 24,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100), color: Colors.grey),
+              child: Icon(
+                icon,
+                size: 18,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCachedImg(String imgUrl) {
+    if (imgUrl != '') {
+      return SizedBox(
+        width: 110,
+        height: 100,
+        child: CachedNetworkImage(
+          imageUrl: imgUrl,
+          placeholder: (context, url) => Container(
+            color: AppColors.color26282F,
+          ),
+          errorWidget: (context, url, error) => Container(
+            color: AppColors.color26282F,
+          ),
+          fit: BoxFit.fill,
+        ),
+      );
+    } else {
+      return Container(
+        color: AppColors.color26282F,
+        width: 110,
+        height: 100,
+      );
+    }
+  }
+
+  Container _buildTotalRow({required int sum}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 25),
       child: Row(
@@ -197,8 +354,8 @@ class _BasketPageState extends State<BasketPage> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const Text(
-            '971 ₽',
+          Text(
+            '${sum} ₽',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -210,7 +367,7 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  Container _buildSubsumRow(String title, int sum) {
+  Container _buildSubsumRow({required String title, required int sum}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Row(
@@ -235,7 +392,7 @@ class _BasketPageState extends State<BasketPage> {
 
   Widget _buildChooseTimeDelivery() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.color191A1F,
       ),
       child: Material(
@@ -243,13 +400,13 @@ class _BasketPageState extends State<BasketPage> {
         child: InkWell(
           onTap: () {},
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               children: <Widget>[
-                Icon(
+                const Icon(
                   Icons.timeline,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Column(
@@ -260,8 +417,8 @@ class _BasketPageState extends State<BasketPage> {
                     Text('Выберите время доставки'),
                   ],
                 ),
-                Spacer(),
-                Icon(
+                const Spacer(),
+                const Icon(
                   Icons.arrow_right,
                 ),
               ],
@@ -298,7 +455,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
           children: <Widget>[
             Text(
               '${(index == 0) ? 'Доставка' : 'Навынос'}: ',
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Unbounded',
                 fontSize: 16,
               ),
@@ -312,7 +469,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 18,
         ),
         Row(
@@ -323,7 +480,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
               decoration: BoxDecoration(
                 color: (TypeOfOrder.delivery.index == index)
                     ? AppColors.color2D2D2D
-                    : Color(0xFF000000),
+                    : const Color(0xFF000000),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Material(
@@ -337,13 +494,13 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.motorcycle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
@@ -365,7 +522,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
               decoration: BoxDecoration(
                 color: (TypeOfOrder.pickup.index == index)
                     ? AppColors.color2D2D2D
-                    : Color(0xFF000000),
+                    : const Color(0xFF000000),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Material(
@@ -379,21 +536,21 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.motorcycle,
+                        const Icon(
+                          Icons.shopping_bag_rounded,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Доставка'),
-                            Text('30-40 минут'),
+                            Text('Навынос'),
+                            Text('Московский пр. 178'),
                           ],
                         ),
                       ],
