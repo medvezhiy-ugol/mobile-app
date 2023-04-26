@@ -23,6 +23,7 @@ import 'pages/menu/detail_menu_page.dart';
 import 'pages/menu/menu_page.dart';
 import 'pages/more/auth/auth_page.dart';
 import 'pages/more/more_page.dart';
+import 'pages/more/my_orders_page.dart';
 import 'pages/stock/stock_page.dart';
 import 'services/menu_service.dart';
 import 'services/theme_service.dart';
@@ -180,6 +181,16 @@ class UgolApp extends StatelessWidget {
                 context: context,
                 state: state,
                 child: BasketPage(),
+              ),
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: Routes.myOrders,
+              pageBuilder: (context, state) =>
+                  buildPageWithPopupTransition<void>(
+                context: context,
+                state: state,
+                child: MyOrdersPage(),
               ),
             ),
           ],

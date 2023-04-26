@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
+import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
@@ -43,7 +44,7 @@ class MorePage extends StatelessWidget {
                 SizedBox(
                   height: (state is MoreRegisteredState) ? 10 : 0,
                 ),
-                _buildDefaultRows(context),
+                _buildDefaultRows(context, state),
                 const SizedBox(
                   height: 7,
                 ),
@@ -63,7 +64,7 @@ class MorePage extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(
-          S.of(context).profileScreenProfileTitleText,//'Профиль',
+          S.of(context).profileScreenProfileTitleText, //'Профиль',
           style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -107,7 +108,8 @@ class MorePage extends StatelessWidget {
                           width: screenWidth * 0.6,
                           // color: Colors.blue,
                           child: Text(
-                            S.current.profileScreenSlogan,//'Чтобы стать ближе, получать бонусы',
+                            S.current
+                                .profileScreenSlogan, //'Чтобы стать ближе, получать бонусы',
                             style: const TextStyle(
                               color: AppColors.color808080,
                               fontSize: 14,
@@ -187,16 +189,53 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Column _buildDefaultRows(BuildContext context) {
+  Column _buildDefaultRows(BuildContext context, MoreState state) {
     return Column(
       children: <Widget>[
+        //My Orders
+        (state is MoreRegisteredState)
+            ? Container(
+                color: AppColors.color191A1F,
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      context.push(Routes.myOrders);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 21,
+                            height: 24,
+                            child: Image.asset(
+                              A.assetsMorePageMyOrdersIcon,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 26,
+                          ),
+                          Text(
+                            'Мои заказы',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : Container(), //Settings
         Container(
           color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: (){},
-              
+              onTap: () {},
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
@@ -230,7 +269,7 @@ class MorePage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
-                  children:  [
+                  children: [
                     const Icon(
                       MorePageIcons.car,
                       size: 28,
@@ -239,7 +278,8 @@ class MorePage extends StatelessWidget {
                       width: 26,
                     ),
                     Text(
-                      S.current.profileScreenDeliveryConditions,//'Условия доставки',
+                      S.current
+                          .profileScreenDeliveryConditions, //'Условия доставки',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -269,7 +309,7 @@ class MorePage extends StatelessWidget {
                       width: 26,
                     ),
                     Text(
-                      S.current.profileScreenContactUs,//'Связаться с нами',
+                      S.current.profileScreenContactUs, //'Связаться с нами',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -299,7 +339,7 @@ class MorePage extends StatelessWidget {
                       width: 26,
                     ),
                     Text(
-                      S.current.profileScreenAboutApp,//'О приложении',
+                      S.current.profileScreenAboutApp, //'О приложении',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -342,7 +382,7 @@ class MorePage extends StatelessWidget {
                             height: 14,
                           ),
                           Text(
-                            S.current.profileScreenAddresses,//'Адреса',
+                            S.current.profileScreenAddresses, //'Адреса',
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -384,7 +424,7 @@ class MorePage extends StatelessWidget {
                             height: 14,
                           ),
                           Text(
-                            S.current.profileScreenLoyalty,//'Лояльность',
+                            S.current.profileScreenLoyalty, //'Лояльность',
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
