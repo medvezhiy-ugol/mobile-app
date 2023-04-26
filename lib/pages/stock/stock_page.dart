@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/stock/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import '../../generated/l10n.dart';
 
 import '../../common_setup/routes.dart';
@@ -11,6 +12,8 @@ import '../../utils/app_assets.dart';
 class StockPage extends StatelessWidget {
   const StockPage({super.key});
 
+  // final TextEditingController _textMailBodyController = TextEditingController();
+  // final TextEditingController _textMailSubjectController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,10 +27,10 @@ class StockPage extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   'Розыгрыш', //'Акции и комбо',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.unbounded,
@@ -39,10 +42,129 @@ class StockPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SlotMachineWidget(),
-            SizedBox(
+            const SlotMachineWidget(),
+            Container(
+              color: AppColors.color191A1F,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: (){},
+                  child: Container(
+                    padding: const EdgeInsets.all(9),
+                    height: 100,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SimpleCircularProgressBar(
+                          size: 45,
+                          progressStrokeWidth: 6,
+                          backStrokeWidth: 6,
+                          backColor: AppColors.color808080,
+                          animationDuration: 0,
+                          progressColors: const [AppColors.colorFF9900],
+                          maxValue: 100,
+                          valueNotifier: ValueNotifier(65),
+                        ),
+                        const SizedBox(width: 13.5,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(children: const [
+                              Text('65%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                              SizedBox(width: 6,),
+                              Text('Ваш процент выигрыша', style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.color808080
+                                ),),
+                            ],),
+                            const SizedBox(height: 8,),
+                            Row(
+                              children: [
+                                // Icon(Icons.close, color: AppColors.color808080,),
+                                Image.asset('assets/images/stock_page/clock.png', height: 16,),
+                                const SizedBox(width: 7,),
+                                const Text('16:30:16 ', style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(width: 10,),
+                                const Text('ДО КОНЦА РОЗЫГРЫША', style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.color808080
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            const Text('7 мар 10:00', style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.color808080
+                                  ),
+                                ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
               height: 10,
             ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: (){},
+                    child: const Text('Посмотреть выигрыши', 
+                    style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          decoration: TextDecoration.underline,
+                          ),
+                        ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            promoTextField(context),
+            // Container(
+            //   height: 60,
+            //   color: AppColors.color191A1F,
+            //   child: const TextField(
+            //     textAlign: TextAlign.center,
+            //     // controller: _textMailSubjectController,
+            //     textCapitalization: TextCapitalization.sentences,
+            //     maxLines: 1,
+            //     style: TextStyle(
+            //         fontWeight: FontWeight.w400, fontSize: 14),
+            //     decoration: InputDecoration(
+            //       hintText: 'Введите промокод',
+            //       hintStyle: TextStyle(
+            //         fontSize: 16, 
+            //         fontWeight: FontWeight.w600, 
+            //         color: AppColors.color808080
+            //         ),
+            //       isCollapsed: true,
+            //       contentPadding: EdgeInsets.all(10),
+            //     ),
+            //   ),
+            // ),
+            const SizedBox(
+              height: 26,
+            ),
+
             Text(
               S.current.stocksScreenStocksTitleText, //'Акции и комбо',
               style: const TextStyle(
@@ -155,4 +277,47 @@ class StockPage extends StatelessWidget {
       ],
     );
   }
+
+  Container promoTextField(BuildContext context) {
+    return Container(
+      height: 60,
+      color: AppColors.color191A1F,
+      alignment: Alignment.center,
+      child: const TextField(
+        autofocus: false,
+        textAlign: TextAlign.center,
+        cursorHeight: 26,
+        cursorColor: AppColors.colorFF9900,
+        // keyboardType: TextInputType.phone,
+        decoration: InputDecoration(
+          hintText: 'Введите промокод',
+          hintStyle: TextStyle(
+            fontSize: 16, 
+            fontWeight: FontWeight.w600, 
+            color: AppColors.color808080
+            ),
+          // hintText: ,
+          border: InputBorder.none,
+        ),
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+        ),
+        // inputFormatters: [
+        //   MaskTextInputFormatter(
+        //     mask: '+7 (###) ###-##-##',
+        //   )
+        // ],
+        // onChanged: (value) {
+        //   if (value.length == 18) {
+        //     context.read<AuthBloc>().add(AuthShowButtonEvent());
+        //   } else if (state is AuthWithButtonState) {
+        //     context.read<AuthBloc>().add(AuthHideButtonEvent());
+        //   }
+        // },
+      ),
+    );
+  }
 }
+
+

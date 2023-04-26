@@ -7,8 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactUsPage extends StatelessWidget {
   ContactUsPage({super.key});
 
-  TextEditingController _textMailSubjectController = TextEditingController();
-  TextEditingController _textMailBodyController = TextEditingController();
+  final TextEditingController _textMailSubjectController = TextEditingController();
+  final TextEditingController _textMailBodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,7 +67,7 @@ class ContactUsPage extends StatelessWidget {
                     child: TextField(
                       controller: _textMailSubjectController,
                       textCapitalization: TextCapitalization.sentences,
-                      maxLines: 3,
+                      maxLines: 1,
                       style: const TextStyle(
                           fontWeight: FontWeight.w400, fontSize: 14),
                       decoration: const InputDecoration(
@@ -97,8 +97,8 @@ class ContactUsPage extends StatelessWidget {
                       controller: _textMailBodyController,
                       textCapitalization: TextCapitalization.sentences,
                       maxLines: 5,
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-                      decoration: InputDecoration(
+                      style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                      decoration: const InputDecoration(
                         isCollapsed: true,
                         contentPadding: EdgeInsets.all(10),
                       ),

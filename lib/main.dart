@@ -77,7 +77,7 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.stock,
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: StockPage()),
+                    NoTransitionPage(child: StockPage()),
               ),
               GoRoute(
                 path: Routes.menu,
@@ -100,7 +100,7 @@ class UgolApp extends StatelessWidget {
                     buildPageWithPopupTransition<void>(
                   context: context,
                   state: state,
-                  child: DeliveryInfoPage(),
+                  child: const DeliveryInfoPage(),
                 ),
               ),
               GoRoute(
@@ -109,7 +109,7 @@ class UgolApp extends StatelessWidget {
                     buildPageWithPopupTransition<void>(
                   context: context,
                   state: state,
-                  child: AboutAppPage(),
+                  child: const AboutAppPage(),
                 ),
               ),
               GoRoute(
@@ -118,7 +118,7 @@ class UgolApp extends StatelessWidget {
                     buildPageWithPopupTransition<void>(
                   context: context,
                   state: state,
-                  child: TermsOfServicePage(),
+                  child: const TermsOfServicePage(),
                 ),
               ),
               GoRoute(
