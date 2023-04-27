@@ -48,7 +48,7 @@ class StockPage extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: (){},
+                  onTap: () => context.push(Routes.slotDetail),
                   child: Container(
                     padding: const EdgeInsets.all(9),
                     height: 100,

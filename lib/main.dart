@@ -4,13 +4,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
 import 'package:medvezhiy_ugol/pages/more/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
+import 'package:medvezhiy_ugol/pages/stock/slot_detail_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/slot_history.dart';
 
 import 'common_setup/module_container.dart';
@@ -110,7 +110,16 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: DeliveryInfoPage(),
+                    child: const DeliveryInfoPage(),
+                  ),
+                ),
+                GoRoute(
+                  path: Routes.slotDetail,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const SlotDetailPage(amountWinners: 4,),
                   ),
                 ),
                 GoRoute(
@@ -119,7 +128,7 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: AboutAppPage(),
+                    child: const AboutAppPage(),
                   ),
                 ),
                 GoRoute(
@@ -137,7 +146,7 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: TermsOfServicePage(),
+                    child: const TermsOfServicePage(),
                   ),
                 ),
                 GoRoute(
