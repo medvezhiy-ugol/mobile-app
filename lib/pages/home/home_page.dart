@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     
     return SafeArea(
       child: SingleChildScrollView(
@@ -54,7 +54,6 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 160,
                 child: ListView(
-                  itemExtent: 10,
                   scrollDirection: Axis.horizontal,
                   children: [
                     SizedBox(
