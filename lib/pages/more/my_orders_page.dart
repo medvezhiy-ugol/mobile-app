@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:medvezhiy_ugol/generated/l10n.dart';
 
+import '../../common_setup/routes.dart';
 import '../../ui/close_circle_button.dart';
+import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 
 class MyOrdersPage extends StatelessWidget {
@@ -67,6 +69,9 @@ class MyOrdersPage extends StatelessWidget {
                     ],
                     price: 1550.05,
                     status: 'done',
+                    onTap: () {
+                      context.push(Routes.deliveredOrderPage);
+                    },
                   );
                 },
               ),
@@ -82,72 +87,84 @@ class MyOrdersPage extends StatelessWidget {
     required double price,
     required String status,
     required DateTime dateTime,
+    required VoidCallback onTap,
   }) {
     String formattedDateTime = DateFormat('d MMMM HH:mm').format(dateTime);
     return Container(
       color: AppColors.color191A1F,
-      padding: EdgeInsets.all(
-        12,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                itmes.join(', '),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.all(
+              12,
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      itmes.join(', '),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      '$price ₽',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Text(
-                '$price ₽',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              _buildStatus(status),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                '$formattedDateTime',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.color808080,
+                Row(
+                  children: [
+                    _buildStatus(status),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '$formattedDateTime',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.color808080,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          SizedBox(
-            height: 50,
-            child: ListView.separated(
-              itemCount: 10,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Container(
+                SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
                   height: 50,
-                  width: 65,
-                  color: Colors.red,
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(width: 5.0),
+                  child: ListView.separated(
+                      itemCount: 10,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          height: 50,
+                          width: 65,
+                          child: Image.asset(
+                            A.assetsStockPageItemImg,
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Container();
+                      }),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
