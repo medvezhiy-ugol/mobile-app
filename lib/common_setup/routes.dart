@@ -18,6 +18,7 @@ class Routes {
   static const String termsOfService = '/more/termsOfService';
   static const String contactUs = '/more/contactUs';
   static const String slotHistory = '/stock/slotHistory';
+  static const String slotDetail = '/stock/slotDetail';
   static const String myOrders = '/more/myOrders';
 }
 
