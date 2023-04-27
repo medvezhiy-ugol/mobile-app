@@ -11,13 +11,14 @@ class Routes {
   static const String menu = '/menu';
   static const String map = '/map';
   static const String more = '/more';
-  
+
   static const String moreAuth = '/more/auth';
   static const String deliveryInfo = '/more/deliveryInfo';
   static const String aboutApp = '/more/aboutApp';
   static const String termsOfService = '/more/termsOfService';
   static const String contactUs = '/more/contactUs';
   static const String myOrders = '/more/myOrders';
+  static const String deliveredOrderPage = '/more/myOrders/deliveredOrderPage';
 }
 
 enum MenuRoute {
