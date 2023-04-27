@@ -123,7 +123,7 @@ class StockPage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: (){},
+                    onTap: () => context.push(Routes.slotHistory),
                     child: const Text('Посмотреть выигрыши', 
                     style: TextStyle(
                           fontSize: 16,

@@ -17,6 +17,7 @@ class Routes {
   static const String aboutApp = '/more/aboutApp';
   static const String termsOfService = '/more/termsOfService';
   static const String contactUs = '/more/contactUs';
+  static const String slotHistory = '/stock/slotHistory';
 }
 
 enum MenuRoute {

@@ -8,6 +8,7 @@ import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
 import 'package:medvezhiy_ugol/pages/more/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
+import 'package:medvezhiy_ugol/pages/stock/slot_history.dart';
 
 import 'common_setup/module_container.dart';
 import 'common_setup/routes.dart';
@@ -77,7 +78,7 @@ class UgolApp extends StatelessWidget {
               GoRoute(
                 path: Routes.stock,
                 pageBuilder: (context, state) =>
-                    NoTransitionPage(child: StockPage()),
+                    const NoTransitionPage(child: StockPage()),
               ),
               GoRoute(
                 path: Routes.menu,
@@ -110,6 +111,15 @@ class UgolApp extends StatelessWidget {
                   context: context,
                   state: state,
                   child: const AboutAppPage(),
+                ),
+              ),
+              GoRoute(
+                path: Routes.slotHistory,
+                pageBuilder: (context, state) =>
+                    buildPageWithPopupTransition<void>(
+                  context: context,
+                  state: state,
+                  child: const SlotHistoryPage(),
                 ),
               ),
               GoRoute(
