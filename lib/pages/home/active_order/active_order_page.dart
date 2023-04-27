@@ -18,8 +18,11 @@ class ActiveOrderPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            CloseCircleButton(
-              onTap: () => context.pop(),
+            Padding(
+              padding: const EdgeInsets.only(right: 18, top: 18),
+              child: CloseCircleButton(
+                onTap: () => context.pop(),
+              ),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -56,7 +59,7 @@ class ActiveOrderPage extends StatelessWidget {
                       height: 10,
                     ),
                     orderStages(
-                      progressValue: 2,
+                      progressValue: 1,
                     ),
                     const SizedBox(
                       height: 50,
@@ -69,7 +72,7 @@ class ActiveOrderPage extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    _buildSubsumRow(S.current.orderSumText, 971),
+                    _buildSubsumRow(S.current.orderSumText, 410),
                     const SizedBox(
                       height: 10,
                     ),
@@ -103,7 +106,7 @@ class ActiveOrderPage extends StatelessWidget {
           animationDuration: 0,
           progressColors: const [AppColors.colorFF9900],
           maxValue: 100,
-          valueNotifier: ValueNotifier(70),
+          valueNotifier: ValueNotifier(30),
         ),
         Column(
           children: const <Widget>[
@@ -146,7 +149,7 @@ class ActiveOrderPage extends StatelessWidget {
             ),
           ),
           const Text(
-            '971 ₽',
+            '410 ₽',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -212,14 +215,14 @@ class ActiveOrderPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Text(
-                      '3 шт',
+                      '1 шт',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           color: Colors.white),
                     ),
                     Text(
-                      '440 ₽',
+                      '190 ₽',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

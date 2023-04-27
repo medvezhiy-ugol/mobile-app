@@ -1,25 +1,21 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/menu/tabbar/menu_sections_widget.dart';
 import 'package:medvezhiy_ugol/pages/stock/slot_machine_widget/slot_machine_widget.dart';
-import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../common_setup/routes.dart';
-import '../../generated/l10n.dart';
-import '../../models/menu.dart';
-import '../../models/product.dart';
 import '../../services/theme_service.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
-import '../menu/tabbar/menu_card_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  
   @override
   Widget build(BuildContext context) {
+    // final width = MediaQuery.of(context).size.width;
+    
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -31,7 +27,8 @@ class HomePage extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
+                      SizedBox(height: 32,),
                       Text(
                         'Адрес и время доставки',
                         style: TextStyle(
@@ -51,10 +48,10 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Container(
+              SizedBox(
                 height: 160,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
@@ -67,7 +64,7 @@ class HomePage extends StatelessWidget {
                         fit: BoxFit.fill,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     SizedBox(
@@ -78,7 +75,7 @@ class HomePage extends StatelessWidget {
                         fit: BoxFit.fill,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     SizedBox(
@@ -92,24 +89,24 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 30,
               ),
-              _buildOrderStatusTimerWidget(),
-              SizedBox(
+              _buildOrderStatusTimerWidget(context),
+              const SizedBox(
                 height: 10,
               ),
               _buildOrderStatusWidget(),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 32,
               ),
               _buildLoyaltyCard(height: 180),
-              SizedBox(
+              const SizedBox(
                 height: 28,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text(
                     'Популярно',
                     style: TextStyle(
@@ -129,7 +126,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               _buildPopularSegmentWidget(),
@@ -228,7 +225,7 @@ class HomePage extends StatelessWidget {
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '${weight} г.',
+                          '$weight г.',
                           style: ThemeService.tabBarCardWeightTextStyle(),
                         ),
                       ),
@@ -259,7 +256,7 @@ class HomePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Text(
-                            '${price} ₽',
+                            '$price ₽',
                             style: ThemeService
                                 .detailPageStatusBarItemCountTextStyle(),
                           ),
@@ -302,9 +299,9 @@ class HomePage extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Align(
-                alignment: Alignment(0.70, -0.8),
+                alignment: const Alignment(0.70, -0.8),
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     'Карта лояльности',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
@@ -315,9 +312,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0.6, -0.35),
+                alignment: const Alignment(0.6, -0.35),
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     'ЕГОР',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
@@ -328,9 +325,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0.25, 0.1),
+                alignment: const Alignment(0.25, 0.1),
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     '9834',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
@@ -348,46 +345,54 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildSlotMachineWidget() {
-    return SlotMachineWidget();
+    return const SlotMachineWidget();
   }
 
-  Widget _buildOrderStatusTimerWidget() {
+  Widget _buildOrderStatusTimerWidget(BuildContext context) {
     return Container(
-      width: double.infinity,
       color: AppColors.color191A1F,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              'Заказ принят',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w300,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => context.push(Routes.activeOrderPage),
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: <Widget>[
+                  const Text(
+                    'Заказ принят',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    '23:42',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const LineralProgresBarWidget(
+                    height: 5,
+                    width: 115,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  orderStages(),
+                ],
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              '23:42',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            LineralProgresBarWidget(
-              height: 5,
-              width: 115,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            orderStages(),
-          ],
+          ),
         ),
       ),
     );
@@ -416,7 +421,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildOrderStatusWidget() {
-    final double height = 147;
+    const double height = 147;
     return Container(
       color: AppColors.color191A1F,
       child: LayoutBuilder(
