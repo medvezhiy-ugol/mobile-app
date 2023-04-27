@@ -67,7 +67,7 @@ class ContactUsPage extends StatelessWidget {
                     child: TextField(
                       controller: _textMailSubjectController,
                       textCapitalization: TextCapitalization.sentences,
-                      maxLines: 3,
+                      maxLines: 1,
                       style: const TextStyle(
                           fontWeight: FontWeight.w400, fontSize: 14),
                       decoration: const InputDecoration(

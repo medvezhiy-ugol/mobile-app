@@ -16,58 +16,60 @@ class DetailStockPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            CloseCircleButton(
-              onTap: () => context.pop(),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _buildHeader(),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
-                  
-    Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
-                  
-    При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
-                  ''',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+        body: Scaffold(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              CloseCircleButton(
+                onTap: () => context.pop(),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 14,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: PrimaryButton(
-                      onTap: () => context.pop(),
+                    _buildHeader(),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        S.current.detailStockScreenToUseButtonText,
-                        style: const TextStyle(
+                        '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                    
+          Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
+                    
+          При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
+                    ''',
+                        style: TextStyle(
+                          color: Colors.white,
                           fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 14,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: PrimaryButton(
+                        onTap: () => context.pop(),
+                        child: Text(
+                          S.current.detailStockScreenToUseButtonText,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
