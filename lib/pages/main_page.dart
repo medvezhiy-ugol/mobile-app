@@ -28,8 +28,6 @@ class _MainPageState extends State<MainPage> {
       .firstWhere((e) => widget.location.contains(e.path))
       .index;
 
-  final MenuService menuService = Injector().get<MenuService>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +37,6 @@ class _MainPageState extends State<MainPage> {
           BlocProvider(
             create: (context) => MoreBloc(),
           ),
-          BlocProvider(
-            create: (context) => MenuBloc(menuService: menuService),
-          )
         ],
         child: widget.child,
       ),
@@ -62,35 +57,44 @@ class _MainPageState extends State<MainPage> {
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: const Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Icon(BottomBarIcons.main),
-                ),
-                label: S.current.bottomBarMainText), //'Главная'
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 6),
+                child: Icon(BottomBarIcons.main),
+              ),
+              label: S.current.bottomBarMainText,
+            ), //'Главная'
             BottomNavigationBarItem(
-                icon: const Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Icon(BottomBarIcons.stock),
-                ),
-                label: S.current.bottomBarStockText), //'Акции'
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 6),
+                child: Icon(BottomBarIcons.stock),
+              ),
+              label: S.current.bottomBarStockText,
+            ), //'Акции'
             BottomNavigationBarItem(
-                icon: const Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Icon(BottomBarIcons.menu),
-                ),
-                label: S.current.bottomBarMenuText), //'Меню'
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 6),
+                child: Icon(BottomBarIcons.menu),
+              ),
+              label: S.current.bottomBarMenuText,
+            ), //'Меню'
             BottomNavigationBarItem(
-                icon: const Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Icon(BottomBarIcons.map),
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 6),
+                child: Icon(
+                  BottomBarIcons.map,
                 ),
-                label: S.current.bottomBarMapText), //'Карта'
+              ),
+              label: S.current.bottomBarMapText,
+            ), //'Карта'
             BottomNavigationBarItem(
-                icon: const Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Icon(BottomBarIcons.more),
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: 6),
+                child: Icon(
+                  BottomBarIcons.more,
                 ),
-                label: S.current.bottomBarMoreText) // 'Еще'
+              ),
+              label: S.current.bottomBarMoreText,
+            ) // 'Еще'
           ],
           onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),
           currentIndex: _currentIndex,

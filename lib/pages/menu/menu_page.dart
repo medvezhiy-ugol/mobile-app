@@ -161,45 +161,54 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Container(
-            color: AppColors.colorFFB627,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () => context.push(Routes.basket),
-                child: SizedBox(
-                  height: 56,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.5, vertical: 17.5),
-                    child: Center(
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text('Оформить заказ', style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black
-                          ),),
-                          Expanded(child: SizedBox()),
-                          Text('220 ₽ · ', style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black
-                          ),),
-                          Text('25-30 мин', style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.color808080
-                          ),),
-                          
-                        ],
+          (state.order.isNotEmpty)
+              ? Container(
+                  color: AppColors.colorFFB627,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () => context.push(Routes.basket),
+                      child: SizedBox(
+                        height: 56,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.5, vertical: 17.5),
+                          child: Center(
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Оформить заказ',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                Text(
+                                  '${state.orderSum.toInt()} ₽ · ',
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                const Text(
+                                  '25-30 мин',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.color808080,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          )
+                )
+              : const SizedBox()
         ],
       ),
     );
@@ -220,8 +229,25 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             baseColor: AppColors.color111216,
             highlightColor: AppColors.color5D6377.withOpacity(0.5),
             child: Container(
-              height: 50,
-              color: AppColors.color26282F,
+              height: 20,
+              width: 2 * 70 + 30,
+              decoration: BoxDecoration(
+                  color: AppColors.color26282F,
+                  borderRadius: BorderRadius.circular(20)),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Shimmer.fromColors(
+            baseColor: AppColors.color111216,
+            highlightColor: AppColors.color5D6377.withOpacity(0.5),
+            child: Container(
+              height: 25,
+              decoration: BoxDecoration(
+                color: AppColors.color26282F,
+                // borderRadius: BorderRadius.circular(20),
+              ),
             ),
           ),
           const SizedBox(

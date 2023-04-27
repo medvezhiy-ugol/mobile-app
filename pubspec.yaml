@@ -30,7 +30,9 @@ dependencies:
   yandex_mapkit: ^3.2.0
   sliding_up_panel: ^2.0.0+1
   cached_network_image: ^3.2.3
+  flutter_native_splash: ^2.2.19
   url_launcher: ^6.1.10
+  flutter_slidable: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +52,7 @@ flutter:
     - assets/images/delivery_info_page/
     - assets/images/contact_us_page/
     - assets/images/about_app_page/
+    - assets/images/more_page/
 
   fonts:
     - family: Unbounded
@@ -93,3 +96,12 @@ flutter:
 flutter_intl:
   enabled: true
   main_locale: ru
+
+flutter_native_splash:
+  color: "#111216"
+  image: "assets/images/splash_screen/splash_img.png"
+  android_12:
+    image: "assets/images/splash_screen/splash_img.png"
+    color: "#111216"
+  android: true
+  ios: true

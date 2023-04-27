@@ -5,7 +5,8 @@ part 'more_event.dart';
 part 'more_state.dart';
 
 class MoreBloc extends Bloc<MoreEvent, MoreState> {
-  MoreBloc() : super(MoreDefaultState()) {
+  //заменил MoreDefaultState на MoreRegisteredState
+  MoreBloc() : super(MoreRegisteredState()) {
     on<MoreEvent>((event, emit) {
       // TODO: implement event handler
     });

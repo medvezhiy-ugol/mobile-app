@@ -37,6 +37,7 @@ class _ToggleSwitcherState extends State<ToggleSwitcher> {
         unSelectedTextStyle: ThemeService.unselectedToggleSwitcherTextStyle(),
         labels: _listTextTabToggle,
         selectedLabelIndex: (index) {
+          //delivery unavalible
           if (index == 0) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
