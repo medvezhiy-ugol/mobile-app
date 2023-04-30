@@ -13,7 +13,6 @@ import '../../utils/app_assets.dart';
 
 class StockPage extends StatelessWidget {
   StockPage({super.key});
-
   // final TextEditingController _textMailBodyController = TextEditingController();
   // final TextEditingController _textMailSubjectController = TextEditingController();
   @override
@@ -24,8 +23,8 @@ class StockPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // _buildActiveLotteryBody(context),
-            _buildCompletedLotteryBody(context),
+            _buildActiveLotteryBody(context),
+            // _buildCompletedLotteryBody(context),
             const SizedBox(
               height: 10,
             ),
