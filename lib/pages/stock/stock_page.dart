@@ -183,9 +183,6 @@ class StockPage extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 40,
-        ),
       ],
     );
   }
