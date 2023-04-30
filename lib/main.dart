@@ -89,7 +89,7 @@ class UgolApp extends StatelessWidget {
                 GoRoute(
                   path: Routes.stock,
                   pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: StockPage()),
+                      NoTransitionPage(child: StockPage()),
                 ),
                 GoRoute(
                   path: Routes.menu,

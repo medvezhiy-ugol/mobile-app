@@ -5,6 +5,8 @@ abstract class A {
       'assets/images/detail_menu_page/souse.png';
   static const String assetsStockPageItemImg =
       'assets/images/stock_page/pizza.png';
+  static const String assetsStockPageDrawResultsImg =
+      'assets/images/stock_page/draw_results_state_img.png';
   static const String assetsDetailStockPageItemImg =
       'assets/images/detail_stock_page/scribble.png';
 
