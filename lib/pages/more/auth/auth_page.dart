@@ -20,6 +20,7 @@ class AuthPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             return SafeArea(

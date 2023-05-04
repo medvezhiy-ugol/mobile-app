@@ -79,7 +79,8 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => context.push(Routes.moreAuth),
+              //moreAuth - profilePage
+              onTap: () => context.push(Routes.profilePage),
               child: Container(
                 padding: const EdgeInsets.all(17),
                 child: Row(

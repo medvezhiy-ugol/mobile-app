@@ -24,6 +24,7 @@ import 'pages/menu/bloc/menu_bloc.dart';
 import 'pages/menu/detail_menu_page.dart';
 import 'pages/menu/menu_page.dart';
 import 'pages/more/auth/auth_page.dart';
+import 'pages/more/auth/profile_page.dart';
 import 'pages/more/more_page.dart';
 import 'pages/more/my_orders_page.dart';
 import 'pages/more/order_delivered_page.dart';
@@ -121,7 +122,9 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: const SlotDetailPage(amountWinners: 4,),
+                    child: const SlotDetailPage(
+                      amountWinners: 4,
+                    ),
                   ),
                 ),
                 GoRoute(
@@ -134,12 +137,12 @@ class UgolApp extends StatelessWidget {
                   ),
                 ),
                 GoRoute(
-                path: Routes.slotHistory,
-                pageBuilder: (context, state) =>
-                    buildPageWithPopupTransition<void>(
-                  context: context,
-                  state: state,
-                  child: const SlotHistoryPage(),
+                  path: Routes.slotHistory,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const SlotHistoryPage(),
                   ),
                 ),
                 GoRoute(
@@ -232,6 +235,16 @@ class UgolApp extends StatelessWidget {
                 context: context,
                 state: state,
                 child: OrderDeliveredPage(),
+              ),
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: Routes.profilePage,
+              pageBuilder: (context, state) =>
+                  buildPageWithPopupTransition<void>(
+                context: context,
+                state: state,
+                child: ProfilePage(),
               ),
             ),
           ],
