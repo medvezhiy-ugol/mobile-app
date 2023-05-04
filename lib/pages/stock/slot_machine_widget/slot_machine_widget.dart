@@ -45,35 +45,25 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
         Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset('assets/images/stock_page/slot_machine_background.png'),
+            Image.asset(
+              'assets/images/stock_page/slot_machine_background.png',
+              fit: BoxFit.fill,
+            ),
             SlotMachine(
-              rollItems: [
-                RollItem(index: 0, child: Container(color: Colors.red)),
-                RollItem(index: 1, child: Container(color: Colors.red)),
-                RollItem(index: 2, child: Container(color: Colors.red)),
-                RollItem(index: 3, child: Container(color: Colors.red)),
-                RollItem(index: 4, child: Container(color: Colors.red)),
-              ],
-              onCreated: (controller) {
-                _controller = controller;
-              },
-              onFinished: (resultIndexes) {
-                print('Result: $resultIndexes');
-              }
-            ),
+                rollItems: [
+                  RollItem(index: 0, child: Container(color: Colors.red)),
+                  RollItem(index: 1, child: Container(color: Colors.red)),
+                  RollItem(index: 2, child: Container(color: Colors.red)),
+                  RollItem(index: 3, child: Container(color: Colors.red)),
+                  RollItem(index: 4, child: Container(color: Colors.red)),
+                ],
+                onCreated: (controller) {
+                  _controller = controller;
+                },
+                onFinished: (resultIndexes) {
+                  print('Result: $resultIndexes');
+                }),
           ],
-        ),
-        Container(
-          color: Colors.green,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                _controller.go(index: 123123);
-              },
-              child: Container(),
-            ),
-          ),
         ),
       ],
     );
