@@ -53,40 +53,58 @@ class HomePage extends StatelessWidget {
               ),
               SizedBox(
                 height: 160,
-                child: ListView(
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Image.asset(
-                        A.assetsHomePagePromoImg,
-                        fit: BoxFit.fill,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => context.push(Routes.detailStock),
+                        child: SizedBox(
+                          width: 300,
+                          height: 150,
+                          child: Image.asset(
+                            A.assetsHomePagePromoImg,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Image.asset(
-                        A.assetsHomePagePromoImg,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Image.asset(
-                        A.assetsHomePagePromoImg,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ],
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 5,),
+                  // children: [
+                  //   SizedBox(
+                  //     width: 300,
+                  //     height: 150,
+                  //     child: Image.asset(
+                  //       A.assetsHomePagePromoImg,
+                  //       fit: BoxFit.fill,
+                  //     ),
+                  //   ),
+                  //   const SizedBox(
+                  //     width: 5,
+                  //   ),
+                  //   SizedBox(
+                  //     width: 300,
+                  //     height: 150,
+                  //     child: Image.asset(
+                  //       A.assetsHomePagePromoImg,
+                  //       fit: BoxFit.fill,
+                  //     ),
+                  //   ),
+                  //   const SizedBox(
+                  //     width: 5,
+                  //   ),
+                  //   SizedBox(
+                  //     width: 300,
+                  //     height: 150,
+                  //     child: Image.asset(
+                  //       A.assetsHomePagePromoImg,
+                  //       fit: BoxFit.fill,
+                  //     ),
+                  //   ),
+                  // ],
                 ),
               ),
               const SizedBox(
