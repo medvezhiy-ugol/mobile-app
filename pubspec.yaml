@@ -33,6 +33,7 @@ dependencies:
   flutter_native_splash: ^2.2.19
   url_launcher: ^6.1.10
   flutter_slidable: ^3.0.0
+  barcode_widget: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
     - assets/images/contact_us_page/
     - assets/images/about_app_page/
     - assets/images/more_page/
+    - assets/images/loaltyCard_page/
 
   fonts:
     - family: Unbounded
