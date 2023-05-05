@@ -8,6 +8,7 @@ class Routes {
   static const String basket = '/home/basket';
   static const String basketMenuName = 'basketMenu';
   static const String activeOrderPage = '/home/activeOrderPage';
+  static const String loaltyCard = '/home/loaltyCard';
   static const String stock = '/stock';
   static const String menu = '/menu';
   static const String map = '/map';

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:go_router/go_router.dart';
@@ -53,40 +54,26 @@ class HomePage extends StatelessWidget {
               ),
               SizedBox(
                 height: 160,
-                child: ListView(
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Image.asset(
-                        A.assetsHomePagePromoImg,
-                        fit: BoxFit.fill,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => context.push(Routes.detailStock),
+                        child: SizedBox(
+                          width: 300,
+                          height: 150,
+                          child: Image.asset(
+                            A.assetsHomePagePromoImg,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Image.asset(
-                        A.assetsHomePagePromoImg,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Image.asset(
-                        A.assetsHomePagePromoImg,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ],
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 5,),
                 ),
               ),
               const SizedBox(
@@ -100,7 +87,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              _buildLoyaltyCard(height: 180),
+              _buildLoyaltyCard(height: 180, context: context),
               const SizedBox(
                 height: 28,
               ),
@@ -281,7 +268,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildLoyaltyCard({required double height}) {
+  Widget _buildLoyaltyCard({required double height, required BuildContext context}) {
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -295,7 +282,7 @@ class HomePage extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: () {},
+          onTap: () {context.push(Routes.loaltyCard);},
           child: Stack(
             children: <Widget>[
               Align(
