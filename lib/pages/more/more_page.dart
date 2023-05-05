@@ -216,9 +216,9 @@ class MorePage extends StatelessWidget {
                           const SizedBox(
                             width: 26,
                           ),
-                          Text(
+                          const Text(
                             'Мои заказы',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
@@ -378,8 +378,9 @@ class MorePage extends StatelessWidget {
                             MorePageIcons.location,
                             size: 24,
                           ),
-                          const SizedBox(
-                            height: 14,
+                          const Expanded(
+                            child: SizedBox(
+                            ),
                           ),
                           Text(
                             S.current.profileScreenAddresses, //'Адреса',
@@ -420,8 +421,9 @@ class MorePage extends StatelessWidget {
                             MorePageIcons.loyal,
                             size: 28,
                           ),
-                          const SizedBox(
-                            height: 14,
+                          const Expanded(
+                            child: SizedBox(
+                            ),
                           ),
                           Text(
                             S.current.profileScreenLoyalty, //'Лояльность',
