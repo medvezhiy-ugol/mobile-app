@@ -229,37 +229,37 @@ class MorePage extends StatelessWidget {
                   ),
                 ),
               )
-            : Container(), //Settings
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                child: Row(
-                  children: [
-                    const Icon(
-                      MorePageIcons.settings,
-                      size: 28,
-                    ),
-                    const SizedBox(
-                      width: 26,
-                    ),
-                    Text(
-                      S.current.profileScreenSettings,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+            : Container(), 
+        // Container(
+        //   color: AppColors.color191A1F,
+        //   child: Material(
+        //     color: Colors.transparent,
+        //     child: InkWell(
+        //       onTap: () {},
+        //       child: Container(
+        //         padding: const EdgeInsets.all(18),
+        //         child: Row(
+        //           children: [
+        //             const Icon(
+        //               MorePageIcons.settings,
+        //               size: 28,
+        //             ),
+        //             const SizedBox(
+        //               width: 26,
+        //             ),
+        //             Text(
+        //               S.current.profileScreenSettings,  // Настройки
+        //               style: const TextStyle(
+        //                   color: Colors.white,
+        //                   fontSize: 18,
+        //                   fontWeight: FontWeight.w600),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Container(
           color: AppColors.color191A1F,
           child: Material(
@@ -416,18 +416,18 @@ class MorePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
+                        children: const [
+                          Icon(
                             MorePageIcons.loyal,
                             size: 28,
                           ),
-                          const Expanded(
+                          Expanded(
                             child: SizedBox(
                             ),
                           ),
                           Text(
-                            S.current.profileScreenLoyalty, //'Лояльность',
-                            style: const TextStyle(
+                            'Мои карты', // 'Мои карты' (на будущее записал),
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
