@@ -13,10 +13,16 @@ class CodeAuthBloc extends Bloc<CodeAuthEvent, CodeAuthState> {
       if (event is CodeAuthShowButtonEvent) {
         emit(CodeAuthWithButtonState());
       } else if (event is CodeAuthVerificationEvent) {
-        await authService.authUser(
+        String response = 'error';
+        response = await authService.authUser(
           phone: event.phone,
           code: event.code,
         );
+        if (response.contains('Token: ')) {
+        // emit(SignInSuccess(token: response));
+      } else {
+        // emit(SignInError(error: response));
+      }
         emit(CodeAuthDefaultState());
       }
     });

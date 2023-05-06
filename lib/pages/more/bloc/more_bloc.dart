@@ -11,7 +11,9 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
   final authService = Injector().get<AuthService>();
   MoreBloc() : super(MoreDefaultState()) {
     on<MoreEvent>((event, emit) {
-      if (event is MoreRegisteredEvent || authService.token != '') {
+      if (event is MoreUnRegisteredEvent) {
+        emit(MoreDefaultState());
+      } else if (event is MoreRegisteredEvent || authService.token != '') {
         emit(MoreRegisteredState());
       }
     });

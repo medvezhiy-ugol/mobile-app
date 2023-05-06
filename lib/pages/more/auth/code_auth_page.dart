@@ -102,18 +102,21 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                     ),
                     if (state is CodeAuthWithButtonState)
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenSize.width * 0.16),
                         child: PrimaryButton(
-                          onTap: () {
+                          onTap: () async {
                             context.read<CodeAuthBloc>().add(
                                   CodeAuthVerificationEvent(
                                     phone: AuthPage.phoneController!.text,
                                     code: CodeAuthPage.codeController!.text,
                                   ),
                                 );
-                            for (int i = 0; i < 2; i++) {
-                              context.pop();
-                            }
+                            setState(() {
+                              if (authService.token != '') {
+                                context.go(Routes.more);
+                              }
+                            });
                           },
                           child: const Text(
                             'Войти',
@@ -142,8 +145,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
       width: 56,
       height: 60,
       textStyle: const TextStyle(
-        fontSize: 22,
-        color: AppColors.colorFF9900,
+        fontSize: 24,
       ),
       decoration: BoxDecoration(
         color: AppColors.color222222,

@@ -11,6 +11,7 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
+import 'auth/auth_page.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
@@ -22,6 +23,8 @@ class MorePage extends StatelessWidget {
       builder: (context, state) {
         if (state is MoreDefaultState && authService.token != '') {
           context.read<MoreBloc>().add(MoreRegisteredEvent());
+        } else if (state is MoreRegisteredState && authService.token == '') {
+          context.read<MoreBloc>().add(MoreUnRegisteredEvent());
         }
         return SafeArea(
           child: SingleChildScrollView(
@@ -85,7 +88,7 @@ class MorePage extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               //moreAuth - profilePage
-              onTap: () => context.push(Routes.profilePage),
+              onTap: () => context.push(Routes.moreAuth),
               child: Container(
                 padding: const EdgeInsets.all(17),
                 child: Row(
@@ -462,7 +465,7 @@ class MorePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Денис',
+              'User',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -473,7 +476,7 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  // context.push(Routes.);
+                  context.push(Routes.profilePage);
                 },
                 customBorder: const CircleBorder(),
                 child: Padding(
@@ -502,9 +505,9 @@ class MorePage extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Text(
-              '+7 930 103 28 35',
+              (authService.phone == '') ? 'phone': authService.phone ,
               style: TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
             SizedBox(

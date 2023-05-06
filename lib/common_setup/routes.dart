@@ -16,6 +16,7 @@ class Routes {
 
   static const String moreAuth = '/more/auth';
   static const String moreAuthCode = '/more/auth/code';
+    static const String profilePage = '/more/profilePage';
   static const String deliveryInfo = '/more/deliveryInfo';
   static const String aboutApp = '/more/aboutApp';
   static const String termsOfService = '/more/termsOfService';
@@ -24,7 +25,6 @@ class Routes {
   static const String slotDetail = '/stock/slotDetail';
   static const String myOrders = '/more/myOrders';
   static const String deliveredOrderPage = '/more/myOrders/deliveredOrderPage';
-  static const String profilePage = '/more/profilePage';
 }
 
 enum MenuRoute {

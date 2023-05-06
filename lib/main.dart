@@ -258,6 +258,16 @@ class UgolApp extends StatelessWidget {
                 child: CodeAuthPage(),
               ),
             ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: Routes.profilePage,
+              pageBuilder: (context, state) =>
+                  buildPageWithPopupTransition<void>(
+                context: context,
+                state: state,
+                child: ProfilePage(),
+              ),
+            ),
           ],
         ),
       ),
