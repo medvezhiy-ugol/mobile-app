@@ -24,6 +24,7 @@ class Routes {
   static const String slotDetail = '/stock/slotDetail';
   static const String myOrders = '/more/myOrders';
   static const String deliveredOrderPage = '/more/myOrders/deliveredOrderPage';
+  static const String profilePage = '/more/profilePage';
 }
 
 enum MenuRoute {

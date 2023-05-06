@@ -26,6 +26,7 @@ import 'pages/menu/bloc/menu_bloc.dart';
 import 'pages/menu/detail_menu_page.dart';
 import 'pages/menu/menu_page.dart';
 import 'pages/more/auth/auth_page.dart';
+import 'pages/more/auth/profile_page.dart';
 import 'pages/more/more_page.dart';
 import 'pages/more/my_orders_page.dart';
 import 'pages/more/order_delivered_page.dart';

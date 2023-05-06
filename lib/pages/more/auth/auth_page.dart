@@ -38,6 +38,7 @@ class _AuthPageState extends State<AuthPage> {
     return BlocProvider(
       create: (context) => AuthBloc(authService: authService),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state is AuthDefaultState || state is AuthWithButtonState) {
