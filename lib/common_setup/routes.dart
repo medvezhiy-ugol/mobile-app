@@ -8,12 +8,14 @@ class Routes {
   static const String basket = '/home/basket';
   static const String basketMenuName = 'basketMenu';
   static const String activeOrderPage = '/home/activeOrderPage';
+  static const String loaltyCard = '/home/loaltyCard';
   static const String stock = '/stock';
   static const String menu = '/menu';
   static const String map = '/map';
   static const String more = '/more';
 
   static const String moreAuth = '/more/auth';
+  static const String moreAuthCode = '/more/auth/code';
   static const String deliveryInfo = '/more/deliveryInfo';
   static const String aboutApp = '/more/aboutApp';
   static const String termsOfService = '/more/termsOfService';

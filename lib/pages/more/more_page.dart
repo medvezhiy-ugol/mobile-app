@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
+import '../../services/auth_service.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
@@ -12,12 +14,15 @@ import '../../utils/icons/social_icons_icons.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
-  const MorePage({super.key});
-
+  MorePage({super.key});
+  final authService = Injector().get<AuthService>();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoreBloc, MoreState>(
       builder: (context, state) {
+        if (state is MoreDefaultState && authService.token != '') {
+          context.read<MoreBloc>().add(MoreRegisteredEvent());
+        }
         return SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
@@ -33,7 +38,7 @@ class MorePage extends StatelessWidget {
                   height: (state is MoreDefaultState) ? 16 : 0,
                 ),
                 (state is MoreRegisteredState)
-                    ? _buildProfileWidget()
+                    ? _buildProfileWidget(context)
                     : Container(),
                 SizedBox(
                   height: (state is MoreRegisteredState) ? 84 : 0,
@@ -152,14 +157,15 @@ class MorePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        customBorder: const CircleBorder(),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: const Icon(SocialIcons.vk)),
-                      )),
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {},
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(SocialIcons.vk)),
+                    ),
+                  ),
                   Material(
                       color: Colors.transparent,
                       child: InkWell(
@@ -173,14 +179,18 @@ class MorePage extends StatelessWidget {
                     width: 4,
                   ),
                   Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        customBorder: const CircleBorder(),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: const Icon(SocialIcons.instagram)),
-                      )),
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {},
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: const Icon(
+                          SocialIcons.instagram,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],
@@ -217,9 +227,9 @@ class MorePage extends StatelessWidget {
                           const SizedBox(
                             width: 26,
                           ),
-                          Text(
+                          const Text(
                             'Мои заказы',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
@@ -230,37 +240,37 @@ class MorePage extends StatelessWidget {
                   ),
                 ),
               )
-            : Container(), //Settings
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                child: Row(
-                  children: [
-                    const Icon(
-                      MorePageIcons.settings,
-                      size: 28,
-                    ),
-                    const SizedBox(
-                      width: 26,
-                    ),
-                    Text(
-                      S.current.profileScreenSettings,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+            : Container(),
+        // Container(
+        //   color: AppColors.color191A1F,
+        //   child: Material(
+        //     color: Colors.transparent,
+        //     child: InkWell(
+        //       onTap: () {},
+        //       child: Container(
+        //         padding: const EdgeInsets.all(18),
+        //         child: Row(
+        //           children: [
+        //             const Icon(
+        //               MorePageIcons.settings,
+        //               size: 28,
+        //             ),
+        //             const SizedBox(
+        //               width: 26,
+        //             ),
+        //             Text(
+        //               S.current.profileScreenSettings,  // Настройки
+        //               style: const TextStyle(
+        //                   color: Colors.white,
+        //                   fontSize: 18,
+        //                   fontWeight: FontWeight.w600),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Container(
           color: AppColors.color191A1F,
           child: Material(
@@ -379,8 +389,8 @@ class MorePage extends StatelessWidget {
                             MorePageIcons.location,
                             size: 24,
                           ),
-                          const SizedBox(
-                            height: 14,
+                          const Expanded(
+                            child: SizedBox(),
                           ),
                           Text(
                             S.current.profileScreenAddresses, //'Адреса',
@@ -416,17 +426,17 @@ class MorePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
+                        children: const [
+                          Icon(
                             MorePageIcons.loyal,
                             size: 28,
                           ),
-                          const SizedBox(
-                            height: 14,
+                          Expanded(
+                            child: SizedBox(),
                           ),
                           Text(
-                            S.current.profileScreenLoyalty, //'Лояльность',
-                            style: const TextStyle(
+                            'Мои карты', // 'Мои карты' (на будущее записал),
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
@@ -444,17 +454,48 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Column _buildProfileWidget() {
+  Column _buildProfileWidget(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Денис',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              fontFamily: AppFonts.unbounded),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Денис',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: AppFonts.unbounded),
+            ),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  // context.push(Routes.);
+                },
+                customBorder: const CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.transparent,
+                      ),
+                      child: const Icon(
+                        Icons.more_horiz,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
           height: 12,

@@ -33,6 +33,8 @@ dependencies:
   flutter_native_splash: ^2.2.19
   url_launcher: ^6.1.10
   flutter_slidable: ^3.0.0
+  barcode_widget: ^2.0.3
+  pinput: ^2.2.31
 
 dev_dependencies:
   flutter_test:

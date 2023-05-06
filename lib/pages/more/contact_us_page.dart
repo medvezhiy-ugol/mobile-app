@@ -65,6 +65,7 @@ class ContactUsPage extends StatelessWidget {
                     // height: 112,
                     color: AppColors.color191A1F,
                     child: TextField(
+                      cursorColor: AppColors.colorFF9900,
                       controller: _textMailSubjectController,
                       textCapitalization: TextCapitalization.sentences,
                       maxLines: 1,
@@ -73,7 +74,9 @@ class ContactUsPage extends StatelessWidget {
                       decoration: const InputDecoration(
                         isCollapsed: true,
                         contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
                       ),
+                      
                     ),
                   ),
                   const SizedBox(
@@ -94,6 +97,7 @@ class ContactUsPage extends StatelessWidget {
                     // height: 112,
                     color: AppColors.color191A1F,
                     child: TextField(
+                      cursorColor: AppColors.colorFF9900,
                       controller: _textMailBodyController,
                       textCapitalization: TextCapitalization.sentences,
                       maxLines: 5,
@@ -101,6 +105,7 @@ class ContactUsPage extends StatelessWidget {
                       decoration: const InputDecoration(
                         isCollapsed: true,
                         contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
                       ),
                     ),
                   ),
