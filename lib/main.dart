@@ -8,6 +8,7 @@ import 'package:medvezhiy_ugol/pages/home/loalty_card_page.dart';
 
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
+import 'package:medvezhiy_ugol/pages/more/auth/code_auth_page.dart';
 import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
 import 'package:medvezhiy_ugol/pages/more/term_of_service_page.dart';
@@ -105,7 +106,7 @@ class UgolApp extends StatelessWidget {
                 GoRoute(
                   path: Routes.more,
                   pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: MorePage()),
+                      NoTransitionPage(child: MorePage()),
                 ),
                 GoRoute(
                   path: Routes.deliveryInfo,
@@ -122,7 +123,9 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: const SlotDetailPage(amountWinners: 4,),
+                    child: const SlotDetailPage(
+                      amountWinners: 4,
+                    ),
                   ),
                 ),
                 GoRoute(
@@ -135,12 +138,12 @@ class UgolApp extends StatelessWidget {
                   ),
                 ),
                 GoRoute(
-                path: Routes.slotHistory,
-                pageBuilder: (context, state) =>
-                    buildPageWithPopupTransition<void>(
-                  context: context,
-                  state: state,
-                  child: const SlotHistoryPage(),
+                  path: Routes.slotHistory,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const SlotHistoryPage(),
                   ),
                 ),
                 GoRoute(
@@ -149,7 +152,7 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                  child: const LoaltyCardPage(),
+                    child: const LoaltyCardPage(),
                   ),
                 ),
                 GoRoute(
@@ -242,6 +245,16 @@ class UgolApp extends StatelessWidget {
                 context: context,
                 state: state,
                 child: OrderDeliveredPage(),
+              ),
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: Routes.moreAuthCode,
+              pageBuilder: (context, state) =>
+                  buildPageWithPopupTransition<void>(
+                context: context,
+                state: state,
+                child: CodeAuthPage(),
               ),
             ),
           ],
