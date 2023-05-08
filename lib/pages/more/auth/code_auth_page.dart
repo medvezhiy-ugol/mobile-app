@@ -112,11 +112,9 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                                     code: CodeAuthPage.codeController!.text,
                                   ),
                                 );
-                            setState(() {
-                              if (authService.token != '') {
-                                context.go(Routes.more);
-                              }
-                            });
+                            if (authService.token != '') {
+                              context.go(Routes.more);
+                            }
                           },
                           child: const Text(
                             'Войти',
