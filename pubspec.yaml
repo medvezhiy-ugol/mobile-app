@@ -34,6 +34,8 @@ dependencies:
   url_launcher: ^6.1.10
   flutter_slidable: ^3.0.0
   barcode_widget: ^2.0.3
+  pinput: ^2.2.31
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +56,6 @@ flutter:
     - assets/images/contact_us_page/
     - assets/images/about_app_page/
     - assets/images/more_page/
-    - assets/images/loaltyCard_page/
 
   fonts:
     - family: Unbounded
@@ -103,9 +104,15 @@ flutter_native_splash:
   color: "#111216"
   image: assets/images/splash_screen/splash_img.png
   android_12:
-    image: assets/images/splash_screen/splash_img.png
+    image: assets/images/splash_screen/an12_splash_img.png
     color: "#111216"
-    image_dark: assets/images/splash_screen/splash_img.png
+    image_dark: assets/images/splash_screen/an12_splash_img.png
     icon_background_color_dark: "#111216"
   android: true
   ios: true
+
+flutter_icons:
+  android: "launcher"
+  ios: true
+  image_path: "assets/images/app_icon/app_icon.png"
+  adaptive_icon_background: "assets/images/app_icon/app_icon.png"

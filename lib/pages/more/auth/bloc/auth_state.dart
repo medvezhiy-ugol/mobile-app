@@ -6,3 +6,11 @@ abstract class AuthState {}
 class AuthDefaultState extends AuthState {}
 
 class AuthWithButtonState extends AuthState {}
+
+class AuthErrorState extends AuthState {
+  final String error;
+
+  AuthErrorState({required this.error});
+}
+
+class AuthSendCodeState extends AuthState {}

@@ -15,6 +15,8 @@ class Routes {
   static const String more = '/more';
 
   static const String moreAuth = '/more/auth';
+  static const String moreAuthCode = '/more/auth/code';
+    static const String profilePage = '/more/profilePage';
   static const String deliveryInfo = '/more/deliveryInfo';
   static const String aboutApp = '/more/aboutApp';
   static const String termsOfService = '/more/termsOfService';

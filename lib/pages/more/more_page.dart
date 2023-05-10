@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
+import '../../services/auth_service.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
+import 'auth/auth_page.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
-  const MorePage({super.key});
-
+  MorePage({super.key});
+  final authService = Injector().get<AuthService>();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoreBloc, MoreState>(
       builder: (context, state) {
+        if (state is MoreDefaultState && authService.token != '') {
+          context.read<MoreBloc>().add(MoreRegisteredEvent());
+        } else if (state is MoreRegisteredState && authService.token == '') {
+          context.read<MoreBloc>().add(MoreUnRegisteredEvent());
+        }
         return SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
@@ -33,7 +41,7 @@ class MorePage extends StatelessWidget {
                   height: (state is MoreDefaultState) ? 16 : 0,
                 ),
                 (state is MoreRegisteredState)
-                    ? _buildProfileWidget()
+                    ? _buildProfileWidget(context)
                     : Container(),
                 SizedBox(
                   height: (state is MoreRegisteredState) ? 84 : 0,
@@ -79,6 +87,7 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
+              //moreAuth - profilePage
               onTap: () => context.push(Routes.moreAuth),
               child: Container(
                 padding: const EdgeInsets.all(17),
@@ -151,14 +160,15 @@ class MorePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        customBorder: const CircleBorder(),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: const Icon(SocialIcons.vk)),
-                      )),
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {},
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(SocialIcons.vk)),
+                    ),
+                  ),
                   Material(
                       color: Colors.transparent,
                       child: InkWell(
@@ -172,14 +182,18 @@ class MorePage extends StatelessWidget {
                     width: 4,
                   ),
                   Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        customBorder: const CircleBorder(),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: const Icon(SocialIcons.instagram)),
-                      )),
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {},
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: const Icon(
+                          SocialIcons.instagram,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],
@@ -229,7 +243,7 @@ class MorePage extends StatelessWidget {
                   ),
                 ),
               )
-            : Container(), 
+            : Container(),
         // Container(
         //   color: AppColors.color191A1F,
         //   child: Material(
@@ -379,8 +393,7 @@ class MorePage extends StatelessWidget {
                             size: 24,
                           ),
                           const Expanded(
-                            child: SizedBox(
-                            ),
+                            child: SizedBox(),
                           ),
                           Text(
                             S.current.profileScreenAddresses, //'Адреса',
@@ -422,8 +435,7 @@ class MorePage extends StatelessWidget {
                             size: 28,
                           ),
                           Expanded(
-                            child: SizedBox(
-                            ),
+                            child: SizedBox(),
                           ),
                           Text(
                             'Мои карты', // 'Мои карты' (на будущее записал),
@@ -445,26 +457,57 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Column _buildProfileWidget() {
+  Column _buildProfileWidget(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Денис',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              fontFamily: AppFonts.unbounded),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'User',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: AppFonts.unbounded),
+            ),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  context.push(Routes.profilePage);
+                },
+                customBorder: const CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.transparent,
+                      ),
+                      child: const Icon(
+                        Icons.more_horiz,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
           height: 12,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Text(
-              '+7 930 103 28 35',
+              (authService.phone == '') ? 'phone': authService.phone ,
               style: TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
             SizedBox(
