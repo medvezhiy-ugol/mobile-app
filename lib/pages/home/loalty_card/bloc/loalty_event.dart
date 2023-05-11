@@ -1,8 +1,8 @@
-part of 'loalty_bloc.dart';
+part of 'loyalty_bloc.dart';
 
 @immutable
-abstract class LoaltyEvent {}
+abstract class LoyaltyEvent {}
 
-class LoaltyLoadingEvent extends LoaltyEvent {}
+class LoyaltyLoadingEvent extends LoyaltyEvent {}
 
-class LoaltyLoadedEvent extends LoaltyEvent {}
+class LoyaltyLoadedEvent extends LoyaltyEvent {}

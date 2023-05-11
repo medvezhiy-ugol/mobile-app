@@ -5,7 +5,7 @@ import '../models/loalty_card.dart';
 import 'api_service.dart';
 import 'auth_service.dart';
 
-class LoaltyCardService {
+class LoyaltyCardService {
   final authService = Injector().get<AuthService>();
   final SharedPreferences prefs;
 
@@ -13,7 +13,7 @@ class LoaltyCardService {
 
   get cardId => _cardId;
 
-  LoaltyCardService({
+  LoyaltyCardService({
     required this.prefs,
   }) {
     _cardId = prefs.getString('cardId') ?? '';

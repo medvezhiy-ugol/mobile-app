@@ -14,29 +14,29 @@ import 'package:shimmer/shimmer.dart';
 import '../../../common_setup/routes.dart';
 import '../../../services/menu_service.dart';
 import '../../../utils/app_assets.dart';
-import 'bloc/loalty_bloc.dart';
+import 'bloc/loyalty_bloc.dart';
 
-class LoaltyCardPage extends StatefulWidget {
-  LoaltyCardPage({super.key});
+class LoyaltyCardPage extends StatefulWidget {
+  LoyaltyCardPage({super.key});
 
   @override
-  State<LoaltyCardPage> createState() => _LoaltyCardPageState();
+  State<LoyaltyCardPage> createState() => _LoyaltyCardPageState();
 }
 
-class _LoaltyCardPageState extends State<LoaltyCardPage> {
-  final LoaltyCardService loaltyCardService =
-      Injector().get<LoaltyCardService>();
+class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
+  final LoyaltyCardService loyaltyCardService =
+      Injector().get<LoyaltyCardService>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoaltyBloc(loaltyCardService: loaltyCardService),
+      create: (context) => LoyaltyBloc(loyaltyCardService: loyaltyCardService),
       child: Scaffold(
-        body: BlocBuilder<LoaltyBloc, LoaltyState>(
+        body: BlocBuilder<LoyaltyBloc, LoyaltyState>(
           builder: (context, state) {
-            if (state is LoaltyLoadedState) {
+            if (state is LoyaltyLoadedState) {
               return _buildLoadedBody(context, state);
-            } else if (state is LoaltyLoadingState) {
+            } else if (state is LoyaltyLoadingState) {
               return _buildLoadingBody(context);
             } else {
               return Container();
@@ -49,7 +49,7 @@ class _LoaltyCardPageState extends State<LoaltyCardPage> {
 
   Widget _buildLoadedBody(
     BuildContext context,
-    LoaltyLoadedState state,
+    LoyaltyLoadedState state,
   ) {
     return SafeArea(
       child: SingleChildScrollView(
@@ -415,7 +415,7 @@ class _LoaltyCardPageState extends State<LoaltyCardPage> {
   Widget _buildLoyaltyCard({
     required double height,
     required BuildContext context,
-    required LoaltyLoadedState state,
+    required LoyaltyLoadedState state,
   }) {
     return Container(
       height: height,

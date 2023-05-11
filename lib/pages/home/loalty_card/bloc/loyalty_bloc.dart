@@ -9,27 +9,27 @@ import 'package:meta/meta.dart';
 import '../../../../services/auth_service.dart';
 
 part 'loalty_event.dart';
-part 'loalty_state.dart';
+part 'loyalty_state.dart';
 
-class LoaltyBloc extends Bloc<LoaltyEvent, LoaltyState> {
-  final LoaltyCardService loaltyCardService;
+class LoyaltyBloc extends Bloc<LoyaltyEvent, LoyaltyState> {
+  final LoyaltyCardService loyaltyCardService;
 
   String name = '';
   String cardId = '';
   double cardBalance = 0;
   LoaltyCard? _card;
 
-  LoaltyBloc({
-    required this.loaltyCardService,
-  }) : super(LoaltyLoadingState()) {
-    on<LoaltyEvent>(
+  LoyaltyBloc({
+    required this.loyaltyCardService,
+  }) : super(LoyaltyLoadingState()) {
+    on<LoyaltyEvent>(
       (event, emit) async {
-        if (event is LoaltyLoadingEvent) {
+        if (event is LoyaltyLoadingEvent) {
           _initLoaltyCard();
-          emit(LoaltyLoadingState());
-        } else if (event is LoaltyLoadedEvent) {
+          emit(LoyaltyLoadingState());
+        } else if (event is LoyaltyLoadedEvent) {
           await Future.delayed(const Duration(seconds: 5), () {});
-          emit(LoaltyLoadedState(
+          emit(LoyaltyLoadedState(
             cardBalance: cardBalance,
             cardId: cardId,
             name: name,
@@ -37,17 +37,17 @@ class LoaltyBloc extends Bloc<LoaltyEvent, LoaltyState> {
         }
       },
     );
-    add(LoaltyLoadingEvent());
+    add(LoyaltyLoadingEvent());
   }
 
   Future<void> _initLoaltyCard() async {
     try {
-      _card = await Isolate.run(loaltyCardService.getUserCard);
+      _card = await Isolate.run(loyaltyCardService.getUserCard);
       if (_card != null) {
         name = _card!.name;
         cardId = _card!.id;
         cardBalance = _card!.walletBalances[0].balance;
-        add(LoaltyLoadedEvent());
+        add(LoyaltyLoadedEvent());
       }
     } catch (e) {}
   }
