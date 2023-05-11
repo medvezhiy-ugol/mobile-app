@@ -103,7 +103,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 30,
                     ),
                     PrimaryButton(
-                      onTap: () {},
+                      onTap: () {
+                         _showSnackBar(
+                        context: context,
+                        text: 'В данный момент профиль в разработке, возможен только выход из аккаунта',
+                      );
+                      },
                       child: Text(
                         'Сохранить',
                         style: TextStyle(
@@ -163,5 +168,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+  _showSnackBar({required BuildContext context, required String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
+      behavior: SnackBarBehavior.floating,
+    ));
   }
 }

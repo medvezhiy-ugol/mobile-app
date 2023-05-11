@@ -296,7 +296,9 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
           const Text('Ошибка, попробуйте повторить.'),
           IconButton(
             onPressed: () {
-              context.read<MenuBloc>().add(MenuLoadingEvent());
+              setState(() {
+                context.read<MenuBloc>().add(MenuLoadingEvent());
+              });
             },
             icon: const Icon(
               color: AppColors.color808080,

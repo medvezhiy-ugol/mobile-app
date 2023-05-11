@@ -48,7 +48,7 @@ class MorePage extends StatelessWidget {
                   height: (state is MoreRegisteredState) ? 84 : 0,
                 ),
                 (state is MoreRegisteredState)
-                    ? _buildRegisteredRow()
+                    ? _buildRegisteredRow(context)
                     : Container(),
                 SizedBox(
                   height: (state is MoreRegisteredState) ? 10 : 0,
@@ -395,7 +395,7 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Row _buildRegisteredRow() {
+  Row _buildRegisteredRow(BuildContext context) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -447,7 +447,12 @@ class MorePage extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                   _showSnackBar(
+                        context: context,
+                        text: 'Данный раздел в разработке',
+                      );
+                },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
                   child: Row(

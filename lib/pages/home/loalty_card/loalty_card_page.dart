@@ -7,8 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-import '../../common_setup/routes.dart';
-import '../../utils/app_assets.dart';
+import '../../../common_setup/routes.dart';
+import '../../../utils/app_assets.dart';
 
 
 

@@ -33,6 +33,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   final authService = Injector().get<AuthService>();
+  bool showButton = false;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -49,119 +50,104 @@ class _AuthPageState extends State<AuthPage> {
             }
           },
           builder: (context, state) {
-            if (state is AuthDefaultState ||
-                state is AuthWithButtonState ||
-                state is AuthErrorState) {
-              return _buildFirstStageAuthBody(
-                context: context,
-                state: state,
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFirstStageAuthBody({
-    required BuildContext context,
-    required AuthState state,
-  }) {
-    Size screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerRight,
-              child: CloseCircleButton(
-                onTap: () => context.pop(),
-              ),
-            ),
-            SizedBox(
-              height: screenSize.height * 0.05,
-            ),
-            Text(
-              'Авторизация',
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-                fontFamily: AppFonts.unbounded,
-              ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Text(
-              'Введите номер мобильного телефона',
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(
-              height: screenSize.height * 0.2,
-            ),
-            buildTextField(context, state),
-            const SizedBox(
-              height: 28,
-            ),
-            if (state is AuthWithButtonState || state is AuthSendCodeEvent)
-              Expanded(
+            Size screenSize = MediaQuery.of(context).size;
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                      child: PrimaryButton(
-                        onTap: () {
-                          context.read<AuthBloc>().add(
-                                AuthSendCodeEvent(
-                                  phone: AuthPage.phoneController!.text,
-                                ),
-                              );
-                        },
-                        child: const Text(
-                          'Получить код',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: CloseCircleButton(
+                        onTap: () => context.pop(),
                       ),
                     ),
-                    const Spacer(),
-                    Center(
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Text(
-                            'Нажимая “получить код”, вы принимаете условия',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white.withOpacity(0.7),
-                                fontSize: 12),
-                          ),
-                          CupertinoButton(
-                            onPressed: () {},
-                            borderRadius: BorderRadius.circular(5),
-                            child: Text(
-                              'Пользовательского соглашения',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
+                    SizedBox(
+                      height: screenSize.height * 0.05,
+                    ),
+                    Text(
+                      'Авторизация',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                        fontFamily: AppFonts.unbounded,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Text(
+                      'Введите номер мобильного телефона',
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenSize.height * 0.2,
+                    ),
+                    buildTextField(context, state),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    if (showButton)
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 0.0),
+                              child: PrimaryButton(
+                                onTap: () {
+                                  context.read<AuthBloc>().add(
+                                        AuthSendCodeEvent(
+                                          phone: AuthPage.phoneController!.text,
+                                        ),
+                                      );
+                                },
+                                child: const Text(
+                                  'Получить код',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                            const Spacer(),
+                            Center(
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: <Widget>[
+                                  Text(
+                                    'Нажимая “получить код”, вы принимаете условия',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 12),
+                                  ),
+                                  CupertinoButton(
+                                    onPressed: () {},
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Text(
+                                      'Пользовательского соглашения',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                   ],
                 ),
-              )
-          ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -202,9 +188,14 @@ class _AuthPageState extends State<AuthPage> {
         ],
         onChanged: (value) {
           if (value.length == 18) {
-            context.read<AuthBloc>().add(AuthShowButtonEvent());
+            setState(() {
+                showButton = true;
+            });
+           
           } else if (state is AuthWithButtonState) {
-            context.read<AuthBloc>().add(AuthHideButtonEvent());
+            setState(() {
+                showButton = false;
+            });
           }
         },
       ),

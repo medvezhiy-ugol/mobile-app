@@ -39,9 +39,11 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
             order: _order,
             orderSum: _orderSum));
       } else if (event is MenuLoadingErrorEvent) {
+        await Future.delayed(const Duration(seconds: 1), () {});
         emit(MenuLoadingErrorState(error: 'Ошибка, повторите вновь'));
       } else if (event is MenuLoadingEvent) {
         _initMenu();
+        emit(MenuLoadingState());
       } else if (event is MenuAddToOrderEvent) {
         _order.add(event.menuProduct);
         _orderSum += event.menuProduct.itemSizes.first.prices.first.price;

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:go_router/go_router.dart';
@@ -12,112 +11,126 @@ import '../../utils/app_colors.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     // final width = MediaQuery.of(context).size.width;
-    
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      SizedBox(height: 32,),
-                      Text(
-                        'Адрес и время доставки',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.color808080,
-                        ),
-                      ),
-                      Text(
-                        'Республиканская ул. 68',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 160,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () => context.push(Routes.detailStock),
-                        child: SizedBox(
-                          width: 300,
-                          height: 150,
-                          child: Image.asset(
-                            A.assetsHomePagePromoImg,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 5,),
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme: ColorScheme.fromSwatch(
+          accentColor: AppColors.color191A1F,
+        ),
+      ),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              children: [
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: const [
+                //         SizedBox(height: 32,),
+                //         Text(
+                //           'Адрес и время доставки',
+                //           style: TextStyle(
+                //             fontSize: 10,
+                //             fontWeight: FontWeight.w400,
+                //             color: AppColors.color808080,
+                //           ),
+                //         ),
+                //         Text(
+                //           'Республиканская ул. 68',
+                //           style: TextStyle(
+                //             fontSize: 16,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                // SizedBox(
+                //   height: 160,
+                //   child: ListView.separated(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: 3,
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return Material(
+                //         color: Colors.transparent,
+                //         child: InkWell(
+                //           onTap: () => context.push(Routes.detailStock),
+                //           child: SizedBox(
+                //             width: 300,
+                //             height: 150,
+                //             child: Image.asset(
+                //               A.assetsHomePagePromoImg,
+                //               fit: BoxFit.fill,
+                //             ),
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //     separatorBuilder: (BuildContext context, int index) =>
+                //         const SizedBox(
+                //       width: 5,
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              _buildOrderStatusTimerWidget(context),
-              const SizedBox(
-                height: 10,
-              ),
-              _buildOrderStatusWidget(),
-              const SizedBox(
-                height: 32,
-              ),
-              _buildLoyaltyCard(height: 180, context: context),
-              const SizedBox(
-                height: 28,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Популярно',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.colorE3E3E3,
+                // _buildOrderStatusTimerWidget(context),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                // _buildOrderStatusWidget(),
+                // const SizedBox(
+                //   height: 32,
+                // ),
+                _buildLoyaltyCard(height: 180, context: context),
+                const SizedBox(
+                  height: 28,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Популярно',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.colorE3E3E3,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Все',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.color808080,
-                      decoration: TextDecoration.underline,
+                    InkWell(
+                      onTap: () {
+                        context.go(Routes.menu);
+                      },
+                      child: Text(
+                        'Все',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.color808080,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              _buildPopularSegmentWidget(),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                _buildPopularSegmentWidget(),
+              ],
+            ),
           ),
         ),
       ),
@@ -268,7 +281,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildLoyaltyCard({required double height, required BuildContext context}) {
+  Widget _buildLoyaltyCard(
+      {required double height, required BuildContext context}) {
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -282,7 +296,9 @@ class HomePage extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: () {context.push(Routes.loaltyCard);},
+          onTap: () {
+            context.push(Routes.loaltyCard);
+          },
           child: Stack(
             children: <Widget>[
               Align(

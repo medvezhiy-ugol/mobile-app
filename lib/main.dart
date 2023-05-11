@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
-import 'package:medvezhiy_ugol/pages/home/loalty_card_page.dart';
+import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';

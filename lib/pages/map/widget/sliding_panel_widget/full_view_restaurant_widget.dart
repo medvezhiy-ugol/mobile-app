@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../common_setup/routes.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../map_page.dart';
@@ -8,7 +10,8 @@ class FullViewRestaurantWidget extends StatefulWidget {
   FullViewRestaurantWidget({super.key});
 
   @override
-  State<FullViewRestaurantWidget> createState() => _FullViewRestaurantWidgetState();
+  State<FullViewRestaurantWidget> createState() =>
+      _FullViewRestaurantWidgetState();
 }
 
 class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
@@ -126,7 +129,9 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                     color: Colors.black,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  context.push(Routes.menu);
+                },
               ),
             ],
           ),
@@ -213,9 +218,9 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
 //   return Scaffold(
 //     appBar: AppBar(title: Text('Fade Transition Example')),
 //     body: Center(
-//       child: 
+//       child:
 
-    // ),
+  // ),
 //     floatingActionButton: FloatingActionButton(
 //       onPressed: () {
 //         setState(() {
@@ -226,9 +231,4 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
 //     ),
 //   );
 // }
-
-
-
-
-
 }
