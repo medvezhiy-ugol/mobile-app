@@ -23,19 +23,19 @@ class StockPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildActiveLotteryBody(context),
+            // _buildActiveLotteryBody(context),
             // _buildCompletedLotteryBody(context),
-            const SizedBox(
-              height: 10,
-            ),
-            promoTextField(context),
-            const SizedBox(
-              height: 26,
-            ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // promoTextField(context),
+            // const SizedBox(
+            //   height: 26,
+            // ),
             Text(
               S.current.stocksScreenStocksTitleText, //'Акции и комбо',
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 24,
                 fontWeight: FontWeight.w600,
                 fontFamily: AppFonts.unbounded,
                 color: Colors.white,

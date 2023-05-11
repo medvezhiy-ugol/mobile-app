@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -38,6 +39,11 @@ import 'utils/app_colors.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ModuleContainer.initialize(Injector());
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: AppColors.color111216,
+    ),
+  );
   runApp(UgolApp());
 }
 
@@ -63,6 +69,15 @@ class UgolApp extends StatelessWidget {
         ],
         supportedLocales: S.delegate.supportedLocales,
         darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: AppColors.color111216,
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: Colors.white,
+                displayColor: Colors.white,
+              ),
+          bottomNavigationBarTheme: themeService.bottomNavigationBarTheme(),
+        ),
+        theme: ThemeData(
           brightness: Brightness.dark,
           scaffoldBackgroundColor: AppColors.color111216,
           textTheme: Theme.of(context).textTheme.apply(

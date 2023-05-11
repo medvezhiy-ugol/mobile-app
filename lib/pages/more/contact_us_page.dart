@@ -7,7 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactUsPage extends StatelessWidget {
   ContactUsPage({super.key});
 
-  final TextEditingController _textMailSubjectController = TextEditingController();
+  final TextEditingController _textMailSubjectController =
+      TextEditingController();
   final TextEditingController _textMailBodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,6 @@ class ContactUsPage extends StatelessWidget {
                         contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                       ),
-                      
                     ),
                   ),
                   const SizedBox(
@@ -101,7 +101,8 @@ class ContactUsPage extends StatelessWidget {
                       controller: _textMailBodyController,
                       textCapitalization: TextCapitalization.sentences,
                       maxLines: 5,
-                      style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: 14),
                       decoration: const InputDecoration(
                         isCollapsed: true,
                         contentPadding: EdgeInsets.all(10),
@@ -124,27 +125,24 @@ class ContactUsPage extends StatelessWidget {
                             query:
                                 'subject=${_textMailSubjectController.text}&body=${_textMailBodyController.text}',
                           );
-                          print(mail);
-                          if (await canLaunchUrl(mail)) {
-                            launchUrl(mail);
-                          } else {
-                            print('Could not send mail.');
-                          }
+                          launchUrl(mail);
                         },
                         child: Container(
                           height: 50,
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                           child: Center(
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text(
-                                    'Отправить',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16),
-                                  )
-                                ]),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  'Отправить',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

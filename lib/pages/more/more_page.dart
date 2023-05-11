@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
@@ -57,7 +58,7 @@ class MorePage extends StatelessWidget {
                   height: 7,
                 ),
                 (state is MoreRegisteredState)
-                    ? _buildOurSocials()
+                    ? _buildOurSocials(context)
                     : Container()
               ],
             ),
@@ -137,7 +138,7 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Container _buildOurSocials() {
+  Container _buildOurSocials(BuildContext context) {
     return Container(
       color: AppColors.color191A1F,
       padding: const EdgeInsets.all(15),
@@ -162,29 +163,50 @@ class MorePage extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        var url = Uri.parse('https://vk.com/medvezh_ugol');
+                        try {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } catch (e) {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.platformDefault,
+                          );
+                        }
+                      },
                       customBorder: const CircleBorder(),
                       child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: const Icon(SocialIcons.vk)),
+                        padding: const EdgeInsets.all(10),
+                        child: const Icon(
+                          SocialIcons.vk,
+                        ),
+                      ),
                     ),
                   ),
-                  Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        customBorder: const CircleBorder(),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: const Icon(SocialIcons.youtube)),
-                      )),
-                  const SizedBox(
-                    width: 4,
+                  SizedBox(
+                    width: 5,
                   ),
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        var url = Uri.parse(
+                            'https://www.instagram.com/medvezh.ugol/');
+                        try {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } catch (e) {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.platformDefault,
+                          );
+                        }
+                      },
                       customBorder: const CircleBorder(),
                       child: Container(
                         padding: const EdgeInsets.all(10),
@@ -214,7 +236,11 @@ class MorePage extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      context.push(Routes.myOrders);
+                      // context.push(Routes.myOrders);
+                      _showSnackBar(
+                        context: context,
+                        text: 'Данный раздел в разработке',
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.all(18),
@@ -507,7 +533,7 @@ class MorePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              (authService.phone == '') ? 'phone': authService.phone ,
+              (authService.phone == '') ? 'phone' : authService.phone,
               style: TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
             SizedBox(
@@ -522,5 +548,15 @@ class MorePage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _showSnackBar({required BuildContext context, required String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
+      behavior: SnackBarBehavior.floating,
+    ));
   }
 }
