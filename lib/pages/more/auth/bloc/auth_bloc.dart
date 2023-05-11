@@ -17,8 +17,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is AuthHideButtonEvent) {
         emit(AuthDefaultState());
       } else if (event is AuthSendCodeEvent) {
-        await authService.getVerificationCode(phone: event.phone);
-        emit(AuthDefaultState());
+        String response = 'error';
+        response = await authService.getVerificationCode(phone: event.phone);
+        if (response.contains('Выполнено')) {
+          emit(AuthSuccessState());
+        } else {
+          emit(AuthErrorState(error: response));
+        }
       }
     });
   }

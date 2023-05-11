@@ -35,7 +35,16 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
     return BlocProvider(
       create: (context) => CodeAuthBloc(authService: authService),
       child: Scaffold(
-        body: BlocBuilder<CodeAuthBloc, CodeAuthState>(
+        resizeToAvoidBottomInset: false,
+        body: BlocConsumer<CodeAuthBloc, CodeAuthState>(
+          listener: (context, state) {
+            if (state is CodeAuthErrorState) {
+              _showSnackBar(context: context, text: state.error);
+              CodeAuthPage.codeController!.clear();
+            } else if (state is CodeAuthSuccessState) {
+              context.go(Routes.more);
+            }
+          },
           builder: (context, state) {
             Size screenSize = MediaQuery.of(context).size;
             return SafeArea(
@@ -96,7 +105,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                     SizedBox(
                       height: screenSize.height * 0.2,
                     ),
-                    _buildCodeTextField(context),
+                    _buildCodeTextField(context, state),
                     const SizedBox(
                       height: 28,
                     ),
@@ -112,9 +121,6 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                                     code: CodeAuthPage.codeController!.text,
                                   ),
                                 );
-                            if (authService.token != '') {
-                              context.go(Routes.more);
-                            }
                           },
                           child: const Text(
                             'Войти',
@@ -135,7 +141,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
     );
   }
 
-  Widget _buildCodeTextField(BuildContext context) {
+  Widget _buildCodeTextField(BuildContext context, CodeAuthState state) {
     const length = 4;
     const Color borderColor = AppColors.color222222;
 
@@ -165,6 +171,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
               border: Border.all(color: borderColor),
             ),
           ),
+          forceErrorState: (state is CodeAuthErrorState),
           onChanged: (value) {
             if (CodeAuthPage.codeController!.text.length == 4) {
               context.read<CodeAuthBloc>().add(CodeAuthShowButtonEvent());
@@ -181,5 +188,15 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
         ),
       ),
     );
+  }
+
+  _showSnackBar({required BuildContext context, required String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
+      behavior: SnackBarBehavior.floating,
+    ));
   }
 }

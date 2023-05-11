@@ -39,9 +39,19 @@ class _AuthPageState extends State<AuthPage> {
       create: (context) => AuthBloc(authService: authService),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: BlocBuilder<AuthBloc, AuthState>(
+        body: BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthErrorState) {
+              _showSnackBar(context: context, text: state.error);
+              AuthPage.phoneController!.clear();
+            } else if (state is AuthSuccessState) {
+              context.push(Routes.moreAuthCode);
+            }
+          },
           builder: (context, state) {
-            if (state is AuthDefaultState || state is AuthWithButtonState) {
+            if (state is AuthDefaultState ||
+                state is AuthWithButtonState ||
+                state is AuthErrorState) {
               return _buildFirstStageAuthBody(
                 context: context,
                 state: state,
@@ -104,10 +114,9 @@ class _AuthPageState extends State<AuthPage> {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 0.0),
                       child: PrimaryButton(
                         onTap: () {
-                          context.push(Routes.moreAuthCode);
                           context.read<AuthBloc>().add(
                                 AuthSendCodeEvent(
                                   phone: AuthPage.phoneController!.text,
@@ -173,8 +182,13 @@ class _AuthPageState extends State<AuthPage> {
         cursorHeight: 26,
         cursorColor: AppColors.colorFF9900,
         keyboardType: TextInputType.phone,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: InputBorder.none,
+          hintText: '+7 (###) ###-##-##',
+          hintStyle: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 24,
+              color: Colors.white.withOpacity(0.3)),
         ),
         style: const TextStyle(
           fontWeight: FontWeight.w600,
@@ -182,8 +196,9 @@ class _AuthPageState extends State<AuthPage> {
         ),
         inputFormatters: [
           MaskTextInputFormatter(
-            mask: '+7 (###) ###-##-##',
-          )
+              mask: '+7 (###) ###-##-##',
+              filter: {"#": RegExp(r'[0-9]')},
+              type: MaskAutoCompletionType.lazy)
         ],
         onChanged: (value) {
           if (value.length == 18) {
@@ -194,5 +209,15 @@ class _AuthPageState extends State<AuthPage> {
         },
       ),
     );
+  }
+
+  _showSnackBar({required BuildContext context, required String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
+      behavior: SnackBarBehavior.floating,
+    ));
   }
 }

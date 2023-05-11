@@ -19,9 +19,9 @@ class CodeAuthBloc extends Bloc<CodeAuthEvent, CodeAuthState> {
           code: event.code,
         );
         if (response.contains('Token: ')) {
-        // emit(SignInSuccess(token: response));
+        emit(CodeAuthSuccessState());
       } else {
-        // emit(SignInError(error: response));
+        emit(CodeAuthErrorState(error: response));
       }
         emit(CodeAuthDefaultState());
       }

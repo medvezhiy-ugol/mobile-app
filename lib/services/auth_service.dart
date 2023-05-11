@@ -27,7 +27,10 @@ class AuthService {
     phoneNumber = "+$phoneNumber";
 
     final data = await APIService.postRequest(
-        request: 'v1/login', data: {'phone': phoneNumber});
+      serverIndex: 1,
+      request: 'v1/login',
+      data: {'phone': phoneNumber},
+    );
     if (data != null) {
       return data.toString();
     } else {
@@ -45,6 +48,7 @@ class AuthService {
     phoneNumber = "+$phoneNumber";
     try {
       final data = await APIService.postRequest(
+        serverIndex: 1,
         request: 'v1/check/code',
         data: {
           'phone': phoneNumber,
@@ -59,9 +63,9 @@ class AuthService {
         return 'Token: ${data['access_token']}';
       }
     } catch (e) {
-      return 'Такого пользователя не существует или введен неправильный пароль.';
+      return 'Ошибка. Введите корректный код из смс и повторите попытку.';
     }
-    return 'Такого пользователя не существует или введен неправильный пароль.';
+    return 'Ошибка. Введите корректный код из смс и повторите попытку.';
   }
 
   signOut() async {

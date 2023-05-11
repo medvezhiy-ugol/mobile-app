@@ -13,4 +13,4 @@ class AuthErrorState extends AuthState {
   AuthErrorState({required this.error});
 }
 
-class AuthSendCodeState extends AuthState {}
+class AuthSuccessState extends AuthState {}
