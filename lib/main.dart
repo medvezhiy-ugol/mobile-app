@@ -168,7 +168,7 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: const LoaltyCardPage(),
+                    child: LoaltyCardPage(),
                   ),
                 ),
                 GoRoute(

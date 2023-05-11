@@ -34,11 +34,15 @@ class APIService {
     required String request,
     Map<String, String> queryParameters = const {},
     int serverIndex = 0,
+    Map<String, String> headers = const {},
   }) async {
     try {
       var response = await Dio().get(
         '${url[serverIndex]}/$request',
         queryParameters: queryParameters,
+        options: Options(
+          headers: headers,
+        ),
       );
       debugPrint(response.data.toString());
       if (response.statusCode == 200) {

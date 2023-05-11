@@ -24,6 +24,8 @@ abstract class A {
       'assets/images/map_page/point.png';
   static const String assetsHomePageLoyaltyCardBackgroundImg =
       'assets/images/home_page/loyalty_card.png';
+  static const String assetsHomePageUnAuthLoyaltyCardBackgroundImg =
+      'assets/images/home_page/unauth_loyalty_card.png';
   static const String assetsHomePageLoyaltyCardBearIconImg =
       'assets/images/home_page/loyalty_card_bear_icon.png';
   static const String assetsHomePagePromoImg =
