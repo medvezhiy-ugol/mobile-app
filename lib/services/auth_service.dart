@@ -18,7 +18,7 @@ class AuthService {
     _phone = prefs.getString('phone') ?? '';
   }
 
-  Future<void> getVerificationCode({
+  Future<String> getVerificationCode({
     required String phone,
   }) async {
     String phoneNumber = phone;
@@ -29,7 +29,9 @@ class AuthService {
     final data = await APIService.postRequest(
         request: 'v1/login', data: {'phone': phoneNumber});
     if (data != null) {
-      print('getVerificationCode');
+      return data.toString();
+    } else {
+      return 'Ошибка. Введите корректный телефонный номер и повторите попытку.';
     }
   }
 

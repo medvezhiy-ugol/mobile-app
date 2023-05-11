@@ -7,12 +7,12 @@ class MenuService {
   Future<List<MenuCategory>> getFullMenu() async {
     final List<ExternalMenu> externalMenus = await _getAllMenus();
     final response = await APIService.postRequest(
-      request: 'v1/menu/iiko/by_id/${externalMenus[3].id}',
+      request: 'v1/menu/iiko/by_id/${externalMenus[0].id}',
     );
 
     if (response != null) {
       final List<MenuCategory> categories = [];
-      for (final menu in response['itemCategories']) {
+      for (var menu in response['itemCategories']) {
         categories.add(MenuCategory.fromJson(menu));
       }
 

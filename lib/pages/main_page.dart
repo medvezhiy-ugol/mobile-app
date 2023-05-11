@@ -54,50 +54,56 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: SizedBox(
         height: MainPage.navBarHeight,
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: const Padding(
-                padding: EdgeInsets.only(bottom: 6),
-                child: Icon(BottomBarIcons.main),
-              ),
-              label: S.current.bottomBarMainText,
-            ), //'Главная'
-            BottomNavigationBarItem(
-              icon: const Padding(
-                padding: EdgeInsets.only(bottom: 6),
-                child: Icon(BottomBarIcons.stock),
-              ),
-              label: S.current.bottomBarStockText,
-            ), //'Акции'
-            BottomNavigationBarItem(
-              icon: const Padding(
-                padding: EdgeInsets.only(bottom: 6),
-                child: Icon(BottomBarIcons.menu),
-              ),
-              label: S.current.bottomBarMenuText,
-            ), //'Меню'
-            BottomNavigationBarItem(
-              icon: const Padding(
-                padding: EdgeInsets.only(bottom: 6),
-                child: Icon(
-                  BottomBarIcons.map,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+          ),
+          child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: const Padding(
+                  padding: EdgeInsets.only(bottom: 6),
+                  child: Icon(BottomBarIcons.main),
                 ),
-              ),
-              label: S.current.bottomBarMapText,
-            ), //'Карта'
-            BottomNavigationBarItem(
-              icon: const Padding(
-                padding: EdgeInsets.only(bottom: 6),
-                child: Icon(
-                  BottomBarIcons.more,
+                label: S.current.bottomBarMainText,
+              ), //'Главная'
+              BottomNavigationBarItem(
+                icon: const Padding(
+                  padding: EdgeInsets.only(bottom: 6),
+                  child: Icon(BottomBarIcons.stock),
                 ),
-              ),
-              label: S.current.bottomBarMoreText,
-            ) // 'Еще'
-          ],
-          onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),
-          currentIndex: _currentIndex,
+                label: S.current.bottomBarStockText,
+              ), //'Акции'
+              BottomNavigationBarItem(
+                icon: const Padding(
+                  padding: EdgeInsets.only(bottom: 6),
+                  child: Icon(BottomBarIcons.menu),
+                ),
+                label: S.current.bottomBarMenuText,
+              ), //'Меню'
+              BottomNavigationBarItem(
+                icon: const Padding(
+                  padding: EdgeInsets.only(bottom: 6),
+                  child: Icon(
+                    BottomBarIcons.map,
+                  ),
+                ),
+                label: S.current.bottomBarMapText,
+              ), //'Карта'
+              BottomNavigationBarItem(
+                icon: const Padding(
+                  padding: EdgeInsets.only(bottom: 6),
+                  child: Icon(
+                    BottomBarIcons.more,
+                  ),
+                ),
+                label: S.current.bottomBarMoreText,
+              ) // 'Еще'
+            ],
+            onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),
+            currentIndex: _currentIndex,
+          ),
         ),
       ),
     );

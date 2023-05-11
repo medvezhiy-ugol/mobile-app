@@ -17,7 +17,7 @@ class MenuCategory {
   // String description;
   // String buttonImageUrl;
   // String? headerImageUrl;
-  final String iikoGroupId;
+  final String? iikoGroupId;
 
   factory MenuCategory.fromJson(Map<String, dynamic> json) => MenuCategory(
         items: List<MenuProduct>.from(
@@ -137,7 +137,7 @@ class ItemSize {
   String? sizeCode;
   String? sizeName;
   bool isDefault;
-  int portionWeightGrams;
+  dynamic portionWeightGrams;
   String? sizeId;
   NutritionPerHundredGrams nutritionPerHundredGrams;
   String? buttonImageUrl;
@@ -303,7 +303,7 @@ class MenuPrice {
   });
 
   String organizationId;
-  double price;
+  int price;
 
   factory MenuPrice.fromJson(Map<String, dynamic> json) => MenuPrice(
         organizationId: json["organizationId"],
