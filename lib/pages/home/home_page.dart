@@ -1,140 +1,175 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/stock/slot_machine_widget/slot_machine_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../common_setup/routes.dart';
+import '../../services/auth_service.dart';
+import '../../services/loalty_service.dart';
 import '../../services/theme_service.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
+import 'bloc/home_bloc.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final loyaltyCardService = Injector().get<LoyaltyCardService>();
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // final width = MediaQuery.of(context).size.width;
-
-    return Theme(
-      data: Theme.of(context).copyWith(
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: AppColors.color191A1F,
-        ),
-      ),
-      child: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              children: [
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: const [
-                //         SizedBox(height: 32,),
-                //         Text(
-                //           'Адрес и время доставки',
-                //           style: TextStyle(
-                //             fontSize: 10,
-                //             fontWeight: FontWeight.w400,
-                //             color: AppColors.color808080,
-                //           ),
-                //         ),
-                //         Text(
-                //           'Республиканская ул. 68',
-                //           style: TextStyle(
-                //             fontSize: 16,
-                //             fontWeight: FontWeight.w600,
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                // SizedBox(
-                //   height: 160,
-                //   child: ListView.separated(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: 3,
-                //     itemBuilder: (BuildContext context, int index) {
-                //       return Material(
-                //         color: Colors.transparent,
-                //         child: InkWell(
-                //           onTap: () => context.push(Routes.detailStock),
-                //           child: SizedBox(
-                //             width: 300,
-                //             height: 150,
-                //             child: Image.asset(
-                //               A.assetsHomePagePromoImg,
-                //               fit: BoxFit.fill,
-                //             ),
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //     separatorBuilder: (BuildContext context, int index) =>
-                //         const SizedBox(
-                //       width: 5,
-                //     ),
-                //   ),
-                // ),
-                const SizedBox(
-                  height: 30,
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => HomeBloc(loyaltyCardService: loyaltyCardService),
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColors.color191A1F,
                 ),
-                // _buildOrderStatusTimerWidget(context),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                // _buildOrderStatusWidget(),
-                // const SizedBox(
-                //   height: 32,
-                // ),
-                _buildLoyaltyCard(height: 180, context: context),
-                const SizedBox(
-                  height: 28,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Популярно',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.colorE3E3E3,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        context.go(Routes.menu);
-                      },
-                      child: Text(
-                        'Все',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.color808080,
-                          decoration: TextDecoration.underline,
+              ),
+              child: SafeArea(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Column(
+                      children: [
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: const [
+                        //         SizedBox(height: 32,),
+                        //         Text(
+                        //           'Адрес и время доставки',
+                        //           style: TextStyle(
+                        //             fontSize: 10,
+                        //             fontWeight: FontWeight.w400,
+                        //             color: AppColors.color808080,
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           'Республиканская ул. 68',
+                        //           style: TextStyle(
+                        //             fontSize: 16,
+                        //             fontWeight: FontWeight.w600,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // SizedBox(
+                        //   height: 160,
+                        //   child: ListView.separated(
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemCount: 3,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return Material(
+                        //         color: Colors.transparent,
+                        //         child: InkWell(
+                        //           onTap: () => context.push(Routes.detailStock),
+                        //           child: SizedBox(
+                        //             width: 300,
+                        //             height: 150,
+                        //             child: Image.asset(
+                        //               A.assetsHomePagePromoImg,
+                        //               fit: BoxFit.fill,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       );
+                        //     },
+                        //     separatorBuilder: (BuildContext context, int index) =>
+                        //         const SizedBox(
+                        //       width: 5,
+                        //     ),
+                        //   ),
+                        // ),
+                        const SizedBox(
+                          height: 30,
                         ),
-                      ),
+                        // _buildOrderStatusTimerWidget(context),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // _buildOrderStatusWidget(),
+                        // const SizedBox(
+                        //   height: 32,
+                        // ),
+                        _switchLoyaltyCardStates(
+                          height: 180,
+                          context: context,
+                          state: state,
+                        ),
+                        const SizedBox(
+                          height: 28,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Популярно',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.colorE3E3E3,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                context.go(Routes.menu);
+                              },
+                              child: Text(
+                                'Все',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.color808080,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        _buildPopularSegmentWidget(),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
-                _buildPopularSegmentWidget(),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
+  }
+
+  Widget _switchLoyaltyCardStates({
+    required double height,
+    required BuildContext context,
+    required HomeState state,
+  }) {
+    if (state is HomeAuthState) {
+      return _buildLoyaltyCard(context: context, height: 180, state: state);
+    } else if (state is HomeUnAuthState) {
+      return _buildUnAuthLoyaltyCard(height: 180, context: context);
+    } else if (state is HomeLoadingLoyaltyCardState) {
+      return _buildLoadingLoyaltyCard(height: 180);
+    }
+    return Container();
   }
 
   Widget _buildPopularSegmentWidget() {
@@ -281,8 +316,11 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildLoyaltyCard(
-      {required double height, required BuildContext context}) {
+  Widget _buildLoyaltyCard({
+    required double height,
+    required BuildContext context,
+    required HomeAuthState state,
+  }) {
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -317,8 +355,8 @@ class HomePage extends StatelessWidget {
               Align(
                 alignment: const Alignment(0.6, -0.35),
                 child: Container(
-                  child: const Text(
-                    'ЕГОР',
+                  child: Text(
+                    (state.name != '') ? '${state.name}' : 'User',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 40,
@@ -330,8 +368,8 @@ class HomePage extends StatelessWidget {
               Align(
                 alignment: const Alignment(0.25, 0.1),
                 child: Container(
-                  child: const Text(
-                    '9834',
+                  child: Text(
+                    '${state.cardBalance.toString()}',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 15,
@@ -340,6 +378,92 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUnAuthLoyaltyCard(
+      {double height = 180, required BuildContext context}) {
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        image: const DecorationImage(
+          image: AssetImage(A.assetsHomePageUnAuthLoyaltyCardBackgroundImg),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () => context.push(Routes.moreAuth),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingLoyaltyCard({
+    required double height,
+  }) {
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        image: const DecorationImage(
+          image: AssetImage(A.assetsHomePageLoyaltyCardBackgroundImg),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          child: Stack(
+            children: <Widget>[
+              Align(
+                alignment: const Alignment(0.70, -0.8),
+                child: Container(
+                  child: const Text(
+                    'Карта лояльности',
+                    style: TextStyle(
+                      fontFamily: 'Unbounded',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: const Alignment(0.6, -0.35),
+                child: Shimmer.fromColors(
+                  baseColor: AppColors.color4C459E,
+                  highlightColor: AppColors.color66788E.withOpacity(0.3),
+                  child: Container(
+                    height: 45,
+                    width: 130,
+                    decoration: BoxDecoration(
+                        color: AppColors.color4C459E,
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                ),
+              ),
+              Align(
+                  alignment: const Alignment(0.25, 0.15),
+                  child: Shimmer.fromColors(
+                    baseColor: AppColors.color4C459E,
+                    highlightColor: AppColors.color66788E.withOpacity(0.3),
+                    child: Container(
+                      height: 20,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          color: AppColors.color4C459E,
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  )),
             ],
           ),
         ),

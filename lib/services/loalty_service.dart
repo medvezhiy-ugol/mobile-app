@@ -10,13 +10,16 @@ class LoyaltyCardService {
   final SharedPreferences prefs;
 
   String _cardId = '';
+  String _userName = '';
 
   get cardId => _cardId;
+  get userName => _userName;
 
   LoyaltyCardService({
     required this.prefs,
   }) {
-    _cardId = prefs.getString('cardId') ?? '';
+    _cardId = prefs.getString('user_card_id') ?? '';
+    _userName = prefs.getString('user_name') ?? '';
   }
 
   Future<LoaltyCard?> getUserCard() async {
@@ -26,9 +29,9 @@ class LoyaltyCardService {
       headers: {"Authorization": "Bearer ${authService.token}"},
     );
     if (data != null) {
-      var loaltyCard = LoaltyCard.fromJson(data);
-      _cardId = loaltyCard.id;
-      return loaltyCard;
+      var loyaltyCard = LoaltyCard.fromJson(data);
+      _cardId = loyaltyCard.id;
+      return loyaltyCard;
     } else {
       return null;
     }

@@ -14,9 +14,7 @@ class ModuleContainer {
     injector.map<MenuService>((i) => MenuService(), isSingleton: true);
     injector.map<AuthService>((i) => AuthService(prefs: preferences),
         isSingleton: true);
-    injector.map<LoaltyCardService>(
-        (i) => LoaltyCardService(prefs: preferences),
-        isSingleton: true);
+        injector.map<LoyaltyCardService>((i) => LoyaltyCardService(prefs: preferences), isSingleton: true);
     return injector;
   }
 }

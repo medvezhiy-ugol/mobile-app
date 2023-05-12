@@ -28,7 +28,6 @@ class LoyaltyBloc extends Bloc<LoyaltyEvent, LoyaltyState> {
           _initLoaltyCard();
           emit(LoyaltyLoadingState());
         } else if (event is LoyaltyLoadedEvent) {
-          await Future.delayed(const Duration(seconds: 5), () {});
           emit(LoyaltyLoadedState(
             cardBalance: cardBalance,
             cardId: cardId,

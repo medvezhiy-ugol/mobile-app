@@ -452,7 +452,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                 alignment: const Alignment(0.6, -0.35),
                 child: Container(
                   child: Text(
-                    '${state.name}',
+                    (state.name != '') ? '${state.name}' : 'User',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 40,
@@ -465,7 +465,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                 alignment: const Alignment(0.25, 0.1),
                 child: Container(
                   child: Text(
-                    '${state.cardId.substring(state.cardId.length - 4)}',
+                    '${state.cardBalance}',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 15,
