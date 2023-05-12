@@ -34,109 +34,111 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10.0,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CloseCircleButton(
-                          onTap: () {
-                            context.pop();
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 60,
-                    ),
-                    Text(
-                      'Имя',
-                      style: TextStyle(
-                        color: AppColors.color808080,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CloseCircleButton(
+                            onTap: () {
+                              context.pop();
+                            },
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 2,
-                    ),
-                    _buildTextField(
-                      controller: _textNameController,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Text(
-                      'Дата рождения',
-                      style: TextStyle(
-                        color: AppColors.color808080,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                      SizedBox(
+                        height: 60,
                       ),
-                    ),
-                    SizedBox(
-                      height: 2,
-                    ),
-                    _buildTextField(
-                      controller: _textBirthController,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Text(
-                      'Пол',
-                      style: TextStyle(
-                        color: AppColors.color808080,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2,
-                    ),
-                    _buildTextField(
-                      controller: _textSexController,
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    PrimaryButton(
-                      onTap: () {
-                         _showSnackBar(
-                        context: context,
-                        text: 'В данный момент профиль в разработке, возможен только выход из аккаунта',
-                      );
-                      },
-                      child: Text(
-                        'Сохранить',
+                      Text(
+                        'Имя',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          color: AppColors.color808080,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    PrimaryButton.icon(
-                      onTap: () {
-                        context.read<ProfileBloc>().add(
-                              ProfileLogoutEvent(),
-                            );
-                        context.pop();
-                      },
-                      icon: Icons.exit_to_app_rounded,
-                      label: Text(
-                        'Выйти',
+                      SizedBox(
+                        height: 2,
+                      ),
+                      _buildTextField(
+                        controller: _textNameController,
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Text(
+                        'Дата рождения',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          color: AppColors.color808080,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 2,
+                      ),
+                      _buildTextField(
+                        controller: _textBirthController,
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Text(
+                        'Пол',
+                        style: TextStyle(
+                          color: AppColors.color808080,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      _buildTextField(
+                        controller: _textSexController,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      PrimaryButton(
+                        onTap: () {
+                           _showSnackBar(
+                          context: context,
+                          text: 'В данный момент профиль в разработке, возможен только выход из аккаунта',
+                        );
+                        },
+                        child: Text(
+                          'Сохранить',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      PrimaryButton.icon(
+                        onTap: () {
+                          context.read<ProfileBloc>().add(
+                                ProfileLogoutEvent(),
+                              );
+                          context.pop();
+                        },
+                        icon: Icons.exit_to_app_rounded,
+                        label: Text(
+                          'Выйти',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
