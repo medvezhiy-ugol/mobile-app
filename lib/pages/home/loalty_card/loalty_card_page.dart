@@ -166,7 +166,7 @@ class LoaltyCardPage extends StatelessWidget {
                 alignment: const Alignment(0.6, -0.35),
                 child: Container(
                   child: const Text(
-                    'ЕГОР',
+                    'USER',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 40,

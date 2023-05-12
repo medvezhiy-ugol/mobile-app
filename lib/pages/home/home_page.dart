@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Популярно',
                       style: TextStyle(
                         fontSize: 18,
@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         context.go(Routes.menu);
                       },
-                      child: Text(
+                      child: const Text(
                         'Все',
                         style: TextStyle(
                           fontSize: 18,
@@ -318,7 +318,7 @@ class HomePage extends StatelessWidget {
                 alignment: const Alignment(0.6, -0.35),
                 child: Container(
                   child: const Text(
-                    'ЕГОР',
+                    'USER',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 40,
