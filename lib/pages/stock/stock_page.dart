@@ -41,18 +41,30 @@ class StockPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+            
             const SizedBox(
-              height: 10,
+              height: 250,
             ),
-            _buildStockItem(context, '1'),
-            const SizedBox(
-              height: 8,
+            const Center(
+              child: Text(
+                'Акций пока нет', //'Акции и комбо',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: AppFonts.unbounded,
+                  color: AppColors.color808080,
+                ),
+              ),
             ),
-            _buildStockItem(context, '2'),
-            const SizedBox(
-              height: 8,
-            ),
-            _buildStockItem(context, '3'),
+            // _buildStockItem(context, '1'),
+            // const SizedBox(
+            //   height: 8,
+            // ),
+            // _buildStockItem(context, '2'),
+            // const SizedBox(
+            //   height: 8,
+            // ),
+            // _buildStockItem(context, '3'),
           ],
         ),
       ),
@@ -84,7 +96,7 @@ class StockPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
+              const Align(
                 alignment: Alignment.center,
                 child: Text(
                   'Результаты\nрозыгрыша',
@@ -132,12 +144,12 @@ class StockPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       formattedDateTime,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
@@ -149,7 +161,7 @@ class StockPage extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Row(
@@ -158,7 +170,7 @@ class StockPage extends StatelessWidget {
             Expanded(
               child: PrimaryButton(
                 onTap: () => context.push(Routes.slotHistory),
-                child: Text(
+                child: const Text(
                   'История',
                   style: TextStyle(
                     fontSize: 14,
@@ -167,11 +179,11 @@ class StockPage extends StatelessWidget {
                 ),
               ),
             ),
-            VerticalDivider(width: 5.0),
+            const VerticalDivider(width: 5.0),
             Expanded(
               child: PrimaryButton(
                 onTap: () => context.push(Routes.slotDetail),
-                child: Text(
+                child: const Text(
                   'Предыдущая лотерея',
                   style: TextStyle(
                     fontSize: 14,

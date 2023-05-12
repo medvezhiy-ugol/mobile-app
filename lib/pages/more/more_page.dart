@@ -12,7 +12,6 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
-import 'auth/auth_page.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
@@ -186,7 +185,7 @@ class MorePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Material(
@@ -239,7 +238,7 @@ class MorePage extends StatelessWidget {
                       // context.push(Routes.myOrders);
                       _showSnackBar(
                         context: context,
-                        text: 'Данный раздел в разработке',
+                        text: 'Данный раздел пока недоступен',
                       );
                     },
                     child: Container(
@@ -405,7 +404,12 @@ class MorePage extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  _showSnackBar(
+                        context: context,
+                        text: 'Данный раздел пока недоступен',
+                      );
+                },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
                   child: Row(
@@ -450,7 +454,7 @@ class MorePage extends StatelessWidget {
                 onTap: () {
                    _showSnackBar(
                         context: context,
-                        text: 'Данный раздел в разработке',
+                        text: 'Данный раздел пока недоступен',
                       );
                 },
                 child: Container(
@@ -495,7 +499,7 @@ class MorePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'User',
               style: TextStyle(
                   color: Colors.white,
@@ -539,12 +543,12 @@ class MorePage extends StatelessWidget {
           children: [
             Text(
               (authService.phone == '') ? 'phone' : authService.phone,
-              style: TextStyle(color: AppColors.color808080, fontSize: 14),
+              style: const TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
-            SizedBox(
+            const SizedBox(
               width: 17,
             ),
-            Text('youremail@mail.com',
+            const Text('youremail@mail.com',
                 style: TextStyle(
                   color: AppColors.color808080,
                   fontSize: 14,
