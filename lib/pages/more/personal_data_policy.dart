@@ -7,24 +7,24 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import '../../utils/app_assets.dart';
 
-class TermsOfServicePage extends StatefulWidget {
-  const TermsOfServicePage({super.key});
+class PersonalDataPolicyPage extends StatefulWidget {
+  const PersonalDataPolicyPage({super.key});
 
   @override
-  State<TermsOfServicePage> createState() => _TermsOfServicePageState();
+  State<PersonalDataPolicyPage> createState() => _PersonalDataPolicyPageState();
 }
 
-class _TermsOfServicePageState extends State<TermsOfServicePage> {
-  late Future<String> assetsTermsOfUse;
+class _PersonalDataPolicyPageState extends State<PersonalDataPolicyPage> {
+  late Future<String> assetsPersonalDataPolicy;
 
   @override
   void initState() {
-    assetsTermsOfUse = _loadTextFile();
+    assetsPersonalDataPolicy = _loadTextFile();
     super.initState();
   }
 
   Future<String> _loadTextFile() async {
-    return await rootBundle.loadString(A.assetsTermsOfUse);
+    return await rootBundle.loadString(A.assetsPersonalDataPolicy);
   }
 
   @override
@@ -56,7 +56,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                     height: 27,
                   ),
                   const Text(
-                    'Пользовательское положение',
+                    'Политика об обработке персональных данных',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -67,7 +67,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                     height: 32,
                   ),
                   FutureBuilder<String>(
-                    future: assetsTermsOfUse,
+                    future: assetsPersonalDataPolicy,
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {

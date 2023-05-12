@@ -30,10 +30,10 @@ class LoaltyCard {
     bool shouldReceivePromoActionsInfo;
     bool shouldReceiveLoyaltyInfo;
     bool shouldReceiveOrderStatusInfo;
-    DateTime personalDataConsentFrom;
-    DateTime personalDataConsentTo;
-    dynamic personalDataProcessingFrom;
-    dynamic personalDataProcessingTo;
+    // DateTime? personalDataConsentFrom;
+    // DateTime personalDataConsentTo;
+    // dynamic personalDataProcessingFrom;
+    // dynamic personalDataProcessingTo;
     bool isDeleted;
 
     LoaltyCard({
@@ -57,10 +57,10 @@ class LoaltyCard {
         required this.shouldReceivePromoActionsInfo,
         required this.shouldReceiveLoyaltyInfo,
         required this.shouldReceiveOrderStatusInfo,
-        required this.personalDataConsentFrom,
-        required this.personalDataConsentTo,
-        this.personalDataProcessingFrom,
-        this.personalDataProcessingTo,
+        // required this.personalDataConsentFrom,
+        // required this.personalDataConsentTo,
+        // this.personalDataProcessingFrom,
+        // this.personalDataProcessingTo,
         required this.isDeleted,
     });
 
@@ -85,10 +85,10 @@ class LoaltyCard {
         shouldReceivePromoActionsInfo: json["shouldReceivePromoActionsInfo"],
         shouldReceiveLoyaltyInfo: json["shouldReceiveLoyaltyInfo"],
         shouldReceiveOrderStatusInfo: json["shouldReceiveOrderStatusInfo"],
-        personalDataConsentFrom: DateTime.parse(json["personalDataConsentFrom"]),
-        personalDataConsentTo: DateTime.parse(json["personalDataConsentTo"]),
-        personalDataProcessingFrom: json["personalDataProcessingFrom"],
-        personalDataProcessingTo: json["personalDataProcessingTo"],
+        // personalDataConsentFrom: DateTime.parse(json["personalDataConsentFrom"]),
+        // personalDataConsentTo: DateTime.parse(json["personalDataConsentTo"]),
+        // personalDataProcessingFrom: json["personalDataProcessingFrom"],
+        // personalDataProcessingTo: json["personalDataProcessingTo"],
         isDeleted: json["isDeleted"],
     );
 
@@ -113,10 +113,10 @@ class LoaltyCard {
         "shouldReceivePromoActionsInfo": shouldReceivePromoActionsInfo,
         "shouldReceiveLoyaltyInfo": shouldReceiveLoyaltyInfo,
         "shouldReceiveOrderStatusInfo": shouldReceiveOrderStatusInfo,
-        "personalDataConsentFrom": personalDataConsentFrom.toIso8601String(),
-        "personalDataConsentTo": personalDataConsentTo.toIso8601String(),
-        "personalDataProcessingFrom": personalDataProcessingFrom,
-        "personalDataProcessingTo": personalDataProcessingTo,
+        // "personalDataConsentFrom": personalDataConsentFrom.toIso8601String(),
+        // "personalDataConsentTo": personalDataConsentTo.toIso8601String(),
+        // "personalDataProcessingFrom": personalDataProcessingFrom,
+        // "personalDataProcessingTo": personalDataProcessingTo,
         "isDeleted": isDeleted,
     };
 }

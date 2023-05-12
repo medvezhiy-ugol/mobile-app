@@ -48,6 +48,7 @@ class LoyaltyBloc extends Bloc<LoyaltyEvent, LoyaltyState> {
         cardBalance = _card!.walletBalances[0].balance;
         add(LoyaltyLoadedEvent());
       }
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 }

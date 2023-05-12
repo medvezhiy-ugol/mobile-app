@@ -89,7 +89,9 @@ class AboutAppPage extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: (){},
+                      onTap: (){
+                         context.push(Routes.privacyPolicy);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Row(
@@ -116,7 +118,9 @@ class AboutAppPage extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        context.push(Routes.personalDataPolicy);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Row(

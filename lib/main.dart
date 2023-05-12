@@ -8,10 +8,12 @@ import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
+import 'package:medvezhiy_ugol/pages/more/Privacy_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/code_auth_page.dart';
 import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
+import 'package:medvezhiy_ugol/pages/more/personal_data_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/slot_detail_page.dart';
@@ -178,6 +180,24 @@ class UgolApp extends StatelessWidget {
                     context: context,
                     state: state,
                     child: const TermsOfServicePage(),
+                  ),
+                ),
+                GoRoute(
+                  path: Routes.privacyPolicy,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const PrivacyPolicyPage(),
+                  ),
+                ),
+                GoRoute(
+                  path: Routes.personalDataPolicy,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const PersonalDataPolicyPage(),
                   ),
                 ),
                 GoRoute(
