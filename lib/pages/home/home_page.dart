@@ -344,6 +344,7 @@ class HomePage extends StatelessWidget {
                 child: Container(
                   child: const Text(
                     'Карта лояльности',
+                    overflow: TextOverflow.fade,
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 12,
@@ -353,10 +354,11 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: const Alignment(0.6, -0.35),
+                alignment: const Alignment(0.53, -0.35),
                 child: Container(
                   child: Text(
                     (state.name != '') ? '${state.name}' : 'User',
+                    overflow: TextOverflow.fade,
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 35,
@@ -370,6 +372,7 @@ class HomePage extends StatelessWidget {
                 child: Container(
                   child: Text(
                     '${state.cardBalance.toString()}',
+                    overflow: TextOverflow.fade,
                     style: TextStyle(
                       fontFamily: 'Unbounded',
                       fontSize: 15,

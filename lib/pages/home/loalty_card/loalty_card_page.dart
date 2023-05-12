@@ -160,21 +160,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                                   child: InkWell(
                                     onTap: () {
                                       // context.pop();
-                                      // context.push(Routes.slotHistory);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'История в данный момент недоступна',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: AppColors.color111216,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                          behavior: SnackBarBehavior.floating,
-                                        ),
-                                      );
+                                      context.push(Routes.slotHistory);
                                     },
                                     child: Container(
                                       // margin: const EdgeInsets.symmetric(horizontal: 18),
@@ -242,17 +228,14 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
               const SizedBox(
                 height: 32,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Shimmer.fromColors(
-                  baseColor: AppColors.color191A1F,
-                  highlightColor: AppColors.color5D6377.withOpacity(0.5),
-                  child: Container(
-                    height: 180,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              Shimmer.fromColors(
+                baseColor: AppColors.color191A1F,
+                highlightColor: AppColors.color5D6377.withOpacity(0.5),
+                child: Container(
+                  height: 180,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
@@ -355,20 +338,6 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                                     onTap: () {
                                       // context.pop();
                                       context.push(Routes.slotHistory);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'История в данный момент недоступна',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: AppColors.color111216,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                          behavior: SnackBarBehavior.floating,
-                                        ),
-                                      );
                                     },
                                     child: Container(
                                       // margin: const EdgeInsets.symmetric(horizontal: 18),
@@ -431,7 +400,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            context.push(Routes.loaltyCard);
+            // context.push(Routes.loaltyCard);
           },
           child: Stack(
             children: <Widget>[
