@@ -16,10 +16,12 @@ class Routes {
 
   static const String moreAuth = '/more/auth';
   static const String moreAuthCode = '/more/auth/code';
-    static const String profilePage = '/more/profilePage';
+  static const String profilePage = '/more/profilePage';
   static const String deliveryInfo = '/more/deliveryInfo';
   static const String aboutApp = '/more/aboutApp';
   static const String termsOfService = '/more/termsOfService';
+  static const String privacyPolicy = '/more/privacy_policy';
+  static const String personalDataPolicy = '/more/personal_data_policy';
   static const String contactUs = '/more/contactUs';
   static const String slotHistory = '/stock/slotHistory';
   static const String slotDetail = '/stock/slotDetail';

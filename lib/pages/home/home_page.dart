@@ -359,7 +359,7 @@ class HomePage extends StatelessWidget {
                     (state.name != '') ? '${state.name}' : 'User',
                     style: TextStyle(
                       fontFamily: 'Unbounded',
-                      fontSize: 40,
+                      fontSize: 35,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

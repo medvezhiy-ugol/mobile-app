@@ -56,7 +56,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         add(HomeAuthEvent());
       }
     } catch (e) {
-      debugPrint('Error - get loyalty card');
+      // debugPrint('Error - get loyalty card');
     }
   }
 }

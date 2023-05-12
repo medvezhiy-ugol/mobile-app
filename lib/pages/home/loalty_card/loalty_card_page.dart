@@ -354,7 +354,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                                   child: InkWell(
                                     onTap: () {
                                       // context.pop();
-                                      // context.push(Routes.slotHistory);
+                                      context.push(Routes.slotHistory);
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(

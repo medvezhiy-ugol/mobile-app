@@ -197,7 +197,7 @@ class _ToggleSwitcherWidgetState extends State<ToggleSwitcherWidget> {
                         });
                       }
                     } catch (e) {
-                      print("err : $e");
+                      // print("err : $e");
                     }
                   },
                 );

@@ -7,24 +7,24 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import '../../utils/app_assets.dart';
 
-class TermsOfServicePage extends StatefulWidget {
-  const TermsOfServicePage({super.key});
+class PrivacyPolicyPage extends StatefulWidget {
+  const PrivacyPolicyPage({super.key});
 
   @override
-  State<TermsOfServicePage> createState() => _TermsOfServicePageState();
+  State<PrivacyPolicyPage> createState() => _PrivacyPolicyPageState();
 }
 
-class _TermsOfServicePageState extends State<TermsOfServicePage> {
-  late Future<String> assetsTermsOfUse;
+class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
+  late Future<String> assetsPrivacyPolicy;
 
   @override
   void initState() {
-    assetsTermsOfUse = _loadTextFile();
+    assetsPrivacyPolicy = _loadTextFile();
     super.initState();
   }
 
   Future<String> _loadTextFile() async {
-    return await rootBundle.loadString(A.assetsTermsOfUse);
+    return await rootBundle.loadString(A.assetsPrivacyPolicy);
   }
 
   @override
@@ -67,7 +67,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                     height: 32,
                   ),
                   FutureBuilder<String>(
-                    future: assetsTermsOfUse,
+                    future: assetsPrivacyPolicy,
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {

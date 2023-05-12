@@ -34,4 +34,11 @@ abstract class A {
       'assets/images/delivery_info_page/scooter.png';
   static const String assetsMorePageMyOrdersIcon =
       'assets/images/more_page/my_orders_icon.png';
+  static const String assetsPersonalDataPolicy =
+      'assets/documents/txt/personal_data_policy.txt';
+  static const String assetsPrivacyPolicy =
+      'assets/documents/txt/privacy_policy.txt';
+  static const String assetsTermsOfUse =
+      'assets/documents/txt/terms_of_use.txt';
+
 }
