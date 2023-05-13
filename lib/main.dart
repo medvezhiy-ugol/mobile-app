@@ -8,7 +8,7 @@ import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
-import 'package:medvezhiy_ugol/pages/more/Privacy_policy.dart';
+import 'package:medvezhiy_ugol/pages/more/privacy_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/code_auth_page.dart';
 import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
@@ -290,7 +290,7 @@ class UgolApp extends StatelessWidget {
                   buildPageWithPopupTransition<void>(
                 context: context,
                 state: state,
-                child: CodeAuthPage(),
+                child: const CodeAuthPage(),
               ),
             ),
             GoRoute(
@@ -300,7 +300,7 @@ class UgolApp extends StatelessWidget {
                   buildPageWithPopupTransition<void>(
                 context: context,
                 state: state,
-                child: ProfilePage(),
+                child: const ProfilePage(),
               ),
             ),
           ],
