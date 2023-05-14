@@ -25,7 +25,8 @@ class ViewRestaurantWidget extends StatelessWidget {
               accentColor: AppColors.color191A1F,
             ),
           ),
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
                 height: 27,

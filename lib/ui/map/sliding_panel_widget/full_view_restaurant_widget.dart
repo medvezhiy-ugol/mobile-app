@@ -29,7 +29,8 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
               accentColor: AppColors.color191A1F,
             ),
           ),
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
                 height: 27,
@@ -91,13 +92,17 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
               ),
               InfoBox(
                 title: 'Телефон',
-                child: Text(
-                  '+79231235673',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      '+79231235673',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(

@@ -118,11 +118,11 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
             animation: animation,
           );
         }
-        // MapPage.pageController.animateToPage(
-        //   1,
-        //   duration: const Duration(milliseconds: 200),
-        //   curve: Curves.bounceIn,
-        // );
+        MapPage.pageController.animateToPage(
+          1,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.bounceIn,
+        );
       },
     ),
 
@@ -145,11 +145,11 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
           animation: animation,
         );
 
-        // MapPage.pageController.animateToPage(
-        //   1,
-        //   duration: const Duration(milliseconds: 300),
-        //   curve: Curves.linear,
-        // );
+        MapPage.pageController.animateToPage(
+          1,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.linear,
+        );
       },
     ),
    ];
