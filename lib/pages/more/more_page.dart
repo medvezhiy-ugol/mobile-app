@@ -12,7 +12,7 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
-import 'bloc/more_bloc.dart';
+import 'auth/bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
   MorePage({super.key});
@@ -406,9 +406,9 @@ class MorePage extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   _showSnackBar(
-                        context: context,
-                        text: 'Данный раздел пока недоступен',
-                      );
+                    context: context,
+                    text: 'Данный раздел пока недоступен',
+                  );
                 },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
@@ -452,10 +452,10 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                   _showSnackBar(
-                        context: context,
-                        text: 'Данный раздел пока недоступен',
-                      );
+                  _showSnackBar(
+                    context: context,
+                    text: 'Данный раздел пока недоступен',
+                  );
                 },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
@@ -543,7 +543,8 @@ class MorePage extends StatelessWidget {
           children: [
             Text(
               (authService.phone == '') ? 'phone' : authService.phone,
-              style: const TextStyle(color: AppColors.color808080, fontSize: 14),
+              style:
+                  const TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
             const SizedBox(
               width: 17,

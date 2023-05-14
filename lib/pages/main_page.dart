@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/pages/menu/bloc/menu_bloc.dart';
-import 'package:medvezhiy_ugol/services/menu_service.dart';
+
 import '../generated/l10n.dart';
 
 import '../common_setup/routes.dart';
 import '../utils/icons/bottom_bar_icons.dart';
-import 'menu/bloc/menu_detail_bloc.dart';
-import 'more/bloc/more_bloc.dart';
+
+import 'more/auth/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {
   final Widget child;
