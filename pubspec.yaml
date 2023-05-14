@@ -56,6 +56,7 @@ flutter:
     - assets/images/contact_us_page/
     - assets/images/about_app_page/
     - assets/images/more_page/
+    - assets/documents/txt/
 
   fonts:
     - family: Unbounded

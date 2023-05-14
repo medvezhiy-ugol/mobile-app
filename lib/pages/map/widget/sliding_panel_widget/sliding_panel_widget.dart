@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/pages/map/widget/map_widget.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../../services/theme_service.dart';
 import '../../../../utils/app_colors.dart';
@@ -82,7 +84,7 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
                 separatorBuilder: (context, index) => SizedBox(
                   height: 10,
                 ),
-                itemCount: 3,
+                itemCount: 2,
                 shrinkWrap: true,
                 itemBuilder: (ctx, index) => listRestaurantInfo[index],
               )
@@ -92,54 +94,65 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
       ),
     );
   }
+  static const animation = MapAnimation(
+    type: MapAnimationType.smooth,
+    duration: 0.5,
+  );
 
   List<Widget> listRestaurantInfo = [
-    RestaurantInfo(
-      openInfo: 'Открыто до 23:00',
+     RestaurantInfo(
+      openInfo: 'Открыто с 10:00 до 23:00',
       distance: '1,3 км',
-      adress: 'Ул. Свободы, д. 46/3',
+      adress: 'Улица Свободы, 16',
       index: 0,
-      onTap: () {
+      onTap: () async {
+        if (MapPage.panelController.isAttached) {
+          MapPage.panelController.animatePanelToPosition(
+            0,
+            duration: const Duration(milliseconds: 300),
+          );
+          await MapWidget.mapController.moveCamera(
+            CameraUpdate.newCameraPosition(
+              CameraPosition(target: MapWidget.points[1], zoom: 15),
+            ),
+            animation: animation,
+          );
+        }
+        // MapPage.pageController.animateToPage(
+        //   1,
+        //   duration: const Duration(milliseconds: 200),
+        //   curve: Curves.bounceIn,
+        // );
+      },
+    ),
+
+    RestaurantInfo(
+      openInfo: 'Открыто с 9:00 до 22:00',
+      distance: '1,3 км',
+      adress: 'Ленинградский просп., 62',
+      index: 1,
+      onTap: () async {
         if (MapPage.panelController.isAttached) {
           MapPage.panelController.animatePanelToPosition(
             0,
             duration: const Duration(milliseconds: 300),
           );
         }
-        MapPage.pageController.animateToPage(
-          1,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.linear,
+        await MapWidget.mapController.moveCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(target: MapWidget.points[0], zoom: 15),
+          ),
+          animation: animation,
         );
+
+        // MapPage.pageController.animateToPage(
+        //   1,
+        //   duration: const Duration(milliseconds: 300),
+        //   curve: Curves.linear,
+        // );
       },
     ),
-    RestaurantInfo(
-      openInfo: 'Откроется в 9:00',
-      distance: '1,3 км',
-      adress: 'Ул. Свободы, д. 46/3',
-      index: 1,
-      onTap: () {
-        MapPage.pageController.animateToPage(
-          1,
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.bounceIn,
-        );
-      },
-    ),
-    RestaurantInfo(
-      openInfo: 'Открыто до 23:00',
-      distance: '1,3 км',
-      adress: 'Ул. Свободы, д. 46/3',
-      index: 2,
-      onTap: () {
-        MapPage.pageController.animateToPage(
-          1,
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.bounceIn,
-        );
-      },
-    ),
-  ];
+   ];
 }
 
 class RestaurantInfo extends StatelessWidget {
@@ -179,14 +192,14 @@ class RestaurantInfo extends StatelessWidget {
                       color: AppColors.color32CD43,
                     ),
                   ),
-                  Text(
-                    ' - $distance',
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.colorEFEFEF,
-                    ),
-                  ),
+                  // Text(
+                  //   ' - $distance',
+                  //   style: const TextStyle(
+                  //     fontSize: 10,
+                  //     fontWeight: FontWeight.w400,
+                  //     color: AppColors.colorEFEFEF,
+                  //   ),
+                  // ),
                 ],
               ),
               Spacer(),

@@ -58,7 +58,7 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
                 _controller = controller;
               },
               onFinished: (resultIndexes) {
-                print('Result: $resultIndexes');
+                // print('Result: $resultIndexes');
               }
             ),
           ],

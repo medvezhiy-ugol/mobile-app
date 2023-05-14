@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/home/active_order/active_order_page.dart';
-import 'package:medvezhiy_ugol/pages/home/loalty_card_page.dart';
+import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page.dart';
+import 'package:medvezhiy_ugol/pages/more/privacy_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/code_auth_page.dart';
 import 'package:medvezhiy_ugol/pages/more/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/delivery_info_page.dart';
+import 'package:medvezhiy_ugol/pages/more/personal_data_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/detail_stock_page.dart';
 import 'package:medvezhiy_ugol/pages/stock/slot_detail_page.dart';
@@ -38,6 +41,11 @@ import 'utils/app_colors.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ModuleContainer.initialize(Injector());
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: AppColors.color111216,
+    ),
+  );
   runApp(UgolApp());
 }
 
@@ -71,6 +79,15 @@ class UgolApp extends StatelessWidget {
               ),
           bottomNavigationBarTheme: themeService.bottomNavigationBarTheme(),
         ),
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: AppColors.color111216,
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: Colors.white,
+                displayColor: Colors.white,
+              ),
+          bottomNavigationBarTheme: themeService.bottomNavigationBarTheme(),
+        ),
         themeMode: ThemeMode.dark,
         routerConfig: GoRouter(
           navigatorKey: _rootNavigatorKey,
@@ -87,7 +104,7 @@ class UgolApp extends StatelessWidget {
                 GoRoute(
                   path: Routes.home,
                   pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: HomePage()),
+                      NoTransitionPage(child: HomePage()),
                 ),
                 GoRoute(
                   path: Routes.stock,
@@ -153,7 +170,7 @@ class UgolApp extends StatelessWidget {
                       buildPageWithPopupTransition<void>(
                     context: context,
                     state: state,
-                    child: const LoaltyCardPage(),
+                    child: LoyaltyCardPage(),
                   ),
                 ),
                 GoRoute(
@@ -163,6 +180,24 @@ class UgolApp extends StatelessWidget {
                     context: context,
                     state: state,
                     child: const TermsOfServicePage(),
+                  ),
+                ),
+                GoRoute(
+                  path: Routes.privacyPolicy,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const PrivacyPolicyPage(),
+                  ),
+                ),
+                GoRoute(
+                  path: Routes.personalDataPolicy,
+                  pageBuilder: (context, state) =>
+                      buildPageWithPopupTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const PersonalDataPolicyPage(),
                   ),
                 ),
                 GoRoute(
@@ -255,7 +290,7 @@ class UgolApp extends StatelessWidget {
                   buildPageWithPopupTransition<void>(
                 context: context,
                 state: state,
-                child: CodeAuthPage(),
+                child: const CodeAuthPage(),
               ),
             ),
             GoRoute(
@@ -265,7 +300,7 @@ class UgolApp extends StatelessWidget {
                   buildPageWithPopupTransition<void>(
                 context: context,
                 state: state,
-                child: ProfilePage(),
+                child: const ProfilePage(),
               ),
             ),
           ],

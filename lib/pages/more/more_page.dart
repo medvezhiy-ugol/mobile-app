@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
@@ -11,7 +12,6 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
-import 'auth/auth_page.dart';
 import 'bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
@@ -47,7 +47,7 @@ class MorePage extends StatelessWidget {
                   height: (state is MoreRegisteredState) ? 84 : 0,
                 ),
                 (state is MoreRegisteredState)
-                    ? _buildRegisteredRow()
+                    ? _buildRegisteredRow(context)
                     : Container(),
                 SizedBox(
                   height: (state is MoreRegisteredState) ? 10 : 0,
@@ -57,7 +57,7 @@ class MorePage extends StatelessWidget {
                   height: 7,
                 ),
                 (state is MoreRegisteredState)
-                    ? _buildOurSocials()
+                    ? _buildOurSocials(context)
                     : Container()
               ],
             ),
@@ -137,7 +137,7 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Container _buildOurSocials() {
+  Container _buildOurSocials(BuildContext context) {
     return Container(
       color: AppColors.color191A1F,
       padding: const EdgeInsets.all(15),
@@ -162,29 +162,50 @@ class MorePage extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        var url = Uri.parse('https://vk.com/medvezh_ugol');
+                        try {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } catch (e) {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.platformDefault,
+                          );
+                        }
+                      },
                       customBorder: const CircleBorder(),
                       child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: const Icon(SocialIcons.vk)),
+                        padding: const EdgeInsets.all(10),
+                        child: const Icon(
+                          SocialIcons.vk,
+                        ),
+                      ),
                     ),
                   ),
-                  Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        customBorder: const CircleBorder(),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: const Icon(SocialIcons.youtube)),
-                      )),
                   const SizedBox(
-                    width: 4,
+                    width: 5,
                   ),
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        var url = Uri.parse(
+                            'https://www.instagram.com/medvezh.ugol/');
+                        try {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } catch (e) {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.platformDefault,
+                          );
+                        }
+                      },
                       customBorder: const CircleBorder(),
                       child: Container(
                         padding: const EdgeInsets.all(10),
@@ -214,7 +235,11 @@ class MorePage extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      context.push(Routes.myOrders);
+                      // context.push(Routes.myOrders);
+                      _showSnackBar(
+                        context: context,
+                        text: 'Данный раздел пока недоступен',
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.all(18),
@@ -369,7 +394,7 @@ class MorePage extends StatelessWidget {
     );
   }
 
-  Row _buildRegisteredRow() {
+  Row _buildRegisteredRow(BuildContext context) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -379,7 +404,12 @@ class MorePage extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  _showSnackBar(
+                        context: context,
+                        text: 'Данный раздел пока недоступен',
+                      );
+                },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
                   child: Row(
@@ -421,7 +451,12 @@ class MorePage extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                   _showSnackBar(
+                        context: context,
+                        text: 'Данный раздел пока недоступен',
+                      );
+                },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
                   child: Row(
@@ -464,7 +499,7 @@ class MorePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'User',
               style: TextStyle(
                   color: Colors.white,
@@ -507,13 +542,13 @@ class MorePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              (authService.phone == '') ? 'phone': authService.phone ,
-              style: TextStyle(color: AppColors.color808080, fontSize: 14),
+              (authService.phone == '') ? 'phone' : authService.phone,
+              style: const TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
-            SizedBox(
+            const SizedBox(
               width: 17,
             ),
-            Text('youremail@mail.com',
+            const Text('youremail@mail.com',
                 style: TextStyle(
                   color: AppColors.color808080,
                   fontSize: 14,
@@ -522,5 +557,15 @@ class MorePage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _showSnackBar({required BuildContext context, required String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
+      behavior: SnackBarBehavior.floating,
+    ));
   }
 }
