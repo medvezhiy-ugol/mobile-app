@@ -7,7 +7,6 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../common_setup/routes.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/icons/toggle_switcher_icons_icons.dart';
 import '../../../ui/menu/menu_sections_widget.dart';
 import '../../../ui/menu/scale_tabbar_module.dart';
 import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
@@ -82,55 +81,55 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
           const SizedBox(
             height: 5,
           ),
-          const ToggleSwitcher(),
+          // const ToggleSwitcher(),
           const SizedBox(
             height: 6,
           ),
-          GestureDetector(
-            onTap: onAddressTap,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  ToggleSwitcherIcons.vector,
-                  size: 12,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  'Ул. Свободы, д. 46/3',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.colorEFEFEF,
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    shape: const CircleBorder(),
-                    child: InkWell(
-                      onTap: onAddressTap,
-                      customBorder: const CircleBorder(),
-                      child: Ink(
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        height: 20,
-                        width: 20,
-                        child: const Icon(
-                          Icons.chevron_right,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: onAddressTap,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       const Icon(
+          //         ToggleSwitcherIcons.vector,
+          //         size: 12,
+          //       ),
+          //       const SizedBox(
+          //         width: 10,
+          //       ),
+          //       const Text(
+          //         'Ул. Свободы, д. 46/3',
+          //         style: TextStyle(
+          //           fontSize: 12,
+          //           fontWeight: FontWeight.w400,
+          //           color: AppColors.colorEFEFEF,
+          //         ),
+          //       ),
+          //       Container(
+          //         decoration: const BoxDecoration(
+          //           shape: BoxShape.circle,
+          //         ),
+          //         child: Material(
+          //           color: Colors.transparent,
+          //           shape: const CircleBorder(),
+          //           child: InkWell(
+          //             onTap: onAddressTap,
+          //             customBorder: const CircleBorder(),
+          //             child: Ink(
+          //               decoration: const BoxDecoration(shape: BoxShape.circle),
+          //               height: 20,
+          //               width: 20,
+          //               child: const Icon(
+          //                 Icons.chevron_right,
+          //                 size: 20,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
           const SizedBox(
             height: 10,
           ),
