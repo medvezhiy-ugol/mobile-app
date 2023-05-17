@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1" date="1684348837257" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17.05.2023, 21:39 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="assets/images/home_page/loyalty_card.png" />
+    <option name="AFTER_PATH" value="assets/images/home_page/loyalty_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1/loyalty_card.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="assets/images/home_page/no_loyalty_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1/no_loyalty_card.png" />
+  </binary>
+</changelist>

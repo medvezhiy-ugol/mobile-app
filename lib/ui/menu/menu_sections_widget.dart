@@ -50,10 +50,10 @@ class MenuSection extends StatelessWidget {
               (i) => MenuCardWidget(
                 menuProduct: menuCategory.items[i],
                 onTap: () {
-                  context.pushNamed(
-                    Routes.detailMenuName,
-                    params: {'id': menuCategory.items[i].id},
-                  );
+                  // context.pushNamed(
+                  //   Routes.detailMenuName,
+                  //   params: {'id': menuCategory.items[i].id},
+                  // );
                 },
               ),
             ),

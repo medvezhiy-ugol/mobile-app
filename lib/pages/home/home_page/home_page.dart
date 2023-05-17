@@ -7,15 +7,28 @@ import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../common_setup/routes.dart';
+import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import 'bloc/home_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final PageController _controller = PageController(
+      viewportFraction: 0.8,
+    initialPage: 1
+  );
   final loyaltyCardService = Injector().get<LoyaltyCardService>();
-  HomePage({super.key});
+  final authService = Injector().get<AuthService>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,121 +46,286 @@ class HomePage extends StatelessWidget {
               ),
               child: SafeArea(
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                SizedBox(
-                                  height: 32,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 51,
+                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: const [
+                      //         SizedBox(
+                      //           height: 32,
+                      //         ),
+                      //         Text(
+                      //           'Адрес и время доставки',
+                      //           style: TextStyle(
+                      //             fontSize: 10,
+                      //             fontWeight: FontWeight.w400,
+                      //             color: AppColors.color808080,
+                      //           ),
+                      //         ),
+                      //         Text(
+                      //           'Республиканская ул. 68',
+                      //           style: TextStyle(
+                      //             fontSize: 16,
+                      //             fontWeight: FontWeight.w600,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
+                      SizedBox(
+                        height: 160,
+                        child: PageView.builder(
+                          controller: _controller,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10
+                              ),
+                              child: GestureDetector(
+                                onTap: () => context.push(Routes.detailStock),
+                                child: Image.asset(
+                                  A.assetsHomePagePromoImg,
+                                  fit: BoxFit.fill,
                                 ),
-                                Text(
-                                  'Адрес и время доставки',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.color808080,
-                                  ),
-                                ),
-                                Text(
-                                  'Республиканская ул. 68',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            );
+                          },
+                          // separatorBuilder:
+                          //     (BuildContext context, int index) =>
+                          //         const SizedBox(
+                          //   width: 5,
+                          // ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 160,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () => context.push(Routes.detailStock),
-                                  child: SizedBox(
-                                    width: 300,
-                                    height: 150,
-                                    child: Image.asset(
-                                      A.assetsHomePagePromoImg,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const SizedBox(
-                              width: 5,
-                            ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10
                           ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        _buildOrderStatusTimerWidget(context),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _buildOrderStatusWidget(),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        _switchLoyaltyCardStates(
-                          height: 180,
-                          context: context,
-                          state: state,
-                        ),
-                        const SizedBox(
-                          height: 28,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Column(
                           children: [
-                            Text(
-                              'Популярно',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.colorE3E3E3,
-                              ),
+                            const SizedBox(
+                              height: 46,
                             ),
-                            InkWell(
-                              onTap: () {
-                                context.go(Routes.menu);
-                              },
-                              child: Text(
-                                'Все',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.color808080,
-                                  decoration: TextDecoration.underline,
+                            authService.token == ""
+                                ? ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                height: 180,
+                                color: const Color(0xff191A1F),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 63,
+                                        left: 21,
+                                        right: 16
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "У вас нет",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16,
+                                                color: Color(0xffFFFFFF)
+                                            ),
+                                          ),
+                                          Text(
+                                            "карты",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16,
+                                                color: Color(0xffFFFFFF)
+                                            ),
+                                          ),
+                                          Text(
+                                            "лояльности :(",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16,
+                                                color: Color(0xffFFFFFF)
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 13,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () => context.push(Routes.moreAuth),
+                                            child: Text(
+                                              "Войдите, чтобы получить",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 8,
+                                                  color: Color(0xffFFFFFF),
+                                                decoration: TextDecoration.underline,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Image.asset(
+                                        "assets/images/home_page/no_loyalty_card.png",
+                                      height: 180,
+                                      width: 180,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                                : ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                height: 180,
+                                color: const Color(0xff191A1F),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 8,
+                                        left: 10,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Карта лояльности",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 10,
+                                                color: Color(0xffEFEFEF)
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 40,
+                                          ),
+                                          Text(
+                                            "Егор",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16,
+                                                color: Color(0xffFFFFFF)
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 11,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.all(2),
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(6.88235),
+                                                    border: Border.all(
+                                                      color: Color(0xffFF9900),
+                                                    )
+                                                ),
+                                                child: Text(
+                                                  "Баланс",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 9.14286,
+                                                      color: Color(0xffFFFFFF)
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 3,
+                                              ),
+                                              Text(
+                                                "9834",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 9.14286,
+                                                    color: Color(0xffFFFFFF)
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Image.asset("assets/images/home_page/loyalty_card.png")
+                                  ],
                                 ),
                               ),
                             ),
+                            //_buildOrderStatusTimerWidget(context),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
+                            // _buildOrderStatusWidget(),
+                            // const SizedBox(
+                            //   height: 32,
+                            // ),
+                            // _switchLoyaltyCardStates(
+                            //   height: 180,
+                            //   context: context,
+                            //   state: state,
+                            // ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                context.go('/menu');
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Популярно',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.colorE3E3E3,
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          context.go(Routes.menu);
+                                        },
+                                        child: Text(
+                                          'Все',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.color808080,
+                                            decoration: TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  _buildPopularSegmentWidget(),
+                                  const SizedBox(
+                                    height: 32,
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
                         ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        _buildPopularSegmentWidget(),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -184,22 +362,22 @@ class HomePage extends StatelessWidget {
       rowGap: 10,
       children: <Widget>[
         _buildCardPopularProduct(
-          description: '',
-          name: "Пицца 5 сыров",
+          description: 'ролл с микс-крабом и спайси соусом, сливочный сыр, креветка в темпуре, огурец',
+          name: "Гренландия рору с сливочным сыром",
           onTap: () {},
-          price: 330,
+          price: 220,
           srcImg:
               "https://102922.selcdn.ru/ecomm/440-423-641/65994/10369/images/items/1d295a21eeb77c07174e34350d67a471.PNG",
-          weight: 450,
+          isBadge: false
         ),
         _buildCardPopularProduct(
-          description: '',
-          name: "Донер с курицей в булке",
+          description: 'ролл с микс-крабом и спайси соусом, сливочный сыр, креветка в темпуре, огурец',
+          name: "Гренландия рору с сливочным сыром",
           onTap: () {},
-          price: 200,
+          price: 220,
           srcImg:
               "https://102922.selcdn.ru/ecomm/440-423-641/65994/10369/images/items/3eb8302f3c471fa41fea8a18f62d63e1.PNG",
-          weight: 450,
+          isBadge: false
         ),
       ],
     );
@@ -208,112 +386,113 @@ class HomePage extends StatelessWidget {
   Widget _buildCardPopularProduct({
     required String srcImg,
     required String name,
-    required double weight,
     required String description,
     required int price,
+    required bool isBadge,
     required VoidCallback onTap,
   }) {
     return Container(
-      height: 300,
-      decoration: const BoxDecoration(
-        color: AppColors.color191A1F,
-      ),
-      child: Stack(
-        children: [
-          Column(
-            children: <Widget>[
-              SizedBox(
-                height: 125,
-                width: double.infinity,
-                child: Image.network(
-                  srcImg,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
-                child: SizedBox(
-                  height: 175 - 6,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                name,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style:
-                                    ThemeService.detailPageAddButtonTextStyle(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '$weight г.',
-                          style: ThemeService.tabBarCardWeightTextStyle(),
-                        ),
-                      ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              description == ''
-                                  ? 'Состав отсутствует'
-                                  : description,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: ThemeService.tabBarCardIngrTextStyle(),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          width: 74,
-                          height: 30,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.color26282F,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Text(
-                            '$price ₽',
-                            style: ThemeService
-                                .detailPageStatusBarItemCountTextStyle(),
-                          ),
-                        ),
-                      ),
-                    ],
+        decoration: const BoxDecoration(
+          color: AppColors.color191A1F,
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 125,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Image.network(
+                    srcImg,
+                    fit: BoxFit.fill,
                   ),
-                ),
-              )
-            ],
-          ),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: onTap,
+                  Positioned(
+                      top: 5,
+                      left: 10,
+                      child: Container(
+                        height: 20,
+                        width: 26,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Color(0xffFF9900),
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        child: Text(
+                          "%",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 12,
+                              color: Color(0xffFFFFFF)
+                          ),
+                        ),
+                      )
+                  )
+                ],
               ),
             ),
-          ),
-        ],
-      ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            name,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                            ThemeService.detailPageAddButtonTextStyle(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          description == ''
+                              ? 'Состав отсутствует'
+                              : description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: ThemeService.tabBarCardIngrTextStyle(),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      width: 74,
+                      height: 30,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.color26282F,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Text(
+                        '$price ₽',
+                        style: ThemeService
+                            .detailPageStatusBarItemCountTextStyle(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
     );
   }
 

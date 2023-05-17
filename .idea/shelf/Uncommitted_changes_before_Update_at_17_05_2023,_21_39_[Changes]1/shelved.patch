@@ -1,0 +1,1265 @@
+Index: android/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/android/build.gradle b/android/build.gradle
+--- a/android/build.gradle	
++++ b/android/build.gradle	
+@@ -1,12 +1,12 @@
+ buildscript {
+-    ext.kotlin_version = '1.6.10'
++    ext.kotlin_version = '1.8.21'
+     repositories {
+         google()
+         mavenCentral()
+     }
+ 
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:7.1.2'
++        classpath 'com.android.tools.build:gradle:7.4.2'
+         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+     }
+ }
+Index: lib/pages/more/more_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/pages/more/more_page.dart b/lib/pages/more/more_page.dart
+--- a/lib/pages/more/more_page.dart	
++++ b/lib/pages/more/more_page.dart	
+@@ -10,11 +10,13 @@
+ import '../../utils/app_fonts.dart';
+ import '../../utils/icons/more_page_icons.dart';
+ import '../../utils/icons/social_icons_icons.dart';
++import '../map/map_page/map_page.dart';
+ import 'auth/bloc/more_bloc.dart';
+ 
+ class MorePage extends StatelessWidget {
+   MorePage({super.key});
+   final authService = Injector().get<AuthService>();
++
+   @override
+   Widget build(BuildContext context) {
+     return BlocBuilder<MoreBloc, MoreState>(
+@@ -401,10 +403,11 @@
+               color: Colors.transparent,
+               child: InkWell(
+                 onTap: () {
+-                  _showSnackBar(
+-                    context: context,
+-                    text: 'Данный раздел пока недоступен',
+-                  );
++                  context.go('/map');
++                  // _showSnackBar(
++                  //   context: context,
++                  //   text: 'Данный раздел пока недоступен',
++                  // );
+                 },
+                 child: Container(
+                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
+@@ -448,10 +451,11 @@
+               color: Colors.transparent,
+               child: InkWell(
+                 onTap: () {
+-                  _showSnackBar(
+-                    context: context,
+-                    text: 'Данный раздел пока недоступен',
+-                  );
++                  context.go('/home');
++                  // _showSnackBar(
++                  //   context: context,
++                  //   text: 'Данный раздел пока недоступен',
++                  // );
+                 },
+                 child: Container(
+                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
+Index: lib/pages/home/home_page/home_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/pages/home/home_page/home_page.dart b/lib/pages/home/home_page/home_page.dart
+--- a/lib/pages/home/home_page/home_page.dart	
++++ b/lib/pages/home/home_page/home_page.dart	
+@@ -13,9 +13,20 @@
+ import '../../../utils/app_colors.dart';
+ import 'bloc/home_bloc.dart';
+ 
+-class HomePage extends StatelessWidget {
++class HomePage extends StatefulWidget {
++
++  const HomePage({super.key});
++
++  @override
++  State<HomePage> createState() => _HomePageState();
++}
++
++class _HomePageState extends State<HomePage> {
++  final PageController _controller = PageController(
++      viewportFraction: 0.8,
++    initialPage: 1
++  );
+   final loyaltyCardService = Injector().get<LoyaltyCardService>();
+-  HomePage({super.key});
+ 
+   @override
+   Widget build(BuildContext context) {
+@@ -33,121 +44,217 @@
+               ),
+               child: SafeArea(
+                 child: SingleChildScrollView(
+-                  child: Padding(
+-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+-                    child: Column(
+-                      children: [
+-                        Row(
+-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+-                          children: [
+-                            Column(
+-                              crossAxisAlignment: CrossAxisAlignment.start,
+-                              children: const [
+-                                SizedBox(
+-                                  height: 32,
+-                                ),
+-                                Text(
+-                                  'Адрес и время доставки',
+-                                  style: TextStyle(
+-                                    fontSize: 10,
+-                                    fontWeight: FontWeight.w400,
+-                                    color: AppColors.color808080,
+-                                  ),
+-                                ),
+-                                Text(
+-                                  'Республиканская ул. 68',
+-                                  style: TextStyle(
+-                                    fontSize: 16,
+-                                    fontWeight: FontWeight.w600,
+-                                  ),
+-                                ),
+-                              ],
+-                            ),
+-                          ],
+-                        ),
+-                        const SizedBox(
+-                          height: 10,
+-                        ),
+-                        SizedBox(
+-                          height: 160,
+-                          child: ListView.separated(
+-                            scrollDirection: Axis.horizontal,
+-                            itemCount: 3,
+-                            itemBuilder: (BuildContext context, int index) {
+-                              return Material(
+-                                color: Colors.transparent,
+-                                child: InkWell(
+-                                  onTap: () => context.push(Routes.detailStock),
+-                                  child: SizedBox(
+-                                    width: 300,
+-                                    height: 150,
+-                                    child: Image.asset(
+-                                      A.assetsHomePagePromoImg,
+-                                      fit: BoxFit.fill,
+-                                    ),
+-                                  ),
+-                                ),
+-                              );
+-                            },
+-                            separatorBuilder:
+-                                (BuildContext context, int index) =>
+-                                    const SizedBox(
+-                              width: 5,
+-                            ),
+-                          ),
+-                        ),
+-                        const SizedBox(
+-                          height: 30,
+-                        ),
+-                        _buildOrderStatusTimerWidget(context),
+-                        const SizedBox(
+-                          height: 10,
+-                        ),
+-                        _buildOrderStatusWidget(),
+-                        const SizedBox(
+-                          height: 32,
+-                        ),
+-                        _switchLoyaltyCardStates(
+-                          height: 180,
+-                          context: context,
+-                          state: state,
+-                        ),
+-                        const SizedBox(
+-                          height: 28,
+-                        ),
+-                        Row(
+-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+-                          children: [
+-                            Text(
+-                              'Популярно',
+-                              style: TextStyle(
+-                                fontSize: 18,
+-                                fontWeight: FontWeight.w500,
+-                                color: AppColors.colorE3E3E3,
+-                              ),
+-                            ),
+-                            InkWell(
+-                              onTap: () {
+-                                context.go(Routes.menu);
+-                              },
+-                              child: Text(
+-                                'Все',
+-                                style: TextStyle(
+-                                  fontSize: 18,
+-                                  fontWeight: FontWeight.w500,
+-                                  color: AppColors.color808080,
+-                                  decoration: TextDecoration.underline,
+-                                ),
+-                              ),
+-                            ),
+-                          ],
+-                        ),
+-                        const SizedBox(
+-                          height: 12,
+-                        ),
+-                        _buildPopularSegmentWidget(),
+-                      ],
+-                    ),
++                  child: Column(
++                    children: [
++                      const SizedBox(
++                        height: 51,
++                      ),
++                      // Row(
++                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
++                      //   children: [
++                      //     Column(
++                      //       crossAxisAlignment: CrossAxisAlignment.start,
++                      //       children: const [
++                      //         SizedBox(
++                      //           height: 32,
++                      //         ),
++                      //         Text(
++                      //           'Адрес и время доставки',
++                      //           style: TextStyle(
++                      //             fontSize: 10,
++                      //             fontWeight: FontWeight.w400,
++                      //             color: AppColors.color808080,
++                      //           ),
++                      //         ),
++                      //         Text(
++                      //           'Республиканская ул. 68',
++                      //           style: TextStyle(
++                      //             fontSize: 16,
++                      //             fontWeight: FontWeight.w600,
++                      //           ),
++                      //         ),
++                      //       ],
++                      //     ),
++                      //   ],
++                      // ),
++                      SizedBox(
++                        height: 160,
++                        child: PageView.builder(
++                          controller: _controller,
++                          scrollDirection: Axis.horizontal,
++                          itemCount: 3,
++                          itemBuilder: (BuildContext context, int index) {
++                            return Padding(
++                              padding: const EdgeInsets.symmetric(
++                                  horizontal: 10
++                              ),
++                              child: GestureDetector(
++                                onTap: () => context.push(Routes.detailStock),
++                                child: Image.asset(
++                                  A.assetsHomePagePromoImg,
++                                  fit: BoxFit.fill,
++                                ),
++                              ),
++                            );
++                          },
++                          // separatorBuilder:
++                          //     (BuildContext context, int index) =>
++                          //         const SizedBox(
++                          //   width: 5,
++                          // ),
++                        ),
++                      ),
++                      Padding(
++                          padding: EdgeInsets.symmetric(
++                            horizontal: 10
++                          ),
++                        child: Column(
++                          children: [
++                            const SizedBox(
++                              height: 46,
++                            ),
++                            ClipRRect(
++                              borderRadius: BorderRadius.circular(20),
++                              child: Container(
++                                height: 180,
++                                color: const Color(0xff191A1F),
++                                child: Row(
++                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
++                                  children: [
++                                    Padding(
++                                      padding: EdgeInsets.only(
++                                        top: 8,
++                                        left: 10,
++                                      ),
++                                      child: Column(
++                                        crossAxisAlignment: CrossAxisAlignment.start,
++                                        children: [
++                                          Text(
++                                            "Карта лояльности",
++                                            style: TextStyle(
++                                                fontWeight: FontWeight.w600,
++                                                fontSize: 10,
++                                                color: Color(0xffEFEFEF)
++                                            ),
++                                          ),
++                                          SizedBox(
++                                            height: 40,
++                                          ),
++                                          Text(
++                                            "Абдурахмангаджи",
++                                            style: TextStyle(
++                                                fontWeight: FontWeight.w600,
++                                                fontSize: 16,
++                                                color: Color(0xffFFFFFF)
++                                            ),
++                                          ),
++                                          SizedBox(
++                                            height: 11,
++                                          ),
++                                          Row(
++                                            mainAxisAlignment: MainAxisAlignment.start,
++                                            children: [
++                                              Container(
++                                                padding: EdgeInsets.all(2),
++                                                decoration: BoxDecoration(
++                                                    borderRadius: BorderRadius.circular(6.88235),
++                                                    border: Border.all(
++                                                      color: Color(0xffFF9900),
++                                                    )
++                                                ),
++                                                child: Text(
++                                                  "Баланс",
++                                                  style: TextStyle(
++                                                      fontWeight: FontWeight.w600,
++                                                      fontSize: 9.14286,
++                                                      color: Color(0xffFFFFFF)
++                                                  ),
++                                                ),
++                                              ),
++                                              SizedBox(
++                                                width: 3,
++                                              ),
++                                              Text(
++                                                "9834",
++                                                style: TextStyle(
++                                                    fontWeight: FontWeight.w600,
++                                                    fontSize: 9.14286,
++                                                    color: Color(0xffFFFFFF)
++                                                ),
++                                              ),
++                                            ],
++                                          ),
++                                        ],
++                                      ),
++                                    ),
++                                    Image.asset("assets/images/home_page/loyalty_card.png")
++                                  ],
++                                ),
++                              ),
++                            ),
++                            //_buildOrderStatusTimerWidget(context),
++                            // const SizedBox(
++                            //   height: 10,
++                            // ),
++                            // _buildOrderStatusWidget(),
++                            // const SizedBox(
++                            //   height: 32,
++                            // ),
++                            // _switchLoyaltyCardStates(
++                            //   height: 180,
++                            //   context: context,
++                            //   state: state,
++                            // ),
++                            const SizedBox(
++                              height: 32,
++                            ),
++                            GestureDetector(
++                              onTap: () {
++                                context.go('/menu');
++                              },
++                              child: Column(
++                                children: [
++                                  Row(
++                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
++                                    children: [
++                                      Text(
++                                        'Популярно',
++                                        style: TextStyle(
++                                          fontSize: 18,
++                                          fontWeight: FontWeight.w500,
++                                          color: AppColors.colorE3E3E3,
++                                        ),
++                                      ),
++                                      InkWell(
++                                        onTap: () {
++                                          context.go(Routes.menu);
++                                        },
++                                        child: Text(
++                                          'Все',
++                                          style: TextStyle(
++                                            fontSize: 18,
++                                            fontWeight: FontWeight.w500,
++                                            color: AppColors.color808080,
++                                            decoration: TextDecoration.underline,
++                                          ),
++                                        ),
++                                      ),
++                                    ],
++                                  ),
++                                  const SizedBox(
++                                    height: 12,
++                                  ),
++                                  _buildPopularSegmentWidget(),
++                                  const SizedBox(
++                                    height: 32,
++                                  ),
++                                ],
++                              ),
++                            )
++                          ],
++                        ),
++                      ),
++                    ],
+                   ),
+                 ),
+               ),
+@@ -184,22 +291,22 @@
+       rowGap: 10,
+       children: <Widget>[
+         _buildCardPopularProduct(
+-          description: '',
+-          name: "Пицца 5 сыров",
++          description: 'ролл с микс-крабом и спайси соусом, сливочный сыр, креветка в темпуре, огурец',
++          name: "Гренландия рору с сливочным сыром",
+           onTap: () {},
+-          price: 330,
++          price: 220,
+           srcImg:
+               "https://102922.selcdn.ru/ecomm/440-423-641/65994/10369/images/items/1d295a21eeb77c07174e34350d67a471.PNG",
+-          weight: 450,
++          isBadge: false
+         ),
+         _buildCardPopularProduct(
+-          description: '',
+-          name: "Донер с курицей в булке",
++          description: 'ролл с микс-крабом и спайси соусом, сливочный сыр, креветка в темпуре, огурец',
++          name: "Гренландия рору с сливочным сыром",
+           onTap: () {},
+-          price: 200,
++          price: 220,
+           srcImg:
+               "https://102922.selcdn.ru/ecomm/440-423-641/65994/10369/images/items/3eb8302f3c471fa41fea8a18f62d63e1.PNG",
+-          weight: 450,
++          isBadge: false
+         ),
+       ],
+     );
+@@ -208,112 +315,113 @@
+   Widget _buildCardPopularProduct({
+     required String srcImg,
+     required String name,
+-    required double weight,
+     required String description,
+     required int price,
++    required bool isBadge,
+     required VoidCallback onTap,
+   }) {
+     return Container(
+-      height: 300,
+-      decoration: const BoxDecoration(
+-        color: AppColors.color191A1F,
+-      ),
+-      child: Stack(
+-        children: [
+-          Column(
+-            children: <Widget>[
+-              SizedBox(
+-                height: 125,
+-                width: double.infinity,
+-                child: Image.network(
+-                  srcImg,
+-                  fit: BoxFit.fill,
+-                ),
++        decoration: const BoxDecoration(
++          color: AppColors.color191A1F,
++        ),
++        child: Column(
++          children: <Widget>[
++            SizedBox(
++              height: 125,
++              width: double.infinity,
++              child: Stack(
++                children: [
++                  Image.network(
++                    srcImg,
++                    fit: BoxFit.fill,
++                  ),
++                  Positioned(
++                      top: 5,
++                      left: 10,
++                      child: Container(
++                        height: 20,
++                        width: 26,
++                        alignment: Alignment.center,
++                        decoration: BoxDecoration(
++                            color: Color(0xffFF9900),
++                            borderRadius: BorderRadius.circular(30)
++                        ),
++                        child: Text(
++                          "%",
++                          style: TextStyle(
++                              fontWeight: FontWeight.w800,
++                              fontSize: 12,
++                              color: Color(0xffFFFFFF)
++                          ),
++                        ),
++                      )
++                  )
++                ],
+               ),
+-              Padding(
+-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
+-                child: SizedBox(
+-                  height: 175 - 6,
+-                  child: Column(
+-                    children: [
+-                      const SizedBox(
+-                        height: 8,
+-                      ),
+-                      Container(
+-                        alignment: Alignment.centerLeft,
+-                        child: Row(
+-                          children: [
+-                            Expanded(
+-                              child: Text(
+-                                name,
+-                                maxLines: 3,
+-                                overflow: TextOverflow.ellipsis,
+-                                style:
+-                                    ThemeService.detailPageAddButtonTextStyle(),
+-                              ),
+-                            ),
+-                          ],
+-                        ),
+-                      ),
+-                      const SizedBox(
+-                        height: 8,
+-                      ),
+-                      Container(
+-                        alignment: Alignment.centerLeft,
+-                        child: Text(
+-                          '$weight г.',
+-                          style: ThemeService.tabBarCardWeightTextStyle(),
+-                        ),
+-                      ),
+-                      const Spacer(),
+-                      Row(
+-                        children: [
+-                          Expanded(
+-                            child: Text(
+-                              description == ''
+-                                  ? 'Состав отсутствует'
+-                                  : description,
+-                              maxLines: 2,
+-                              overflow: TextOverflow.ellipsis,
+-                              style: ThemeService.tabBarCardIngrTextStyle(),
+-                            ),
+-                          )
+-                        ],
+-                      ),
+-                      const SizedBox(height: 10),
+-                      Align(
+-                        alignment: Alignment.centerLeft,
+-                        child: Container(
+-                          width: 74,
+-                          height: 30,
+-                          alignment: Alignment.center,
+-                          decoration: BoxDecoration(
+-                            color: AppColors.color26282F,
+-                            borderRadius: BorderRadius.circular(30),
+-                          ),
+-                          child: Text(
+-                            '$price ₽',
+-                            style: ThemeService
+-                                .detailPageStatusBarItemCountTextStyle(),
+-                          ),
+-                        ),
+-                      ),
+-                    ],
+-                  ),
+-                ),
+-              )
+-            ],
+-          ),
+-          Positioned.fill(
+-            child: Material(
+-              color: Colors.transparent,
+-              child: InkWell(
+-                onTap: onTap,
+-              ),
+-            ),
+-          ),
+-        ],
+-      ),
++            ),
++            Padding(
++              padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
++              child: Column(
++                children: [
++                  const SizedBox(
++                    height: 8,
++                  ),
++                  Container(
++                    alignment: Alignment.centerLeft,
++                    child: Row(
++                      children: [
++                        Expanded(
++                          child: Text(
++                            name,
++                            maxLines: 3,
++                            overflow: TextOverflow.ellipsis,
++                            style:
++                            ThemeService.detailPageAddButtonTextStyle(),
++                          ),
++                        ),
++                      ],
++                    ),
++                  ),
++                  const SizedBox(
++                    height: 8,
++                  ),
++                  Row(
++                    children: [
++                      Expanded(
++                        child: Text(
++                          description == ''
++                              ? 'Состав отсутствует'
++                              : description,
++                          maxLines: 2,
++                          overflow: TextOverflow.ellipsis,
++                          style: ThemeService.tabBarCardIngrTextStyle(),
++                        ),
++                      )
++                    ],
++                  ),
++                  const SizedBox(height: 10),
++                  Align(
++                    alignment: Alignment.centerLeft,
++                    child: Container(
++                      width: 74,
++                      height: 30,
++                      alignment: Alignment.center,
++                      decoration: BoxDecoration(
++                        color: AppColors.color26282F,
++                        borderRadius: BorderRadius.circular(30),
++                      ),
++                      child: Text(
++                        '$price ₽',
++                        style: ThemeService
++                            .detailPageStatusBarItemCountTextStyle(),
++                      ),
++                    ),
++                  ),
++                ],
++              ),
++            ),
++          ],
++        )
+     );
+   }
+ 
+Index: lib/pages/more/profile/profile_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/pages/more/profile/profile_page.dart b/lib/pages/more/profile/profile_page.dart
+--- a/lib/pages/more/profile/profile_page.dart	
++++ b/lib/pages/more/profile/profile_page.dart	
+@@ -1,3 +1,4 @@
++import 'package:flutter/cupertino.dart';
+ import 'package:flutter/material.dart';
+ import 'package:flutter_bloc/flutter_bloc.dart';
+ import 'package:flutter_simple_dependency_injection/injector.dart';
+@@ -22,6 +23,58 @@
+   TextEditingController _textSexController = TextEditingController();
+   final authService = Injector().get<AuthService>();
+ 
++  DateTime date = DateTime(2016, 10, 26);
++
++  bool _isMale = false;
++
++  void _showDialog(Widget child) {
++    showCupertinoModalPopup<void>(
++      context: context,
++      builder: (BuildContext context) => Container(
++        height: 302,
++        padding: const EdgeInsets.only(top: 6.0),
++        margin: EdgeInsets.only(
++          bottom: MediaQuery.of(context).viewInsets.bottom,
++        ),
++        decoration: BoxDecoration(
++          color: Color(0xff111216),
++          borderRadius: BorderRadius.vertical(
++            top: Radius.circular(40)
++          )
++        ),
++        child: SafeArea(
++          top: false,
++          child: Column(
++            children: [
++              Expanded(
++                child: child,
++              ),
++              Material(
++                child: GestureDetector(
++                  onTap: () => Navigator.of(context).pop(),
++                  child: Container(
++                    height: 56,
++                    width: double.infinity,
++                    color: Color(0xffFFB627),
++                    alignment: Alignment.center,
++                    child: Text(
++                      "Сохранить",
++                      style: TextStyle(
++                        fontWeight: FontWeight.w700,
++                        fontSize: 18,
++                        color: Color(0xff121212)
++                      ),
++                    ),
++                  ),
++                ),
++              )
++            ],
++          )
++        ),
++      ),
++    );
++  }
++
+   @override
+   Widget build(BuildContext context) {
+     return BlocProvider(
+@@ -80,8 +133,40 @@
+                       SizedBox(
+                         height: 2,
+                       ),
+-                      _buildTextField(
+-                        controller: _textBirthController,
++                      Container(
++                        height: 60,
++                        color: AppColors.color191A1F,
++                        child: TextField(
++                          onTap: () {
++                            setState(() {
++                              _textBirthController.text = '${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}';
++                            });
++                            _showDialog(
++                              CupertinoDatePicker(
++                                initialDateTime: DateTime.now(),
++                                mode: CupertinoDatePickerMode.date,
++                                use24hFormat: true,
++                                // This is called when the user changes the date.
++                                onDateTimeChanged: (DateTime newDate) {
++                                  setState(() => _textBirthController.text = '${newDate.day}.${newDate.month}.${newDate.year}');
++                                },
++                              ),
++                            );
++                          },
++                          controller: _textBirthController,
++                          style: const TextStyle(
++                            fontWeight: FontWeight.w600,
++                            fontSize: 16,
++                          ),
++                          decoration: const InputDecoration(
++                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
++                            border: InputBorder.none,
++                            focusedBorder: InputBorder.none,
++                            enabledBorder: InputBorder.none,
++                            errorBorder: InputBorder.none,
++                            disabledBorder: InputBorder.none,
++                          ),
++                        ),
+                       ),
+                       SizedBox(
+                         height: 24,
+@@ -97,8 +182,78 @@
+                       SizedBox(
+                         height: 2,
+                       ),
+-                      _buildTextField(
+-                        controller: _textSexController,
++                      Container(
++                        height: 60,
++                        color: AppColors.color191A1F,
++                        child: TextField(
++                          onTap: () {
++                            setState(() {
++                              _textSexController.text = "Мужской";
++                            });
++                            _showDialog(
++                              CupertinoPicker(
++                                magnification: 1.22,
++                                squeeze: 1.2,
++                                useMagnifier: true,
++                                itemExtent: 32.0,
++                                // This sets the initial item.
++                                scrollController: FixedExtentScrollController(
++                                  initialItem: 0,
++                                ),
++                                // This is called when selected item is changed.
++                                onSelectedItemChanged: (int selectedItem) {
++                                  switch (selectedItem) {
++                                    case 0:
++                                      _textSexController.text = "Мужской";
++                                      break;
++                                    case 1:
++                                      _textSexController.text = "Женский";
++                                      break;
++                                    case 2:
++                                      _textSexController.text = "Не выбрано";
++                                      break;
++                                  }
++                                  setState(() {});
++                                },
++                                children: [
++                                  Center(
++                                      child: Text(
++                                          "Мужской",
++                                        style: TextStyle(
++                                          fontWeight: FontWeight.w600,
++                                          fontSize: 16,
++                                          color: Color(0xffFFFFFF)
++                                        ),
++                                      )
++                                  ),
++                                  Center(
++                                    child: Text(
++                                      "Женский",
++                                      style: TextStyle(
++                                          fontWeight: FontWeight.w600,
++                                          fontSize: 16,
++                                          color: Color(0xffFFFFFF)
++                                      ),
++                                    ),
++                                  ),
++                                ],
++                              ),
++                            );
++                          },
++                          controller: _textSexController,
++                          style: const TextStyle(
++                            fontWeight: FontWeight.w600,
++                            fontSize: 16,
++                          ),
++                          decoration: const InputDecoration(
++                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
++                            border: InputBorder.none,
++                            focusedBorder: InputBorder.none,
++                            enabledBorder: InputBorder.none,
++                            errorBorder: InputBorder.none,
++                            disabledBorder: InputBorder.none,
++                          ),
++                        ),
+                       ),
+                       SizedBox(
+                         height: 30,
+Index: android/app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/android/app/build.gradle b/android/app/build.gradle
+--- a/android/app/build.gradle	
++++ b/android/app/build.gradle	
+@@ -69,4 +69,4 @@
+ dependencies {
+     implementation 'com.yandex.android:maps.mobile:4.2.2-full'
+     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+-}
++}
+\ No newline at end of file
+Index: lib/ui/menu/menu_sections_widget.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/ui/menu/menu_sections_widget.dart b/lib/ui/menu/menu_sections_widget.dart
+--- a/lib/ui/menu/menu_sections_widget.dart	
++++ b/lib/ui/menu/menu_sections_widget.dart	
+@@ -50,10 +50,10 @@
+               (i) => MenuCardWidget(
+                 menuProduct: menuCategory.items[i],
+                 onTap: () {
+-                  context.pushNamed(
+-                    Routes.detailMenuName,
+-                    params: {'id': menuCategory.items[i].id},
+-                  );
++                  // context.pushNamed(
++                  //   Routes.detailMenuName,
++                  //   params: {'id': menuCategory.items[i].id},
++                  // );
+                 },
+               ),
+             ),
+Index: android/.idea/.gitignore
+===================================================================
+diff --git a/android/.idea/.gitignore b/android/.idea/.gitignore
+deleted file mode 100644
+--- a/android/.idea/.gitignore	
++++ /dev/null	
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: android/.idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/android/.idea/compiler.xml b/android/.idea/compiler.xml
+--- a/android/.idea/compiler.xml	
++++ b/android/.idea/compiler.xml	
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="11" />
++    <bytecodeTargetLevel target="17" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/libraries/Dart_SDK.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/Dart_SDK.xml b/.idea/libraries/Dart_SDK.xml
+--- a/.idea/libraries/Dart_SDK.xml	
++++ b/.idea/libraries/Dart_SDK.xml	
+@@ -1,25 +1,25 @@
+ <component name="libraryTable">
+   <library name="Dart SDK">
+     <CLASSES>
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/async" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/cli" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/collection" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/convert" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/core" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/developer" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/ffi" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/html" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/indexed_db" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/io" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/isolate" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/js" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/js_util" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/math" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/mirrors" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/svg" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/typed_data" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/web_audio" />
+-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/dart-sdk/lib/web_gl" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/async" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/cli" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/collection" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/convert" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/core" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/developer" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/ffi" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/html" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/indexed_db" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/io" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/isolate" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/js" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/js_util" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/math" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/mirrors" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/svg" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/typed_data" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/web_audio" />
++      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/dart-sdk/lib/web_gl" />
+     </CLASSES>
+     <JAVADOC />
+     <SOURCES />
+Index: android/gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/android/gradle/wrapper/gradle-wrapper.properties b/android/gradle/wrapper/gradle-wrapper.properties
+--- a/android/gradle/wrapper/gradle-wrapper.properties	
++++ b/android/gradle/wrapper/gradle-wrapper.properties	
+@@ -2,4 +2,4 @@
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-7.4-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-all.zip
+Index: android/app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/android/app/src/main/AndroidManifest.xml b/android/app/src/main/AndroidManifest.xml
+--- a/android/app/src/main/AndroidManifest.xml	
++++ b/android/app/src/main/AndroidManifest.xml	
+@@ -1,5 +1,5 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    package="com.bearcorner_mobile">
++    package="com.example.bearcorner_mobile">
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="SuppressKotlinCodeStyleNotification">
+     <option name="disableForAll" value="true" />
+Index: android/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/android/.idea/misc.xml b/android/.idea/misc.xml
+--- a/android/.idea/misc.xml	
++++ b/android/.idea/misc.xml	
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: android/.idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/android/.idea/gradle.xml b/android/.idea/gradle.xml
+--- a/android/.idea/gradle.xml	
++++ b/android/.idea/gradle.xml	
+@@ -9,12 +9,12 @@
+         <option name="modules">
+           <set>
+             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_splash-2.2.19/android" />
+-            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.9/android" />
+-            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_android-2.0.25/android" />
+-            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.0.17/android" />
++            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.14/android" />
++            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27/android" />
++            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/android" />
+             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-1.0.8/android" />
+-            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.6/android" />
+-            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.27/android" />
++            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.8+2/android" />
++            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.33/android" />
+             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/yandex_mapkit-3.2.0/android" />
+             <option value="$PROJECT_DIR$" />
+             <option value="$PROJECT_DIR$/app" />
+Index: .idea/libraries/Flutter_Plugins.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/Flutter_Plugins.xml b/.idea/libraries/Flutter_Plugins.xml
+--- a/.idea/libraries/Flutter_Plugins.xml	
++++ b/.idea/libraries/Flutter_Plugins.xml	
+@@ -1,28 +1,28 @@
+ <component name="libraryTable">
+   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+     <CLASSES>
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.27" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yandex_mapkit-3.2.0" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_android-2.0.25" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.5" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.4" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher-6.1.10" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider-2.0.14" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_splash-2.2.19" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.5" />
+       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.10" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4" />
+       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_web-2.0.16" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-1.0.8" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.1" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.2" />
+       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.2.0" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.7" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.5" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.33" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_web-2.1.0" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher-6.1.11" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.8+2" />
+       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.2.0" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.0" />
+-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_web-2.1.0" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.6" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider-2.0.15" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-1.0.8" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yandex_mapkit-3.2.0" />
++      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_splash-2.2.19" />
+     </CLASSES>
+     <JAVADOC />
+     <SOURCES />
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -9,12 +9,26 @@
+     <option name="autoReloadType" value="NONE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="">
++    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="test commit">
++      <change afterPath="$PROJECT_DIR$/assets/images/home_page/no_loyalty_card.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page.dart" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/menu_page.dart" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/lib/pages/stock/stock_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/stock/stock_page.dart" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/.idea/.gitignore" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/compiler.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/gradle.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/assets/images/home_page/loyalty_card.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/home_page/loyalty_card.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/lib/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/more_page.dart" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/lib/pages/more/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/profile/profile_page.dart" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,20 +54,28 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;AnalyzeApkAction.lastApkPath&quot;: &quot;/Users/tw0ch/Documents/GitHub/mobile-app/build/app/outputs/flutter-apk/app-debug.apk&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;/Users/tw0ch/Documents/GitHub/mobile-app&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+-  }
+-}</component>
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "AnalyzeApkAction.lastApkPath": "/Users/tw0ch/Documents/GitHub/mobile-app/build/app/outputs/flutter-apk/app-debug.apk",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.cidr.known.project.marker": "true",
++    "cidr.known.project.marker": "true",
++    "dart.analysis.tool.window.visible": "false",
++    "io.flutter.reload.alreadyRun": "true",
++    "last_opened_file_path": "/Users/mindykfam/Desktop/Developer/Medvezhi-ugol/mobile-app/assets/images/home_page",
++    "settings.editor.selected.configurable": "AndroidSdkUpdater",
++    "show.migrate.to.gradle.popup": "false"
++  }
++}]]></component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/assets/images/home_page" />
++    </key>
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/assets/images/home_page" />
++    </key>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -63,6 +85,21 @@
+       <option name="presentableId" value="Default" />
+       <updated>1677934220958</updated>
+     </task>
++    <task id="LOCAL-00001" summary="test commit">
++      <created>1684169478780</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1684169478780</updated>
++    </task>
++    <task id="LOCAL-00002" summary="test commit">
++      <created>1684303169469</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1684303169469</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="ToolWindowManager">
+@@ -71,4 +108,19 @@
+       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+     </layout>
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="test commit" />
++    <option name="LAST_COMMIT_MESSAGE" value="test commit" />
++  </component>
+ </project>
+\ No newline at end of file

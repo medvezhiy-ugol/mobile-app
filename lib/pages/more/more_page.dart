@@ -10,11 +10,13 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
+import '../map/map_page/map_page.dart';
 import 'auth/bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
   MorePage({super.key});
   final authService = Injector().get<AuthService>();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoreBloc, MoreState>(
@@ -401,10 +403,11 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  _showSnackBar(
-                    context: context,
-                    text: 'Данный раздел пока недоступен',
-                  );
+                  context.go('/map');
+                  // _showSnackBar(
+                  //   context: context,
+                  //   text: 'Данный раздел пока недоступен',
+                  // );
                 },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
@@ -448,10 +451,11 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  _showSnackBar(
-                    context: context,
-                    text: 'Данный раздел пока недоступен',
-                  );
+                  context.go('/home');
+                  // _showSnackBar(
+                  //   context: context,
+                  //   text: 'Данный раздел пока недоступен',
+                  // );
                 },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
