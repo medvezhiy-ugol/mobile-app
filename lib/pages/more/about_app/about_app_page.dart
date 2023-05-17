@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../../common_setup/routes.dart';
-import '../../../generated/l10n.dart';
 import '../../../ui/close_circle_button.dart';
 
 class AboutAppPage extends StatelessWidget {
@@ -40,7 +39,7 @@ class AboutAppPage extends StatelessWidget {
 
                   // Title
                   Text(
-                    S.current.profileScreenAboutApp,
+                    "О приложении",
                     style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

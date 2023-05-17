@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../generated/l10n.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
 import '../../services/auth_service.dart';
@@ -72,7 +70,7 @@ class MorePage extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(
-          S.of(context).profileScreenProfileTitleText, //'Профиль',
+          'Профиль',
           style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -104,7 +102,7 @@ class MorePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          S.of(context).profileScreenSingIn,
+                          "Войти",
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -117,8 +115,7 @@ class MorePage extends StatelessWidget {
                           width: screenWidth * 0.6,
                           // color: Colors.blue,
                           child: Text(
-                            S.current
-                                .profileScreenSlogan, //'Чтобы стать ближе, получать бонусы',
+                            'Чтобы стать ближе, получать бонусы',
                             style: const TextStyle(
                               color: AppColors.color808080,
                               fontSize: 14,
@@ -147,7 +144,7 @@ class MorePage extends StatelessWidget {
           Column(
             children: [
               Text(
-                S.current.profileScreenSocialNetworksTitle,
+                "Наши соцсети",
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -317,8 +314,7 @@ class MorePage extends StatelessWidget {
                       width: 26,
                     ),
                     Text(
-                      S.current
-                          .profileScreenDeliveryConditions, //'Условия доставки',
+                      'Условия доставки',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -348,7 +344,7 @@ class MorePage extends StatelessWidget {
                       width: 26,
                     ),
                     Text(
-                      S.current.profileScreenContactUs, //'Связаться с нами',
+                      'Связаться с нами',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -378,7 +374,7 @@ class MorePage extends StatelessWidget {
                       width: 26,
                     ),
                     Text(
-                      S.current.profileScreenAboutApp, //'О приложении',
+                      'О приложении',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -426,7 +422,7 @@ class MorePage extends StatelessWidget {
                             child: SizedBox(),
                           ),
                           Text(
-                            S.current.profileScreenAddresses, //'Адреса',
+                            'Адреса',
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,

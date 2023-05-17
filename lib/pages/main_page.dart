@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../generated/l10n.dart';
-
 import '../common_setup/routes.dart';
 import '../utils/icons/bottom_bar_icons.dart';
 
@@ -64,21 +62,21 @@ class _MainPageState extends State<MainPage> {
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.main),
                 ),
-                label: S.current.bottomBarMainText,
+                label: "Главная",
               ), //'Главная'
               BottomNavigationBarItem(
                 icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.stock),
                 ),
-                label: S.current.bottomBarStockText,
+                label: "Акции",
               ), //'Акции'
               BottomNavigationBarItem(
                 icon: const Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.menu),
                 ),
-                label: S.current.bottomBarMenuText,
+                label: "Меню",
               ), //'Меню'
               BottomNavigationBarItem(
                 icon: const Padding(
@@ -87,7 +85,7 @@ class _MainPageState extends State<MainPage> {
                     BottomBarIcons.map,
                   ),
                 ),
-                label: S.current.bottomBarMapText,
+                label: "Карта",
               ), //'Карта'
               BottomNavigationBarItem(
                 icon: const Padding(
@@ -96,7 +94,7 @@ class _MainPageState extends State<MainPage> {
                     BottomBarIcons.more,
                   ),
                 ),
-                label: S.current.bottomBarMoreText,
+                label: "Еще",
               ) // 'Еще'
             ],
             onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),

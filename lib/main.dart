@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/pages/home/active_order_page/active_order_page.dart';
@@ -15,7 +14,6 @@ import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_
 
 import 'common_setup/module_container.dart';
 import 'common_setup/routes.dart';
-import 'generated/l10n.dart';
 import 'pages/home/home_page/home_page.dart';
 import 'pages/main_page.dart';
 import 'pages/map/map_page/map_page.dart';
@@ -69,7 +67,7 @@ class UgolApp extends StatelessWidget {
         //   GlobalWidgetsLocalizations.delegate,
         //   GlobalCupertinoLocalizations.delegate
         // ],
-        supportedLocales: S.delegate.supportedLocales,
+        // supportedLocales: S.delegate.supportedLocales,
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           scaffoldBackgroundColor: AppColors.color111216,

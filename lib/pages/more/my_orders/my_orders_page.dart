@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:medvezhiy_ugol/generated/l10n.dart';
-
 import '../../../common_setup/routes.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../utils/app_assets.dart';

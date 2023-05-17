@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medvezhiy_ugol/generated/l10n.dart';
-
 import '../../../ui/close_circle_button.dart';
 import '../../../ui/primary_button.dart';
 import '../../../utils/app_colors.dart';
@@ -347,7 +345,7 @@ class _BasketPageState extends State<BasketPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            S.current.activeOrderScreenInTotal.toUpperCase(),
+            "итого",
             style: const TextStyle(
               color: Colors.white,
               fontSize: 20,

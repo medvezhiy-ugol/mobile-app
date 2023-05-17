@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
-import 'package:medvezhiy_ugol/utils/icons/more_page_icons.dart';
-
-import '../../../generated/l10n.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../utils/app_assets.dart';
 
@@ -39,7 +33,7 @@ class DeliveryInfoPage extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      S.current.profileScreenDeliveryConditions,
+                      "Условия доставки",
                       style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

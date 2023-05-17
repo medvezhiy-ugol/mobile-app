@@ -3,8 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-
-import '../../../generated/l10n.dart';
 import '../../../utils/app_assets.dart';
 
 class DetailStockPage extends StatelessWidget {
@@ -57,7 +55,7 @@ class DetailStockPage extends StatelessWidget {
                       child: PrimaryButton(
                         onTap: () => context.pop(),
                         child: Text(
-                          S.current.detailStockScreenToUseButtonText,
+                          "Воспользоваться",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

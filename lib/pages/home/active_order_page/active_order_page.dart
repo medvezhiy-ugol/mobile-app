@@ -4,8 +4,6 @@ import 'package:medvezhiy_ugol/utils/app_assets.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-
-import '../../../generated/l10n.dart';
 import '../../../ui/close_circle_button.dart';
 
 class ActiveOrderPage extends StatelessWidget {
@@ -32,7 +30,7 @@ class ActiveOrderPage extends StatelessWidget {
                       height: 3,
                     ),
                     Text(
-                      S.current.activeOrderScreenYourOrder,
+                      "Ваш заказ",
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -48,7 +46,7 @@ class ActiveOrderPage extends StatelessWidget {
                       height: 18,
                     ),
                     Text(
-                      S.current.activeOrderScreenOrderAccepted,
+                      "Заказ принят",
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -72,11 +70,11 @@ class ActiveOrderPage extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    _buildSubsumRow(S.current.orderSumText, 410),
+                    _buildSubsumRow("Сумма заказа", 410),
                     const SizedBox(
                       height: 10,
                     ),
-                    _buildSubsumRow(S.current.serviceFeeText, 30),
+                    _buildSubsumRow("Сервисный сбор", 30),
                     const SizedBox(
                       height: 38,
                     ),
@@ -141,7 +139,7 @@ class ActiveOrderPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            S.current.activeOrderScreenInTotal.toUpperCase(),
+            "итого",
             style: const TextStyle(
               color: Colors.white,
               fontSize: 20,

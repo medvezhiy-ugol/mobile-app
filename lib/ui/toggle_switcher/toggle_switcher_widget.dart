@@ -4,8 +4,6 @@ import 'package:medvezhiy_ugol/ui/toggle_switcher/module/toggle_switcher_module.
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-import '../../generated/l10n.dart';
-
 class ToggleSwitcher extends StatefulWidget {
   const ToggleSwitcher({super.key});
 
@@ -17,8 +15,8 @@ class _ToggleSwitcherState extends State<ToggleSwitcher> {
   final int _tabTextIndexSelected = 1;
 
   final List<String> _listTextTabToggle = [
-    S.current.deliveryButtonText, //'Доставка',
-    S.current.pickUpButtonText //'Самовывоз',
+    'Доставка',
+    'Самовывоз',
   ];
 
   @override

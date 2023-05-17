@@ -7,7 +7,6 @@ import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 
 import '../../../common_setup/routes.dart';
-import '../../../generated/l10n.dart';
 import 'menu_card_widget.dart';
 
 class MenuSection extends StatelessWidget {

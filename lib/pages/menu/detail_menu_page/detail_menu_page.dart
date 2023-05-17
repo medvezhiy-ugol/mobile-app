@@ -6,8 +6,6 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../generated/l10n.dart';
 import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../ui/close_circle_button.dart';
@@ -180,7 +178,7 @@ class DetailMenuPage extends StatelessWidget {
                                 context.pop();
                               },
                               child: Text(
-                                '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   ${S.current.mealScreenDeleteAddTitleText}',
+                                '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -222,7 +220,7 @@ class DetailMenuPage extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                S.current.mealScreenDeleteAddTitleText,
+                                "Добавить",
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -334,16 +332,15 @@ class DetailMenuPage extends StatelessWidget {
       String carbohydrates) {
     return Row(
       children: <Widget>[
-        buildStatsBarItem(S.current.mealScreenWeightTitleText, '$weight г'),
+        buildStatsBarItem("Вес", '$weight г'),
         const SizedBox(width: 8),
-        buildStatsBarItem(S.current.mealScreenCaloriesTitleText, '$calories г'),
+        buildStatsBarItem("Ккал", '$calories г'),
         const Spacer(),
-        buildStatsBarItem(S.current.mealScreenProteinTitleText, '$protein г'),
+        buildStatsBarItem("Белки", '$protein г'),
         const SizedBox(width: 8),
-        buildStatsBarItem(S.current.mealScreenFatsTitleText, '$fats г'),
+        buildStatsBarItem("Жиры", '$fats г'),
         const SizedBox(width: 8),
-        buildStatsBarItem(
-            S.current.mealScreenCarbohydratesTitleText, '$carbohydrates г'),
+        buildStatsBarItem("Углеводы", '$carbohydrates г'),
       ],
     );
   }
@@ -402,7 +399,7 @@ class DetailMenuPage extends StatelessWidget {
     return Column(
       children: <Widget>[
         OptionalProduct(
-          name: S.current.detailScreenTomatoSauceText,
+          name: "Томатный соус",
           price: 20,
           imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
@@ -410,7 +407,7 @@ class DetailMenuPage extends StatelessWidget {
           height: 2,
         ),
         OptionalProduct(
-          name: S.current.detailScreenCheeseSauceText,
+          name: "Сырный соус",
           price: 20,
           imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),
@@ -418,7 +415,7 @@ class DetailMenuPage extends StatelessWidget {
           height: 2,
         ),
         OptionalProduct(
-          name: S.current.detailScreenCheeseSauceText,
+          name: "Сырный соус",
           price: 20,
           imgPath: A.assetsDetailMenuPageOptionalProductImg,
         ),

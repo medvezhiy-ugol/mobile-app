@@ -5,7 +5,6 @@ import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import '../../../generated/l10n.dart';
 
 import '../../../common_setup/routes.dart';
 import '../../../ui/primary_button.dart';
@@ -33,7 +32,7 @@ class StockPage extends StatelessWidget {
             //   height: 26,
             // ),
             Text(
-              S.current.stocksScreenStocksTitleText, //'Акции и комбо',
+              "Акции и комбо",
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
