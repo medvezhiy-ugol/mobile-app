@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Скрыть кнопки &quot;доставка и самовывоз&quot; из меню заведения и адрес">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Штрих код">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/loalty_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/loalty_card.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684428474560</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Штрих код">
+      <created>1684435723873</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684435723873</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -112,6 +116,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Скрыть кнопки &quot;доставка и самовывоз&quot; из меню заведения и адрес" />
-    <option name="LAST_COMMIT_MESSAGE" value="Скрыть кнопки &quot;доставка и самовывоз&quot; из меню заведения и адрес" />
+    <MESSAGE value="Штрих код" />
+    <option name="LAST_COMMIT_MESSAGE" value="Штрих код" />
   </component>
 </project>

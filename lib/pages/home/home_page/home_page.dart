@@ -305,11 +305,70 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 10,
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 13,
+                                top: 17,
+                                right: 183,
+                                bottom: 14,
+                              ),
+                              child: Text("Данные карты",
+                              style: TextStyle(
+                                fontWeight:FontWeight.w600,
+                                fontSize: 17,
+                                color: Color(0xffE3E3E3)
+                              ),
+                              ),
+                            ),
                             Container(
                                 height: 100,
                                 width: double.infinity,
                                 color: Colors.white,
                                 child: SvgPicture.string(Barcode.code128().toSvg(cardId, width: 500, height: 100))),
+                            SizedBox(
+                              height: 46,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Номер карты",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff808080,)
+                                ),
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                Text(cardId,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xffe3e3e3)
+                                ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Text('Баланс баллов',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xff808080,)
+                                ),
+                                ),SizedBox(
+                                  height: 4,
+                                ),
+                                Text("$cardBalance",
+                                    style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xffe3e3e3)
+                                ),
+                                ),
+                              ],
+                            ),
                             //_buildOrderStatusTimerWidget(context),
                             // const SizedBox(
                             //   height: 10,
