@@ -13,7 +13,7 @@ class LoaltyCard {
     String id;
     dynamic referrerId;
     String name;
-    String surname;
+    String? surname;
     dynamic middleName;
     dynamic comment;
     String phone;

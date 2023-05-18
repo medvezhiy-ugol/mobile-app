@@ -1,12 +1,16 @@
+import 'package:barcode/barcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../common_setup/routes.dart';
+import '../../../models/loalty_card.dart';
+import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
 import '../../../services/theme_service.dart';
@@ -22,7 +26,42 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+
 class _HomePageState extends State<HomePage> {
+
+  String name = '';
+  String cardId = '';
+  double cardBalance = 0;
+
+  Barcode? bc;
+  Widget test = Container();
+
+  @override
+  void initState() {
+    _initLoaltyCard();
+    super.initState();
+  }
+
+  Future<void> _initLoaltyCard() async {
+    final data = await APIService.getRequest(
+      serverIndex: 0,
+      request: 'v1/whoiam',
+      headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIrNzk5NjkyNjc5MjEiLCJleHAiOjE2OTAzNDk2NjV9.cwRzfo9-emxO5frSJq68DEhEqzSOSlJ6hdYROaBvfiI"},
+    );
+    if (data != null) {
+      print(data);
+      var loyaltyCard = LoaltyCard.fromJson(data);
+      print('cardId');
+      print('cardBalance');
+      cardId = loyaltyCard.id;
+      name = loyaltyCard.name;
+      cardBalance = loyaltyCard.walletBalances[0].balance;
+      setState(() {
+
+      });
+    }
+  }
+
   final PageController _controller = PageController(
       viewportFraction: 0.8,
     initialPage: 1
@@ -212,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                                             height: 40,
                                           ),
                                           Text(
-                                            "Егор",
+                                            name,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 16,
@@ -234,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                                                     )
                                                 ),
                                                 child: Text(
-                                                  "Баланс",
+                                                  "$cardBalance",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w600,
                                                       fontSize: 9.14286,
@@ -263,6 +302,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                                height: 100,
+                                width: double.infinity,
+                                color: Colors.white,
+                                child: SvgPicture.string(Barcode.code128().toSvg(cardId, width: 500, height: 100))),
                             //_buildOrderStatusTimerWidget(context),
                             // const SizedBox(
                             //   height: 10,
