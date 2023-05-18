@@ -144,10 +144,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             );
           },
         ),
-        const Positioned(
-          top: 60,
-          child: ToggleSwitcher(),
-        ),
+        // const Positioned(
+        //   top: 60,
+        //   child: ToggleSwitcher(),
+        // ),
       ],
     );
   }

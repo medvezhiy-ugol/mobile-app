@@ -226,7 +226,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
           const SizedBox(
             height: 5,
           ),
-          const ToggleSwitcher(),
+          // const ToggleSwitcher(),
           const SizedBox(
             height: 6,
           ),
