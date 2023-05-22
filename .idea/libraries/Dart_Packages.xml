@@ -201,7 +201,7 @@
         <entry key="flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/Downloads/flutter/packages/flutter/lib" />
+              <option value="$USER_HOME$/Documents/flutter/packages/flutter/lib" />
             </list>
           </value>
         </entry>
@@ -250,7 +250,7 @@
         <entry key="flutter_localizations">
           <value>
             <list>
-              <option value="$USER_HOME$/Downloads/flutter/packages/flutter_localizations/lib" />
+              <option value="$USER_HOME$/Documents/flutter/packages/flutter_localizations/lib" />
             </list>
           </value>
         </entry>
@@ -264,7 +264,7 @@
         <entry key="flutter_plugin_android_lifecycle">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.14/lib" />
             </list>
           </value>
         </entry>
@@ -292,14 +292,14 @@
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$USER_HOME$/Downloads/flutter/packages/flutter_test/lib" />
+              <option value="$USER_HOME$/Documents/flutter/packages/flutter_test/lib" />
             </list>
           </value>
         </entry>
         <entry key="flutter_web_plugins">
           <value>
             <list>
-              <option value="$USER_HOME$/Downloads/flutter/packages/flutter_web_plugins/lib" />
+              <option value="$USER_HOME$/Documents/flutter/packages/flutter_web_plugins/lib" />
             </list>
           </value>
         </entry>
@@ -649,7 +649,7 @@
         <entry key="sky_engine">
           <value>
             <list>
-              <option value="$USER_HOME$/Downloads/flutter/bin/cache/pkg/sky_engine/lib" />
+              <option value="$USER_HOME$/Documents/flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
         </entry>
@@ -677,7 +677,7 @@
         <entry key="sqflite">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.8+2/lib" />
             </list>
           </value>
         </entry>
@@ -761,7 +761,7 @@
         <entry key="url_launcher_android">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.34/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.33/lib" />
             </list>
           </value>
         </entry>
@@ -922,7 +922,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_layout_grid-2.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_splash-2.2.19/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.14/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_simple_dependency_injection-2.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_slidable-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_svg-2.0.5/lib" />
@@ -978,7 +978,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sliding_up_panel-2.0.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-1.0.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/source_span-1.9.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.8+2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite_common-2.4.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/stack_trace-1.11.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/stream_channel-2.1.1/lib" />
@@ -990,7 +990,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/universal_io-2.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/universal_platform-1.0.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher-6.1.11/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.34/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.33/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5/lib" />
@@ -1008,11 +1008,11 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xml-6.2.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yaml-3.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yandex_mapkit-3.2.0/lib" />
-      <root url="file://$USER_HOME$/Downloads/flutter/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$USER_HOME$/Downloads/flutter/packages/flutter/lib" />
-      <root url="file://$USER_HOME$/Downloads/flutter/packages/flutter_localizations/lib" />
-      <root url="file://$USER_HOME$/Downloads/flutter/packages/flutter_test/lib" />
-      <root url="file://$USER_HOME$/Downloads/flutter/packages/flutter_web_plugins/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/packages/flutter_localizations/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/packages/flutter_test/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/packages/flutter_web_plugins/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -4,24 +4,21 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e374281-32fb-466f-8292-78e3e97423d2" name="Changes" comment="">
+    <list default="true" id="56729e6f-de56-408b-82a6-88a154117059" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/images/home_page/loyalty_card.png" beforeDir="false" afterPath="$PROJECT_DIR$/../assets/images/home_page/loyalty_card.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/l10n/intl_ru.arb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/pages/home/home_page/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/pages/more/more_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/pages/more/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/pages/more/profile/profile_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,13 +31,17 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../../../BearCorner_keystore.jks" />
+    <option name="KEY_ALIAS" value="key0" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2PvgCUcOf1otlHZIlrmeZLTK6Ro" />
+  <component name="ProjectId" id="2Q3SXVc6f6ARPJsWaSFI7D54pkh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -48,11 +49,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "BundleExportedModule": "android.app",
+    "ExportBundle.BundlePathForandroid.app": "/Users/mindykfam/Desktop/Developer/Medvezhi-ugol/mobile-app/android/app",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "memory.settings.postsync.last.time.stamp": "1684344443604",
+    "memory.settings.postsync.last.time.stamp": "1684580820828",
     "show.migrate.to.gradle.popup": "false"
+  },
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -118,11 +126,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4e374281-32fb-466f-8292-78e3e97423d2" name="Changes" comment="" />
-      <created>1684342841943</created>
+      <changelist id="56729e6f-de56-408b-82a6-88a154117059" name="Changes" comment="" />
+      <created>1684580811859</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1684342841943</updated>
+      <updated>1684580811859</updated>
     </task>
     <servers />
   </component>
