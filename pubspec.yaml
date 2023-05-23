@@ -59,7 +59,8 @@ flutter:
     - assets/images/about_app_page/
     - assets/images/more_page/
     - assets/documents/txt/
-
+    - assets/images/
+    -
   fonts:
     - family: Unbounded
       fonts:
