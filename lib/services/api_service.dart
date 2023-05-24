@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class APIService {
   static const List<String> url = [
-    'http://94.131.97.26',
-    'http://194.116.172.13',
+    'https://medveshii-ugol.lambda-dev.ru',
+    'https://medveshii-ugol.lambda-dev.ru',
   ];
 
   static Future<dynamic> postRequest({
@@ -44,7 +43,7 @@ class APIService {
           headers: headers,
         ),
       );
-      // debugPrint(response.data.toString());
+      //debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }

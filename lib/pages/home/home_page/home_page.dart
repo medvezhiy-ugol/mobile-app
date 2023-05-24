@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   String name = '';
   String cardId = '';
+  String phone = '';
   double cardBalance = 0;
 
   Widget test = Container();
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
       cardId = loyaltyCard.id;
       name = loyaltyCard.name;
       cardBalance = loyaltyCard.walletBalances[0].balance;
+      phone = loyaltyCard.phone;
       setState(() {
 
       });
@@ -210,149 +212,160 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       )
-                          : ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 180,
-                          color: const Color(0xff191A1F),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 8,
-                                  left: 10,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Карта лояльности",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 10,
-                                          color: Color(0xffEFEFEF)
-                                      ),
+                          : Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              height: 180,
+                              color: const Color(0xff191A1F),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 8,
+                                      left: 10,
                                     ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                    Text(
-                                      name,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                          color: Color(0xffFFFFFF)
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 11,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(6.88235),
-                                              border: Border.all(
-                                                color: Color(0xffFF9900),
-                                              )
-                                          ),
-                                          child: Text(
-                                            "$cardBalance",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 9.14286,
-                                                color: Color(0xffFFFFFF)
-                                            ),
+                                        Text(
+                                          "Карта лояльности",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 10,
+                                              color: Color(0xffEFEFEF)
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 3,
+                                          height: 40,
                                         ),
                                         Text(
-                                          "9834",
+                                          name,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 9.14286,
+                                              fontSize: 16,
                                               color: Color(0xffFFFFFF)
                                           ),
                                         ),
+                                        SizedBox(
+                                          height: 11,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.all(2),
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(6.88235),
+                                                  border: Border.all(
+                                                    color: Color(0xffFF9900),
+                                                  )
+                                              ),
+                                              child: Text(
+                                                "$cardBalance",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 9.14286,
+                                                    color: Color(0xffFFFFFF)
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 3,
+                                            ),
+                                            Text(
+                                              "9834",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 9.14286,
+                                                  color: Color(0xffFFFFFF)
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                  ],
+                                  ),
+                                  Image.asset("assets/images/home_page/loyalty_card.png")
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(
+                              left: 13,
+                              top: 17,
+                              right: 183,
+                              bottom: 14,
+                            ),
+                            child: Text("Данные карты",
+                              style: TextStyle(
+                                  fontWeight:FontWeight.w600,
+                                  fontSize: 17,
+                                  color: Color(0xffE3E3E3)
+                              ),
+                            ),
+                          ),
+                          Container(
+                              height: 100,
+                              width: double.infinity,
+                              color: Colors.white,
+                              child: SvgPicture.string(
+                                  Barcode.code128().toSvg(
+                                  phone,
+                                  width: 500,
+                                  height: 100
+                              )
+                              )
+                          ),
+                          SizedBox(
+                            height: 46,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Номер карты",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xff808080,)
                                 ),
                               ),
-                              Image.asset("assets/images/home_page/loyalty_card.png")
+                              SizedBox(
+                                height: 4,
+                              ),
+                              Text(cardId,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xffe3e3e3)
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Text('Баланс баллов',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xff808080,)
+                                ),
+                              ),SizedBox(
+                                height: 4,
+                              ),
+                              Text("$cardBalance",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xffe3e3e3)
+                                ),
+                              ),
                             ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 13,
-                          top: 17,
-                          right: 183,
-                          bottom: 14,
-                        ),
-                        child: Text("Данные карты",
-                          style: TextStyle(
-                              fontWeight:FontWeight.w600,
-                              fontSize: 17,
-                              color: Color(0xffE3E3E3)
-                          ),
-                        ),
-                      ),
-                      Container(
-                          height: 100,
-                          width: double.infinity,
-                          color: Colors.white,
-                          child: SvgPicture.string(Barcode.code128().toSvg(cardId, width: 500, height: 100))),
-                      SizedBox(
-                        height: 46,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Номер карты",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff808080,)
-                            ),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text(cardId,
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xffe3e3e3)
-                            ),
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Text('Баланс баллов',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff808080,)
-                            ),
-                          ),SizedBox(
-                            height: 4,
-                          ),
-                          Text("$cardBalance",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xffe3e3e3)
-                            ),
                           ),
                         ],
                       ),
