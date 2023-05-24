@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/draw_page.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_history.dart';
 import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
@@ -27,15 +29,20 @@ class StockPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
               child: Stack(
                 children: [
-                  Image.asset('assets/images/draw_result.png'),
+                  Image.asset('assets/images/draw_result.png',  width: double.infinity, height: double.infinity),
                   Center(
-                    child: Text('Результаты \n'
-                        'розыгрыша',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xffffffff)
-                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DrawPage()));
+                      },
+                      child: Text('Результаты \n'
+                          'розыгрыша',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xffffffff)
+                      ),
+                      ),
                     ),
                   ),
                   Padding(
@@ -94,18 +101,24 @@ class StockPage extends StatelessWidget {
               height: 13,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  height: 50,
-                  width: 175,
-                  color: Color(0xff26282F),
-                  child: Center(
-                    child: Text('История',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: Color(0xffffffff)
-                    ),),
+                GestureDetector(
+                  onTap: () {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotHistoryPage()));
+      },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 2 - 16,
+                    color: Color(0xff26282F),
+                    child: Center(
+                      child: Text('История',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Color(0xffffffff)
+                      ),),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -113,7 +126,7 @@ class StockPage extends StatelessWidget {
                 ),
                 Container(
                   height: 50,
-                  width: 175,
+                  width: MediaQuery.of(context).size.width / 2 - 16,
                   color: Color(0xff26282F),
                   child: Center(
                     child: Text('Предыдущая лотерея',
