@@ -9,11 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Страница розыгрыша">
-      <change afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/history_draw.dart" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Предыдущая лотерея">
+      <change afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/product_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1/loyalty_card.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1/no_loyalty_card.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023,_21_39_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023__21_39__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_history_page/discounts_history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_history_page/discounts_history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684952907179</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Предыдущая лотерея">
+      <created>1685039103661</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685039103661</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -165,7 +174,8 @@
     <MESSAGE value="Fix icons" />
     <MESSAGE value="Розыгрыш" />
     <MESSAGE value="Страница розыгрыша" />
-    <option name="LAST_COMMIT_MESSAGE" value="Страница розыгрыша" />
+    <MESSAGE value="Предыдущая лотерея" />
+    <option name="LAST_COMMIT_MESSAGE" value="Предыдущая лотерея" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -179,6 +189,11 @@
           <url>file://$PROJECT_DIR$/lib/pages/discounts/discounts_page/history_draw.dart</url>
           <line>326</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart</url>
+          <line>493</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
