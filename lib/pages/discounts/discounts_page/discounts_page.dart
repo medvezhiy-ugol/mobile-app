@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/draw_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_history.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_page/history_draw.dart';
 import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
@@ -124,17 +125,22 @@ class StockPage extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width / 2 - 16,
-                  color: Color(0xff26282F),
-                  child: Center(
-                    child: Text('Предыдущая лотерея',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: Color(0xffffffff)
-                      ),),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoryDraw()));
+                    },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 2 - 16,
+                    color: Color(0xff26282F),
+                    child: Center(
+                      child: Text('Предыдущая лотерея',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Color(0xffffffff)
+                        ),),
+                    ),
                   ),
                 ),
               ],

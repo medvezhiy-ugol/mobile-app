@@ -51,6 +51,7 @@ class SlotHistoryPage extends StatelessWidget {
                       height: 12,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Начисление бонусов',
                         style: TextStyle(
@@ -117,6 +118,7 @@ class SlotHistoryPage extends StatelessWidget {
                       height: 12,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Списание бонусов',
                           style: TextStyle(
