@@ -60,9 +60,6 @@ class SlotHistoryPage extends StatelessWidget {
                           color: Color(0xffffffff)
                         ),
                         ),
-                        SizedBox(
-                          width: 127,
-                        ),
                         Text('+1000',
                           style: TextStyle(
                               fontSize: 16,
@@ -79,9 +76,16 @@ class SlotHistoryPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          alignment: Alignment.center,
                           height: 20,
-                          width: 151,
-                          color: Color(0xff29FF24),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xff29FF24),
+                          ),
                           child: Text('Еженедельная лотерая',
                             style: TextStyle(
                                 fontSize: 12,
@@ -109,6 +113,10 @@ class SlotHistoryPage extends StatelessWidget {
                 height: 4,
               ),
               Container(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                ),
                 height: 73,
                 width: double.infinity,
                 color: Color(0xff191A1F),
@@ -147,7 +155,6 @@ class SlotHistoryPage extends StatelessWidget {
                       children: [
                         Container(
                           height: 20,
-                          width: 151,
                           color: Color(0xffBD3232),
                           child: Text('Оплата покупки',
                             style: TextStyle(

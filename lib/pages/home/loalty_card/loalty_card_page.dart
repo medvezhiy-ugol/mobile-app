@@ -103,17 +103,21 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                         const SizedBox(
                           height: 14,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 89,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 13),
-                            child: BarcodeWidget(
-                              barcode: Barcode.code128(escapes: true),
-                              data: state.cardId,
-                              backgroundColor: Colors.white,
-                              drawText: false,
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.all(80.0),
+                          child: BarcodeWidget(
+                            barcode: Barcode.code128(escapes: true),
+                            data: state.cardId,
+                            backgroundColor: Colors.white,
+                            drawText: false,
+                            // margin: EdgeInsets.only(
+                            //   left: 50,
+                            //   right: 50,
+                            // ),
+                            // padding: EdgeInsets.only(
+                            //   left: 50,
+                            //   right: 50,
+                            // ),
                           ),
                         ),
                         const SizedBox(

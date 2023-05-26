@@ -10,6 +10,7 @@ import '../../../utils/app_colors.dart';
 import '../../../ui/menu/menu_sections_widget.dart';
 import '../../../ui/menu/scale_tabbar_module.dart';
 import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
+import '../basket_menu_page/basket_menu_page.dart';
 import 'bloc/menu_bloc.dart';
 
 class MenuPage extends StatefulWidget {

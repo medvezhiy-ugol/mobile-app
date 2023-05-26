@@ -30,7 +30,11 @@ class StockPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
               child: Stack(
                 children: [
-                  Image.asset('assets/images/draw_result.png',  width: double.infinity, height: double.infinity),
+                  Image.asset('assets/images/draw_result.png',
+                      width: double.infinity,
+                      height: 259,
+                  fit: BoxFit.cover,
+                  ),
                   Center(
                     child: GestureDetector(
                       onTap: () {
