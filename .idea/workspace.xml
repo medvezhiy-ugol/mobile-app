@@ -9,16 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="донер с курицей">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Акции и комбо (контейнер)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_detail_page/draw_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_detail_page/draw_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_history_page/discounts_history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_history_page/discounts_history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/history_draw.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/history_draw.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685039103661</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Акции и комбо (контейнер)">
+      <created>1685293053028</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1685293053028</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -178,7 +178,8 @@
     <MESSAGE value="Розыгрыш" />
     <MESSAGE value="Страница розыгрыша" />
     <MESSAGE value="Предыдущая лотерея" />
-    <option name="LAST_COMMIT_MESSAGE" value="Предыдущая лотерея" />
+    <MESSAGE value="Акции и комбо (контейнер)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Акции и комбо (контейнер)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

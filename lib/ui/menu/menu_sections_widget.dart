@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/ios.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
+import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 
 import '../../../common_setup/routes.dart';
 import 'menu_card_widget.dart';
@@ -58,7 +60,32 @@ class MenuSection extends StatelessWidget {
                       builder: (sheetContext) => Column(
                         children: [
                           SizedBox(height: 100),
-                          Text('sds'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CloseCircleButton(onTap: () => context.pop()),
+                              const SizedBox(width: 8,)
+                            ],
+                          ),
+                          Text('Корзина',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          ),
+                          SizedBox(
+                            height: 26,
+                          ),
+                          Text('Очистить корзину',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff808080)
+                          ),
+                          ),
+                          SizedBox(
+                            height: 14,
+                          ),
                           Slidable(
                             // Specify a key if the Slidable is dismissible.
                             key: const ValueKey(0),
@@ -87,12 +114,48 @@ class MenuSection extends StatelessWidget {
                               height: 96,
                               width: double.infinity,
                               color: Color(0xff191A1F),
-                              child: Text('Донер с курицей',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                color: Colors.lightBlue
-                              ),),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Image.asset('assets/images/detail_menu_page/doner.png',
+                                    height: 78,
+                                    width: 108,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 2,
+                                          top: 10,
+                                        ),
+                                        child: Text('Донер с курицей',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color(0xffffffff)
+                                        ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 23,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(Icons.remove),
+                                            onPressed: (){},
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
