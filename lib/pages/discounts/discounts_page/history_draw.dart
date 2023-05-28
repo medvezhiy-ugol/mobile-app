@@ -68,11 +68,16 @@ class HistoryDraw extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('ВЫ',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                            ),
+                            child: Text('ВЫ',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xffffffff)
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -82,7 +87,7 @@ class HistoryDraw extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xff66BF28)
+                                color: Color(0xff66bf28)
                             ),
                           ),
                         ],
@@ -93,15 +98,29 @@ class HistoryDraw extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 20,
-                            width: 151,
-                            color: Color(0xffff9900),
-                            child: Text('Билет №234/300',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffffffff)
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color(0xffff9900),
+                              ),
+                              alignment: Alignment.center,
+                              height: 20,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 2,
+                                  horizontal: 8,
+                                ),
+                                child: Text('Билет №234/300',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -135,11 +154,16 @@ class HistoryDraw extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Маша№31345',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                            ),
+                            child: Text('Маша#31345',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xffffffff)
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -149,7 +173,7 @@ class HistoryDraw extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xff66BF28)
+                                color: Color(0xff66bf28)
                             ),
                           ),
                         ],
@@ -160,15 +184,29 @@ class HistoryDraw extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 20,
-                            width: 151,
-                            color: Color(0xff66BF28),
-                            child: Text('Билет №14/300',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffffffff)
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color(0xff66BF28),
+                              ),
+                              alignment: Alignment.center,
+                              height: 20,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 2,
+                                  horizontal: 8,
+                                ),
+                                child: Text('Билет №14/300',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -187,274 +225,7 @@ class HistoryDraw extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 4,
-                ),
-                Container(
-                  height: 73,
-                  width: double.infinity,
-                  color: Color(0xff191A1F),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Саша№23345',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)
-                            ),
-                          ),
-                          SizedBox(
-                            width: 127,
-                          ),
-                          Text('+1000',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff66BF28)
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 20,
-                            width: 151,
-                            color: Color(0xff66BF28),
-                            child: Text('Билет №85/300',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffffffff)
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('21 марта',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Color(0xff808080)
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Container(
-                  height: 73,
-                  width: double.infinity,
-                  color: Color(0xff191A1F),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Альберт№21545',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)
-                            ),
-                          ),
-                          SizedBox(
-                            width: 127,
-                          ),
-                          Text('+1000',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff66BF28)
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 20,
-                            width: 151,
-                            color: Color(0xff66BF28),
-                            child: Text('Билет №95/300',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffffffff)
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('21 марта',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Color(0xff808080)
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Container(
-                  height: 73,
-                  width: double.infinity,
-                  color: Color(0xff191A1F),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Роман№55345',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)
-                            ),
-                          ),
-                          SizedBox(
-                            width: 127,
-                          ),
-                          Text('+1000',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff66BF28)
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 20,
-                            width: 151,
-                            color: Color(0xff66BF28),
-                            child: Text('Билет №8/300',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffffffff)
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('21 марта',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Color(0xff808080)
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Container(
-                  height: 73,
-                  width: double.infinity,
-                  color: Color(0xff191A1F),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Никита№277745',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)
-                            ),
-                          ),
-                          SizedBox(
-                            width: 127,
-                          ),
-                          Text('+1000',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff66BF28)
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 20,
-                            width: 151,
-                            color: Color(0xff66BF28),
-                            child: Text('Билет №215/300',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffffffff)
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('21 марта',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Color(0xff808080)
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+
                 // const SizedBox(height: 10,),
 
                 // const CaseWidget(date: '27 апреля'),

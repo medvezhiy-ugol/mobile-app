@@ -312,6 +312,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Container(
+                            padding: EdgeInsets.only(
+                              left: 15,
+                              right: 15,
+                            ),
                               height: 100,
                               width: double.infinity,
                               color: Colors.white,

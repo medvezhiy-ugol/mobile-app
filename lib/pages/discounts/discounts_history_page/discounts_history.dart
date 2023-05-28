@@ -53,12 +53,17 @@ class SlotHistoryPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Начисление бонусов',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xffffffff)
-                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 12,
+                          ),
+                          child: Text('Начисление бонусов',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xffffffff)
+                          ),
+                          ),
                         ),
                         Text('+1000',
                           style: TextStyle(
@@ -75,22 +80,27 @@ class SlotHistoryPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 12,
                           ),
-                          alignment: Alignment.center,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color(0xff29FF24),
-                          ),
-                          child: Text('Еженедельная лотерая',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xffffffff)
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            alignment: Alignment.center,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Color(0xff29FF24),
+                            ),
+                            child: Text('Еженедельная лотерая',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xffffffff)
+                              ),
                             ),
                           ),
                         ),
@@ -113,10 +123,6 @@ class SlotHistoryPage extends StatelessWidget {
                 height: 4,
               ),
               Container(
-                padding: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                ),
                 height: 73,
                 width: double.infinity,
                 color: Color(0xff191A1F),
@@ -128,11 +134,16 @@ class SlotHistoryPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Списание бонусов',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffffffff)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 12,
+                          ),
+                          child: Text('Списание бонусов',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xffffffff)
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -153,14 +164,29 @@ class SlotHistoryPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 20,
-                          color: Color(0xffBD3232),
-                          child: Text('Оплата покупки',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xffffffff)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 12,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Color(0xffBD3232),
+                            ),
+                            alignment: Alignment.center,
+                            height: 20,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 8,
+                              ),
+                              child: Text('Оплата покупки',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xffffffff)
+                                ),
+                              ),
                             ),
                           ),
                         ),
