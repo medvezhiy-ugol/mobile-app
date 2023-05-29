@@ -150,12 +150,233 @@ class MenuSection extends StatelessWidget {
                                             icon: Icon(Icons.remove),
                                             onPressed: (){},
                                           ),
+                                          Text('2',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                          ),
+                                          ),
+                                          IconButton(
+                                            icon: Icon(Icons.remove),
+                                            onPressed: (){},
+                                          ),
+                                          Text('324 Р',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ),
+                            child: Container(
+                              height: 60,
+                              width: double.infinity,
+                              color: Color(0xff191A1F),
+                              child: Center(
+                                child: Text('LETO2023',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 18,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                Text('Доставка:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text('Ярославль',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Color(0xff808080)
+                                ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 26,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 29
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 45,
+                                  width: 133,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: Color(0xff2D2D2D)
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 40,
+                                        child: Icon(
+                                          Icons.delivery_dining
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Доставка',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12,
+                                            color: Color(0xffffffff)
+                                          ),
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Text('30-40 минут',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color(0xff808080)
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 14,
+                                ),
+                                Container(
+                                  height: 45,
+                                  width: 158,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Color(0xff000000)
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 40,
+                                        child: Icon(
+                                            Icons.shopping_bag
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Навынос',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 12,
+                                                color: Color(0xff808080)
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Text('Московский пр. 178',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color(0xff808080)
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 11
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 48,
+                                  width: 400,
+                                  color: Color(0xff191a1f),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 40,
+                                        child: Icon(
+                                            Icons.history
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Доставка 30-40 минут',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                color: Color(0xffffffff)
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Text('Выберите время доставки',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color(0xff808080)
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                        child: Icon(
+                                          Icons.arrow_right
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
