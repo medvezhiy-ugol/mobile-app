@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:medvezhiy_ugol/models/menu.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_page/Leto.dart';
 import 'package:medvezhiy_ugol/pages/menu/basket_menu_page/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
@@ -13,7 +14,7 @@ import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import '../../../common_setup/routes.dart';
 import 'menu_card_widget.dart';
 
-class MenuSection extends StatelessWidget {
+class MenuSection extends StatefulWidget {
   final MenuCategory menuCategory;
   static const double menuSectionWidgetGapValue = 10;
 
@@ -22,6 +23,12 @@ class MenuSection extends StatelessWidget {
     required this.menuCategory,
   }) : super(key: key);
 
+  @override
+  State<MenuSection> createState() => _MenuSectionState();
+}
+
+class _MenuSectionState extends State<MenuSection> {
+  int _counter = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +40,7 @@ class MenuSection extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                menuCategory.name,
+                widget.menuCategory.name,
                 style: ThemeService.tabBarTitleSectionTextStyle(),
               ),
             ),
@@ -44,15 +51,15 @@ class MenuSection extends StatelessWidget {
           LayoutGrid(
             columnSizes: [1.fr, 1.fr],
             rowSizes: List.generate(
-              menuCategory.items.length ~/ 2 + 1,
+              widget.menuCategory.items.length ~/ 2 + 1,
               (index) => auto,
             ),
             columnGap: 10,
-            rowGap: menuSectionWidgetGapValue,
+            rowGap: MenuSection.menuSectionWidgetGapValue,
             children: List.generate(
-              menuCategory.items.length,
+              widget.menuCategory.items.length,
               (i) => MenuCardWidget(
-                menuProduct: menuCategory.items[i],
+                menuProduct: widget.menuCategory.items[i],
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
@@ -141,30 +148,37 @@ class MenuSection extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 23,
+                                        height: 19,
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           IconButton(
                                             icon: Icon(Icons.remove),
-                                            onPressed: (){},
+                                            onPressed: () {
+                                              setState(() {
+                                                _counter--;
+                                              });
+                                            },
                                           ),
-                                          Text('2',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                          ),
-                                          ),
+                                          Text('$_counter'),
                                           IconButton(
-                                            icon: Icon(Icons.remove),
-                                            onPressed: (){},
+                                            icon: Icon(Icons.add),
+                                            onPressed: () {
+                                              setState(() {
+                                                _counter++;
+                                              });
+                                            },
                                           ),
-                                          Text('324 Р',
+                                          SizedBox(
+                                            width: 100,
+                                          ),
+                                          Text('324',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),),
+                                            fontSize:16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -174,22 +188,30 @@ class MenuSection extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
+                            height: 4,
+                          ),
+                          SizedBox(
                             height: 32,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                            ),
-                            child: Container(
-                              height: 60,
-                              width: double.infinity,
-                              color: Color(0xff191A1F),
-                              child: Center(
-                                child: Text('LETO2023',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xffffffff)
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => leto()));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              child: Container(
+                                height: 60,
+                                width: double.infinity,
+                                color: Color(0xff191A1F),
+                                child: Center(
+                                  child: Text('LETO2023',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xffffffff)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -325,55 +347,219 @@ class MenuSection extends StatelessWidget {
                           SizedBox(
                             height: 32,
                           ),
+                          Container(
+                            height: 48,
+                            width: 400,
+                            color: Color(0xff191a1f),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 40,
+                                  child: Icon(
+                                      Icons.history
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Доставка 30-40 минут',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Color(0xffffffff)
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Text('Выберите время доставки',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff808080)
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 130,
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                  child: Icon(
+                                      Icons.arrow_right
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Container(
+                            height: 48,
+                            width: 400,
+                            color: Color(0xff191a1f),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 40,
+                                  child: Icon(
+                                      Icons.credit_card
+                                  ),
+                                ),
+                                Text('MasterCard ** 4498',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 150,
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                  child: Icon(
+                                      Icons.circle_sharp
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 45,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 11
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 22
                             ),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  height: 48,
-                                  width: 400,
-                                  color: Color(0xff191a1f),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 40,
-                                        child: Icon(
-                                            Icons.history
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Доставка 30-40 минут',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14,
-                                                color: Color(0xffffffff)
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 2,
-                                          ),
-                                          Text('Выберите время доставки',
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w400,
-                                                color: Color(0xff808080)
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                        child: Icon(
-                                          Icons.arrow_right
-                                        ),
-                                      )
-                                    ],
+                                Text('Сумма заказа',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Color(0xff808080,)
+                                ),
+                                ),
+                                Text('971',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xffffffff)
+                                ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 21,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 22
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Сервисный сбор',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                      color: Color(0xff808080,)
+                                  ),
+                                ),
+                                Text('30',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 22
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Сервисный сбор',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                      color: Color(0xff808080,)
+                                  ),
+                                ),
+                                Text('30',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height:58,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 22
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('При самовывозе',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                      color: Color(0xff808080,)
+                                  ),
+                                ),
+                                Text('768',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 9,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 22
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                  Text('ИТОГО',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
+                                      color: Color(0xffFfffff,)
+                                  ),
+                                ),
+                                Text('971',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
                                   ),
                                 ),
                               ],
