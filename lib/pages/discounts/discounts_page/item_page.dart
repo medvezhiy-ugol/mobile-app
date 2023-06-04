@@ -271,29 +271,159 @@ class _ItemPageState extends State<ItemPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    height: 36,
-                    width: 63,
-                    color: Color(0xff26282f),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            child: Icon(
-                              Icons.close
-                            ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 36,
+                        width: 63,
+                        color: Color(0xff26282f),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                child: Icon(
+                                  Icons.close
+                                ),
+                              ),
+                              SizedBox(
+                                width: 9.33,
+                              ),
+                              Text('Лук',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                              ),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            width: 9.33,
-                          ),
-                          Text('Лук',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                          ),
-                        ],
+                        ),
                       ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        height: 36,
+                        width: 63,
+                        color: Color(0xff26282f),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                child: Icon(
+                                    Icons.close
+                                ),
+                              ),
+                              SizedBox(
+                                width: 9.33,
+                              ),
+                              Text('Салат',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        height: 36,
+                        width: 63,
+                        color: Color(0xff26282f),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                child: Icon(
+                                    Icons.close
+                                ),
+                              ),
+                              SizedBox(
+                                width: 9.33,
+                              ),
+                              Text('Огурцы маринованные',
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 36,
+                        width: 63,
+                        color: Color(0xff26282f),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                child: Icon(
+                                    Icons.close
+                                ),
+                              ),
+                              SizedBox(
+                                width: 9.33,
+                              ),
+                              Text('Соус',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        height: 36,
+                        width: 63,
+                        color: Color(0xff26282f),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                child: Icon(
+                                    Icons.close
+                                ),
+                              ),
+                              SizedBox(
+                                width: 9.33,
+                              ),
+                              Text('Томаты',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Text('Добавить',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
                     ),
                   ),
               ],
