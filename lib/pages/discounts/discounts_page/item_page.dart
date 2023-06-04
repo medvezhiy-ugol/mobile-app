@@ -60,6 +60,10 @@ class _ItemPageState extends State<ItemPage> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height:
+                    16,
+                  ),
                   Text('куриное бедро, помидор, огурец, айсберг, \n'
                       'кинза, базилик, соус на выбор',
                   style: TextStyle(
@@ -68,6 +72,33 @@ class _ItemPageState extends State<ItemPage> {
                     color: Color(0xff808080)
                   ),
                   ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 38,
+                          width: 56,
+                          child: Text('Вес',
+                          style: TextStyle(
+                            color: Color(0xff808080),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          ),
+                        ),
+                        Text('300 г',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white
+                        ),
+                        ),
+                      ],
+                    ),
+                  )
               ],
             ),
             ),
