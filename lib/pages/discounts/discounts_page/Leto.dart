@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_page/item_page.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -153,7 +154,7 @@ class _letoState extends State<leto> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => leto()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemPage()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
