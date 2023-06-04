@@ -299,11 +299,11 @@ class _ItemPageState extends State<ItemPage> {
                         ),
                       ),
                       SizedBox(
-                        width: 5,
+                        width: 8,
                       ),
                       Container(
                         height: 36,
-                        width: 63,
+                        width: 75,
                         color: Color(0xff26282f),
                         child: Center(
                           child: Row(
@@ -327,44 +327,32 @@ class _ItemPageState extends State<ItemPage> {
                         ),
                       ),
                       SizedBox(
-                        width: 5,
+                        width: 8,
                       ),
                       Container(
                         height: 36,
-                        width: 63,
+                        width: 158,
                         color: Color(0xff26282f),
                         child: Center(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                child: Icon(
-                                    Icons.close
-                                ),
-                              ),
-                              SizedBox(
-                                width: 9.33,
-                              ),
-                              Text('Огурцы маринованные',
-                                style: TextStyle(
-                                  decoration: TextDecoration.lineThrough,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
+                          child: Text('Огурцы маринованные',
+                            style: TextStyle(
+                              decoration: TextDecoration.lineThrough,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Row(
                     children: [
                       Container(
                         height: 36,
-                        width: 63,
+                        width: 70,
                         color: Color(0xff26282f),
                         child: Center(
                           child: Row(
@@ -388,11 +376,11 @@ class _ItemPageState extends State<ItemPage> {
                         ),
                       ),
                       SizedBox(
-                        width: 5,
+                        width: 8,
                       ),
                       Container(
                         height: 36,
-                        width: 63,
+                        width: 84,
                         color: Color(0xff26282f),
                         child: Center(
                           child: Row(
@@ -418,12 +406,170 @@ class _ItemPageState extends State<ItemPage> {
                     ],
                   ),
                   SizedBox(
-                    height: 32,
+                    height: 24,
                   ),
                   Text('Добавить',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 11,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25,
+                    ),
+                    child: Container(
+                      height: 65,
+                      width: double.infinity,
+                      color: Color(0xff191a1f),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset('assets/images/detail_menu_page/souse.png',
+                            height: 65,
+                            width: 65,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Томатный соус',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: Color(0xffffffff)
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: SizedBox(
+                                width: 40,
+                                child: Icon(
+                                  Icons.circle_sharp,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25
+                    ),
+                    child: Container(
+                      height: 65,
+                      width: double.infinity,
+                      color: Color(0xff191a1f),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset('assets/images/detail_menu_page/souse.png',
+                            height: 65,
+                            width: 65,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Сырный соус',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: Color(0xffffffff)
+                                ),
+                              ),
+                              Text('+ 20 р',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff808080)
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: SizedBox(
+                                width: 40,
+                                child: Icon(
+                                  Icons.circle_sharp,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25
+                    ),
+                    child: Container(
+                      height: 65,
+                      width: double.infinity,
+                      color: Color(0xff191a1f),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset('assets/images/detail_menu_page/souse.png',
+                            height: 65,
+                            width: 65,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Сырный соус',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: Color(0xffffffff)
+                                ),
+                              ),
+                              Text('+ 20 р',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff808080)
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: SizedBox(
+                                width: 40,
+                                child: Icon(
+                                  Icons.check_circle,
+                                  color: Color(0xffff9900),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
               ],
