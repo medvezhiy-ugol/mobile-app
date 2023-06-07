@@ -13,77 +13,91 @@ class DrawPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
             SizedBox(
-            height:248,
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                Image.asset('assets/images/draw_result.png',  width: double.infinity, height: double.infinity),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => DrawPage()));
-                    },
-                    child: Text('Розыгрыш',
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xffffffff)
+                height:248,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: [
+                    Image.asset('assets/images/draw_result.png',  width: double.infinity, height: double.infinity,
+                      fit: BoxFit.cover,),
+                    Positioned(
+                      top: 14, // расположение сверху
+                      left: MediaQuery.of(context).size.width / 2 - 50,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => DrawPage()));
+                        },
+                        child: Text('Розыгрыш',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xffffffff)
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 67.75,
-                    bottom: 51.75,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                    Positioned(
+                      top: 278,
+                      left: 0,
+                      right: 0,
+                      child: Image.asset(
+                        'assets/images/stock_page/slot_machine_background.png',
+                        width: double.infinity,
+                        height: 200,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 67.75,
+                        bottom: 51.75,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.history,
-                            color: Color(0xff808080)
-                            ,),
+                          Row(
+                            children: [
+                              Icon(Icons.history,
+                                color: Color(0xff808080)
+                                ,),
+                              SizedBox(
+                                width: 6.75,
+                              ),
+                              Text('16:30:16',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text('ДО КОНЦА РОЗЫГРЫША',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff808080,)
+                                ),
+                              ),
+                            ],
+                          ),
                           SizedBox(
-                            width: 6.75,
+                            height: 11,
                           ),
-                          Text('16:30:16',
+                          Text('7 мар 10:00',
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text('ДО КОНЦА РОЗЫГРЫША',
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff808080,)
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff808080,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 11,
-                      ),
-                      Text('7 мар 10:00',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff808080,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
           SizedBox(
             height: 10,
           ),

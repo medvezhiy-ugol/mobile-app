@@ -225,8 +225,9 @@ class _letoState extends State<leto> {
                           children: [
                             SizedBox(
                               width: 40,
-                              child: Icon(
-                                  Icons.shopping_bag
+                              child: Image.asset('assets/images/active_order_page/delivery_off.png',
+                                height: 19.25,
+                                width: 16.5,
                               ),
                             ),
                             Column(
@@ -269,8 +270,9 @@ class _letoState extends State<leto> {
                     children: [
                       SizedBox(
                         width: 40,
-                        child: Icon(
-                            Icons.credit_card
+                        child: Image.asset('assets/images/active_order_page/mastercard.png',
+                          width: 22,
+                          height: 15,
                         ),
                       ),
                       Text('MasterCard ** 4498',
