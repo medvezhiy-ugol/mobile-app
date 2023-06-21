@@ -9,9 +9,9 @@ class AboutAppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.color111216,
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Color(0xff000000),
+      body: SingleChildScrollView(
         child: SafeArea(
             child: Column(
           children: [
@@ -62,7 +62,8 @@ class AboutAppPage extends StatelessWidget {
                         child: const Text(
                           '''ИП “Красильщиков Роман”\nВерсия 0.1.build2''',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
+                              fontSize: 14, fontWeight: FontWeight.w400,
+                          color: Color(0xffffffff)),
                         ),
                       )
                     ],

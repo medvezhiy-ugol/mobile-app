@@ -11,9 +11,9 @@ class ContactUsPage extends StatelessWidget {
   final TextEditingController _textMailBodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.color111216,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: Color(0xff000000),
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -35,6 +35,7 @@ class ContactUsPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
                     ),
                   ),
                   const SizedBox(
@@ -45,6 +46,7 @@ class ContactUsPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
+                        color: Color(0xffffffff)
                     ),
                   ),
                   const SizedBox(
@@ -138,6 +140,7 @@ class ContactUsPage extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16,
+                                      color: Color(0xffffffff)
                                   ),
                                 )
                               ],

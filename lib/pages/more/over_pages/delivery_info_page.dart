@@ -8,9 +8,9 @@ class DeliveryInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.color111216,
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Color(0xff000000),
+      body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [

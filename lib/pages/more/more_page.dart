@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/more/about_app/about_app_page.dart';
+import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
@@ -11,6 +13,7 @@ import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
 import 'auth/auth_page/auth_page.dart';
 import 'auth/bloc/more_bloc.dart';
+import 'over_pages/delivery_info_page.dart';
 
 class MorePage extends StatelessWidget {
   MorePage({super.key});
@@ -28,6 +31,7 @@ class MorePage extends StatelessWidget {
           context.read<MoreBloc>().add(MoreUnRegisteredEvent());
         }
         return Scaffold(
+          backgroundColor: Color(0xff151515),
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(10),
@@ -98,6 +102,7 @@ class MorePage extends StatelessWidget {
                   children: [
                     const Icon(
                       MorePageIcons.person,
+                      color: Color(0xffffffff),
                       size: 32,
                     ),
                     const SizedBox(
@@ -306,13 +311,16 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => Navigator.of(context).pushNamed(Routes.deliveryInfo),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => DeliveryInfoPage()));
+              },
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
                     const Icon(
                       MorePageIcons.car,
+                      color: Color(0xffffffff),
                       size: 28,
                     ),
                     const SizedBox(
@@ -336,13 +344,16 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => Navigator.of(context).pushNamed(Routes.contactUs),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContactUsPage()));
+              },
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
                     const Icon(
                       MorePageIcons.star,
+                      color: Color(0xffffffff),
                       size: 28,
                     ),
                     const SizedBox(
@@ -366,13 +377,16 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => Navigator.of(context).pushNamed(Routes.aboutApp),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutAppPage()));
+              },
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
                     const Icon(
                       MorePageIcons.info,
+                      color: Color(0xffffffff),
                       size: 28,
                     ),
                     const SizedBox(

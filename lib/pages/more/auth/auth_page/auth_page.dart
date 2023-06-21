@@ -69,6 +69,7 @@ class _AuthPageState extends State<AuthPage> {
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
                         fontFamily: AppFonts.unbounded,
+                        color: Color(0xffffffff)
                       ),
                     ),
                     const SizedBox(
@@ -78,6 +79,7 @@ class _AuthPageState extends State<AuthPage> {
                       'Введите номер мобильного телефона',
                       style: const TextStyle(
                         fontSize: 16,
+                          color: Color(0xffffffff)
                       ),
                     ),
                     SizedBox(
@@ -107,6 +109,7 @@ class _AuthPageState extends State<AuthPage> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16,
+                                      color: Color(0xffffffff)
                                   ),
                                 ),
                               ),
