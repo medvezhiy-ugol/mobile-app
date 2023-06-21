@@ -9,6 +9,7 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
+import 'auth/auth_page/auth_page.dart';
 import 'auth/bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
@@ -89,9 +90,8 @@ class MorePage extends StatelessWidget {
           color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
-            child: InkWell(
-              //moreAuth - profilePage
-              onTap: () => Navigator.of(context).pushNamed(Routes.moreAuth),
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AuthPage())),
               child: Container(
                 padding: const EdgeInsets.all(17),
                 child: Row(

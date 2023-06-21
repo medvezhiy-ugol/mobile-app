@@ -9,6 +9,7 @@ import '../../../../../utils/app_fonts.dart';
 import '../../../../common_setup/routes.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/close_circle_button.dart';
+import '../auth_code_page/code_auth_page.dart';
 import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatefulWidget {
@@ -34,6 +35,7 @@ class _AuthPageState extends State<AuthPage> {
     return BlocProvider(
       create: (context) => AuthBloc(authService: authService),
       child: Scaffold(
+        backgroundColor: Color(0xff111216),
         resizeToAvoidBottomInset: false,
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -41,7 +43,7 @@ class _AuthPageState extends State<AuthPage> {
               _showSnackBar(context: context, text: state.error);
               AuthPage.phoneController!.clear();
             } else if (state is AuthSuccessState) {
-              Navigator.of(context).pushNamed(Routes.moreAuthCode);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CodeAuthPage()));
             }
           },
           builder: (context, state) {
