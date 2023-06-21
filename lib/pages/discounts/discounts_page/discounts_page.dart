@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/draw_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_history.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_page/Leto.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/history_draw.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
@@ -14,6 +15,7 @@ class StockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff111216),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(10),
@@ -147,17 +149,22 @@ class StockPage extends StatelessWidget {
               SizedBox(
                 height: 42,
               ),
-              Container(
-                height: 60,
-                width: double.infinity,
-                color: Color(0xff191A1F),
-                child: Center(
-                  child: Text('Введите промокод',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff808080)
-                  ),),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => leto()));
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  color: Color(0xff191A1F),
+                  child: Center(
+                    child: Text('Введите промокод',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff808080)
+                    ),),
+                  ),
                 ),
               ),
               SizedBox(

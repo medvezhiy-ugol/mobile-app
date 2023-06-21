@@ -18,7 +18,7 @@ class _letoState extends State<leto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.color111216,
+      backgroundColor: Color(0xff111216),
       body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
@@ -36,6 +36,7 @@ class _letoState extends State<leto> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
+                    color: Color(0xffffffff)
                   ),
                 ),
                 SizedBox(
@@ -112,16 +113,23 @@ class _letoState extends State<leto> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.remove),
+                                  icon: Icon(Icons.remove,
+                                  color: Color(0xffffffff),
+                                  ),
                                   onPressed: () {
                                     setState(() {
                                       _counter--;
                                     });
                                   },
                                 ),
-                                Text('$_counter'),
+                                Text('$_counter',
+                                style: TextStyle(
+                                    color: Color(0xffffffff)
+                                ),),
                                 IconButton(
-                                  icon: Icon(Icons.add),
+                                  icon: Icon(Icons.add,
+                                      color: Color(0xffffffff)
+                                  ),
                                   onPressed: () {
                                     setState(() {
                                       _counter++;
@@ -135,6 +143,7 @@ class _letoState extends State<leto> {
                                   style: TextStyle(
                                     fontSize:16,
                                     fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
                                   ),
                                 ),
                               ],
@@ -188,6 +197,7 @@ class _letoState extends State<leto> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
+                            color: Color(0xffffffff)
                         ),
                       ),
                       SizedBox(
@@ -247,6 +257,7 @@ class _letoState extends State<leto> {
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w400,
+                                      color: Color(0xffffffff)
                                   ),
                                 ),
                               ],
@@ -261,11 +272,13 @@ class _letoState extends State<leto> {
                   height: 32,
                 ),
                 Container(
+                  padding: EdgeInsets.only(
+                    right: 23.16,
+                  ),
                   height: 48,
                   width: 400,
                   color: Color(0xff191a1f),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
                         width: 40,
@@ -274,6 +287,9 @@ class _letoState extends State<leto> {
                           height: 15,
                         ),
                       ),
+                      SizedBox(
+                        width: 4,
+                      ),
                       Text('MasterCard ** 4498',
                         style: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -281,18 +297,25 @@ class _letoState extends State<leto> {
                             color: Color(0xffffffff)
                         ),
                       ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: SizedBox(
-                            width: 40,
-                            child: Icon(
-                              Icons.circle_sharp,
-                              color: Colors.white,
-                            ),
+                      Spacer(
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Color(0xffff9900),
+                          shape: BoxShape.circle
+                        ),
+                        child: Container(
+                          height: 10,
+                          width: 10,
+                          decoration: BoxDecoration(
+                            color: Color(0xff000000),
+                            shape: BoxShape.circle
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
