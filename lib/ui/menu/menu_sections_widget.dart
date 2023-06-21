@@ -1,17 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/ios.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:go_router/go_router.dart';
-
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/Leto.dart';
-import 'package:medvezhiy_ugol/pages/menu/basket_menu_page/basket_menu_page.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
-
-import '../../../common_setup/routes.dart';
 import 'menu_card_widget.dart';
 
 class MenuSection extends StatefulWidget {
@@ -70,7 +64,7 @@ class _MenuSectionState extends State<MenuSection> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              CloseCircleButton(onTap: () => context.pop()),
+                              CloseCircleButton(onTap: () => Navigator.of(context).pop()),
                               const SizedBox(width: 8,)
                             ],
                           ),

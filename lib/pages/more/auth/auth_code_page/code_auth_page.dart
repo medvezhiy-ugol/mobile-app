@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../common_setup/routes.dart';
 import '../../../../services/auth_service.dart';
-import '../../../../ui/close_circle_button.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_fonts.dart';
@@ -42,7 +40,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
               _showSnackBar(context: context, text: state.error);
               CodeAuthPage.codeController!.clear();
             } else if (state is CodeAuthSuccessState) {
-              context.go(Routes.more);
+              Navigator.of(context).pushNamed(Routes.more);
             }
           },
           builder: (context, state) {
@@ -59,7 +57,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            context.pop();
+                            Navigator.of(context).pop();
                           },
                           customBorder: const CircleBorder(),
                           child: Padding(

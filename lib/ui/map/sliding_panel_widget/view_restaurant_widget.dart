@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../../../common_setup/routes.dart';
 import '../../../../ui/close_circle_button.dart';
 import '../../../../ui/primary_button.dart';
@@ -8,7 +6,7 @@ import '../../../../utils/app_colors.dart';
 import '../../../pages/map/map_page/map_page.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
-  ViewRestaurantWidget({super.key});
+  const ViewRestaurantWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +84,7 @@ class ViewRestaurantWidget extends StatelessWidget {
               ),
               PrimaryButton(
                 onTap: () {
-                  context.go(Routes.menu);
+                  Navigator.of(context).pushNamed(Routes.menu);
                 },
                 color: AppColors.colorFFB627,
                 child: Text(

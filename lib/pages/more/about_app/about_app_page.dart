@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../../common_setup/routes.dart';
@@ -29,7 +28,7 @@ class AboutAppPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CloseCircleButton(
-                        onTap: () => context.pop(),
+                        onTap: () => Navigator.of(context).pop(),
                       ),
                       const SizedBox(
                         width: 2,
@@ -78,7 +77,7 @@ class AboutAppPage extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () => context.push(Routes.termsOfService),
+                        onTap: () => Navigator.of(context).pushNamed(Routes.termsOfService),
                         child: Padding(
                             padding: const EdgeInsets.all(18.0),
                             child: Row(
@@ -110,7 +109,7 @@ class AboutAppPage extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
-                          context.push(Routes.privacyPolicy);
+                          Navigator.of(context).pushNamed(Routes.privacyPolicy);
                         },
                         child: Padding(
                             padding: const EdgeInsets.all(18.0),
@@ -143,7 +142,7 @@ class AboutAppPage extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
-                          context.push(Routes.personalDataPolicy);
+                          Navigator.of(context).pushNamed(Routes.personalDataPolicy);
                         },
                         child: Padding(
                             padding: const EdgeInsets.all(18.0),

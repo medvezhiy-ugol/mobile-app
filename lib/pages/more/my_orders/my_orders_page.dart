@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../../../common_setup/routes.dart';
 import '../../../ui/close_circle_button.dart';
@@ -24,7 +23,7 @@ class MyOrdersPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CloseCircleButton(
-                    onTap: () => context.pop(),
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(
                     width: 12,
@@ -68,7 +67,7 @@ class MyOrdersPage extends StatelessWidget {
                     price: 1550.05,
                     status: 'done',
                     onTap: () {
-                      context.push(Routes.deliveredOrderPage);
+                      Navigator.of(context).pushNamed(Routes.deliveredOrderPage);
                     },
                   );
                 },

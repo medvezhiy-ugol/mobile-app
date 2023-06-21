@@ -5,14 +5,12 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/services/loalty_service.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../common_setup/routes.dart';
-import '../../../services/menu_service.dart';
 import '../../../utils/app_assets.dart';
 import 'bloc/loyalty_bloc.dart';
 
@@ -64,7 +62,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CloseCircleButton(
-                    onTap: () => context.pop(),
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(
                     width: 2,
@@ -164,7 +162,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                                   child: InkWell(
                                     onTap: () {
                                       // context.pop();
-                                      context.push(Routes.slotHistory);
+                                      Navigator.of(context).pushNamed(Routes.slotHistory);
                                     },
                                     child: Container(
                                       // margin: const EdgeInsets.symmetric(horizontal: 18),
@@ -222,7 +220,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CloseCircleButton(
-                    onTap: () => context.pop(),
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(
                     width: 2,
@@ -341,7 +339,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
                                   child: InkWell(
                                     onTap: () {
                                       // context.pop();
-                                      context.push(Routes.slotHistory);
+                                      Navigator.of(context).pushNamed(Routes.slotHistory);
                                     },
                                     child: Container(
                                       // margin: const EdgeInsets.symmetric(horizontal: 18),

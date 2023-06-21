@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../../common_setup/routes.dart';
 import '../../../models/loalty_card.dart';
 import '../../../services/api_service.dart';
@@ -119,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                             horizontal: 10
                         ),
                         child: GestureDetector(
-                          onTap: () => context.push(Routes.detailStock),
+                          onTap: () => Navigator.of(context).pushNamed(Routes.detailStock),
                           child: Image.asset(
                             A.assetsHomePagePromoImg,
                             fit: BoxFit.fill,
@@ -153,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     top: 63,
                                     left: 21,
                                     right: 16
@@ -161,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "У вас нет",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
@@ -169,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                                           color: Color(0xffFFFFFF)
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       "карты",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
@@ -177,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                                           color: Color(0xffFFFFFF)
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       "лояльности :(",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
@@ -185,12 +183,12 @@ class _HomePageState extends State<HomePage> {
                                           color: Color(0xffFFFFFF)
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 13,
                                     ),
                                     GestureDetector(
-                                      onTap: () => context.push(Routes.moreAuth),
-                                      child: Text(
+                                      onTap: () => Navigator.of(context).pushNamed(Routes.moreAuth),
+                                      child: const Text(
                                         "Войдите, чтобы получить",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
@@ -223,14 +221,14 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                       top: 8,
                                       left: 10,
                                     ),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Карта лояльности",
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
@@ -238,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                               color: Color(0xffEFEFEF)
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 40,
                                         ),
                                         Text(
@@ -319,6 +317,9 @@ class _HomePageState extends State<HomePage> {
                               height: 100,
                               width: double.infinity,
                               color: Colors.white,
+                              // padding: const EdgeInsets.symmetric(
+                              //   horizontal: 20,
+                              // ),
                               child: SvgPicture.string(
                                   Barcode.code128().toSvg(
                                   phone,
@@ -327,43 +328,43 @@ class _HomePageState extends State<HomePage> {
                               )
                               )
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 46,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Номер карты",
+                              const Text("Номер карты",
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff808080,)
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 4,
                               ),
                               Text(cardId,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xffe3e3e3)
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
-                              Text('Баланс баллов',
+                              const Text('Баланс баллов',
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff808080,)
                                 ),
-                              ),SizedBox(
+                              ),const SizedBox(
                                 height: 4,
                               ),
                               Text("$cardBalance",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xffe3e3e3)
@@ -391,14 +392,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.go('/menu');
+                          Navigator.of(context).pushNamed('/menu');
                         },
                         child: Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Популярно',
                                   style: TextStyle(
                                     fontSize: 18,
@@ -408,9 +409,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    context.go(Routes.menu);
+                                    Navigator.of(context).pushNamed(Routes.menu);
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Все',
                                     style: TextStyle(
                                       fontSize: 18,

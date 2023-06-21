@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
@@ -10,7 +9,6 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
-import '../map/map_page/map_page.dart';
 import 'auth/bloc/more_bloc.dart';
 
 class MorePage extends StatelessWidget {
@@ -19,52 +17,57 @@ class MorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MoreBloc, MoreState>(
+    return BlocProvider(
+  create: (context) => MoreBloc(),
+  child: BlocBuilder<MoreBloc, MoreState>(
       builder: (context, state) {
         if (state is MoreDefaultState && authService.token != '') {
           context.read<MoreBloc>().add(MoreRegisteredEvent());
         } else if (state is MoreRegisteredState && authService.token == '') {
           context.read<MoreBloc>().add(MoreUnRegisteredEvent());
         }
-        return SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                (state is MoreDefaultState)
-                    ? _buildAuthRow(context)
-                    : Container(),
-                SizedBox(
-                  height: (state is MoreDefaultState) ? 16 : 0,
-                ),
-                (state is MoreRegisteredState)
-                    ? _buildProfileWidget(context)
-                    : Container(),
-                SizedBox(
-                  height: (state is MoreRegisteredState) ? 84 : 0,
-                ),
-                (state is MoreRegisteredState)
-                    ? _buildRegisteredRow(context)
-                    : Container(),
-                SizedBox(
-                  height: (state is MoreRegisteredState) ? 10 : 0,
-                ),
-                _buildDefaultRows(context, state),
-                const SizedBox(
-                  height: 7,
-                ),
-                (state is MoreRegisteredState)
-                    ? _buildOurSocials(context)
-                    : Container()
-              ],
+        return Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  (state is MoreDefaultState)
+                      ? _buildAuthRow(context)
+                      : Container(),
+                  SizedBox(
+                    height: (state is MoreDefaultState) ? 16 : 0,
+                  ),
+                  (state is MoreRegisteredState)
+                      ? _buildProfileWidget(context)
+                      : Container(),
+                  SizedBox(
+                    height: (state is MoreRegisteredState) ? 84 : 0,
+                  ),
+                  (state is MoreRegisteredState)
+                      ? _buildRegisteredRow(context)
+                      : Container(),
+                  SizedBox(
+                    height: (state is MoreRegisteredState) ? 10 : 0,
+                  ),
+                  _buildDefaultRows(context, state),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  (state is MoreRegisteredState)
+                      ? _buildOurSocials(context)
+                      : Container()
+                ],
+              ),
             ),
           ),
         );
       },
-    );
+    ),
+);
   }
 
   Column _buildAuthRow(BuildContext context) {
@@ -88,7 +91,7 @@ class MorePage extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               //moreAuth - profilePage
-              onTap: () => context.push(Routes.moreAuth),
+              onTap: () => Navigator.of(context).pushNamed(Routes.moreAuth),
               child: Container(
                 padding: const EdgeInsets.all(17),
                 child: Row(
@@ -303,7 +306,7 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => context.push(Routes.deliveryInfo),
+              onTap: () => Navigator.of(context).pushNamed(Routes.deliveryInfo),
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
@@ -333,7 +336,7 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => context.push(Routes.contactUs),
+              onTap: () => Navigator.of(context).pushNamed(Routes.contactUs),
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
@@ -363,7 +366,7 @@ class MorePage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => context.push(Routes.aboutApp),
+              onTap: () => Navigator.of(context).pushNamed(Routes.aboutApp),
               child: Container(
                 padding: const EdgeInsets.all(18),
                 child: Row(
@@ -403,7 +406,7 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  context.go('/map');
+                  Navigator.of(context).pushNamed('/map');
                   // _showSnackBar(
                   //   context: context,
                   //   text: 'Данный раздел пока недоступен',
@@ -451,7 +454,7 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  context.go('/home');
+                  Navigator.of(context).pushNamed('/home');
                   // _showSnackBar(
                   //   context: context,
                   //   text: 'Данный раздел пока недоступен',
@@ -511,7 +514,7 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  context.push(Routes.profilePage);
+                  Navigator.of(context).pushNamed(Routes.profilePage);
                 },
                 customBorder: const CircleBorder(),
                 child: Padding(

@@ -37,7 +37,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
             menu: menu,
             menuTabs: _menuTabs,
             order: _order,
-            orderSum: _orderSum));
+            orderSum: _orderSum
+        ));
       } else if (event is MenuLoadingErrorEvent) {
         await Future.delayed(const Duration(seconds: 1), () {});
         emit(MenuLoadingErrorState(error: 'Ошибка, повторите вновь'));

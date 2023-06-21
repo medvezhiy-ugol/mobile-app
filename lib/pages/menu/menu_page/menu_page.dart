@@ -1,15 +1,12 @@
 import 'package:container_tab_indicator/container_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../common_setup/routes.dart';
 import '../../../utils/app_colors.dart';
 import '../../../ui/menu/menu_sections_widget.dart';
 import '../../../ui/menu/scale_tabbar_module.dart';
-import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
+import '../../map/map_page/map_page.dart';
 import '../basket_menu_page/basket_menu_page.dart';
 import 'bloc/menu_bloc.dart';
 
@@ -29,7 +26,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   }
 
   void onAddressTap() {
-    context.go(Routes.map);
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage()));
   }
 
   @override
@@ -52,26 +49,28 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MenuBloc, MenuState>(
-      listener: (context, state) {
-        if (state is MenuLoadedState) {
-          context.read<MenuBloc>().tabController = TabController(
-            length: state.menu.length,
-            vsync: this,
-          );
-        }
-      },
-      builder: (context, state) {
-        if (state is MenuLoadedState) {
-          return _loadedBuildBody(state: state);
-        } else if (state is MenuLoadingState) {
-          return _loadingBuildBody();
-        } else if (state is MenuLoadingErrorState) {
-          return _loadingErrorBuildBody();
-        } else {
-          return const SizedBox();
-        }
-      },
+    return Scaffold(
+      body: BlocConsumer<MenuBloc, MenuState>(
+        listener: (context, state) {
+          if (state is MenuLoadedState) {
+            context.read<MenuBloc>().tabController = TabController(
+              length: state.menu.length,
+              vsync: this,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is MenuLoadedState) {
+            return _loadedBuildBody(state: state);
+          } else if (state is MenuLoadingState) {
+            return _loadingBuildBody();
+          } else if (state is MenuLoadingErrorState) {
+            return _loadingErrorBuildBody();
+          } else {
+            return const SizedBox();
+          }
+        },
+      ),
     );
   }
 
@@ -173,7 +172,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () => context.push(Routes.basket),
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => BasketPage())),
                       child: SizedBox(
                         height: 56,
                         child: Padding(
@@ -299,7 +298,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Ошибка, попробуйте повторить.'),
+          const Text('Ошибка, попробуйтеч повторить.'),
           IconButton(
             onPressed: () {
               setState(() {

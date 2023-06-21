@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
 import '../common_setup/routes.dart';
 import '../utils/icons/bottom_bar_icons.dart';
 
+import 'home/home_page/home_page.dart';
 import 'more/auth/bloc/more_bloc.dart';
 
 class MainPage extends StatefulWidget {
-  final Widget child;
-  final String location;
-
-  const MainPage({required this.child, required this.location, super.key});
 
   static const double navBarHeight = 76.0;
 
@@ -20,9 +15,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int get _currentIndex => MenuRoute.values
-      .firstWhere((e) => widget.location.contains(e.path))
-      .index;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +27,7 @@ class _MainPageState extends State<MainPage> {
             create: (context) => MoreBloc(),
           ),
         ],
-        child: widget.child,
+        child: HomePage(),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
@@ -42,7 +35,7 @@ class _MainPageState extends State<MainPage> {
 
   void _onItemTapped(BuildContext context, MenuRoute menuRoute) {
     if (menuRoute.index != _currentIndex) {
-      context.go(menuRoute.path);
+      Navigator.of(context).pushNamed(menuRoute.path);
     }
   }
 
@@ -56,30 +49,30 @@ class _MainPageState extends State<MainPage> {
             highlightColor: Colors.transparent,
           ),
           child: BottomNavigationBar(
-            items: [
+            items: const [
               BottomNavigationBarItem(
-                icon: const Padding(
+                icon: Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.main),
                 ),
                 label: "Главная",
               ), //'Главная'
               BottomNavigationBarItem(
-                icon: const Padding(
+                icon: Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.stock),
                 ),
                 label: "Акции",
               ), //'Акции'
               BottomNavigationBarItem(
-                icon: const Padding(
+                icon: Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(BottomBarIcons.menu),
                 ),
                 label: "Меню",
               ), //'Меню'
               BottomNavigationBarItem(
-                icon: const Padding(
+                icon: Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(
                     BottomBarIcons.map,
@@ -88,7 +81,7 @@ class _MainPageState extends State<MainPage> {
                 label: "Карта",
               ), //'Карта'
               BottomNavigationBarItem(
-                icon: const Padding(
+                icon: Padding(
                   padding: EdgeInsets.only(bottom: 6),
                   child: Icon(
                     BottomBarIcons.more,

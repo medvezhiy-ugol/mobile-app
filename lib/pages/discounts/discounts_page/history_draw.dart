@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
@@ -19,7 +18,7 @@ class HistoryDraw extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CloseCircleButton(onTap: () => context.pop()),
+                    CloseCircleButton(onTap: () => Navigator.of(context).pop()),
                     const SizedBox(width: 8,)
                   ],
                 ),

@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../services/menu_service.dart';
@@ -50,7 +48,7 @@ class DetailMenuPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             CloseCircleButton(
-              onTap: () => context.pop(),
+              onTap: () => Navigator.of(context).pop(),
             ),
             const SizedBox(
               height: 8,
@@ -140,7 +138,7 @@ class DetailMenuPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             CloseCircleButton(
-              onTap: () => context.pop(),
+              onTap: () => Navigator.of(context).pop(),
             ),
             const SizedBox(
               height: 8,
@@ -175,7 +173,7 @@ class DetailMenuPage extends StatelessWidget {
                                 context.read<MenuBloc>().add(
                                     MenuAddToOrderEvent(
                                         menuProduct: state.menuProduct));
-                                context.pop();
+                                Navigator.of(context).pop();
                               },
                               child: Text(
                                 '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
@@ -284,7 +282,7 @@ class DetailMenuPage extends StatelessWidget {
                         color: Colors.transparent,
                         child: IconButton(
                           onPressed: () {
-                            context.pop();
+                            Navigator.of(context).pop();
                           },
                           icon: const Icon(
                             color: AppColors.color808080,
@@ -376,22 +374,6 @@ class DetailMenuPage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildChoiceComponent() {
-    return Wrap(
-      direction: Axis.horizontal,
-      alignment: WrapAlignment.start,
-      spacing: 8,
-      runSpacing: 8,
-      children: const <Widget>[
-        ChipComponent(label: 'Лук'),
-        ChipComponent(label: 'Чеснок'),
-        ChipComponent(label: 'Огурцы маринованные'),
-        ChipComponent(label: 'Томаты'),
-        ChipComponent(label: 'Соус'),
-      ],
     );
   }
 

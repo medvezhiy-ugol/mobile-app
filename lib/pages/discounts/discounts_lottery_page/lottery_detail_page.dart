@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
@@ -25,7 +24,7 @@ class SlotDetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      CloseCircleButton(onTap: () => context.pop()),
+                      CloseCircleButton(onTap: () => Navigator.of(context).pop()),
                       const SizedBox(width: 8,)
                     ],
                   ),

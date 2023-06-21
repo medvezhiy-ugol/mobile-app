@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
@@ -45,7 +44,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CloseCircleButton(
-                        onTap: () => context.pop(),
+                        onTap: () => Navigator.of(context).pop(),
                       ),
                       const SizedBox(
                         width: 2,

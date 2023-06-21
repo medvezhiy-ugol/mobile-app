@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
-import 'package:pinput/pinput.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../../utils/app_colors.dart';
 import '../../../../../utils/app_fonts.dart';
 import '../../../../common_setup/routes.dart';
@@ -46,7 +41,7 @@ class _AuthPageState extends State<AuthPage> {
               _showSnackBar(context: context, text: state.error);
               AuthPage.phoneController!.clear();
             } else if (state is AuthSuccessState) {
-              context.push(Routes.moreAuthCode);
+              Navigator.of(context).pushNamed(Routes.moreAuthCode);
             }
           },
           builder: (context, state) {
@@ -60,7 +55,7 @@ class _AuthPageState extends State<AuthPage> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: CloseCircleButton(
-                        onTap: () => context.pop(),
+                        onTap: () => Navigator.of(context).pop(),
                       ),
                     ),
                     SizedBox(

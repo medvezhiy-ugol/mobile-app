@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_assets.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
@@ -19,7 +18,7 @@ class ActiveOrderPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 18, top: 18),
               child: CloseCircleButton(
-                onTap: () => context.pop(),
+                onTap: () => Navigator.of(context).pop(),
               ),
             ),
             Expanded(

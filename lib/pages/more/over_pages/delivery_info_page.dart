@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../utils/app_assets.dart';
@@ -25,7 +24,7 @@ class DeliveryInfoPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CloseCircleButton(
-                          onTap: () => context.pop(),
+                          onTap: () => Navigator.of(context).pop(),
                         ),
                         const SizedBox(
                           width: 12,

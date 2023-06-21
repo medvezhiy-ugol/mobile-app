@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/draw_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_history.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/history_draw.dart';
-import 'package:medvezhiy_ugol/ui/slot_machine_widget/slot_machine_widget.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-
 import '../../../common_setup/routes.dart';
-import '../../../ui/primary_button.dart';
 import '../../../utils/app_assets.dart';
 
 class StockPage extends StatelessWidget {
@@ -19,205 +13,207 @@ class StockPage extends StatelessWidget {
   // final TextEditingController _textMailSubjectController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 259,
-                width: MediaQuery.of(context).size.width,
-              child: Stack(
-                children: [
-                  Image.asset('assets/images/draw_result.png',
-                      width: double.infinity,
-                      height: 259,
-                  fit: BoxFit.cover,
-                  ),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DrawPage()));
-                      },
-                      child: Text('Результаты \n'
-                          'розыгрыша',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xffffffff)
-                      ),
-                      ),
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 259,
+                  width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: [
+                    Image.asset('assets/images/draw_result.png',
+                        width: double.infinity,
+                        height: 259,
+                    fit: BoxFit.cover,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 22.75,
-                        bottom: 33.75,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(Icons.history,
-                            color: Color(0xff808080)
-                              ,),
-                            SizedBox(
-                              width: 6.75,
-                            ),
-                            Text('16:30:16',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('ДО НАЧАЛА СЛЕДУЮЩЕГО РОЗЫГРЫША',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xff808080,)
-                            ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 11,
-                        ),
-                        Text('7 мар 10:00',
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => DrawPage()));
+                        },
+                        child: const Text('Результаты \n'
+                            'розыгрыша',
                         style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff808080,
-                          ),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xffffffff)
                         ),
                         ),
-                      ],
+                      ),
                     ),
-                  )
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 22.75,
+                          bottom: 33.75,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.history,
+                              color: Color(0xff808080)
+                                ,),
+                              SizedBox(
+                                width: 6.75,
+                              ),
+                              Text('16:30:16',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text('ДО НАЧАЛА СЛЕДУЮЩЕГО РОЗЫГРЫША',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff808080,)
+                              ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 11,
+                          ),
+                          Text('7 мар 10:00',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff808080,
+                            ),
+                          ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 13,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotHistoryPage()));
+        },
+                    child: Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 2 - 16,
+                      color: Color(0xff26282F),
+                      child: Center(
+                        child: Text('История',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Color(0xffffffff)
+                        ),),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoryDraw()));
+                      },
+                    child: Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 2 - 16,
+                      color: Color(0xff26282F),
+                      child: Center(
+                        child: Text('Предыдущая лотерея',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              color: Color(0xffffffff)
+                          ),),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 13,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotHistoryPage()));
-      },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width / 2 - 16,
-                    color: Color(0xff26282F),
-                    child: Center(
-                      child: Text('История',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: Color(0xffffffff)
-                      ),),
-                    ),
-                  ),
+              SizedBox(
+                height: 42,
+              ),
+              Container(
+                height: 60,
+                width: double.infinity,
+                color: Color(0xff191A1F),
+                child: Center(
+                  child: Text('Введите промокод',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff808080)
+                  ),),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoryDraw()));
-                    },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width / 2 - 16,
-                    color: Color(0xff26282F),
-                    child: Center(
-                      child: Text('Предыдущая лотерея',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            color: Color(0xffffffff)
-                        ),),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 42,
-            ),
-            Container(
-              height: 60,
-              width: double.infinity,
-              color: Color(0xff191A1F),
-              child: Center(
-                child: Text('Введите промокод',
-                style: TextStyle(
-                  fontSize: 16,
+              ),
+              SizedBox(
+                height: 26,
+              ),
+              // _buildActiveLotteryBody(context),
+              // _buildCompletedLotteryBody(context),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // promoTextField(context),
+              // const SizedBox(
+              //   height: 26,
+              // ),
+              Text(
+                "Акции и комбо",
+                style: const TextStyle(
+                  fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xff808080)
-                ),),
+                  fontFamily: AppFonts.unbounded,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 26,
-            ),
-            // _buildActiveLotteryBody(context),
-            // _buildCompletedLotteryBody(context),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            // promoTextField(context),
-            // const SizedBox(
-            //   height: 26,
-            // ),
-            Text(
-              "Акции и комбо",
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                fontFamily: AppFonts.unbounded,
-                color: Colors.white,
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
 
 //NO Sales
-            // const SizedBox(
-            //   height: 250,
-            // ),
-          
-            // const Center(
-            //   child: Text(
-            //     'Акций пока нет', //'Акции и комбо',
-            //     style: TextStyle(
-            //       fontSize: 20,
-            //       fontWeight: FontWeight.w400,
-            //       fontFamily: AppFonts.unbounded,
-            //       color: AppColors.color808080,
-            //     ),
-            //   ),
-            // ),
+              // const SizedBox(
+              //   height: 250,
+              // ),
+
+              // const Center(
+              //   child: Text(
+              //     'Акций пока нет', //'Акции и комбо',
+              //     style: TextStyle(
+              //       fontSize: 20,
+              //       fontWeight: FontWeight.w400,
+              //       fontFamily: AppFonts.unbounded,
+              //       color: AppColors.color808080,
+              //     ),
+              //   ),
+              // ),
 //-----
 
-            _buildStockItem(context, '1'),
-            const SizedBox(
-              height: 8,
-            ),
-            _buildStockItem(context, '2'),
-            const SizedBox(
-              height: 8,
-            ),
-            _buildStockItem(context, '3'),
-          ],
+              _buildStockItem(context, '1'),
+              const SizedBox(
+                height: 8,
+              ),
+              _buildStockItem(context, '2'),
+              const SizedBox(
+                height: 8,
+              ),
+              _buildStockItem(context, '3'),
+            ],
+          ),
         ),
       ),
     );
@@ -230,270 +226,6 @@ class StockPage extends StatelessWidget {
     5,
     45,
   );
-  Widget _buildCompletedLotteryBody(BuildContext context) {
-    String formattedDateTime = DateFormat('d MMMM HH:mm').format(dateTime);
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 259,
-          child: Stack(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  height: 259,
-                  child: Image.asset(
-                    A.assetsStockPageDrawResultsImg,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Результаты\nрозыгрыша',
-                  style: TextStyle(
-                    fontFamily: 'Unbounded',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        // Icon(Icons.close, color: AppColors.color808080,),
-                        Image.asset(
-                          'assets/images/stock_page/clock.png',
-                          height: 16,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        const Text(
-                          '16:30:16 ',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text(
-                          'ДО КОНЦА РОЗЫГРЫША',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      formattedDateTime,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: PrimaryButton(
-                onTap: () => context.push(Routes.slotHistory),
-                child: const Text(
-                  'История',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            const VerticalDivider(width: 5.0),
-            Expanded(
-              child: PrimaryButton(
-                onTap: () => context.push(Routes.slotDetail),
-                child: const Text(
-                  'Предыдущая лотерея',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildActiveLotteryBody(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              'Розыгрыш', //'Акции и комбо',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                fontFamily: AppFonts.unbounded,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        const SlotMachineWidget(),
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () => context.push(Routes.slotDetail),
-              child: Container(
-                padding: const EdgeInsets.all(9),
-                height: 100,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SimpleCircularProgressBar(
-                      size: 45,
-                      progressStrokeWidth: 6,
-                      backStrokeWidth: 6,
-                      backColor: AppColors.color808080,
-                      animationDuration: 0,
-                      progressColors: const [AppColors.colorFF9900],
-                      maxValue: 100,
-                      valueNotifier: ValueNotifier(65),
-                    ),
-                    const SizedBox(
-                      width: 13.5,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: const [
-                            Text(
-                              '65%',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              'Ваш процент выигрыша',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.color808080),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            // Icon(Icons.close, color: AppColors.color808080,),
-                            Image.asset(
-                              'assets/images/stock_page/clock.png',
-                              height: 16,
-                            ),
-                            const SizedBox(
-                              width: 7,
-                            ),
-                            const Text(
-                              '16:30:16 ',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'ДО КОНЦА РОЗЫГРЫША',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.color808080),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        const Text(
-                          '7 мар 10:00',
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.color808080),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () => context.push(Routes.slotHistory),
-                child: const Text(
-                  'Посмотреть выигрыши',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 
   Stack _buildStockItem(BuildContext context, String id) {
     return Stack(
@@ -565,9 +297,9 @@ class StockPage extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
-              context.pushNamed(
+              Navigator.of(context).pushNamed(
                 Routes.detailStockName,
-                params: {'id': id},
+                arguments: id,
               );
             },
             child: Container(

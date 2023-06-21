@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
@@ -24,8 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
   final authService = Injector().get<AuthService>();
 
   DateTime date = DateTime(2016, 10, 26);
-
-  bool _isMale = false;
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
@@ -97,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           CloseCircleButton(
                             onTap: () {
-                              context.pop();
+                              Navigator.of(context).pop();
                             },
                           ),
                         ],
@@ -282,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           context.read<ProfileBloc>().add(
                                 ProfileLogoutEvent(),
                               );
-                          context.pop();
+                          Navigator.of(context).pop();
                         },
                         icon: Icons.exit_to_app_rounded,
                         label: Text(

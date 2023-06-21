@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
@@ -33,7 +32,7 @@ class OrderDeliveredPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CloseCircleButton(
-                    onTap: () => context.pop(),
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(
                     width: 12,
