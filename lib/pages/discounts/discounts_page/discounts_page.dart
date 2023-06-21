@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/discounts_detail_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/draw_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_history.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/Leto.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/history_draw.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import '../../../common_setup/routes.dart';
 import '../../../utils/app_assets.dart';
 
 class StockPage extends StatelessWidget {
@@ -304,10 +304,16 @@ class StockPage extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
-              Navigator.of(context).pushNamed(
-                Routes.detailStockName,
-                arguments: id,
+              showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => DetailStockPage(id: id)
               );
+              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
+              // Navigator.of(context).pushNamed(
+              //   Routes.detailStockName,
+              //   arguments: id,
+              // );
             },
             child: Container(
               height: 127,

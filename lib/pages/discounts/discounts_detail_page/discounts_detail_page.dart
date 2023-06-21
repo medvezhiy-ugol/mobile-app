@@ -1,4 +1,6 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import 'package:medvezhiy_ugol/utils/app_fonts.dart';
@@ -14,6 +16,7 @@ class DetailStockPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Scaffold(
+          backgroundColor: Color(0xff111216),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
@@ -52,12 +55,23 @@ class DetailStockPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: PrimaryButton(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(text: "your text"));
+                          // copied successfully
+                          Flushbar(
+                            title:  "Hey Ninja",
+                            message:  "Ваш промокод скопирован",
+                            duration:  Duration(seconds: 3),
+                            flushbarPosition: FlushbarPosition.TOP,
+                          ).show(context);
+                        },
+
                         child: Text(
                           "Воспользоваться",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            color: Color(0xffffffff)
                           ),
                         ),
                       ),
