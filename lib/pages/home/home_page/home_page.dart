@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                   child: PageView.builder(
                     controller: _controller,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: 5,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
@@ -120,7 +120,13 @@ class _HomePageState extends State<HomePage> {
                         child: GestureDetector(
                           onTap: () => Navigator.of(context).pushNamed(Routes.detailStock),
                           child: Image.asset(
-                            A.assetsHomePagePromoImg,
+                            [
+                              'assets/images/home_page/Большая шаурма.png',
+                              'assets/images/home_page/Вок0.png',
+                              'assets/images/home_page/Золотая шаурма.png',
+                              'assets/images/home_page/Пицца мафия.png',
+                              'assets/images/home_page/promo_img.png'
+                            ][index],
                             fit: BoxFit.fill,
                           ),
                         ),

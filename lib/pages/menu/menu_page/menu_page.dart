@@ -50,6 +50,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff000000),
       body: BlocConsumer<MenuBloc, MenuState>(
         listener: (context, state) {
           if (state is MenuLoadedState) {
