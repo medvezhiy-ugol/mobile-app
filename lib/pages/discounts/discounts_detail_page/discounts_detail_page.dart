@@ -56,7 +56,7 @@ class DetailStockPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: PrimaryButton(
                         onTap: () {
-                          Clipboard.setData(ClipboardData(text: "your text"));
+                          Clipboard.setData(ClipboardData(text: "PIZZA101"));
                           // copied successfully
                           Flushbar(
                             title:  "Hey Ninja",
