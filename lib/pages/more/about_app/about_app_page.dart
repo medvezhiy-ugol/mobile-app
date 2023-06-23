@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/pages/more/about_app/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../../common_setup/routes.dart';
@@ -78,7 +79,9 @@ class AboutAppPage extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(Routes.termsOfService),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => TermsOfServicePage()));
+                        },
                         child: Padding(
                             padding: const EdgeInsets.all(18.0),
                             child: Row(

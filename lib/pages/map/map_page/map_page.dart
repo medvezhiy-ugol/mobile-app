@@ -6,6 +6,7 @@ import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/sliding_panel_widget.
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
 import '../../../utils/app_colors.dart';
 import '../../main_page.dart';
 
@@ -135,10 +136,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               );
             },
           ),
-          // const Positioned(
-          //   top: 60,
-          //   child: ToggleSwitcher(),
-          // ),
+          const Positioned(
+          top: 60,
+          child: ToggleSwitcher(),
+          ),
         ],
       ),
     );

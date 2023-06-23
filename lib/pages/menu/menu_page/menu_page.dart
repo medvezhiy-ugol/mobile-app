@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
 import '../../../utils/app_colors.dart';
 import '../../../ui/menu/menu_sections_widget.dart';
 import '../../../ui/menu/scale_tabbar_module.dart';
@@ -82,7 +83,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
           const SizedBox(
             height: 5,
           ),
-          // const ToggleSwitcher(),
+          const ToggleSwitcher(),
           const SizedBox(
             height: 6,
           ),
@@ -227,7 +228,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
           const SizedBox(
             height: 5,
           ),
-          // const ToggleSwitcher(),
+          const ToggleSwitcher(),
           const SizedBox(
             height: 6,
           ),
