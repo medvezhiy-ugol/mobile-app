@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../../../common_setup/routes.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_fonts.dart';
 
+import '../../more_page.dart';
 import '../auth_page/auth_page.dart';
 import 'bloc/code_auth_bloc.dart';
 
@@ -34,13 +33,14 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
       create: (context) => CodeAuthBloc(authService: authService),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xff111216),
         body: BlocConsumer<CodeAuthBloc, CodeAuthState>(
           listener: (context, state) {
             if (state is CodeAuthErrorState) {
               _showSnackBar(context: context, text: state.error);
               CodeAuthPage.codeController!.clear();
             } else if (state is CodeAuthSuccessState) {
-              Navigator.of(context).pushNamed(Routes.more);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MorePage()));
             }
           },
           builder: (context, state) {
@@ -83,21 +83,23 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                     SizedBox(
                       height: screenSize.height * 0.05,
                     ),
-                    Text(
+                    const Text(
                       'Верификация',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
                         fontFamily: AppFonts.unbounded,
+                        color: Color(0xffFFFFFF)
                       ),
                     ),
                     const SizedBox(
                       height: 12,
                     ),
-                    Text(
+                    const Text(
                       'Введите код из сообщения',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
+                        color: Color(0xffFFFFFF)
                       ),
                     ),
                     SizedBox(
@@ -125,6 +127,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
+                              color: Color(0xffFFFFFF)
                             ),
                           ),
                         ),
@@ -148,6 +151,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
       height: 60,
       textStyle: const TextStyle(
         fontSize: 24,
+        color: Color(0xffFFFFFF)
       ),
       decoration: BoxDecoration(
         color: AppColors.color222222,

@@ -6,7 +6,6 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import '../../../../../utils/app_colors.dart';
 import '../../../../../utils/app_fonts.dart';
-import '../../../../common_setup/routes.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/close_circle_button.dart';
 import '../auth_code_page/code_auth_page.dart';
@@ -35,7 +34,7 @@ class _AuthPageState extends State<AuthPage> {
     return BlocProvider(
       create: (context) => AuthBloc(authService: authService),
       child: Scaffold(
-        backgroundColor: Color(0xff111216),
+        backgroundColor: const Color(0xff111216),
         resizeToAvoidBottomInset: false,
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -63,9 +62,9 @@ class _AuthPageState extends State<AuthPage> {
                     SizedBox(
                       height: screenSize.height * 0.05,
                     ),
-                    Text(
+                    const Text(
                       'Авторизация',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
                         fontFamily: AppFonts.unbounded,
@@ -75,9 +74,9 @@ class _AuthPageState extends State<AuthPage> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Text(
+                    const Text(
                       'Введите номер мобильного телефона',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                           color: Color(0xffffffff)
                       ),
@@ -179,6 +178,7 @@ class _AuthPageState extends State<AuthPage> {
         style: const TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 24,
+          color: Color(0xffFFFFFF)
         ),
         inputFormatters: [
           MaskTextInputFormatter(

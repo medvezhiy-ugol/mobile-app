@@ -72,379 +72,376 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 51,
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: const [
-                //         SizedBox(
-                //           height: 32,
-                //         ),
-                //         Text(
-                //           'Адрес и время доставки',
-                //           style: TextStyle(
-                //             fontSize: 10,
-                //             fontWeight: FontWeight.w400,
-                //             color: AppColors.color808080,
-                //           ),
-                //         ),
-                //         Text(
-                //           'Республиканская ул. 68',
-                //           style: TextStyle(
-                //             fontSize: 16,
-                //             fontWeight: FontWeight.w600,
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // ),
-                SizedBox(
-                  height: 160,
-                  child: PageView.builder(
-                    controller: _controller,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10
-                        ),
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).pushNamed(Routes.detailStock),
-                          child: Image.asset(
-                            [
-                              'assets/images/home_page/Большая шаурма.png',
-                              'assets/images/home_page/Вок0.png',
-                              'assets/images/home_page/Золотая шаурма.png',
-                              'assets/images/home_page/Пицца мафия.png',
-                              'assets/images/home_page/promo_img.png'
-                            ][index],
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      );
-                    },
-                    // separatorBuilder:
-                    //     (BuildContext context, int index) =>
-                    //         const SizedBox(
-                    //   width: 5,
-                    // ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 10
-                  ),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 46,
+          child: ListView(
+            children: [
+              SizedBox(height: 37),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: const [
+              //         SizedBox(
+              //           height: 32,
+              //         ),
+              //         Text(
+              //           'Адрес и время доставки',
+              //           style: TextStyle(
+              //             fontSize: 10,
+              //             fontWeight: FontWeight.w400,
+              //             color: AppColors.color808080,
+              //           ),
+              //         ),
+              //         Text(
+              //           'Республиканская ул. 68',
+              //           style: TextStyle(
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              SizedBox(
+                height: 160,
+                child: PageView.builder(
+                  controller: _controller,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10
                       ),
-                      authService.token == ""
-                          ? ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 180,
-                          color: const Color(0xff191A1F),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 63,
-                                    left: 21,
-                                    right: 16
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "У вас нет",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                          color: Color(0xffFFFFFF)
-                                      ),
-                                    ),
-                                    const Text(
-                                      "карты",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                          color: Color(0xffFFFFFF)
-                                      ),
-                                    ),
-                                    const Text(
-                                      "лояльности :(",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                          color: Color(0xffFFFFFF)
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 13,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () => Navigator.of(context).pushNamed(Routes.moreAuth),
-                                      child: const Text(
-                                        "Войдите, чтобы получить",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 8,
-                                          color: Color(0xffFFFFFF),
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Image.asset(
-                                "assets/images/home_page/no_loyalty_card.png",
-                                height: 180,
-                                width: 180,
-                              )
-                            ],
-                          ),
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pushNamed(Routes.detailStock),
+                        child: Image.asset(
+                          [
+                            'assets/images/home_page/Большая шаурма.png',
+                            'assets/images/home_page/Вок0.png',
+                            'assets/images/home_page/Золотая шаурма.png',
+                            'assets/images/home_page/Пицца мафия.png',
+                            'assets/images/home_page/promo_img.png'
+                          ][index],
+                          fit: BoxFit.fill,
                         ),
-                      )
-                          : Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                              height: 180,
-                              color: const Color(0xff191A1F),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                    );
+                  },
+                  // separatorBuilder:
+                  //     (BuildContext context, int index) =>
+                  //         const SizedBox(
+                  //   width: 5,
+                  // ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 10
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 46,
+                    ),
+                    authService.token == ""
+                        ? ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        height: 180,
+                        color: const Color(0xff191A1F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 63,
+                                  left: 21,
+                                  right: 16
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 8,
-                                      left: 10,
+                                  const Text(
+                                    "У вас нет",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Color(0xffFFFFFF)
                                     ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          "Карта лояльности",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 10,
-                                              color: Color(0xffEFEFEF)
-                                          ),
+                                  ),
+                                  const Text(
+                                    "карты",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Color(0xffFFFFFF)
+                                    ),
+                                  ),
+                                  const Text(
+                                    "лояльности :(",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Color(0xffFFFFFF)
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 13,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => Navigator.of(context).pushNamed(Routes.moreAuth),
+                                    child: const Text(
+                                      "Войдите, чтобы получить",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 8,
+                                        color: Color(0xffFFFFFF),
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Image.asset(
+                              "assets/images/home_page/no_loyalty_card.png",
+                              height: 180,
+                              width: 180,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                        : Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            height: 180,
+                            color: const Color(0xff191A1F),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 8,
+                                    left: 10,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Карта лояльности",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 10,
+                                            color: Color(0xffEFEFEF)
                                         ),
-                                        const SizedBox(
-                                          height: 40,
+                                      ),
+                                      const SizedBox(
+                                        height: 40,
+                                      ),
+                                      Text(
+                                        name,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16,
+                                            color: Color(0xffFFFFFF)
                                         ),
-                                        Text(
-                                          name,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 16,
-                                              color: Color(0xffFFFFFF)
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 11,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.all(2),
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(6.88235),
-                                                  border: Border.all(
-                                                    color: Color(0xffFF9900),
-                                                  )
-                                              ),
-                                              child: Text(
-                                                "$cardBalance",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 9.14286,
-                                                    color: Color(0xffFFFFFF)
-                                                ),
-                                              ),
+                                      ),
+                                      SizedBox(
+                                        height: 11,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(6.88235),
+                                                border: Border.all(
+                                                  color: Color(0xffFF9900),
+                                                )
                                             ),
-                                            SizedBox(
-                                              width: 3,
-                                            ),
-                                            Text(
-                                              "9834",
+                                            child: Text(
+                                              "$cardBalance",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 9.14286,
                                                   color: Color(0xffFFFFFF)
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                          SizedBox(
+                                            width: 3,
+                                          ),
+                                          Text(
+                                            "9834",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 9.14286,
+                                                color: Color(0xffFFFFFF)
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                  Image.asset("assets/images/home_page/loyalty_card.png")
-                                ],
-                              ),
+                                ),
+                                Image.asset("assets/images/home_page/loyalty_card.png")
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            left: 13,
+                            top: 17,
+                            right: 183,
+                            bottom: 14,
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              left: 13,
-                              top: 17,
-                              right: 183,
-                              bottom: 14,
-                            ),
-                            child: Text("Данные карты",
-                              style: TextStyle(
-                                  fontWeight:FontWeight.w600,
-                                  fontSize: 17,
-                                  color: Color(0xffE3E3E3)
-                              ),
+                          child: Text("Данные карты",
+                            style: TextStyle(
+                                fontWeight:FontWeight.w600,
+                                fontSize: 17,
+                                color: Color(0xffE3E3E3)
                             ),
                           ),
-                          Container(
+                        ),
+                        Container(
                             padding: EdgeInsets.only(
                               left: 15,
                               right: 15,
                             ),
-                              height: 100,
-                              width: double.infinity,
-                              color: Colors.white,
-                              // padding: const EdgeInsets.symmetric(
-                              //   horizontal: 20,
-                              // ),
-                              child: SvgPicture.string(
-                                  Barcode.code128().toSvg(
-                                  phone,
-                                  width: 500,
-                                  height: 100
-                              )
-                              )
-                          ),
-                          const SizedBox(
-                            height: 46,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            height: 100,
+                            width: double.infinity,
+                            color: Colors.white,
+                            // padding: const EdgeInsets.symmetric(
+                            //   horizontal: 20,
+                            // ),
+                            child: SvgPicture.string(
+                                Barcode.code128().toSvg(
+                                    phone,
+                                    width: 500,
+                                    height: 100
+                                )
+                            )
+                        ),
+                        const SizedBox(
+                          height: 46,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Номер карты",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff808080,)
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(cardId,
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xffe3e3e3)
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            const Text('Баланс баллов',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff808080,)
+                              ),
+                            ),const SizedBox(
+                              height: 4,
+                            ),
+                            Text("$cardBalance",
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xffe3e3e3)
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    //_buildOrderStatusTimerWidget(context),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
+                    // _buildOrderStatusWidget(),
+                    // const SizedBox(
+                    //   height: 32,
+                    // ),
+                    // _switchLoyaltyCardStates(
+                    //   height: 180,
+                    //   context: context,
+                    //   state: state,
+                    // ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/menu');
+                      },
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Номер карты",
+                              const Text(
+                                'Популярно',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff808080,)
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.colorE3E3E3,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Text(cardId,
-                                style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xffe3e3e3)
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              const Text('Баланс баллов',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff808080,)
-                                ),
-                              ),const SizedBox(
-                                height: 4,
-                              ),
-                              Text("$cardBalance",
-                                style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xffe3e3e3)
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(Routes.menu);
+                                },
+                                child: const Text(
+                                  'Все',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.color808080,
+                                    decoration: TextDecoration.underline,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          _buildPopularSegmentWidget(),
+                          const SizedBox(
+                            height: 32,
+                          ),
                         ],
                       ),
-                      //_buildOrderStatusTimerWidget(context),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
-                      // _buildOrderStatusWidget(),
-                      // const SizedBox(
-                      //   height: 32,
-                      // ),
-                      // _switchLoyaltyCardStates(
-                      //   height: 180,
-                      //   context: context,
-                      //   state: state,
-                      // ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/menu');
-                        },
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Популярно',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.colorE3E3E3,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).pushNamed(Routes.menu);
-                                  },
-                                  child: const Text(
-                                    'Все',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.color808080,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            _buildPopularSegmentWidget(),
-                            const SizedBox(
-                              height: 32,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 76),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       )
@@ -561,8 +558,7 @@ class _HomePageState extends State<HomePage> {
                             name,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
-                            style:
-                            ThemeService.detailPageAddButtonTextStyle(),
+                            style: ThemeService.detailPageAddButtonTextStyle(),
                           ),
                         ),
                       ],

@@ -30,42 +30,45 @@ class MorePage extends StatelessWidget {
         } else if (state is MoreRegisteredState && authService.token == '') {
           context.read<MoreBloc>().add(MoreUnRegisteredEvent());
         }
-        return Scaffold(
-          backgroundColor: Color(0xff151515),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  (state is MoreDefaultState)
-                      ? _buildAuthRow(context)
-                      : Container(),
-                  SizedBox(
-                    height: (state is MoreDefaultState) ? 16 : 0,
-                  ),
-                  (state is MoreRegisteredState)
-                      ? _buildProfileWidget(context)
-                      : Container(),
-                  SizedBox(
-                    height: (state is MoreRegisteredState) ? 84 : 0,
-                  ),
-                  (state is MoreRegisteredState)
-                      ? _buildRegisteredRow(context)
-                      : Container(),
-                  SizedBox(
-                    height: (state is MoreRegisteredState) ? 10 : 0,
-                  ),
-                  _buildDefaultRows(context, state),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  (state is MoreRegisteredState)
-                      ? _buildOurSocials(context)
-                      : Container()
-                ],
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            backgroundColor: Color(0xff151515),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    (state is MoreDefaultState)
+                        ? _buildAuthRow(context)
+                        : Container(),
+                    SizedBox(
+                      height: (state is MoreDefaultState) ? 16 : 0,
+                    ),
+                    (state is MoreRegisteredState)
+                        ? _buildProfileWidget(context)
+                        : Container(),
+                    SizedBox(
+                      height: (state is MoreRegisteredState) ? 84 : 0,
+                    ),
+                    (state is MoreRegisteredState)
+                        ? _buildRegisteredRow(context)
+                        : Container(),
+                    SizedBox(
+                      height: (state is MoreRegisteredState) ? 10 : 0,
+                    ),
+                    _buildDefaultRows(context, state),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    (state is MoreRegisteredState)
+                        ? _buildOurSocials(context)
+                        : Container()
+                  ],
+                ),
               ),
             ),
           ),
@@ -97,6 +100,7 @@ class MorePage extends StatelessWidget {
             child: GestureDetector(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AuthPage())),
               child: Container(
+                color: Colors.transparent,
                 padding: const EdgeInsets.all(17),
                 child: Row(
                   children: [
@@ -188,6 +192,7 @@ class MorePage extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
                           SocialIcons.vk,
+                            color: Color(0xffFFFFFF)
                         ),
                       ),
                     ),
@@ -218,6 +223,7 @@ class MorePage extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
                           SocialIcons.instagram,
+                            color: Color(0xffFFFFFF)
                         ),
                       ),
                     ),
@@ -433,17 +439,18 @@ class MorePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
+                        children: const [
+                          Icon(
                             MorePageIcons.location,
                             size: 24,
+                            color: Color(0xffFFFFFF),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: SizedBox(),
                           ),
                           Text(
                             'Адреса',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
@@ -485,6 +492,7 @@ class MorePage extends StatelessWidget {
                           Icon(
                             MorePageIcons.loyal,
                             size: 28,
+                              color: Color(0xffFFFFFF)
                           ),
                           Expanded(
                             child: SizedBox(),

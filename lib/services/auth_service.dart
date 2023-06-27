@@ -25,12 +25,12 @@ class AuthService {
     phoneNumber = phoneNumber.replaceAll(
         RegExp(r'[^0-9]'), ''); // Remove all non-digit characters
     phoneNumber = "+$phoneNumber";
-
     final data = await APIService.postRequest(
       serverIndex: 1,
       request: 'v1/login',
       data: {'phone': phoneNumber},
     );
+    print(data);
     if (data != null) {
       return data.toString();
     } else {
