@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                                                 )
                                             ),
                                             child: Text(
-                                              "$cardBalance",
+                                              "Баланс " "$cardBalance",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 9.14286,
@@ -277,14 +277,14 @@ class _HomePageState extends State<HomePage> {
                                           SizedBox(
                                             width: 3,
                                           ),
-                                          Text(
-                                            "9834",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 9.14286,
-                                                color: Color(0xffFFFFFF)
-                                            ),
-                                          ),
+                                          // Text(
+                                          //   "9834",
+                                          //   style: TextStyle(
+                                          //       fontWeight: FontWeight.w600,
+                                          //       fontSize: 9.14286,
+                                          //       color: Color(0xffFFFFFF)
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ],
