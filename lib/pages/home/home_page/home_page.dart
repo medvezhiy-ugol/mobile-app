@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               //   ],
               // ),
               SizedBox(
-                height: 160,
+                height: 180,
                 child: PageView.builder(
                   controller: _controller,
                   scrollDirection: Axis.horizontal,
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                             'assets/images/home_page/Пицца мафия.png',
                             'assets/images/home_page/promo_img.png'
                           ][index],
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     );

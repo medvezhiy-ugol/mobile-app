@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -38,7 +40,6 @@ class APIService {
     Map<String, String> headers = const {},
   }) async {
     try {
-      print('${url[serverIndex]}/$request');
       var response = await Dio().get(
         '${url[serverIndex]}/$request',
         queryParameters: queryParameters,
@@ -47,7 +48,7 @@ class APIService {
         ),
       );
       print(response.statusCode);
-      debugPrint(response.data.toString());
+      log(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }

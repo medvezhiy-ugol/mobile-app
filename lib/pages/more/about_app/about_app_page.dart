@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/pages/more/about_app/personal_data_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/term_of_service_page.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
@@ -113,7 +114,7 @@ class AboutAppPage extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(Routes.privacyPolicy);
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => PersonalDataPolicyPage()));
                         },
                         child: Padding(
                             padding: const EdgeInsets.all(18.0),
