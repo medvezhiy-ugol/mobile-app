@@ -38,6 +38,7 @@ class APIService {
     Map<String, String> headers = const {},
   }) async {
     try {
+      print('${url[serverIndex]}/$request');
       var response = await Dio().get(
         '${url[serverIndex]}/$request',
         queryParameters: queryParameters,
@@ -45,7 +46,8 @@ class APIService {
           headers: headers,
         ),
       );
-      //debugPrint(response.data.toString());
+      print(response.statusCode);
+      debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }

@@ -44,6 +44,7 @@ class DetailMenuPage extends StatelessWidget {
   Widget _buildLoadingBody(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color(0xff000000),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -243,6 +244,7 @@ class DetailMenuPage extends StatelessWidget {
 
   Widget _buildErrorBody(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff000000),
       body: Center(
         child: SizedBox(
           height: MediaQuery.of(context).size.height / 2,

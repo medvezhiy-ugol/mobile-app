@@ -45,6 +45,7 @@ class _BasketPageState extends State<BasketPage> {
       }
     });
     return Scaffold(
+      backgroundColor: const Color(0xff000000),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -26,6 +26,8 @@ class MenuService {
       request: 'v1/menu/product/$id',
     );
 
+    print(response);
+
     if (response != null) {
       return MenuProduct.fromJson(response);
     }

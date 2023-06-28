@@ -9,18 +9,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="add clipboard">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix base url">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/auth/auth_code_page/code_auth_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/auth/auth_code_page/code_auth_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/auth/auth_page/auth_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/auth/auth_page/auth_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/more_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/api_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/api_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/auth_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/auth_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/theme_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/theme_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/menu/basket_menu_page/basket_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/basket_menu_page/basket_menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/menu/detail_menu_page/detail_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/detail_menu_page/detail_menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/services/menu_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/menu_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +68,6 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "flutter.view.tool.window.visible": "true",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "/Users/rainvandesaf/StudioProjects/mobile-app/assets/images/home_page",
     "settings.editor.selected.configurable": "dart.settings",
@@ -276,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687459753678</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix base url">
+      <created>1687909989432</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1687909989432</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -307,7 +307,8 @@
     <MESSAGE value="Корзина" />
     <MESSAGE value="Карточка товара" />
     <MESSAGE value="basket" />
-    <option name="LAST_COMMIT_MESSAGE" value="basket" />
+    <MESSAGE value="fix base url" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix base url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -319,12 +320,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart</url>
-          <line>456</line>
+          <line>457</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart</url>
-          <line>532</line>
+          <line>533</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
