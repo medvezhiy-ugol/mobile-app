@@ -43,7 +43,8 @@ class _ItemPageState extends State<ItemPage> {
                     child: Text('Донер с курицей',
                       style: TextStyle(
                           fontSize: 24,
-                          fontWeight: FontWeight.w600
+                          fontWeight: FontWeight.w600,
+                        color: Color(0xffffffff)
                       ),
                     ),
                   ),
@@ -62,7 +63,8 @@ class _ItemPageState extends State<ItemPage> {
                         child: Text('240 Р Добавить',
                           style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w600
+                              fontWeight: FontWeight.w600,
+                            color: Color(0xffffffff)
                           ),
                         ),
                       ),
