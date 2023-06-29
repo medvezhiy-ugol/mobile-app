@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../common_setup/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
+import '../../../pages/custom_navbar/custom_navbar_bloc_cubit.dart';
 
 class FullViewRestaurantWidget extends StatefulWidget {
   FullViewRestaurantWidget({super.key});
@@ -132,7 +133,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context).pushNamed(Routes.menu);
+                  context.read<CustomNavbarBlocCubit>().changeIndex(2);
                 },
               ),
             ],

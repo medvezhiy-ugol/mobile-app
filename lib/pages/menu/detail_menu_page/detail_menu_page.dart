@@ -41,101 +41,99 @@ class DetailMenuPage extends StatelessWidget {
   }
 
   Widget _buildLoadingBody(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xff000000),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            CloseCircleButton(
-              onTap: () => Navigator.of(context).pop(),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Shimmer.fromColors(
-                        baseColor: AppColors.color111216,
-                        highlightColor: AppColors.color5D6377.withOpacity(0.5),
-                        child: Container(
-                          height: 220,
-                          color: AppColors.color26282F,
-                        ),
+    return Scaffold(
+      backgroundColor: Color(0xff000000),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          CloseCircleButton(
+            onTap: () => Navigator.of(context).pop(),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Expanded(
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Shimmer.fromColors(
+                      baseColor: AppColors.color111216,
+                      highlightColor: AppColors.color5D6377.withOpacity(0.5),
+                      child: Container(
+                        height: 220,
+                        color: AppColors.color26282F,
                       ),
-                      const SizedBox(
-                        height: 28,
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Shimmer.fromColors(
+                            baseColor: AppColors.color111216,
+                            highlightColor:
+                            AppColors.color5D6377.withOpacity(0.5),
+                            child: Container(
+                              height: 35,
+                              color: AppColors.color26282F,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 32,
+                          ),
+                          Shimmer.fromColors(
+                            baseColor: AppColors.color111216,
+                            highlightColor:
+                            AppColors.color5D6377.withOpacity(0.5),
+                            child: Container(
+                              height: 50,
+                              color: AppColors.color26282F,
+                            ),
+                          ),
+                          Container(
+                            height: 25,
+                          ),
+                          Shimmer.fromColors(
+                            baseColor: AppColors.color111216,
+                            highlightColor:
+                            AppColors.color5D6377.withOpacity(0.5),
+                            child: Container(
+                              height: 60,
+                              color: AppColors.color26282F,
+                            ),
+                          ),
+                          const SizedBox(height: 32),
+                          Shimmer.fromColors(
+                            baseColor: AppColors.color111216,
+                            highlightColor:
+                            AppColors.color5D6377.withOpacity(0.5),
+                            child: Container(
+                              height: 100,
+                              color: AppColors.color26282F,
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Shimmer.fromColors(
-                              baseColor: AppColors.color111216,
-                              highlightColor:
-                                  AppColors.color5D6377.withOpacity(0.5),
-                              child: Container(
-                                height: 35,
-                                color: AppColors.color26282F,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 32,
-                            ),
-                            Shimmer.fromColors(
-                              baseColor: AppColors.color111216,
-                              highlightColor:
-                                  AppColors.color5D6377.withOpacity(0.5),
-                              child: Container(
-                                height: 50,
-                                color: AppColors.color26282F,
-                              ),
-                            ),
-                            Container(
-                              height: 25,
-                            ),
-                            Shimmer.fromColors(
-                              baseColor: AppColors.color111216,
-                              highlightColor:
-                                  AppColors.color5D6377.withOpacity(0.5),
-                              child: Container(
-                                height: 60,
-                                color: AppColors.color26282F,
-                              ),
-                            ),
-                            const SizedBox(height: 32),
-                            Shimmer.fromColors(
-                              baseColor: AppColors.color111216,
-                              highlightColor:
-                                  AppColors.color5D6377.withOpacity(0.5),
-                              child: Container(
-                                height: 100,
-                                color: AppColors.color26282F,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildLoadedBody(BuildContext context, MenuDetailLoadedState state) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xff000000),
-        body: Column(
+    return Scaffold(
+      backgroundColor: Color(0xff000000),
+      body: SafeArea(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             CloseCircleButton(
@@ -179,9 +177,9 @@ class DetailMenuPage extends StatelessWidget {
                               child: Text(
                                 '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
                                 style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xffFFFFFF)
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xffFFFFFF)
                                 ),
                               ),
                             ),

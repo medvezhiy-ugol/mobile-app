@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io' show Platform;
 import 'package:medvezhiy_ugol/ui/map/map_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/sliding_panel_widget.dart';
@@ -8,7 +7,6 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
 import '../../../utils/app_colors.dart';
-import '../../main_page.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({super.key});
@@ -32,29 +30,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.35;
     final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
 
-    const double _iosCorrectionMapHeight = 35;
-
-    double _getMapHeight(context) {
-      if (!Platform.isIOS) {
-        return MediaQuery.of(context).size.height -
-            MainPage.navBarHeight -
-            _minSlidingPanelHeight;
-      } else {
-        return MediaQuery.of(context).size.height -
-            MainPage.navBarHeight -
-            _minSlidingPanelHeight -
-            _iosCorrectionMapHeight;
-      }
-    }
-
-    final double _mapHeight = _getMapHeight(context);
-
     return Scaffold(
       body: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
           SizedBox(
-            height: _mapHeight,
+            height: MediaQuery.of(context).size.height,
             child: MapWidget(),
           ),
           SlidingUpPanel(

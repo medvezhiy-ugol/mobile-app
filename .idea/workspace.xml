@@ -10,13 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix product page">
+      <change afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/custom_navbar_bloc_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/custom_navbar_bloc_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/basket_menu_page/basket_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/basket_menu_page/basket_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/detail_menu_page/detail_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/detail_menu_page/detail_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/menu_page/bloc/menu_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/menu_page/bloc/menu_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/custom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/custom_navbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/map/map_page/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/map/map_page/map_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +75,7 @@
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
     "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "/Users/rainvandesaf/StudioProjects/mobile-app/assets/images/home_page",
+    "last_opened_file_path": "/Users/mindykfam/Desktop/Developer/Medvezhi-ugol/mobile-app",
     "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }
@@ -82,6 +86,7 @@
       <recent name="$PROJECT_DIR$/lib/widgets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/pages/custom_navbar" />
       <recent name="$PROJECT_DIR$/lib/pages" />
       <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/ios/Runner/Assets.xcassets" />
