@@ -7,7 +7,7 @@ import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_code_page/code_auth_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_lottery_page/lottery_detail_page.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_history.dart';
-import 'package:medvezhiy_ugol/widgets/custom_navbar.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar.dart';
 
 import 'common_setup/module_container.dart';
 import 'common_setup/routes.dart';

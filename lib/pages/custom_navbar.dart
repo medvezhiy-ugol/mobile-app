@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/discounts_page.dart';
 import 'package:medvezhiy_ugol/pages/map/map_page/map_page.dart';
 
-import '../pages/home/home_page/home_page.dart';
-import '../pages/menu/menu_page/menu_page.dart';
-import '../pages/more/more_page.dart';
+import 'home/home_page/home_page.dart';
+import 'menu/menu_page/menu_page.dart';
+import 'more/more_page.dart';
 import '../utils/icons/bottom_bar_icons.dart';
 
 class CustomNavbar extends StatefulWidget {

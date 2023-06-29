@@ -52,7 +52,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
             menu: menu,
             menuTabs: _menuTabs,
             order: _order,
-            orderSum: _orderSum));
+            orderSum: _orderSum
+        ));
       }
     });
     add(MenuLoadingEvent());

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/menu/basket_menu_page/basket_menu_page.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
@@ -133,6 +134,7 @@ class DetailMenuPage extends StatelessWidget {
   Widget _buildLoadedBody(BuildContext context, MenuDetailLoadedState state) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color(0xff000000),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -172,13 +174,14 @@ class DetailMenuPage extends StatelessWidget {
                                 context.read<MenuBloc>().add(
                                     MenuAddToOrderEvent(
                                         menuProduct: state.menuProduct));
-                                Navigator.of(context).pop();
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => BasketPage()));
                               },
                               child: Text(
                                 '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
+                                  color: Color(0xffFFFFFF)
                                 ),
                               ),
                             ),
@@ -401,6 +404,9 @@ class DetailMenuPage extends StatelessWidget {
           price: 20,
           imgPath: 'assets/images/detail_menu_page/souse.png',
         ),
+        const SizedBox(
+          height: 100,
+        ),
       ],
     );
   }
@@ -508,8 +514,18 @@ class _OptionalProductState extends State<OptionalProduct> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.name),
-                    Text('+ ${widget.price} Р'),
+                    Text(
+                        widget.name,
+                      style: TextStyle(
+                        color: Color(0xffFFFFFF)
+                      ),
+                    ),
+                    Text(
+                        '+ ${widget.price} Р',
+                      style: TextStyle(
+                          color: Color(0xffFFFFFF)
+                      ),
+                    ),
                   ],
                 ),
                 const Spacer(),

@@ -117,7 +117,9 @@ class _BasketPageState extends State<BasketPage> {
                   ),
                   decoration: const InputDecoration(
                     hintText: 'Promocode',
-                    hintStyle: TextStyle(),
+                    hintStyle: TextStyle(
+                      color: Color(0xffFFFFFF)
+                    ),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -205,6 +207,7 @@ class _BasketPageState extends State<BasketPage> {
                   ),
                 ),
               ),
+              SizedBox(height: 100),
             ],
           ),
         ),
@@ -411,8 +414,18 @@ class _BasketPageState extends State<BasketPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Доставка 30-40 минут'),
-                    Text('Выберите время доставки'),
+                    Text(
+                        'Доставка 30-40 минут',
+                      style: TextStyle(
+                        color: Color(0xffFFFFFF)
+                      ),
+                    ),
+                    Text(
+                        'Выберите время доставки',
+                      style: TextStyle(
+                          color: Color(0xffFFFFFF)
+                      ),
+                    ),
                   ],
                 ),
                 const Spacer(),
@@ -456,6 +469,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
               style: const TextStyle(
                 fontFamily: 'Unbounded',
                 fontSize: 16,
+                  color: Color(0xffFFFFFF)
               ),
             ),
             Text(
@@ -463,6 +477,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
               style: TextStyle(
                 fontFamily: 'Unbounded',
                 fontSize: 16,
+                color: Color(0xffFFFFFF)
               ),
             ),
           ],
@@ -505,8 +520,18 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Доставка'),
-                            Text('30-40 минут'),
+                            Text(
+                                'Доставка',
+                              style: TextStyle(
+                                color: Color(0xffFFFFFF)
+                              ),
+                            ),
+                            Text(
+                                '30-40 минут',
+                              style: TextStyle(
+                                  color: Color(0xffFFFFFF)
+                              ),
+                            ),
                           ],
                         ),
                       ],
