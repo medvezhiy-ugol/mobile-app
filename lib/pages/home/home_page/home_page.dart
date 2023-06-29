@@ -9,7 +9,6 @@ import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
 import '../../../services/theme_service.dart';
-import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -827,15 +826,15 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            A.assetsActiveOrderPageForming,
+            'assets/images/active_order_page/forming.png',
             width: 32,
           ),
           (progressValue > 1)
-              ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
-              : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
+              ? Image.asset('assets/images/active_order_page/cooking_on.png', width: 32)
+              : Image.asset('assets/images/active_order_page/cooking_off.png', width: 32),
           (progressValue == 3)
-              ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
-              : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
+              ? Image.asset('assets/images/active_order_page/delivery_on.png', width: 32)
+              : Image.asset('assets/images/active_order_page/delivery_off.png', width: 32)
         ],
       ),
     );

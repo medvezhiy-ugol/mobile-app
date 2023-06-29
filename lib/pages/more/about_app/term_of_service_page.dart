@@ -4,7 +4,6 @@ import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../../../ui/close_circle_button.dart';
-import '../../../utils/app_assets.dart';
 
 class TermsOfServicePage extends StatefulWidget {
   const TermsOfServicePage({super.key});
@@ -23,7 +22,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
   }
 
   Future<String> _loadTextFile() async {
-    return await rootBundle.loadString(A.assetsTermsOfUse);
+    return await rootBundle.loadString('assets/documents/txt/terms_of_use.txt');
   }
 
   @override

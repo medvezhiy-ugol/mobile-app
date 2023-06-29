@@ -11,7 +11,6 @@ import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../common_setup/routes.dart';
-import '../../../utils/app_assets.dart';
 import 'bloc/loyalty_bloc.dart';
 
 class LoyaltyCardPage extends StatefulWidget {
@@ -393,7 +392,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         image: const DecorationImage(
-          image: AssetImage(A.assetsHomePageLoyaltyCardBackgroundImg),
+          image: AssetImage('assets/images/home_page/loyalty_card.png'),
           fit: BoxFit.fill,
         ),
       ),

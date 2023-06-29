@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medvezhiy_ugol/utils/app_assets.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
-import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import '../../../ui/close_circle_button.dart';
 
@@ -34,7 +32,7 @@ class ActiveOrderPage extends StatelessWidget {
                         fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontFamily: AppFonts.unbounded,
+                        fontFamily: 'Unbounded',
                       ),
                     ),
                     const SizedBox(
@@ -189,7 +187,7 @@ class ActiveOrderPage extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            A.assetsDetailPageProductImg,
+            'assets/images/detail_menu_page/doner.png',
             width: 108,
           ),
           const SizedBox(
@@ -243,15 +241,15 @@ class ActiveOrderPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            A.assetsActiveOrderPageForming,
+            'assets/images/active_order_page/forming.png',
             width: 32,
           ),
           (progressValue > 1)
-              ? Image.asset(A.assetsActiveOrderPageCookingOn, width: 32)
-              : Image.asset(A.assetsActiveOrderPageCookingOff, width: 32),
+              ? Image.asset('assets/images/active_order_page/cooking_on.png', width: 32)
+              : Image.asset('assets/images/active_order_page/cooking_off.png', width: 32),
           (progressValue == 3)
-              ? Image.asset(A.assetsActiveOrderPageDeliveryOn, width: 32)
-              : Image.asset(A.assetsActiveOrderPageDeliveryOff, width: 32)
+              ? Image.asset('assets/images/active_order_page/cooking_on.png', width: 32)
+              : Image.asset('assets/images/active_order_page/delivery_off.png', width: 32)
         ],
       ),
     );

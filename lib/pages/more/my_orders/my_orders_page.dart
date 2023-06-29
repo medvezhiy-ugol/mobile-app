@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../common_setup/routes.dart';
 import '../../../ui/close_circle_button.dart';
-import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 
 class MyOrdersPage extends StatelessWidget {
@@ -150,7 +149,7 @@ class MyOrdersPage extends StatelessWidget {
                           height: 50,
                           width: 65,
                           child: Image.asset(
-                            A.assetsStockPageItemImg,
+                            'assets/images/stock_page/pizza.png',
                           ),
                         );
                       },

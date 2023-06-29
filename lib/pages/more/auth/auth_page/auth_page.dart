@@ -5,7 +5,6 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import '../../../../../utils/app_colors.dart';
-import '../../../../../utils/app_fonts.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/close_circle_button.dart';
 import '../auth_code_page/code_auth_page.dart';
@@ -67,7 +66,7 @@ class _AuthPageState extends State<AuthPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
-                        fontFamily: AppFonts.unbounded,
+                        fontFamily: 'Unbounded',
                         color: Color(0xffffffff)
                       ),
                     ),

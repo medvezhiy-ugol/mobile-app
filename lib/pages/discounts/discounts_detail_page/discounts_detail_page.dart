@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
-import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import '../../../utils/app_assets.dart';
 
 class DetailStockPage extends StatelessWidget {
   final String id;
@@ -92,7 +90,7 @@ class DetailStockPage extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Image.asset(
-            A.assetsDetailStockPageItemImg,
+            'assets/images/detail_stock_page/scribble.png',
             fit: BoxFit.fill,
           ),
         ),
@@ -105,7 +103,7 @@ class DetailStockPage extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
-              fontFamily: AppFonts.unbounded,
+              fontFamily: 'Unbounded',
               fontSize: 24,
               overflow: TextOverflow.ellipsis,
             ),

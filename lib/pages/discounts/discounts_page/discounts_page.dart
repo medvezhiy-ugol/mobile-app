@@ -5,8 +5,6 @@ import 'package:medvezhiy_ugol/pages/discounts/discounts_history_page/discounts_
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/Leto.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/history_draw.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
-import 'package:medvezhiy_ugol/utils/app_fonts.dart';
-import '../../../utils/app_assets.dart';
 
 class StockPage extends StatelessWidget {
   StockPage({super.key});
@@ -185,7 +183,7 @@ class StockPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  fontFamily: AppFonts.unbounded,
+                  fontFamily: 'Unbounded',
                   color: Colors.white,
                 ),
               ),
@@ -245,7 +243,7 @@ class StockPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.asset(
-                A.assetsStockPageItemImg,
+                'assets/images/stock_page/pizza.png',
                 height: 130,
               ),
               const SizedBox(
@@ -265,7 +263,7 @@ class StockPage extends StatelessWidget {
                         fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontFamily: AppFonts.unbounded,
+                        fontFamily: 'Unbounded',
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),

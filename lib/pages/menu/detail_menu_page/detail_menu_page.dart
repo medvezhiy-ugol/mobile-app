@@ -2,13 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:medvezhiy_ugol/utils/app_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../ui/primary_button.dart';
-import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../menu_page/bloc/menu_bloc.dart';
 import 'bloc/menu_detail_bloc.dart';
@@ -163,7 +161,7 @@ class DetailMenuPage extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: AppFonts.unbounded,
+                                fontFamily: 'Unbounded',
                               ),
                             ),
                             const SizedBox(
@@ -385,7 +383,7 @@ class DetailMenuPage extends StatelessWidget {
         OptionalProduct(
           name: "Томатный соус",
           price: 20,
-          imgPath: A.assetsDetailMenuPageOptionalProductImg,
+          imgPath: 'assets/images/detail_menu_page/souse.png',
         ),
         const SizedBox(
           height: 2,
@@ -393,7 +391,7 @@ class DetailMenuPage extends StatelessWidget {
         OptionalProduct(
           name: "Сырный соус",
           price: 20,
-          imgPath: A.assetsDetailMenuPageOptionalProductImg,
+          imgPath: 'assets/images/detail_menu_page/souse.png',
         ),
         const SizedBox(
           height: 2,
@@ -401,7 +399,7 @@ class DetailMenuPage extends StatelessWidget {
         OptionalProduct(
           name: "Сырный соус",
           price: 20,
-          imgPath: A.assetsDetailMenuPageOptionalProductImg,
+          imgPath: 'assets/images/detail_menu_page/souse.png',
         ),
       ],
     );

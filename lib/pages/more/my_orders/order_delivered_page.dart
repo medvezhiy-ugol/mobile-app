@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../ui/close_circle_button.dart';
-import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 
 class OrderDeliveredPage extends StatelessWidget {
@@ -194,7 +193,7 @@ class OrderDeliveredPage extends StatelessWidget {
                 },
                 itemBuilder: (context, i) {
                   return _buildDeliveredOrderItem(
-                    imgUrl: A.assetsStockPageItemImg,
+                    imgUrl: 'assets/images/stock_page/pizza.png',
                     itemName: 'Doner',
                     price: 120.0,
                     quantity: 2,

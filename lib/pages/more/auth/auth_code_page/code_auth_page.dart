@@ -6,7 +6,6 @@ import 'package:pinput/pinput.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_fonts.dart';
 
 import '../../more_page.dart';
 import '../auth_page/auth_page.dart';
@@ -88,7 +87,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
-                        fontFamily: AppFonts.unbounded,
+                        fontFamily: 'Unbounded',
                         color: Color(0xffFFFFFF)
                       ),
                     ),

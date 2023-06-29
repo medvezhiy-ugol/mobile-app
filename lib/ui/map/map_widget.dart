@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-import '../../../utils/app_assets.dart';
-
 class MapWidget extends StatefulWidget {
   final double? height;
   static late YandexMapController mapController;
@@ -39,7 +37,7 @@ class _MapWidgetState extends State<MapWidget> {
         icon: PlacemarkIcon.single(
           PlacemarkIconStyle(
             scale: 0.7,
-            image: BitmapDescriptor.fromAssetImage(A.assetsMapPagePointImg),
+            image: BitmapDescriptor.fromAssetImage('assets/images/map_page/point.png'),
             rotationType: RotationType.noRotation,
             anchor: Offset(0.5, 1),
           ),
@@ -66,7 +64,7 @@ class _MapWidgetState extends State<MapWidget> {
         icon: PlacemarkIcon.single(
           PlacemarkIconStyle(
             scale: 0.7,
-            image: BitmapDescriptor.fromAssetImage(A.assetsMapPagePointImg),
+            image: BitmapDescriptor.fromAssetImage('assets/images/map_page/point.png'),
             rotationType: RotationType.noRotation,
             anchor: Offset(0.5, 1),
           ),

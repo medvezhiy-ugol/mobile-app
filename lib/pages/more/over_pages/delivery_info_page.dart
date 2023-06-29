@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import '../../../ui/close_circle_button.dart';
-import '../../../utils/app_assets.dart';
 
 class DeliveryInfoPage extends StatelessWidget {
   const DeliveryInfoPage({super.key});
@@ -192,7 +191,7 @@ class DeliveryInfoPage extends StatelessWidget {
                             SizedBox(
                                 width: 40,
                                 child: Image.asset(
-                                  A.assetsActiveOrderPageCookingOff,
+                                  'assets/images/active_order_page/cooking_off.png',
                                   height: 40,
                                 )),
                             const SizedBox(
@@ -249,7 +248,7 @@ class DeliveryInfoPage extends StatelessWidget {
                               width: 40,
                               // child: Icon(MorePageIcons.car, size: 25,)
                               child: Image.asset(
-                                A.assetsDelveryInfoPageScooter,
+                                'assets/images/delivery_info_page/scooter.png',
                                 height: 18,
                               ),
                             ),
@@ -305,7 +304,7 @@ class DeliveryInfoPage extends StatelessWidget {
                             SizedBox(
                               width: 40,
                               child: Image.asset(
-                                  A.assetsActiveOrderPageDeliveryOff,
+                                  'assets/images/active_order_page/delivery_off.png',
                                   width: 40),
                             ),
                             const SizedBox(

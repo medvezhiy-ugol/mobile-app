@@ -4,7 +4,6 @@ import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../../../ui/close_circle_button.dart';
-import '../../../utils/app_assets.dart';
 
 class PersonalDataPolicyPage extends StatefulWidget {
   const PersonalDataPolicyPage({super.key});
@@ -23,7 +22,7 @@ class _PersonalDataPolicyPageState extends State<PersonalDataPolicyPage> {
   }
 
   Future<String> _loadTextFile() async {
-    return await rootBundle.loadString(A.assetsPersonalDataPolicy);
+    return await rootBundle.loadString('assets/documents/txt/personal_data_policy.txt');
   }
 
   @override

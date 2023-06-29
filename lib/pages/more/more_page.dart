@@ -7,8 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
 import '../../services/auth_service.dart';
-import '../../utils/app_assets.dart';
-import '../../utils/app_fonts.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
 import 'auth/auth_page/auth_page.dart';
@@ -88,7 +86,8 @@ class MorePage extends StatelessWidget {
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              fontFamily: AppFonts.unbounded),
+              fontFamily: 'Unbounded'
+          ),
         ),
         const SizedBox(
           height: 26,
@@ -262,7 +261,7 @@ class MorePage extends StatelessWidget {
                             width: 21,
                             height: 24,
                             child: Image.asset(
-                              A.assetsMorePageMyOrdersIcon,
+                              'assets/images/more_page/my_orders_icon.png',
                             ),
                           ),
                           const SizedBox(
@@ -530,7 +529,8 @@ class MorePage extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  fontFamily: AppFonts.unbounded),
+                  fontFamily: 'Unbounded'
+              ),
             ),
             Material(
               color: Colors.transparent,

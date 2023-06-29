@@ -559,7 +559,6 @@ class _MenuSectionState extends State<MenuSection> {
                   //       ],
                   //     )
                   // );
-                  print("цоофшофш ${widget.menuCategory.items[i].id}");
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailMenuPage(
                       id: widget.menuCategory.items[i].id
                   )));

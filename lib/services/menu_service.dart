@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:medvezhiy_ugol/services/api_service.dart';
 
 import '../models/get_menu.dart';
@@ -9,6 +11,7 @@ class MenuService {
     final response = await APIService.postRequest(
       request: 'v1/menu/iiko/by_id/${externalMenus[0].id}',
     );
+
 
     if (response != null) {
       final List<MenuCategory> categories = [];
@@ -26,8 +29,6 @@ class MenuService {
       request: 'v1/menu/product/$id',
     );
 
-    print(response);
-
     if (response != null) {
       return MenuProduct.fromJson(response);
     }
@@ -42,6 +43,7 @@ class MenuService {
     if (response != null) {
       final List<ExternalMenu> menus = [];
       for (final menu in response['externalMenus']) {
+        log("ывфы $menu");
         menus.add(ExternalMenu.fromJson(menu));
       }
       return menus;

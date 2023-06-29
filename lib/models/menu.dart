@@ -307,7 +307,7 @@ class MenuPrice {
 
   factory MenuPrice.fromJson(Map<String, dynamic> json) => MenuPrice(
         organizationId: json["organizationId"],
-        price: json["price"],
+        price: json["price"].toInt(),
       );
 
   Map<String, dynamic> toJson() => {
