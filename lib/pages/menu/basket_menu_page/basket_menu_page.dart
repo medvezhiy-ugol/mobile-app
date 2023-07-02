@@ -141,16 +141,16 @@ class _BasketPageState extends State<BasketPage> {
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: ChooseDeliveryType(),
               ),
-              const SizedBox(
-                height: 32,
-              ),
+              // const SizedBox(
+              //   height: 32,
+              // ),
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
               //   child: _buildChooseTimeDelivery(),
               // ),
-              const SizedBox(
-                height: 8,
-              ),
+              // const SizedBox(
+              //   height: 8,
+              // ),
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
               //   child: _buildChooseTimeDelivery(),
@@ -213,6 +213,9 @@ class _BasketPageState extends State<BasketPage> {
                 title: 'Сумма заказа',
                 sum: state.orderSum.toInt(),
               ),
+              SizedBox(
+                height: 21,
+              ),
               _buildSubsumRow(title: 'Сервисный сбор', sum: 30),
               const SizedBox(
                 height: 56,
@@ -221,36 +224,39 @@ class _BasketPageState extends State<BasketPage> {
                 title: 'При самовывозе',
                 sum: state.orderSum.toInt(),
               ),
+              SizedBox(
+                height: 9,
+              ),
               _buildTotalRow(sum: state.orderSum.toInt() + 30),
               const SizedBox(
                 height: 33,
               ),
-              PrimaryButton(
-                onTap: () {},
-                color: AppColors.color26282F,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(
-                      Icons.map,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Построить маршрут',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 33,
-              ),
+              // PrimaryButton(
+              //   onTap: () {},
+              //   color: AppColors.color26282F,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: const <Widget>[
+              //       Icon(
+              //         Icons.map,
+              //       ),
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       Text(
+              //         'Построить маршрут',
+              //         style: TextStyle(
+              //           fontSize: 16,
+              //           fontWeight: FontWeight.w600,
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 33,
+              // ),
               PrimaryButton(
                 height: 56,
                 onTap: () {},
@@ -589,6 +595,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
                       children: [
                         const Icon(
                           Icons.motorcycle,
+                          color: Color(0xffffffff),
                         ),
                         const SizedBox(
                           width: 10,
@@ -641,6 +648,7 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
                       children: [
                         const Icon(
                           Icons.shopping_bag_rounded,
+                          color: Color(0xffffffff),
                         ),
                         const SizedBox(
                           width: 10,
@@ -649,8 +657,14 @@ class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Навынос'),
-                            Text('Московский пр. 178'),
+                            Text('Навынос',
+                            style: TextStyle(
+                              color: Color(0xffffffff)
+                            ),),
+                            Text('Московский пр. 178',
+                            style: TextStyle(
+                              color: Color(0xffffffff)
+                            ),),
                           ],
                         ),
                       ],
