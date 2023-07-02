@@ -92,6 +92,7 @@ class _MainPageState extends State<MainPage> {
             ],
             onTap: (index) => _onItemTapped(context, MenuRoute.values[index]),
             currentIndex: _currentIndex,
+            selectedItemColor: Colors.blue,
           ),
         ),
       ),
