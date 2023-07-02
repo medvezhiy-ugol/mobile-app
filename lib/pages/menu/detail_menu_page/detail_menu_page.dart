@@ -162,6 +162,7 @@ class DetailMenuPage extends StatelessWidget {
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Unbounded',
+                                color: Color(0xffffffff)
                               ),
                             ),
                             const SizedBox(

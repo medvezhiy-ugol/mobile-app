@@ -9,6 +9,7 @@ import '../menu_page/bloc/menu_bloc.dart';
 
 class BasketPage extends StatefulWidget {
   BasketPage({super.key});
+  int _counter = 0;
 
   @override
   State<BasketPage> createState() => _BasketPageState();
@@ -104,27 +105,32 @@ class _BasketPageState extends State<BasketPage> {
               const SizedBox(
                 height: 10,
               ),
-              Container(
-                height: 60,
-                color: AppColors.color191A1F,
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
-                  controller: _textPromoCodeController,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Promocode',
-                    hintStyle: TextStyle(
-                      color: Color(0xffFFFFFF)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: Container(
+                  height: 60,
+                  color: AppColors.color191A1F,
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    textAlignVertical: TextAlignVertical.center,
+                    controller: _textPromoCodeController,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
                     ),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
+                    decoration: const InputDecoration(
+                      hintText: 'Promocode',
+                      hintStyle: TextStyle(
+                        color: Color(0xffFFFFFF)
+                      ),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
                   ),
                 ),
               ),
@@ -138,18 +144,69 @@ class _BasketPageState extends State<BasketPage> {
               const SizedBox(
                 height: 32,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: _buildChooseTimeDelivery(),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //   child: _buildChooseTimeDelivery(),
+              // ),
               const SizedBox(
                 height: 8,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: _buildChooseTimeDelivery(),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //   child: _buildChooseTimeDelivery(),
+              // ),
               const SizedBox(
+                height: 45,
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  right: 23.16,
+                ),
+                height: 48,
+                width: 400,
+                color: Color(0xff191a1f),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      child: Image.asset('assets/images/active_order_page/mastercard.png',
+                        width: 22,
+                        height: 15,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text('MasterCard ** 4498',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Color(0xffffffff)
+                      ),
+                    ),
+                    Spacer(
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                          color: Color(0xffff9900),
+                          shape: BoxShape.circle
+                      ),
+                      child: Container(
+                        height: 10,
+                        width: 10,
+                        decoration: BoxDecoration(
+                            color: Color(0xff000000),
+                            shape: BoxShape.circle
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
                 height: 45,
               ),
               _buildSubsumRow(
@@ -256,7 +313,12 @@ class _BasketPageState extends State<BasketPage> {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('${itemName}'),
+                    Text('${itemName}',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xffffffff)
+                    ),),
                   ],
                 ),
                 SizedBox(
@@ -269,15 +331,26 @@ class _BasketPageState extends State<BasketPage> {
                             onTap: () {},
                             icon: Icons.remove,
                           ),
-                          // Text('${_counter}'),
+                          Text('$_counter',
+                          style: TextStyle(
+                            color: Color(0xffffffff)
+                          ),),
                           _buildCirleButton(
                             onTap: () {},
                             icon: Icons.add,
                           ),
                         ],
                       ),
+                      SizedBox(
+                        width: 100,
+                      ),
                       Text(
                         '${itemPrice}',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xffffffff)
+                        ),
                       ),
                     ],
                   ),
@@ -288,6 +361,7 @@ class _BasketPageState extends State<BasketPage> {
         ),
       ),
     );
+
   }
 
   Widget _buildCirleButton(
@@ -390,55 +464,58 @@ class _BasketPageState extends State<BasketPage> {
       ),
     );
   }
+  //
+  // Widget _buildChooseTimeDelivery() {
+  //   return Container(
+  //     decoration: const BoxDecoration(
+  //       color: AppColors.color191A1F,
+  //     ),
+  //     child: Material(
+  //       color: Colors.transparent,
+  //       child: InkWell(
+  //         onTap: () {},
+  //         child: Container(
+  //           padding: const EdgeInsets.all(10),
+  //           child: Row(
+  //             children: <Widget>[
+  //               const Icon(
+  //                 Icons.timeline,
+  //               ),
+  //               const SizedBox(
+  //                 width: 10,
+  //               ),
+  //               // Column(
+  //               //   mainAxisAlignment: MainAxisAlignment.center,
+  //               //   crossAxisAlignment: CrossAxisAlignment.start,
+  //               //   children: <Widget>[
+  //               //     Text(
+  //               //         'Доставка 30-40 минут',
+  //               //       style: TextStyle(
+  //               //         color: Color(0xffFFFFFF)
+  //               //       ),
+  //               //     ),
+  //               //     Text(
+  //               //         'Выберите время доставки',
+  //               //       style: TextStyle(
+  //               //           color: Color(0xffFFFFFF)
+  //               //       ),
+  //               //     ),
+  //               //   ],
+  //               // ),
+  //               const Spacer(),
+  //               const Icon(
+  //                 Icons.arrow_right,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+}
 
-  Widget _buildChooseTimeDelivery() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.color191A1F,
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: <Widget>[
-                const Icon(
-                  Icons.timeline,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                        'Доставка 30-40 минут',
-                      style: TextStyle(
-                        color: Color(0xffFFFFFF)
-                      ),
-                    ),
-                    Text(
-                        'Выберите время доставки',
-                      style: TextStyle(
-                          color: Color(0xffFFFFFF)
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                const Icon(
-                  Icons.arrow_right,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+class _counter {
 }
 
 enum TypeOfOrder<T> {
