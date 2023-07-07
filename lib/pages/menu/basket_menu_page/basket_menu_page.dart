@@ -9,13 +9,15 @@ import '../menu_page/bloc/menu_bloc.dart';
 
 class BasketPage extends StatefulWidget {
   BasketPage({super.key});
-  int _counter = 0;
+
 
   @override
   State<BasketPage> createState() => _BasketPageState();
 }
 
 class _BasketPageState extends State<BasketPage> {
+  int _counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MenuBloc, MenuState>(
@@ -333,18 +335,39 @@ class _BasketPageState extends State<BasketPage> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          _buildCirleButton(
-                            onTap: () {},
-                            icon: Icons.remove,
+                          IconButton(
+                            icon: Icon(Icons.remove,
+                              color: Color(0xffffffff),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _counter--;
+                              });
+                            },
                           ),
                           Text('$_counter',
                           style: TextStyle(
                             color: Color(0xffffffff)
                           ),),
-                          _buildCirleButton(
-                            onTap: () {},
-                            icon: Icons.add,
-                          ),
+                          Container(
+                            width: 50.0,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blue,
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _counter++;
+                                });
+                              },
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(
