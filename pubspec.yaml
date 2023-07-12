@@ -12,7 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl_utils: ^2.8.2
-  intl: ^0.17.0
+  intl: ^0.18.0
   shimmer: ^2.0.0
   another_flushbar: ^1.12.30
   cupertino_icons: ^1.0.2

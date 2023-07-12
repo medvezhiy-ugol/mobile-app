@@ -76,73 +76,52 @@ class _HomePageState extends State<HomePage> {
         child: SafeArea(
           child: ListView(
             children: [
-              SizedBox(height: 37),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: const [
-              //         SizedBox(
-              //           height: 32,
-              //         ),
-              //         Text(
-              //           'Адрес и время доставки',
-              //           style: TextStyle(
-              //             fontSize: 10,
-              //             fontWeight: FontWeight.w400,
-              //             color: AppColors.color808080,
-              //           ),
-              //         ),
-              //         Text(
-              //           'Республиканская ул. 68',
-              //           style: TextStyle(
-              //             fontSize: 16,
-              //             fontWeight: FontWeight.w600,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ],
-              // ),
-            SizedBox(
-              height: 180,
-              child: PageView.builder(
-                controller: _controller,
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 4) { // Индекс 4 соответствует 'assets/images/home_page/promo_img.png'
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: InkWell(
-                        onTap: () {
-                          String id = 'your_id_here'; // Замените 'your_id_here' на фактический идентификатор для изображения "promo_img.png"
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
-                        },
-                        child: Image.asset(
-                          'assets/images/home_page/promo_img.png',
-                          fit: BoxFit.cover,
+              SizedBox(height: 13),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        SizedBox(
+                          height: 32,
                         ),
-                      ),
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Image.asset(
-                        [
-                          'assets/images/home_page/Большая шаурма.png',
-                          'assets/images/home_page/Вок0.png',
-                          'assets/images/home_page/Золотая шаурма.png',
-                          'assets/images/home_page/Пицца мафия.png',
-                          'assets/images/home_page/promo_img.png'
-                        ][index],
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  }
-                },
+                        Text(
+                          'Адрес и время доставки',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.color808080,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                        Text(
+                          'Укажите адрес',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xffffffff)
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text('Джекпот',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xfffffffff)
+                    ),)
+                  ],
+                ),
               ),
+            SizedBox(
+              height: 69,
             ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -155,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     authService.token == ""
                         ? ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(12),
                       child: Container(
                         height: 180,
                         color: const Color(0xff191A1F),
@@ -225,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                         : Column(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(12),
                           child: Container(
                             height: 180,
                             color: const Color(0xff191A1F),
@@ -235,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     top: 8,
-                                    left: 10,
+                                    left: 10.34,
                                   ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,13 +222,13 @@ class _HomePageState extends State<HomePage> {
                                       const Text(
                                         "Карта лояльности",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w400,
                                             fontSize: 10,
                                             color: Color(0xffEFEFEF)
                                         ),
                                       ),
                                       const SizedBox(
-                                        height: 40,
+                                        height: 19,
                                       ),
                                       Text(
                                         name,
@@ -260,30 +239,28 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 11,
+                                        height: 33,
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            padding: EdgeInsets.all(2),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(6.88235),
-                                                border: Border.all(
-                                                  color: Color(0xffFF9900),
-                                                )
-                                            ),
-                                            child: Text(
-                                              "Баланс " "$cardBalance",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 9.14286,
-                                                  color: Color(0xffFFFFFF)
-                                              ),
+                                          Text(
+                                            "$cardBalance ",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                                color: Color(0xffEFEFEF)
                                             ),
                                           ),
                                           SizedBox(
-                                            width: 3,
+                                            width: 1,
+                                          ),
+                                          Text('бонусов',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 10,
+                                            color: Color(0xffEFEFEF)
+                                          ),
                                           ),
                                           // Text(
                                           //   "9834",
@@ -295,10 +272,22 @@ class _HomePageState extends State<HomePage> {
                                           // ),
                                         ],
                                       ),
+                                      SizedBox(
+                                        height: 1,
+                                      ),
+                                      Text('Bronze',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xffEFEFEF)
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                                Image.asset("assets/images/home_page/loyalty_card.png")
+                                Transform(transform: Matrix4.skewX(0.2),
+                                child: Image.asset("assets/images/home_page/loyalty_card2.png"),
+                                ),
                               ],
                             ),
                           ),
@@ -306,84 +295,84 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            left: 13,
-                            top: 17,
-                            right: 183,
-                            bottom: 14,
-                          ),
-                          child: Text("Данные карты",
-                            style: TextStyle(
-                                fontWeight:FontWeight.w600,
-                                fontSize: 17,
-                                color: Color(0xffE3E3E3)
-                            ),
-                          ),
-                        ),
-                        Container(
-                            padding: EdgeInsets.only(
-                              left: 15,
-                              right: 15,
-                            ),
-                            height: 100,
-                            width: double.infinity,
-                            color: Colors.white,
-                            // padding: const EdgeInsets.symmetric(
-                            //   horizontal: 20,
-                            // ),
-                            child: SvgPicture.string(
-                                Barcode.code128().toSvg(
-                                    phone,
-                                    width: 500,
-                                    height: 100
-                                )
-                            )
-                        ),
-                        const SizedBox(
-                          height: 46,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text("Номер карты",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff808080,)
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text(cardId,
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xffe3e3e3)
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            const Text('Баланс баллов',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff808080,)
-                              ),
-                            ),const SizedBox(
-                              height: 4,
-                            ),
-                            Text("$cardBalance",
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xffe3e3e3)
-                              ),
-                            ),
-                          ],
-                        ),
+                        // const Padding(
+                        //   padding: EdgeInsets.only(
+                        //     left: 13,
+                        //     top: 17,
+                        //     right: 183,
+                        //     bottom: 14,
+                        //   ),
+                        //   child: Text("Данные карты",
+                        //     style: TextStyle(
+                        //         fontWeight:FontWeight.w600,
+                        //         fontSize: 17,
+                        //         color: Color(0xffE3E3E3)
+                        //     ),
+                        //   ),
+                        // ),
+                        // Container(
+                        //     padding: EdgeInsets.only(
+                        //       left: 15,
+                        //       right: 15,
+                        //     ),
+                        //     height: 100,
+                        //     width: double.infinity,
+                        //     color: Colors.white,
+                        //     // padding: const EdgeInsets.symmetric(
+                        //     //   horizontal: 20,
+                        //     // ),
+                        //     child: SvgPicture.string(
+                        //         Barcode.code128().toSvg(
+                        //             phone,
+                        //             width: 500,
+                        //             height: 100
+                        //         )
+                        //     )
+                        // ),
+                        // const SizedBox(
+                        //   height: 46,
+                        // ),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     const Text("Номер карты",
+                        //       style: TextStyle(
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w400,
+                        //           color: Color(0xff808080,)
+                        //       ),
+                        //     ),
+                        //     const SizedBox(
+                        //       height: 4,
+                        //     ),
+                        //     Text(cardId,
+                        //       style: const TextStyle(
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w400,
+                        //           color: Color(0xffe3e3e3)
+                        //       ),
+                        //     ),
+                        //     const SizedBox(
+                        //       height: 16,
+                        //     ),
+                        //     const Text('Баланс баллов',
+                        //       style: TextStyle(
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w400,
+                        //           color: Color(0xff808080,)
+                        //       ),
+                        //     ),const SizedBox(
+                        //       height: 4,
+                        //     ),
+                        //     Text("$cardBalance",
+                        //       style: const TextStyle(
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w400,
+                        //           color: Color(0xffe3e3e3)
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                     //_buildOrderStatusTimerWidget(context),
@@ -399,56 +388,153 @@ class _HomePageState extends State<HomePage> {
                     //   context: context,
                     //   state: state,
                     // ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        context.read<CustomNavbarBlocCubit>().changeIndex(2);
-                      },
-                      child: Column(
+                    // const SizedBox(
+                    //   height: 32,
+                    // ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                    //   },
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //         children: [
+                    //           const Text(
+                    //             'Популярно',
+                    //             style: TextStyle(
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //               color: AppColors.colorE3E3E3,
+                    //             ),
+                    //           ),
+                    //           InkWell(
+                    //             onTap: () {
+                    //               context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                    //             },
+                    //             child: const Text(
+                    //               'Все',
+                    //               style: TextStyle(
+                    //                 fontSize: 18,
+                    //                 fontWeight: FontWeight.w500,
+                    //                 color: AppColors.color808080,
+                    //                 decoration: TextDecoration.underline,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       const SizedBox(
+                    //         height: 12,
+                    //       ),
+                    //       _buildPopularSegmentWidget(),
+                    //       const SizedBox(
+                    //         height: 32,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    const SizedBox(height: 24),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 186,
+                child: PageView.builder(
+                  controller: _controller,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index == 4) { // Индекс 4 соответствует 'assets/images/home_page/promo_img.png'
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: InkWell(
+                          onTap: () {
+                            String id = 'promo_img'; // здесь используется фактический идентификатор для изображения "promo_img.png"
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
+                          },
+                          child: Image.asset(
+                            'assets/images/home_page/promo_img.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: InkWell(
+                          onTap: () {
+                            String id = 'pizzamafiya'; // здесь используется фактический идентификатор для изображения "Пицца мафия.png"
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
+                          },
+                          child: Image.asset(
+                            [
+                              'assets/images/home_page/Большая шаурма.png',
+                              'assets/images/home_page/Вок0.png',
+                              'assets/images/home_page/Золотая шаурма.png',
+                              'assets/images/home_page/Пицца мафия.png',
+                              'assets/images/home_page/promo_img.png'
+                            ][index],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              GestureDetector(
+                onTap: () {
+                  context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                },
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Популярно',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.colorE3E3E3,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  context.read<CustomNavbarBlocCubit>().changeIndex(2);
-                                },
-                                child: const Text(
-                                  'Все',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.color808080,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
-                            ],
+                          const Text(
+                            'Популярно',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.colorE3E3E3,
+                            ),
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          _buildPopularSegmentWidget(),
-                          const SizedBox(
-                            height: 32,
+                          InkWell(
+                            onTap: () {
+                              context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                            },
+                            child: const Text(
+                              'Все',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.color808080,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 76),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    _buildPopularSegmentWidget(),
+                    const SizedBox(
+                      height: 32,
+                    ),
                   ],
                 ),
               ),
+              const SizedBox(height: 76),
             ],
           ),
         ),
