@@ -37,6 +37,7 @@ dependencies:
   barcode: ^2.2.3
   flutter_svg: ^2.0.5
   equatable: ^2.0.5
+  toggle_switch: ^2.1.0
 
 dev_dependencies:
   flutter_test:

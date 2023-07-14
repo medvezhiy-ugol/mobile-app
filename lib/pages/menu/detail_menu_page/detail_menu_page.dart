@@ -8,9 +8,12 @@ import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../ui/primary_button.dart';
+import '../../../ui/toggle_switcher/module/toggle_switcher_module.dart';
+import '../../../ui/toggle_switcher/toggle_switcher_widget_food.dart';
 import '../../../utils/app_colors.dart';
 import '../menu_page/bloc/menu_bloc.dart';
 import 'bloc/menu_detail_bloc.dart';
+import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
 
 class DetailMenuPage extends StatelessWidget {
   DetailMenuPage({super.key, required this.id});
@@ -166,26 +169,7 @@ class DetailMenuPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                              height: 32,
-                            ),
-                            PrimaryButton(
-                              onTap: () {
-                                context.read<MenuBloc>().add(
-                                    MenuAddToOrderEvent(
-                                        menuProduct: state.menuProduct));
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => BasketPage()));
-                              },
-                              child: Text(
-                                '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xffFFFFFF)
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
+                              height: 18,
                             ),
                             Text(
                               state.menuProduct.description == ''
@@ -197,7 +181,41 @@ class DetailMenuPage extends StatelessWidget {
                                 color: AppColors.color808080,
                               ),
                             ),
-                            const SizedBox(height: 24),
+                            SizedBox(
+                              height: 6,
+                            ),
+                            Center(
+                                child: ToggleSwitcherFood()),
+                            // PrimaryButton(
+                            //   onTap: () {
+                            //     context.read<MenuBloc>().add(
+                            //         MenuAddToOrderEvent(
+                            //             menuProduct: state.menuProduct));
+                            //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => BasketPage()));
+                            //   },
+                            //   child: Text(
+                            //     '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
+                            //     style: const TextStyle(
+                            //         fontSize: 16,
+                            //         fontWeight: FontWeight.w600,
+                            //         color: Color(0xffFFFFFF)
+                            //     ),
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 16,
+                            // ),
+                            // Text(
+                            //   state.menuProduct.description == ''
+                            //       ? 'Состав отсутствует'
+                            //       : state.menuProduct.description,
+                            //   style: const TextStyle(
+                            //     fontSize: 14,
+                            //     fontWeight: FontWeight.w600,
+                            //     color: AppColors.color808080,
+                            //   ),
+                            // ),
+                            const SizedBox(height: 14),
                             buildStatsBar(
                               state.menuProduct.itemSizes.first
                                   .portionWeightGrams
@@ -215,19 +233,175 @@ class DetailMenuPage extends StatelessWidget {
                                   .nutritionPerHundredGrams.carbs
                                   .toString(),
                             ),
-                            const SizedBox(height: 32),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Добавить",
-                                style: const TextStyle(
-                                  fontSize: 16,
+                            SizedBox(
+                              height: 18,
+                            ),
+                            Text('Убрать инденгрендиенты',
+                              style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                ),
+                                  fontSize: 16,
+                                  color: Color(0xffffffff)
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            _buildAddProduct(),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 36,
+                                  width: 63,
+                                  color: Color(0xff26282f),
+                                  child: Center(
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          child: Icon(
+                                              Icons.close,
+                                            color: Color(0xffffffff),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 9.33,
+                                        ),
+                                        Text('Лук',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12,
+                                              color: Color(0xffffffff)
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Container(
+                                  height: 36,
+                                  width: 75,
+                                  color: Color(0xff26282f),
+                                  child: Center(
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          child: Icon(
+                                              Icons.close,
+                                            color: Color(0xffffffff),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 9.33,
+                                        ),
+                                        Text('Салат',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12,
+                                              color: Color(0xffffffff)
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Container(
+                                  height: 36,
+                                  width: 158,
+                                  color: Color(0xff26282f),
+                                  child: Center(
+                                    child: Text('Огурцы маринованные',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
+                                          color: Color(0xffffffff)
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 36,
+                                  width: 70,
+                                  color: Color(0xff26282f),
+                                  child: Center(
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          child: Icon(
+                                              Icons.close,
+                                            color: Color(0xffffffff),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 9.33,
+                                        ),
+                                        Text('Соус',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12,
+                                              color: Color(0xffffffff)
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Container(
+                                  height: 36,
+                                  width: 84,
+                                  color: Color(0xff26282f),
+                                  child: Center(
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          child: Icon(
+                                              Icons.close,
+                                            color: Color(0xffffffff),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 9.33,
+                                        ),
+                                        Text('Томаты',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12,
+                                            color: Color(0xffffffff)
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 14,
+                            ),
+                            Text('Добавить',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Color(0xffffffff)
+                            ),),
+                            SizedBox(
+                              height: 11,
+                            ),
+                            _buildAddProduct()
                           ],
                         ),
                       )

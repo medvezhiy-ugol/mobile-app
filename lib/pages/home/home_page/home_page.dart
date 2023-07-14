@@ -285,9 +285,7 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                                Transform(transform: Matrix4.skewX(0.2),
-                                child: Image.asset("assets/images/home_page/loyalty_card2.png"),
-                                ),
+                                Image.asset("assets/images/home_page/loyalty_card4.png")
                               ],
                             ),
                           ),
