@@ -55,13 +55,6 @@ class UgolApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Медвежий угол',
         debugShowCheckedModeBanner: false,
-        // localizationsDelegates: const [
-        //   S.delegate,
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate
-        // ],
-        // supportedLocales: S.delegate.supportedLocales,
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           scaffoldBackgroundColor: AppColors.color111216,

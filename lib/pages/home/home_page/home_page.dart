@@ -1,12 +1,9 @@
-import 'package:barcode/barcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:medvezhiy_ugol/pages/custom_navbar/custom_navbar_bloc_cubit.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/discounts_detail_page.dart';
-import '../../../common_setup/routes.dart';
 import '../../../models/loalty_card.dart';
 import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
@@ -178,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 13,
                                   ),
                                   GestureDetector(
-                                    onTap: () => context.read<CustomNavbarBlocCubit>().changeIndex(4),
+                                    onTap: () => context.read<CustomNavbarCubit>().changeIndex(4),
                                     child: const Text(
                                       "Войдите, чтобы получить",
                                       style: TextStyle(
@@ -486,7 +483,7 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                  context.read<CustomNavbarCubit>().changeIndex(2);
                 },
                 child: Column(
                   children: [
@@ -507,7 +504,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           InkWell(
                             onTap: () {
-                              context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                              context.read<CustomNavbarCubit>().changeIndex(2);
                             },
                             child: const Text(
                               'Все',

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medvezhiy_ugol/pages/custom_navbar/custom_navbar_bloc_cubit.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/discounts_page.dart';
 import 'package:medvezhiy_ugol/pages/map/map_page/map_page.dart';
 
@@ -29,8 +29,8 @@ class _CustomNavbarState extends State<CustomNavbar> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CustomNavbarBlocCubit(),
-      child: BlocBuilder<CustomNavbarBlocCubit, CustomNavbarBlocState>(
+      create: (context) => CustomNavbarCubit(context),
+      child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
         buildWhen: (previous, current) => previous.index != current.index,
         builder: (context, state) {
           return WillPopScope(
@@ -70,7 +70,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
                       children: [
                         CupertinoTabView(
                           builder: (BuildContext context) {
-                            return BlocBuilder<CustomNavbarBlocCubit, CustomNavbarBlocState>(
+                            return BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
                               buildWhen: (previous, current) => previous.index != current.index,
                               builder: (context, state) {
                                 switch (state.index) {
@@ -133,12 +133,12 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                               homeKey.currentState?.popUntil((route) => route.isFirst);
                                             }
                                             else {
-                                              context.read<CustomNavbarBlocCubit>().changeIndex(0);
+                                              context.read<CustomNavbarCubit>().changeIndex(0);
                                             }
                                           },
-                                          child: const Icon(
+                                          child: Icon(
                                             BottomBarIcons.main,
-                                            color: Color(0xffEFEFEF),
+                                            color: Color(state.index == 0 ? 0xffEFEFEF : 0xff808080),
                                           )
                                       ),
                                       GestureDetector(
@@ -147,12 +147,12 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                               stocksKey.currentState?.popUntil((route) => route.isFirst);
                                             }
                                             else {
-                                              context.read<CustomNavbarBlocCubit>().changeIndex(1);
+                                              context.read<CustomNavbarCubit>().changeIndex(1);
                                             }
                                           },
-                                          child: const Icon(
+                                          child: Icon(
                                             BottomBarIcons.stock,
-                                            color: Color(0xffEFEFEF),
+                                            color: Color(state.index == 1 ? 0xffEFEFEF : 0xff808080),
                                           )
                                       ),
                                       GestureDetector(
@@ -161,12 +161,12 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                               moreKey.currentState?.popUntil((route) => route.isFirst);
                                             }
                                             else {
-                                              context.read<CustomNavbarBlocCubit>().changeIndex(2);
+                                              context.read<CustomNavbarCubit>().changeIndex(2);
                                             }
                                           },
-                                          child: const Icon(
+                                          child: Icon(
                                             BottomBarIcons.menu,
-                                            color: Color(0xffEFEFEF),
+                                            color: Color(state.index == 2 ? 0xffEFEFEF : 0xff808080),
                                           )
                                       ),
                                       GestureDetector(
@@ -175,12 +175,12 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                             mapKey.currentState?.popUntil((route) => route.isFirst);
                                           }
                                           else {
-                                            context.read<CustomNavbarBlocCubit>().changeIndex(3);
+                                            context.read<CustomNavbarCubit>().changeIndex(3);
                                           }
                                         },
-                                        child: const Icon(
+                                        child: Icon(
                                           BottomBarIcons.map,
-                                          color: Color(0xffEFEFEF),
+                                          color: Color(state.index == 3 ? 0xffEFEFEF : 0xff808080),
                                         ),
                                       ),
                                       GestureDetector(
@@ -189,12 +189,12 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                             moreKey.currentState?.popUntil((route) => route.isFirst);
                                           }
                                           else {
-                                            context.read<CustomNavbarBlocCubit>().changeIndex(4);
+                                            context.read<CustomNavbarCubit>().changeIndex(4);
                                           }
                                         },
-                                        child: const Icon(
+                                        child: Icon(
                                           BottomBarIcons.more,
-                                          color: Color(0xffEFEFEF),
+                                          color: Color(state.index == 4 ? 0xffEFEFEF : 0xff808080),
                                         ),
                                       ),
                                     ]

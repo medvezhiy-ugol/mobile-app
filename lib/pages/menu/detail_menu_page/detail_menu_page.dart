@@ -2,31 +2,34 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:medvezhiy_ugol/pages/menu/basket_menu_page/basket_menu_page.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../ui/close_circle_button.dart';
-import '../../../ui/primary_button.dart';
-import '../../../ui/toggle_switcher/module/toggle_switcher_module.dart';
 import '../../../ui/toggle_switcher/toggle_switcher_widget_food.dart';
 import '../../../utils/app_colors.dart';
-import '../menu_page/bloc/menu_bloc.dart';
 import 'bloc/menu_detail_bloc.dart';
-import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
 
-class DetailMenuPage extends StatelessWidget {
+class DetailMenuPage extends StatefulWidget {
   DetailMenuPage({super.key, required this.id});
-
-  final ThemeService themeService = Injector().get<ThemeService>();
-  final MenuService menuService = Injector().get<MenuService>();
 
   final String id;
 
   @override
+  State<DetailMenuPage> createState() => _DetailMenuPageState();
+}
+
+class _DetailMenuPageState extends State<DetailMenuPage> {
+  final ThemeService themeService = Injector().get<ThemeService>();
+
+  final MenuService menuService = Injector().get<MenuService>();
+
+  int _count = 0;
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MenuDetailBloc(menuService: menuService, id: id),
+      create: (context) => MenuDetailBloc(menuService: menuService, id: widget.id),
       child: BlocBuilder<MenuDetailBloc, MenuDetailState>(
         builder: (context, state) {
           if (state is MenuDetailLoadedState) {
@@ -44,9 +47,9 @@ class DetailMenuPage extends StatelessWidget {
   }
 
   Widget _buildLoadingBody(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff000000),
-      body: Column(
+    return Container(
+      color: Color(0xff000000),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           CloseCircleButton(
@@ -57,73 +60,71 @@ class DetailMenuPage extends StatelessWidget {
           ),
           Expanded(
             child: Scrollbar(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    Shimmer.fromColors(
-                      baseColor: AppColors.color111216,
-                      highlightColor: AppColors.color5D6377.withOpacity(0.5),
-                      child: Container(
-                        height: 220,
-                        color: AppColors.color26282F,
-                      ),
+              child: ListView(
+                children: <Widget>[
+                  Shimmer.fromColors(
+                    baseColor: AppColors.color111216,
+                    highlightColor: AppColors.color5D6377.withOpacity(0.5),
+                    child: Container(
+                      height: 220,
+                      color: AppColors.color26282F,
                     ),
-                    const SizedBox(
-                      height: 28,
+                  ),
+                  const SizedBox(
+                    height: 28,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Shimmer.fromColors(
+                          baseColor: AppColors.color111216,
+                          highlightColor:
+                          AppColors.color5D6377.withOpacity(0.5),
+                          child: Container(
+                            height: 35,
+                            color: AppColors.color26282F,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Shimmer.fromColors(
+                          baseColor: AppColors.color111216,
+                          highlightColor:
+                          AppColors.color5D6377.withOpacity(0.5),
+                          child: Container(
+                            height: 50,
+                            color: AppColors.color26282F,
+                          ),
+                        ),
+                        Container(
+                          height: 25,
+                        ),
+                        Shimmer.fromColors(
+                          baseColor: AppColors.color111216,
+                          highlightColor:
+                          AppColors.color5D6377.withOpacity(0.5),
+                          child: Container(
+                            height: 60,
+                            color: AppColors.color26282F,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Shimmer.fromColors(
+                          baseColor: AppColors.color111216,
+                          highlightColor:
+                          AppColors.color5D6377.withOpacity(0.5),
+                          child: Container(
+                            height: 100,
+                            color: AppColors.color26282F,
+                          ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Shimmer.fromColors(
-                            baseColor: AppColors.color111216,
-                            highlightColor:
-                            AppColors.color5D6377.withOpacity(0.5),
-                            child: Container(
-                              height: 35,
-                              color: AppColors.color26282F,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 32,
-                          ),
-                          Shimmer.fromColors(
-                            baseColor: AppColors.color111216,
-                            highlightColor:
-                            AppColors.color5D6377.withOpacity(0.5),
-                            child: Container(
-                              height: 50,
-                              color: AppColors.color26282F,
-                            ),
-                          ),
-                          Container(
-                            height: 25,
-                          ),
-                          Shimmer.fromColors(
-                            baseColor: AppColors.color111216,
-                            highlightColor:
-                            AppColors.color5D6377.withOpacity(0.5),
-                            child: Container(
-                              height: 60,
-                              color: AppColors.color26282F,
-                            ),
-                          ),
-                          const SizedBox(height: 32),
-                          Shimmer.fromColors(
-                            baseColor: AppColors.color111216,
-                            highlightColor:
-                            AppColors.color5D6377.withOpacity(0.5),
-                            child: Container(
-                              height: 100,
-                              color: AppColors.color26282F,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ),
@@ -133,10 +134,9 @@ class DetailMenuPage extends StatelessWidget {
   }
 
   Widget _buildLoadedBody(BuildContext context, MenuDetailLoadedState state) {
-    return Scaffold(
-      backgroundColor: Color(0xff000000),
-      body: SafeArea(
-        child: Column(
+    return Stack(
+      children: [
+        Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             CloseCircleButton(
@@ -162,10 +162,10 @@ class DetailMenuPage extends StatelessWidget {
                             Text(
                               state.menuProduct.name,
                               style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Unbounded',
-                                color: Color(0xffffffff)
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Unbounded',
+                                  color: Color(0xffffffff)
                               ),
                             ),
                             const SizedBox(
@@ -257,7 +257,7 @@ class DetailMenuPage extends StatelessWidget {
                                       children: [
                                         SizedBox(
                                           child: Icon(
-                                              Icons.close,
+                                            Icons.close,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
@@ -266,8 +266,8 @@ class DetailMenuPage extends StatelessWidget {
                                         ),
                                         Text('Лук',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12,
                                               color: Color(0xffffffff)
                                           ),
                                         ),
@@ -287,7 +287,7 @@ class DetailMenuPage extends StatelessWidget {
                                       children: [
                                         SizedBox(
                                           child: Icon(
-                                              Icons.close,
+                                            Icons.close,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
@@ -296,8 +296,8 @@ class DetailMenuPage extends StatelessWidget {
                                         ),
                                         Text('Салат',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12,
                                               color: Color(0xffffffff)
                                           ),
                                         ),
@@ -315,9 +315,9 @@ class DetailMenuPage extends StatelessWidget {
                                   child: Center(
                                     child: Text('Огурцы маринованные',
                                       style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12,
+                                          decoration: TextDecoration.lineThrough,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12,
                                           color: Color(0xffffffff)
                                       ),
                                     ),
@@ -339,7 +339,7 @@ class DetailMenuPage extends StatelessWidget {
                                       children: [
                                         SizedBox(
                                           child: Icon(
-                                              Icons.close,
+                                            Icons.close,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
@@ -348,8 +348,8 @@ class DetailMenuPage extends StatelessWidget {
                                         ),
                                         Text('Соус',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12,
                                               color: Color(0xffffffff)
                                           ),
                                         ),
@@ -369,7 +369,7 @@ class DetailMenuPage extends StatelessWidget {
                                       children: [
                                         SizedBox(
                                           child: Icon(
-                                              Icons.close,
+                                            Icons.close,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
@@ -378,9 +378,9 @@ class DetailMenuPage extends StatelessWidget {
                                         ),
                                         Text('Томаты',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
-                                            color: Color(0xffffffff)
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12,
+                                              color: Color(0xffffffff)
                                           ),
                                         ),
                                       ],
@@ -393,11 +393,11 @@ class DetailMenuPage extends StatelessWidget {
                               height: 14,
                             ),
                             Text('Добавить',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color(0xffffffff)
-                            ),),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: Color(0xffffffff)
+                              ),),
                             SizedBox(
                               height: 11,
                             ),
@@ -412,14 +412,104 @@ class DetailMenuPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
+        Positioned(
+          bottom: 0,
+            left: 0,
+            right: 0,
+            child: Row(
+              children: [
+                Container(
+                  color: Color(0xff26282F),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 29.5
+                  ),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Container(
+                          height: 28,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color: Color(0xff353535),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                              Icons.remove,
+                            color: Color(0xffFFFFFF),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 13),
+                      Text(
+                        _count.toString(),
+                        style: TextStyle(
+                          color: Color(0xffFFFFFF)
+                        ),
+                      ),
+                      SizedBox(width: 13),
+                      GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Container(
+                          height: 28,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color: Color(0xff353535),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.remove,
+                            color: Color(0xffFFFFFF),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  color: Color(0xffFFB627),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 19.5,
+                    horizontal: 26,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Добавить",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        state.menuProduct.sku,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+        )
+      ],
     );
   }
 
   Widget _buildErrorBody(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff000000),
-      body: Center(
+    return Container(
+      color: Color(0xff000000),
+      child: Center(
         child: SizedBox(
           height: MediaQuery.of(context).size.height / 2,
           child: Column(
