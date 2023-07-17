@@ -439,8 +439,8 @@ class MorePage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Icon(
-                            MorePageIcons.location,
+                          ImageIcon(
+                            AssetImage('assets/images/more_page/Location.png'),
                             size: 24,
                             color: Color(0xffFFFFFF),
                           ),
@@ -450,15 +450,17 @@ class MorePage extends StatelessWidget {
                           Text(
                             'Адреса',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       )
                     ],
                   ),
                 ),
+
               ),
             ),
           ),

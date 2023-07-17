@@ -10,9 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix base url">
+      <change afterPath="$PROJECT_DIR$/assets/images/more_page/Location.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/more_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,15 +66,15 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "flutter.view.tool.window.visible": "true",
     "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "C:/Users/yarin/StudioProjects/mobile-app/assets/images/home_page",
+    "last_opened_file_path": "C:/Users/yarin/StudioProjects/mobile-app/assets/images/more_page",
     "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yarin\StudioProjects\mobile-app\assets\images\more_page" />
       <recent name="C:\Users\yarin\StudioProjects\mobile-app\assets\images\home_page" />
       <recent name="$PROJECT_DIR$/assets/images/home_page" />
       <recent name="$PROJECT_DIR$/lib/widgets" />
@@ -362,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689624453807</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="fix base url">
+      <created>1689625074682</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1689625074682</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="ToolWindowManager">
