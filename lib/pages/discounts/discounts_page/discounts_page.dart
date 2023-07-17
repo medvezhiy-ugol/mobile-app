@@ -174,17 +174,147 @@ class StockPage extends StatelessWidget {
               // const SizedBox(
               //   height: 26,
               // ),
-              Text(
-                "Акции и комбо",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Unbounded',
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
+                child: Text(
+                  "Акции",
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Unbounded',
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 24,
+              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: SizedBox(
+              height: 186,
+              width: 355,
+              child: Container(
+                  child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                    fit: BoxFit.cover,)
+              ),
+            ),
+          ),SizedBox(
+                height: 15,
+              ),
+Padding(
+  padding: const EdgeInsets.only(
+    left: 10,
+  ),
+  child:   Text('Две лучше, чем одна',
+  style: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Color(0xffffffff)
+  ),),
+),
+SizedBox(
+  height: 8,
+),
+Padding(
+  padding: const EdgeInsets.only(
+    left: 10
+  ),
+  child:   Text('Скидлка на вторую пиццу 20%',
+    style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: Color(0xFF808080)
+    ),),
+),
+SizedBox(
+  height: 16,
+),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                      child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                        fit: BoxFit.cover,)
+                  ),
+                ),
+              ),SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
+                child:   Text('Две лучше, чем одна',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
+                  ),),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10
+                ),
+                child:   Text('Скидлка на вторую пиццу 20%',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF808080)
+                  ),),
+              ),
+SizedBox(
+  height: 16,
+),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: SizedBox(
+                  height: 186,
+                  width: 355,
+                  child: Container(
+                      child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                        fit: BoxFit.cover,)
+                  ),
+                ),
+              ),SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
+                child:   Text('Две лучше, чем одна',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
+                  ),),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10
+                ),
+                child:   Text('Скидлка на вторую пиццу 20%',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF808080)
+                  ),),
               ),
 
 //NO Sales
@@ -204,16 +334,6 @@ class StockPage extends StatelessWidget {
               //   ),
               // ),
 //-----
-
-              _buildStockItem(context, '1'),
-              const SizedBox(
-                height: 8,
-              ),
-              _buildStockItem(context, '2'),
-              const SizedBox(
-                height: 8,
-              ),
-              _buildStockItem(context, '3'),
             ],
           ),
         ),

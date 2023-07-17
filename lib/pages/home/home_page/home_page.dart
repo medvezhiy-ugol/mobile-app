@@ -8,6 +8,7 @@ import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
 import '../../../services/theme_service.dart';
+import '../../../ui/close_circle_button.dart';
 import '../../../utils/app_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -448,10 +449,58 @@ class _HomePageState extends State<HomePage> {
                             showModalBottomSheet(
                                 context: state.context,
                                 builder: (context) => Container(
-                                  height: 100,
-                                  width: 10,
-                                  color: Colors.red,
-                                )
+                                  color: Color(0xff111216),
+                                  child: FractionallySizedBox(
+                                    heightFactor: 2.0,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 14,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                                            const SizedBox(width: 8,)
+                                          ],
+                                        ),
+                                        Text('Условия достаки',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xffffffff)
+                                        ),
+                                        ),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                        SizedBox(
+                                          height: 214,
+                                          width: 375,
+                                          child: Container(
+                                            child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                                              fit: BoxFit.cover,)
+                                          ),
+                                        ), SizedBox(
+                                          height: 24,
+                                        ),
+                                        Text(
+                                          '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                      
+            Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
+                      
+            При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
+                      ''',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                             );
                           },
                           child: Image.asset(
