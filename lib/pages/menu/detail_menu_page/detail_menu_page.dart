@@ -6,7 +6,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../ui/close_circle_button.dart';
-import '../../../ui/toggle_switcher/toggle_switcher_widget_food.dart';
 import '../../../utils/app_colors.dart';
 import 'bloc/menu_detail_bloc.dart';
 
@@ -24,7 +23,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
 
   final MenuService menuService = Injector().get<MenuService>();
 
-  int _count = 0;
+  bool isHalf = false;
 
   @override
   Widget build(BuildContext context) {
@@ -184,8 +183,68 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                             SizedBox(
                               height: 6,
                             ),
-                            Center(
-                                child: ToggleSwitcherFood()),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      isHalf = false;
+                                      setState(() {
+
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 38,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: isHalf ? Color(0xff000000) : Color(0xff2a2c2f)
+                                      ),
+                                    child:
+                                      Text('Целая',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xffffffff)
+                                      ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      isHalf= true;
+                                      setState(() {
+
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 38,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(30),
+                                          color: isHalf ? Color(0xff2a2c2f) : Color(0xff000000)
+                                      ),
+                                      child:
+                                      Text('Половина',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xffffffff)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                            // Center(
+                            //     child: ToggleSwitcherFood()),
                             // PrimaryButton(
                             //   onTap: () {
                             //     context.read<MenuBloc>().add(
@@ -412,96 +471,96 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
             ),
           ],
         ),
-        Positioned(
-          bottom: 0,
-            left: 0,
-            right: 0,
-            child: Row(
-              children: [
-                Container(
-                  color: Color(0xff26282F),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 29.5
-                  ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-
-                        },
-                        child: Container(
-                          height: 28,
-                          width: 28,
-                          decoration: BoxDecoration(
-                            color: Color(0xff353535),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                              Icons.remove,
-                            color: Color(0xffFFFFFF),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 13),
-                      Text(
-                        _count.toString(),
-                        style: TextStyle(
-                          color: Color(0xffFFFFFF)
-                        ),
-                      ),
-                      SizedBox(width: 13),
-                      GestureDetector(
-                        onTap: () {
-
-                        },
-                        child: Container(
-                          height: 28,
-                          width: 28,
-                          decoration: BoxDecoration(
-                            color: Color(0xff353535),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.remove,
-                            color: Color(0xffFFFFFF),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  color: Color(0xffFFB627),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 19.5,
-                    horizontal: 26,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Добавить",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        state.menuProduct.sku,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-        )
+        // Positioned(
+        //   bottom: 0,
+        //     left: 0,
+        //     right: 0,
+        //     child: Row(
+        //       children: [
+        //         Container(
+        //           color: Color(0xff26282F),
+        //           padding: EdgeInsets.symmetric(
+        //             vertical: 16,
+        //             horizontal: 29.5
+        //           ),
+        //           child: Row(
+        //             children: [
+        //               GestureDetector(
+        //                 onTap: () {
+        //
+        //                 },
+        //                 child: Container(
+        //                   height: 28,
+        //                   width: 28,
+        //                   decoration: BoxDecoration(
+        //                     color: Color(0xff353535),
+        //                     shape: BoxShape.circle,
+        //                   ),
+        //                   child: const Icon(
+        //                       Icons.remove,
+        //                     color: Color(0xffFFFFFF),
+        //                   ),
+        //                 ),
+        //               ),
+        //               SizedBox(width: 13),
+        //               Text(
+        //                 _count.toString(),
+        //                 style: TextStyle(
+        //                   color: Color(0xffFFFFFF)
+        //                 ),
+        //               ),
+        //               SizedBox(width: 13),
+        //               GestureDetector(
+        //                 onTap: () {
+        //
+        //                 },
+        //                 child: Container(
+        //                   height: 28,
+        //                   width: 28,
+        //                   decoration: BoxDecoration(
+        //                     color: Color(0xff353535),
+        //                     shape: BoxShape.circle,
+        //                   ),
+        //                   child: const Icon(
+        //                     Icons.remove,
+        //                     color: Color(0xffFFFFFF),
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //         Container(
+        //           color: Color(0xffFFB627),
+        //           padding: EdgeInsets.symmetric(
+        //             vertical: 19.5,
+        //             horizontal: 26,
+        //           ),
+        //           child: Row(
+        //             children: [
+        //               Text(
+        //                 "Добавить",
+        //                 style: TextStyle(
+        //                   fontWeight: FontWeight.w600,
+        //                   fontSize: 16,
+        //                   color: Color(0xff000000),
+        //                 ),
+        //               ),
+        //               Spacer(),
+        //               Text(
+        //                 state.menuProduct.sku,
+        //                 style: TextStyle(
+        //                   fontWeight: FontWeight.w600,
+        //                   fontSize: 16,
+        //                   color: Color(0xff000000),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        // )
       ],
     );
   }

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/discounts_detail_page.dart';
 import '../../../models/loalty_card.dart';
 import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
@@ -435,32 +434,25 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(
                 height: 186,
-                child: PageView.builder(
+                child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return PageView.builder(
                   controller: _controller,
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
-                    if (index == 4) { // Индекс 4 соответствует 'assets/images/home_page/promo_img.png'
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: InkWell(
                           onTap: () {
-                            String id = 'promo_img'; // здесь используется фактический идентификатор для изображения "promo_img.png"
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
-                          },
-                          child: Image.asset(
-                            'assets/images/home_page/promo_img.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: InkWell(
-                          onTap: () {
-                            String id = 'pizzamafiya'; // здесь используется фактический идентификатор для изображения "Пицца мафия.png"
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
+                            showModalBottomSheet(
+                                context: state.context,
+                                builder: (context) => Container(
+                                  height: 100,
+                                  width: 10,
+                                  color: Colors.red,
+                                )
+                            );
                           },
                           child: Image.asset(
                             [
@@ -474,9 +466,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       );
-                    }
                   },
-                ),
+                );
+  },
+),
               ),
               const SizedBox(
                 height: 24,
