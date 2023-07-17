@@ -464,12 +464,22 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(width: 8,)
                                           ],
                                         ),
-                                        Text('Условия достаки',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600,
-                                          color: Color(0xffffffff)
-                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 10,
+                                              ),
+                                              child: Text('Условия достаки',
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color(0xffffffff)
+                                              ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         SizedBox(
                                           height: 12,
@@ -484,17 +494,22 @@ class _HomePageState extends State<HomePage> {
                                         ), SizedBox(
                                           height: 24,
                                         ),
-                                        Text(
-                                          '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
                       
-            Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
+Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
                       
-            При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
+При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
                       ''',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
                                       ],

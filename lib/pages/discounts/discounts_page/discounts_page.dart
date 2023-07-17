@@ -191,61 +191,23 @@ class StockPage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            child: SizedBox(
-              height: 186,
-              width: 355,
-              child: Container(
-                  child: Image.asset('assets/images/home_page/Пицца мафия.png',
-                    fit: BoxFit.cover,)
-              ),
-            ),
-          ),SizedBox(
-                height: 15,
-              ),
-Padding(
-  padding: const EdgeInsets.only(
-    left: 10,
-  ),
-  child:   Text('Две лучше, чем одна',
-  style: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    color: Color(0xffffffff)
-  ),),
-),
-SizedBox(
-  height: 8,
-),
-Padding(
-  padding: const EdgeInsets.only(
-    left: 10
-  ),
-  child:   Text('Скидлка на вторую пиццу 20%',
-    style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: Color(0xFF808080)
-    ),),
-),
-SizedBox(
-  height: 16,
-),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: SizedBox(
-                  width: double.infinity,
-                  child: Container(
-                      child: Image.asset('assets/images/home_page/Пицца мафия.png',
-                        fit: BoxFit.cover,)
+                  height: 186,
+                  width: 355,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
+                    child: Container(
+                      child: Image.asset(
+                        'assets/images/home_page/Пицца мафия.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 15,
               ),
               Padding(
@@ -277,18 +239,69 @@ SizedBox(
   height: 16,
 ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: SizedBox(
                   height: 186,
                   width: 355,
-                  child: Container(
-                      child: Image.asset('assets/images/home_page/Пицца мафия.png',
-                        fit: BoxFit.cover,)
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
+                    child: Container(
+                      child: Image.asset(
+                        'assets/images/home_page/Пицца мафия.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
+                child:   Text('Две лучше, чем одна',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
+                  ),),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10
+                ),
+                child:   Text('Скидлка на вторую пиццу 20%',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF808080)
+                  ),),
+              ),
+SizedBox(
+  height: 16,
+),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SizedBox(
+                  height: 186,
+                  width: 355,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
+                    child: Container(
+                      child: Image.asset(
+                        'assets/images/home_page/Пицца мафия.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
                 height: 15,
               ),
               Padding(

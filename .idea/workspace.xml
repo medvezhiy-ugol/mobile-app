@@ -10,9 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix base url">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart" afterDir="false" />
@@ -358,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689611048320</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix base url">
+      <created>1689624453806</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1689624453807</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -390,9 +394,9 @@
     <MESSAGE value="Карточка товара" />
     <MESSAGE value="basket" />
     <MESSAGE value="fix product page" />
-    <MESSAGE value="fix base url" />
     <MESSAGE value="fix basket navigation" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix basket navigation" />
+    <MESSAGE value="fix base url" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix base url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -434,7 +438,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart</url>
-          <line>480</line>
+          <line>493</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
