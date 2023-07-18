@@ -460,7 +460,19 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                             SizedBox(
                               height: 11,
                             ),
-                            _buildAddProduct()
+                            _buildAddProduct(),
+                            Container(
+                              width: 224,
+                              height: 56,
+                              color: Color(0xffffb626),
+                              child: Text('Добавить',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xff000000),
+                              ),
+                              ),
+                            ),
                           ],
                         ),
                       )

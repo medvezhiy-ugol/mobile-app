@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/primary_button.dart';
@@ -51,39 +52,16 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Align(
-                      alignment: Alignment.centerRight,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          customBorder: const CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: Colors.grey,
-                                ),
-                                child: const Icon(
-                                  Icons.arrow_back,
-                                  size: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      alignment: Alignment.centerLeft,
+                      child: BackArrowButton(
+                        onTap: () => Navigator.of(context).pop(),
                       ),
                     ),
                     SizedBox(
                       height: screenSize.height * 0.05,
                     ),
                     const Text(
-                      'Верификация',
+                      'Код из смс',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
@@ -95,7 +73,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                       height: 12,
                     ),
                     const Text(
-                      'Введите код из сообщения',
+                      'Мы отправили код на номер +79301032835',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xffFFFFFF)
