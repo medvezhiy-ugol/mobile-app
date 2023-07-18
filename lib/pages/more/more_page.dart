@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
+import 'package:medvezhiy_ugol/pages/more/profile/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/app_colors.dart';
 import '../../common_setup/routes.dart';
@@ -164,7 +165,7 @@ class MorePage extends StatelessWidget {
                     fontWeight: FontWeight.w600),
               ),
               const SizedBox(
-                height: 10,
+                height: 16,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -197,7 +198,38 @@ class MorePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    width: 5,
+                    width: 24,
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () async {
+                        var url = Uri.parse(
+                            'https://www.instagram.com/medvezh.ugol/');
+                        try {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } catch (e) {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.platformDefault,
+                          );
+                        }
+                      },
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: const Icon(
+                            SocialIcons.youtube,
+                            color: Color(0xffFFFFFF)
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 24,
                   ),
                   Material(
                     color: Colors.transparent,
@@ -499,7 +531,7 @@ class MorePage extends StatelessWidget {
                             child: SizedBox(),
                           ),
                           Text(
-                            'Мои карты', // 'Мои карты' (на будущее записал),
+                            'Лояльность', // 'Мои карты' (на будущее записал),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -523,22 +555,13 @@ class MorePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Text(
-              'User',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Unbounded'
-              ),
-            ),
             Material(
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed(Routes.profilePage);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
                 },
                 customBorder: const CircleBorder(),
                 child: Padding(
@@ -554,12 +577,57 @@ class MorePage extends StatelessWidget {
                       child: const Icon(
                         Icons.more_horiz,
                         size: 25,
+                        color: Color(0xffEFEFEF),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
+          ],
+        ),
+        SizedBox(
+          height: 6.87 ,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'User',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Unbounded'
+              ),
+            ),
+            // Material(
+            //   color: Colors.transparent,
+            //   child: InkWell(
+            //     onTap: () {
+            //       Navigator.of(context).pushNamed(Routes.profilePage);
+            //     },
+            //     customBorder: const CircleBorder(),
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: SizedBox(
+            //         width: 24,
+            //         height: 24,
+            //         child: DecoratedBox(
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(100),
+            //             color: Colors.transparent,
+            //           ),
+            //           child: const Icon(
+            //             Icons.more_horiz,
+            //             size: 25,
+            //             color: Color(0xffEFEFEF),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         const SizedBox(
@@ -573,14 +641,14 @@ class MorePage extends StatelessWidget {
               style:
                   const TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
-            const SizedBox(
-              width: 17,
-            ),
-            const Text('youremail@mail.com',
-                style: TextStyle(
-                  color: AppColors.color808080,
-                  fontSize: 14,
-                )),
+            // const SizedBox(
+            //   width: 17,
+            // ),
+            // const Text('youremail@mail.com',
+            //     style: TextStyle(
+            //       color: AppColors.color808080,
+            //       fontSize: 14,
+            //     )),
           ],
         ),
       ],

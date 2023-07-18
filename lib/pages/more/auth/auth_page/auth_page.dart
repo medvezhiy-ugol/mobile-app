@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import '../../../../../utils/app_colors.dart';
 import '../../../../services/auth_service.dart';
@@ -53,8 +54,8 @@ class _AuthPageState extends State<AuthPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Align(
-                      alignment: Alignment.centerRight,
-                      child: CloseCircleButton(
+                      alignment: Alignment.centerLeft,
+                      child: BackArrowButton(
                         onTap: () => Navigator.of(context).pop(),
                       ),
                     ),
@@ -112,7 +113,9 @@ class _AuthPageState extends State<AuthPage> {
                                 ),
                               ),
                             ),
-                            const Spacer(),
+                            SizedBox(
+                              height: 24,
+                            ),
                             Center(
                               child: Stack(
                                 alignment: Alignment.topCenter,
@@ -138,6 +141,32 @@ class _AuthPageState extends State<AuthPage> {
                                 ],
                               ),
                             ),
+                            const Spacer(),
+                            // Center(
+                            //   child: Stack(
+                            //     alignment: Alignment.topCenter,
+                            //     children: <Widget>[
+                            //       Text(
+                            //         'Нажимая “получить код”, вы принимаете условия',
+                            //         textAlign: TextAlign.center,
+                            //         style: TextStyle(
+                            //             color: Colors.white.withOpacity(0.7),
+                            //             fontSize: 12),
+                            //       ),
+                            //       CupertinoButton(
+                            //         onPressed: () {},
+                            //         borderRadius: BorderRadius.circular(5),
+                            //         child: Text(
+                            //           'Пользовательского соглашения',
+                            //           style: const TextStyle(
+                            //             color: Colors.white,
+                            //             fontSize: 12,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                       )

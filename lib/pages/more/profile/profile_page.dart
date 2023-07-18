@@ -79,6 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: Color(0xff000000),
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
