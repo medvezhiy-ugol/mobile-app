@@ -136,6 +136,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
         border: Border.all(color: Colors.transparent),
       ),
     );
+
     return Center(
       child: SizedBox(
         height: 68,
@@ -179,3 +180,5 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
     ));
   }
 }
+
+

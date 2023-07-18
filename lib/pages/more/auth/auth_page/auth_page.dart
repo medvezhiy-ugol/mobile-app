@@ -82,7 +82,7 @@ class _AuthPageState extends State<AuthPage> {
                       ),
                     ),
                     SizedBox(
-                      height: screenSize.height * 0.2,
+                      height: 116,
                     ),
                     buildTextField(context, state),
                     const SizedBox(
