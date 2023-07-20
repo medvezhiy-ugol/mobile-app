@@ -19,6 +19,7 @@ class DetailMenuPage extends StatefulWidget {
 }
 
 class _DetailMenuPageState extends State<DetailMenuPage> {
+  int _counter = 0;
   final ThemeService themeService = Injector().get<ThemeService>();
 
   final MenuService menuService = Injector().get<MenuService>();
@@ -461,18 +462,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                               height: 11,
                             ),
                             _buildAddProduct(),
-                            Container(
-                              width: 224,
-                              height: 56,
-                              color: Color(0xffffb626),
-                              child: Text('Добавить',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xff000000),
-                              ),
-                              ),
-                            ),
+
                           ],
                         ),
                       )
@@ -483,6 +473,60 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
             ),
           ],
         ),
+        Stack(
+          alignment: Alignment.topLeft,
+          children: [
+            Container(
+              height: 56,
+              width: double.infinity,
+              color: Color(0xffFFB627),
+              alignment: Alignment.centerRight,
+              child: Text(
+                "Добавить 220р",
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: Color(0xff121212)
+                ),
+              ),
+            ),
+
+            Container(
+              height: 56,
+              width: 151,
+              color: Color(0xff26282f),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.remove_circle_outline,
+                      color: Color(0xffffffff),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _counter--;
+                      });
+                    },
+                  ),
+                  Text('$_counter',
+                    style: TextStyle(
+                        color: Color(0xffffffff)
+                    ),),
+                  IconButton(
+                    icon: Icon(Icons.add_circle_outline,
+                        color: Color(0xffffffff)
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _counter++;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
         // Positioned(
         //   bottom: 0,
         //     left: 0,

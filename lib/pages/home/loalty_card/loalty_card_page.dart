@@ -29,6 +29,7 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
     return BlocProvider(
       create: (context) => LoyaltyBloc(loyaltyCardService: loyaltyCardService),
       child: Scaffold(
+        backgroundColor: Color(0xff000000),
         body: BlocBuilder<LoyaltyBloc, LoyaltyState>(
           builder: (context, state) {
             if (state is LoyaltyLoadedState) {
@@ -49,156 +50,159 @@ class _LoyaltyCardPageState extends State<LoyaltyCardPage> {
     LoyaltyLoadedState state,
   ) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 22,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CloseCircleButton(
-                    onTap: () => Navigator.of(context).pop(),
-                  ),
-                  const SizedBox(
-                    width: 2,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              _buildLoyaltyCard(height: 180, context: context, state: state),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 17),
-                color: AppColors.color191A1F,
-                child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+      child: Scaffold(
+        backgroundColor: Color(0xff000000),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 22,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Column(
-                      children: [
-                        Row(
-                          children: const [
-                            SizedBox(
-                              width: 13,
-                            ),
-                            Text(
-                              'Данные карты',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
+                    CloseCircleButton(
+                      onTap: () => Navigator.of(context).pop(),
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                _buildLoyaltyCard(height: 180, context: context, state: state),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 17),
+                  color: AppColors.color191A1F,
+                  child: Column(
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          Row(
+                            children: const [
+                              SizedBox(
+                                width: 13,
                               ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 14,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(80.0),
-                          child: BarcodeWidget(
-                            barcode: Barcode.code128(escapes: true),
-                            data: state.cardId,
-                            backgroundColor: Colors.white,
-                            drawText: false,
-                            // margin: EdgeInsets.only(
-                            //   left: 50,
-                            //   right: 50,
-                            // ),
-                            // padding: EdgeInsets.only(
-                            //   left: 50,
-                            //   right: 50,
-                            // ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 14,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 13),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Номер карты',
+                              Text(
+                                'Данные карты',
                                 style: TextStyle(
-                                    fontSize: 14, color: AppColors.color808080),
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Text(state.cardId.toString(),
-                                  style: TextStyle(fontSize: 14)),
-
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              const Text('Баланс баллов',
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(80.0),
+                            child: BarcodeWidget(
+                              barcode: Barcode.code128(escapes: true),
+                              data: state.cardId,
+                              backgroundColor: Colors.white,
+                              drawText: false,
+                              // margin: EdgeInsets.only(
+                              //   left: 50,
+                              //   right: 50,
+                              // ),
+                              // padding: EdgeInsets.only(
+                              //   left: 50,
+                              //   right: 50,
+                              // ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 13),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Номер карты',
                                   style: TextStyle(
-                                      fontSize: 14,
-                                      color: AppColors.color808080)),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Text(state.cardBalance.toString(),
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600)),
+                                      fontSize: 14, color: AppColors.color808080),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(state.cardId.toString(),
+                                    style: TextStyle(fontSize: 14)),
 
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Container(
-                                color: AppColors.color26282F,
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    onTap: () {
-                                      // context.pop();
-                                      Navigator.of(context).pushNamed(Routes.slotHistory);
-                                    },
-                                    child: Container(
-                                      // margin: const EdgeInsets.symmetric(horizontal: 18),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 16),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: const [
-                                            Text(
-                                              'История',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                const Text('Баланс баллов',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: AppColors.color808080)),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(state.cardBalance.toString(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600)),
+
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Container(
+                                  color: AppColors.color26282F,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () {
+                                        // context.pop();
+                                        Navigator.of(context).pushNamed(Routes.slotHistory);
+                                      },
+                                      child: Container(
+                                        // margin: const EdgeInsets.symmetric(horizontal: 18),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 16),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: const [
+                                              Text(
+                                                'История',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
 
-                              // const SizedBox(height: 25,),
-                              // const Text('Акции', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.color808080)),
-                              // const SizedBox(height: 10,),
-                            ],
+                                // const SizedBox(height: 25,),
+                                // const Text('Акции', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.color808080)),
+                                // const SizedBox(height: 10,),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

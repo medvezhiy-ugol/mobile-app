@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/profile/profile_page.dart';
@@ -474,7 +475,7 @@ class MorePage extends StatelessWidget {
                           ImageIcon(
                             AssetImage('assets/images/more_page/Location.png'),
                             size: 24,
-                            color: Color(0xffFFFFFF),
+                            color: Color(0xffffffff),
                           ),
                           Expanded(
                             child: SizedBox(),
@@ -514,32 +515,37 @@ class MorePage extends StatelessWidget {
                   //   text: 'Данный раздел пока недоступен',
                   // );
                 },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Icon(
-                            MorePageIcons.loyal,
-                            size: 28,
-                              color: Color(0xffFFFFFF)
-                          ),
-                          Expanded(
-                            child: SizedBox(),
-                          ),
-                          Text(
-                            'Лояльность', // 'Мои карты' (на будущее записал),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )
-                    ],
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoyaltyCardPage()));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Icon(
+                              MorePageIcons.loyal,
+                              size: 28,
+                                color: Color(0xffFFFFFF)
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                            Text(
+                              'Лояльность', // 'Мои карты' (на будущее записал),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

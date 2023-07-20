@@ -21,8 +21,8 @@ class BackArrowButton extends StatelessWidget {
             width: 24,
             height: 24,
             child: const Icon(
-              Icons.arrow_back_rounded,
-              size: 18,
+              Icons.keyboard_backspace_sharp,
+              size: 22,
               color: Color(0xffffffff),
             ),
           ),
