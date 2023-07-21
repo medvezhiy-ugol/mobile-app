@@ -54,6 +54,28 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
             order: _order,
             orderSum: _orderSum
         ));
+      } else if (event is MenuRemoveEvent) {
+        _order.remove(event.menuProduct);
+        _orderSum -= event.menuProduct.itemSizes.first.prices.first.price;
+        emit(MenuLoadedState(
+            menu: menu,
+            menuTabs: _menuTabs,
+            order: _order,
+            orderSum: _orderSum
+        ));
+      } else if (event is MenuRemoveAllEvent) {
+        for (int i = 0; i < _order.length; i++) {
+          if (_order[i].id == event.menuProduct.id) {
+            _orderSum -= _order[i].itemSizes.first.prices.first.price;
+          }
+        }
+        _order.removeWhere((element) => element.id == event.menuProduct.id);
+        emit(MenuLoadedState(
+            menu: menu,
+            menuTabs: _menuTabs,
+            order: _order,
+            orderSum: _orderSum
+        ));
       }
     });
     add(MenuLoadingEvent());

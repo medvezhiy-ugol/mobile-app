@@ -290,145 +290,8 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        // const Padding(
-                        //   padding: EdgeInsets.only(
-                        //     left: 13,
-                        //     top: 17,
-                        //     right: 183,
-                        //     bottom: 14,
-                        //   ),
-                        //   child: Text("Данные карты",
-                        //     style: TextStyle(
-                        //         fontWeight:FontWeight.w600,
-                        //         fontSize: 17,
-                        //         color: Color(0xffE3E3E3)
-                        //     ),
-                        //   ),
-                        // ),
-                        // Container(
-                        //     padding: EdgeInsets.only(
-                        //       left: 15,
-                        //       right: 15,
-                        //     ),
-                        //     height: 100,
-                        //     width: double.infinity,
-                        //     color: Colors.white,
-                        //     // padding: const EdgeInsets.symmetric(
-                        //     //   horizontal: 20,
-                        //     // ),
-                        //     child: SvgPicture.string(
-                        //         Barcode.code128().toSvg(
-                        //             phone,
-                        //             width: 500,
-                        //             height: 100
-                        //         )
-                        //     )
-                        // ),
-                        // const SizedBox(
-                        //   height: 46,
-                        // ),
-                        // Column(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     const Text("Номер карты",
-                        //       style: TextStyle(
-                        //           fontSize: 14,
-                        //           fontWeight: FontWeight.w400,
-                        //           color: Color(0xff808080,)
-                        //       ),
-                        //     ),
-                        //     const SizedBox(
-                        //       height: 4,
-                        //     ),
-                        //     Text(cardId,
-                        //       style: const TextStyle(
-                        //           fontSize: 14,
-                        //           fontWeight: FontWeight.w400,
-                        //           color: Color(0xffe3e3e3)
-                        //       ),
-                        //     ),
-                        //     const SizedBox(
-                        //       height: 16,
-                        //     ),
-                        //     const Text('Баланс баллов',
-                        //       style: TextStyle(
-                        //           fontSize: 14,
-                        //           fontWeight: FontWeight.w400,
-                        //           color: Color(0xff808080,)
-                        //       ),
-                        //     ),const SizedBox(
-                        //       height: 4,
-                        //     ),
-                        //     Text("$cardBalance",
-                        //       style: const TextStyle(
-                        //           fontSize: 14,
-                        //           fontWeight: FontWeight.w400,
-                        //           color: Color(0xffe3e3e3)
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
                       ],
                     ),
-                    //_buildOrderStatusTimerWidget(context),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    // _buildOrderStatusWidget(),
-                    // const SizedBox(
-                    //   height: 32,
-                    // ),
-                    // _switchLoyaltyCardStates(
-                    //   height: 180,
-                    //   context: context,
-                    //   state: state,
-                    // ),
-                    // const SizedBox(
-                    //   height: 32,
-                    // ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     context.read<CustomNavbarBlocCubit>().changeIndex(2);
-                    //   },
-                    //   child: Column(
-                    //     children: [
-                    //       Row(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //         children: [
-                    //           const Text(
-                    //             'Популярно',
-                    //             style: TextStyle(
-                    //               fontSize: 18,
-                    //               fontWeight: FontWeight.w500,
-                    //               color: AppColors.colorE3E3E3,
-                    //             ),
-                    //           ),
-                    //           InkWell(
-                    //             onTap: () {
-                    //               context.read<CustomNavbarBlocCubit>().changeIndex(2);
-                    //             },
-                    //             child: const Text(
-                    //               'Все',
-                    //               style: TextStyle(
-                    //                 fontSize: 18,
-                    //                 fontWeight: FontWeight.w500,
-                    //                 color: AppColors.color808080,
-                    //                 decoration: TextDecoration.underline,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //       const SizedBox(
-                    //         height: 12,
-                    //       ),
-                    //       _buildPopularSegmentWidget(),
-                    //       const SizedBox(
-                    //         height: 32,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     const SizedBox(height: 24),
                   ],
                 ),
@@ -448,72 +311,70 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             showModalBottomSheet(
                                 context: state.context,
+                                isScrollControlled: true,
                                 builder: (context) => Container(
                                   color: Color(0xff111216),
-                                  child: FractionallySizedBox(
-                                    heightFactor: 2.0,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 14,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            CloseCircleButton(onTap: () => Navigator.of(context).pop()),
-                                            const SizedBox(width: 8,)
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                left: 10,
-                                              ),
-                                              child: Text('Условия достаки',
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 14,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                                          const SizedBox(width: 8,)
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 10,
+                                            ),
+                                            child: Text('Условия достаки',
                                               style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.w600,
-                                                color: Color(0xffffffff)
-                                              ),
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Color(0xffffffff)
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 12,
-                                        ),
-                                        SizedBox(
-                                          height: 214,
-                                          width: 375,
-                                          child: Container(
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      SizedBox(
+                                        height: 214,
+                                        width: 375,
+                                        child: Container(
                                             child: Image.asset('assets/images/home_page/Пицца мафия.png',
                                               fit: BoxFit.cover,)
-                                          ),
-                                        ), SizedBox(
-                                          height: 24,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 10,
-                                          ),
-                                          child: Text(
-                                            '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                                      ), SizedBox(
+                                        height: 24,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
                       
 Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
                       
 При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
                       ''',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                             );

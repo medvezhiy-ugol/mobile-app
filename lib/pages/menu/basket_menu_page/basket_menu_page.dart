@@ -1,22 +1,27 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:medvezhiy_ugol/ui/widgets/add_button.dart';
+import 'package:medvezhiy_ugol/ui/widgets/basket/basket_item.dart';
 import '../../../ui/close_circle_button.dart';
-import '../../../ui/primary_button.dart';
+import '../../../ui/widgets/remove_button.dart';
 import '../../../utils/app_colors.dart';
 import '../menu_page/bloc/menu_bloc.dart';
 
 class BasketPage extends StatefulWidget {
-  BasketPage({super.key});
-
+  const BasketPage({super.key});
 
   @override
   State<BasketPage> createState() => _BasketPageState();
 }
 
 class _BasketPageState extends State<BasketPage> {
-  int _counter = 0;
+
+  bool isInstruments = false;
+  int _instrumentsCount = 0;
+  
+  bool isTakeaway = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,38 +37,67 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  final TextEditingController _textPromoCodeController =
-      TextEditingController();
   Widget _buildLoadedBody({required MenuLoadedState state}) {
     var elements = List<String>.generate(
       state.order.length,
-      (int index) => state.order[index].id,
+          (int index) => state.order[index].id,
     );
-    var mapQuantity = Map();
-    elements.forEach((element) {
+    var mapQuantity = {};
+    for (var element in elements) {
       if (!mapQuantity.containsKey(element)) {
         mapQuantity[element] = 1;
       } else {
         mapQuantity[element] += 1;
       }
-    });
-    return Scaffold(
-      backgroundColor: const Color(0xff000000),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CloseCircleButton(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+    }
+    state.order.sort((a, b) => a.id.compareTo(b.id));
+    List<BasketItem> basket = [];
+    int count = 1;
+    for (int i = 0; i < state.order.length - 1; i++) {
+      print("фффффф ${state.order[i].id}");
+      if (state.order[i].id == state.order[i + 1].id) {
+        count++;
+      }
+      else {
+        basket.add(BasketItem(
+            product: state.order[i],
+            count: count
+        ));
+        count = 1;
+      }
+    }
+    if (state.order.isNotEmpty) {
+      basket.add(BasketItem(
+          product: state.order.last,
+          count: count
+      ));
+    }
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 24),
+            Container(
+              height: 4,
+              width: 48,
+              decoration: BoxDecoration(
+                  color: const Color(0xffD9D9D9),
+                  borderRadius: BorderRadius.circular(9)
               ),
-              Text(
+            ),
+            CloseCircleButton(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            children: [
+              const Text(
                 'Корзина',
                 style: TextStyle(
                   fontFamily: 'Unbounded',
@@ -74,7 +108,7 @@ class _BasketPageState extends State<BasketPage> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Очистить корзину',
                 style: TextStyle(
                   // fontFamily: 'Unbounded',
@@ -86,617 +120,296 @@ class _BasketPageState extends State<BasketPage> {
               const SizedBox(
                 height: 14,
               ),
-              ListView.builder(
-                itemCount: state.order.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return _buildSlidableElement(
-                    state: state,
-                    itemOrderIndex: index,
-                    itemPrice: state
-                        .order[index].itemSizes.first.prices.first.price
-                        .toInt(),
-                    quantity: 10,
-                    imgUrl: state.order[index].itemSizes.first.buttonImageUrl
-                        .toString(),
-                    itemName: state.order[index].name,
-                  );
-                },
-              ),
+              for (BasketItem basketItem in basket)
+                basketItem,
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
+              const Text(
+                "Приборы",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Color(0xffFFFFFF)
                 ),
-                child: Container(
-                  height: 60,
-                  color: AppColors.color191A1F,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: _textPromoCodeController,
-                    style: const TextStyle(
+              ),
+              Row(
+                children: [
+                  SvgPicture.asset('assets/images/instruments.svg'),
+                  const SizedBox(width: 9),
+                  isInstruments
+                      ? Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_instrumentsCount > 0) {
+                              _instrumentsCount--;
+                            }
+                          });
+                        },
+                        child: const RemoveButton(),
+                      ),
+                      const SizedBox(width: 13),
+                      Text(
+                        _instrumentsCount.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Color(0xffFFFFFF)
+                        ),
+                      ),
+                      const SizedBox(width: 13),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _instrumentsCount++;
+                          });
+                        },
+                        child: const AddButton(),
+                      ),
+                    ],
+                  )
+                      : const Text(
+                    "Без приборов",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: Color(0xff808080)
+                    ),
+                  ),
+                  const Spacer(),
+                  CupertinoSwitch(
+                      value: isInstruments,
+                      onChanged: (value) =>
+                          setState(() {
+                            isInstruments = !isInstruments;
+                          })
+                  )
+                ],
+              ),
+              const SizedBox(height: 19),
+              const Text(
+                "Промокод",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Color(0xffFFFFFF)
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                height: 60,
+                color: const Color(0xff191A1F),
+                alignment: Alignment.center,
+                child: const Text(
+                  "LETO2023",
+                  style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
-                    ),
-                    decoration: const InputDecoration(
-                      hintText: 'Promocode',
-                      hintStyle: TextStyle(
-                        color: Color(0xffFFFFFF)
-                      ),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                    ),
+                      color: Color(0xffFFFFFF)
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 18,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                child: ChooseDeliveryType(),
-              ),
-              // const SizedBox(
-              //   height: 32,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //   child: _buildChooseTimeDelivery(),
-              // ),
-              // const SizedBox(
-              //   height: 8,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //   child: _buildChooseTimeDelivery(),
-              // ),
-              const SizedBox(
-                height: 45,
-              ),
-              Container(
-                padding: EdgeInsets.only(
-                  right: 23.16,
+              const SizedBox(height: 16),
+              const Text(
+                "Как к Вам обращаться?",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: Color(0xff808080)
                 ),
-                height: 48,
-                width: 400,
-                color: Color(0xff191a1f),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 40,
-                      child: Image.asset('assets/images/active_order_page/mastercard.png',
-                        width: 22,
-                        height: 15,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 4,
-                    ),
-                    Text('MasterCard ** 4498',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Color(0xffffffff)
-                      ),
-                    ),
-                    Spacer(
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 20,
-                      width: 20,
-                      decoration: BoxDecoration(
-                          color: Color(0xffff9900),
-                          shape: BoxShape.circle
-                      ),
+              ),
+              const SizedBox(height: 2),
+              Container(
+                height: 60,
+                color: const Color(0xff191A1F),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(left: 10),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                "Получение",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Color(0xffFFFFFF)
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        isTakeaway = false;
+                        setState(() {});
+                      },
                       child: Container(
-                        height: 10,
-                        width: 10,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                            color: Color(0xff000000),
-                            shape: BoxShape.circle
+                          color: Color(isTakeaway ? 0xff000000 : 0xff2D2D2D),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/delivery${isTakeaway ? "" : "_enabled"}.svg'),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Доставка',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      color: Color(isTakeaway ? 0xff545456 : 0xffFFFFFF)
+                                  ),
+                                ),
+                                const SizedBox(width: 2),
+                                Text(
+                                  '30-40 минут',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Color(isTakeaway ? 0xff545456 : 0xff808080)
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 45,
-              ),
-              _buildSubsumRow(
-                title: 'Сумма заказа',
-                sum: state.orderSum.toInt(),
-              ),
-              SizedBox(
-                height: 21,
-              ),
-              _buildSubsumRow(title: 'Сервисный сбор', sum: 30),
-              const SizedBox(
-                height: 56,
-              ),
-              _buildSubsumRow(
-                title: 'При самовывозе',
-                sum: state.orderSum.toInt(),
-              ),
-              SizedBox(
-                height: 9,
-              ),
-              _buildTotalRow(sum: state.orderSum.toInt() + 30),
-              const SizedBox(
-                height: 33,
-              ),
-              // PrimaryButton(
-              //   onTap: () {},
-              //   color: AppColors.color26282F,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: const <Widget>[
-              //       Icon(
-              //         Icons.map,
-              //       ),
-              //       SizedBox(
-              //         width: 10,
-              //       ),
-              //       Text(
-              //         'Построить маршрут',
-              //         style: TextStyle(
-              //           fontSize: 16,
-              //           fontWeight: FontWeight.w600,
-              //           color: Colors.white,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 33,
-              // ),
-              PrimaryButton(
-                height: 56,
-                onTap: () {},
-                color: AppColors.colorFFB627,
-                child: Text(
-                  'Оформить заказ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.color121212,
-                  ),
-                ),
-              ),
-              SizedBox(height: 100),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSlidableElement({
-    required String itemName,
-    required String imgUrl,
-    required int quantity,
-    required int itemPrice,
-    required int itemOrderIndex,
-    required MenuLoadedState state,
-  }) {
-    return Slidable(
-      key: const ValueKey(0),
-      endActionPane: ActionPane(
-        motion: const ScrollMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (BuildContext conteext) {
-              setState(() {
-                state.order.removeAt(itemOrderIndex);
-              });
-            },
-            backgroundColor: const Color(0xFFE64646),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Удалить',
-          ),
-        ],
-      ),
-      child: Container(
-        // constraints: BoxConstraints(
-        //   minHeight: 100,
-        // ),
-        child: Row(
-          children: [
-            _buildCachedImg(imgUrl),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 10,
                     ),
-                    Text('${itemName}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xffffffff)
-                    ),),
-                  ],
-                ),
-                SizedBox(
-                  child: Row(
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.remove,
-                              color: Color(0xffffffff),
+                  ),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        isTakeaway = true;
+                        setState(() {});
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Color(isTakeaway ? 0xff2D2D2D : 0xff000000),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/takeaway${isTakeaway ? "_enabled" : ""}.svg'),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Навынос',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      color: Color(isTakeaway ? 0xffFFFFFF : 0xff545456)
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  'Московский пр. 178',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Color(isTakeaway ? 0xff808080 : 0xff545456)
+                                  ),
+                                ),
+                              ],
                             ),
-                            onPressed: () {
-                              setState(() {
-                                _counter--;
-                              });
-                            },
-                          ),
-                          Text('$_counter',
-                          style: TextStyle(
-                            color: Color(0xffffffff)
-                          ),),
-                          Container(
-                            width: 50.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.blue,
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _counter++;
-                                });
-                              },
-                            ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        width: 100,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Text(
+                    isTakeaway ? "Навынос:" : "Доставка:",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: Color(0xffFFFFFF)
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'ул. Республиканская, д46/3',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Color(0xff808080)
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 47),
+              for (int i = 0; i < _instrumentsCount; i++)
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Сервисный сбор",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Color(0xff808080)
+                        ),
                       ),
                       Text(
-                        '${itemPrice}',
+                        "30 ₽",
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xffffffff)
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Color(0xffFFFFFF)
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-
-  }
-
-  Widget _buildCirleButton(
-      {required VoidCallback onTap, required IconData icon}) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        customBorder: const CircleBorder(),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: 24,
-            height: 24,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100), color: Colors.grey),
-              child: Icon(
-                icon,
-                size: 18,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCachedImg(String imgUrl) {
-    if (imgUrl != '') {
-      return SizedBox(
-        width: 110,
-        height: 100,
-        child: CachedNetworkImage(
-          imageUrl: imgUrl,
-          placeholder: (context, url) => Container(
-            color: AppColors.color26282F,
-          ),
-          errorWidget: (context, url, error) => Container(
-            color: AppColors.color26282F,
-          ),
-          fit: BoxFit.fill,
-        ),
-      );
-    } else {
-      return Container(
-        color: AppColors.color26282F,
-        width: 110,
-        height: 100,
-      );
-    }
-  }
-
-  Container _buildTotalRow({required int sum}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "итого",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          Text(
-            '${sum} ₽',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container _buildSubsumRow({required String title, required int sum}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-                color: AppColors.color808080,
-                fontSize: 16,
-                fontWeight: FontWeight.w500),
-          ),
-          Text(
-            '$sum ₽',
-            style: const TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    );
-  }
-  //
-  // Widget _buildChooseTimeDelivery() {
-  //   return Container(
-  //     decoration: const BoxDecoration(
-  //       color: AppColors.color191A1F,
-  //     ),
-  //     child: Material(
-  //       color: Colors.transparent,
-  //       child: InkWell(
-  //         onTap: () {},
-  //         child: Container(
-  //           padding: const EdgeInsets.all(10),
-  //           child: Row(
-  //             children: <Widget>[
-  //               const Icon(
-  //                 Icons.timeline,
-  //               ),
-  //               const SizedBox(
-  //                 width: 10,
-  //               ),
-  //               // Column(
-  //               //   mainAxisAlignment: MainAxisAlignment.center,
-  //               //   crossAxisAlignment: CrossAxisAlignment.start,
-  //               //   children: <Widget>[
-  //               //     Text(
-  //               //         'Доставка 30-40 минут',
-  //               //       style: TextStyle(
-  //               //         color: Color(0xffFFFFFF)
-  //               //       ),
-  //               //     ),
-  //               //     Text(
-  //               //         'Выберите время доставки',
-  //               //       style: TextStyle(
-  //               //           color: Color(0xffFFFFFF)
-  //               //       ),
-  //               //     ),
-  //               //   ],
-  //               // ),
-  //               const Spacer(),
-  //               const Icon(
-  //                 Icons.arrow_right,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-}
-
-class _counter {
-}
-
-enum TypeOfOrder<T> {
-  delivery<String>('Доставка'),
-  pickup<String>('Навынос');
-
-  const TypeOfOrder(this.getType);
-  final T getType;
-}
-
-class ChooseDeliveryType extends StatefulWidget {
-  const ChooseDeliveryType({super.key});
-
-  @override
-  State<ChooseDeliveryType> createState() => _ChooseDeliveryTypeState();
-}
-
-class _ChooseDeliveryTypeState extends State<ChooseDeliveryType> {
-  int index = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: <Widget>[
-            Text(
-              '${(index == 0) ? 'Доставка' : 'Навынос'}: ',
-              style: const TextStyle(
-                fontFamily: 'Unbounded',
-                fontSize: 16,
-                  color: Color(0xffFFFFFF)
-              ),
-            ),
-            Text(
-              'Ярославль',
-              style: TextStyle(
-                fontFamily: 'Unbounded',
-                fontSize: 16,
-                color: Color(0xffFFFFFF)
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 18,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            //delivery
-            Container(
-              decoration: BoxDecoration(
-                color: (TypeOfOrder.delivery.index == index)
-                    ? AppColors.color2D2D2D
-                    : const Color(0xFF000000),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () {
-                    setState(() {
-                      index = 0;
-                    });
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.motorcycle,
-                          color: Color(0xffffffff),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                'Доставка',
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF)
-                              ),
-                            ),
-                            Text(
-                                '30-40 минут',
-                              style: TextStyle(
-                                  color: Color(0xffFFFFFF)
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+              Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "При самовывозе",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Color(0xffFFFFFF)
+                      ),
                     ),
-                  ),
+                    Text(
+                      "360 ₽",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: Color(0xffFFFFFF)
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            //pickup
-            Container(
-              decoration: BoxDecoration(
-                color: (TypeOfOrder.pickup.index == index)
-                    ? AppColors.color2D2D2D
-                    : const Color(0xFF000000),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () {
-                    setState(() {
-                      index = 1;
-                    });
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.shopping_bag_rounded,
-                          color: Color(0xffffffff),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Навынос',
-                            style: TextStyle(
-                              color: Color(0xffffffff)
-                            ),),
-                            Text('Московский пр. 178',
-                            style: TextStyle(
-                              color: Color(0xffffffff)
-                            ),),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+              const SizedBox(height: 100),
+            ],
+          ),
         ),
       ],
     );
