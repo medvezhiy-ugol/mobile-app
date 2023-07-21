@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/about_app_page.dart';
+import 'package:medvezhiy_ugol/pages/more/about_app/history_order.dart';
+import 'package:medvezhiy_ugol/pages/more/my_orders/my_orders_page.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/profile/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -286,28 +288,33 @@ class MorePage extends StatelessWidget {
                         text: 'Данный раздел пока недоступен',
                       );
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(18),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 21,
-                            height: 24,
-                            child: Image.asset(
-                              'assets/images/more_page/my_orders_icon.png',
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> HistoryOrder()));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(18),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 21,
+                              height: 24,
+                              child: Image.asset(
+                                'assets/images/more_page/my_orders_icon.png',
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 26,
-                          ),
-                          const Text(
-                            'Мои заказы',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
+                            const SizedBox(
+                              width: 26,
+                            ),
+                            const Text(
+                              'Мои заказы',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -637,7 +644,7 @@ class MorePage extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 12,
+          height: 8,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
