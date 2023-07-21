@@ -9,29 +9,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="add toggle switcher">
-      <change afterPath="$PROJECT_DIR$/assets/images/delivery.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/delivery_enabled.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/instruments.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/takeaway.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/takeaway_enabled.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/add_button.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/basket/basket_item.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/receiving_sheet.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/remove_button.dart" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix base url">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/custom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/custom_navbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/basket_menu_page/basket_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/basket_menu_page/basket_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/detail_menu_page/detail_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/detail_menu_page/detail_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/menu_page/bloc/menu_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/menu_page/bloc/menu_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/menu_page/bloc/menu_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/menu_page/bloc/menu_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/menu/menu_page/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/menu/menu_page/menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/menu/menu_card_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/menu/menu_card_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +68,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
+    "flutter.view.tool.window.visible": "true",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Users/yarin/StudioProjects/mobile-app/assets/images/more_page",
     "settings.editor.selected.configurable": "dart.settings",
@@ -464,8 +448,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart</url>
-          <line>493</line>
+          <line>10</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/pages/home/home_page/home_page.dart</url>
+          <line>310</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

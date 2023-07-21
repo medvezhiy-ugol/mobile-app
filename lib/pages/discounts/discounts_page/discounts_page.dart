@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/discounts_detail_page.dart';
+import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-class StockPage extends StatelessWidget {
+class StockPage extends StatefulWidget {
   StockPage({super.key});
+
+  @override
+  State<StockPage> createState() => _StockPageState();
+}
+
+class _StockPageState extends State<StockPage> {
   // final TextEditingController _textMailBodyController = TextEditingController();
-  // final TextEditingController _textMailSubjectController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -191,17 +197,90 @@ class StockPage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SizedBox(
-                  height: 186,
-                  width: 355,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
-                    child: Container(
-                      child: Image.asset(
-                        'assets/images/home_page/Пицца мафия.png',
-                        fit: BoxFit.cover,
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => Container(
+                      color: Color(0xff111216),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 14,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                              const SizedBox(width: 8,)
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                ),
+                                child: Text('Условия достаки',
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          SizedBox(
+                            height: 214,
+                            width: 375,
+                            child: Container(
+                                child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                                  fit: BoxFit.cover,)
+                            ),
+                          ), SizedBox(
+                            height: 24,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            child: Text(
+                              '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                      
+Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
+                      
+При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
+                      ''',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    height: 186,
+                    width: 355,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
+                      child: Container(
+                        child: Image.asset(
+                          'assets/images/home_page/Пицца мафия.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -210,16 +289,94 @@ class StockPage extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => Container(
+                      color: Color(0xff111216),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 14,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                              const SizedBox(width: 8,)
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                ),
+                                child: Text('Условия достаки',
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          SizedBox(
+                            height: 214,
+                            width: 375,
+                            child: Container(
+                                child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                                  fit: BoxFit.cover,)
+                            ),
+                          ), SizedBox(
+                            height: 24,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            child: Text(
+                              '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                      
+Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
+                      
+При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
+                      ''',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    height: 186,
+                    width: 355,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
+                      child: Container(
+                        child: Image.asset(
+                          'assets/images/home_page/Пицца мафия.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                child:   Text('Две лучше, чем одна',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xffffffff)
-                  ),),
               ),
               SizedBox(
                 height: 8,
@@ -238,17 +395,90 @@ class StockPage extends StatelessWidget {
 SizedBox(
   height: 16,
 ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SizedBox(
-                  height: 186,
-                  width: 355,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
-                    child: Container(
-                      child: Image.asset(
-                        'assets/images/home_page/Пицца мафия.png',
-                        fit: BoxFit.cover,
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => Container(
+                      color: Color(0xff111216),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 14,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                              const SizedBox(width: 8,)
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                ),
+                                child: Text('Условия достаки',
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffffffff)
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          SizedBox(
+                            height: 214,
+                            width: 375,
+                            child: Container(
+                                child: Image.asset('assets/images/home_page/Пицца мафия.png',
+                                  fit: BoxFit.cover,)
+                            ),
+                          ), SizedBox(
+                            height: 24,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            child: Text(
+                              '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
+                      
+Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
+                      
+При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
+                      ''',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    height: 186,
+                    width: 355,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
+                      child: Container(
+                        child: Image.asset(
+                          'assets/images/home_page/Пицца мафия.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
