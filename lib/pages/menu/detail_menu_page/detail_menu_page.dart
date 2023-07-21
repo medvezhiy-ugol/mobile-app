@@ -7,10 +7,11 @@ import '../../../services/menu_service.dart';
 import '../../../services/theme_service.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../utils/app_colors.dart';
+import '../menu_page/bloc/menu_bloc.dart';
 import 'bloc/menu_detail_bloc.dart';
 
 class DetailMenuPage extends StatefulWidget {
-  DetailMenuPage({super.key, required this.id});
+  const DetailMenuPage({super.key, required this.id});
 
   final String id;
 
@@ -22,6 +23,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
   final ThemeService themeService = Injector().get<ThemeService>();
 
   final MenuService menuService = Injector().get<MenuService>();
+
+  int _count = 0;
 
   bool isHalf = false;
 
@@ -47,7 +50,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
 
   Widget _buildLoadingBody(BuildContext context) {
     return Container(
-      color: Color(0xff000000),
+      color: const Color(0xff000000),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
@@ -243,37 +246,6 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
 
                               ],
                             ),
-                            // Center(
-                            //     child: ToggleSwitcherFood()),
-                            // PrimaryButton(
-                            //   onTap: () {
-                            //     context.read<MenuBloc>().add(
-                            //         MenuAddToOrderEvent(
-                            //             menuProduct: state.menuProduct));
-                            //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => BasketPage()));
-                            //   },
-                            //   child: Text(
-                            //     '${state.menuProduct.itemSizes.first.prices.first.price.toInt()} ₽   Добавить',
-                            //     style: const TextStyle(
-                            //         fontSize: 16,
-                            //         fontWeight: FontWeight.w600,
-                            //         color: Color(0xffFFFFFF)
-                            //     ),
-                            //   ),
-                            // ),
-                            // const SizedBox(
-                            //   height: 16,
-                            // ),
-                            // Text(
-                            //   state.menuProduct.description == ''
-                            //       ? 'Состав отсутствует'
-                            //       : state.menuProduct.description,
-                            //   style: const TextStyle(
-                            //     fontSize: 14,
-                            //     fontWeight: FontWeight.w600,
-                            //     color: AppColors.color808080,
-                            //   ),
-                            // ),
                             const SizedBox(height: 14),
                             buildStatsBar(
                               state.menuProduct.itemSizes.first
@@ -471,96 +443,114 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
             ),
           ],
         ),
-        // Positioned(
-        //   bottom: 0,
-        //     left: 0,
-        //     right: 0,
-        //     child: Row(
-        //       children: [
-        //         Container(
-        //           color: Color(0xff26282F),
-        //           padding: EdgeInsets.symmetric(
-        //             vertical: 16,
-        //             horizontal: 29.5
-        //           ),
-        //           child: Row(
-        //             children: [
-        //               GestureDetector(
-        //                 onTap: () {
-        //
-        //                 },
-        //                 child: Container(
-        //                   height: 28,
-        //                   width: 28,
-        //                   decoration: BoxDecoration(
-        //                     color: Color(0xff353535),
-        //                     shape: BoxShape.circle,
-        //                   ),
-        //                   child: const Icon(
-        //                       Icons.remove,
-        //                     color: Color(0xffFFFFFF),
-        //                   ),
-        //                 ),
-        //               ),
-        //               SizedBox(width: 13),
-        //               Text(
-        //                 _count.toString(),
-        //                 style: TextStyle(
-        //                   color: Color(0xffFFFFFF)
-        //                 ),
-        //               ),
-        //               SizedBox(width: 13),
-        //               GestureDetector(
-        //                 onTap: () {
-        //
-        //                 },
-        //                 child: Container(
-        //                   height: 28,
-        //                   width: 28,
-        //                   decoration: BoxDecoration(
-        //                     color: Color(0xff353535),
-        //                     shape: BoxShape.circle,
-        //                   ),
-        //                   child: const Icon(
-        //                     Icons.remove,
-        //                     color: Color(0xffFFFFFF),
-        //                   ),
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //         Container(
-        //           color: Color(0xffFFB627),
-        //           padding: EdgeInsets.symmetric(
-        //             vertical: 19.5,
-        //             horizontal: 26,
-        //           ),
-        //           child: Row(
-        //             children: [
-        //               Text(
-        //                 "Добавить",
-        //                 style: TextStyle(
-        //                   fontWeight: FontWeight.w600,
-        //                   fontSize: 16,
-        //                   color: Color(0xff000000),
-        //                 ),
-        //               ),
-        //               Spacer(),
-        //               Text(
-        //                 state.menuProduct.sku,
-        //                 style: TextStyle(
-        //                   fontWeight: FontWeight.w600,
-        //                   fontSize: 16,
-        //                   color: Color(0xff000000),
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        // )
+        Positioned(
+          bottom: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              child: Row(
+                children: [
+                  Container(
+                    color: const Color(0xff26282F),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 29.5
+                    ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            if (_count > 0) {
+                              _count--;
+                            }
+                            setState(() {
+
+                            });
+                          },
+                          child: Container(
+                            height: 28,
+                            width: 28,
+                            decoration: const BoxDecoration(
+                              color: Color(0xff353535),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.remove,
+                              color: Color(0xffFFFFFF),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 13),
+                        Text(
+                          _count.toString(),
+                          style: const TextStyle(
+                              color: Color(0xffFFFFFF)
+                          ),
+                        ),
+                        const SizedBox(width: 13),
+                        GestureDetector(
+                          onTap: () {
+                            _count++;
+                            setState(() {
+
+                            });
+                          },
+                          child: Container(
+                            height: 28,
+                            width: 28,
+                            decoration: BoxDecoration(
+                              color: Color(0xff353535),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Color(0xffFFFFFF),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<MenuBloc>().add(MenuAddToOrderEvent(menuProduct: state.menuProduct));
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        color: const Color(0xffFFB627),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 19.5,
+                          horizontal: 26,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Добавить",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                            Text(
+                              '${state.menuProduct.itemSizes.first.prices.first.price} ₽',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        )
       ],
     );
   }

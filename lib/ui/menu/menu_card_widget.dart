@@ -37,10 +37,9 @@ class MenuCardWidget extends StatelessWidget {
                 child: SizedBox(
                   height: 175 - 6,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8),
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Row(
@@ -57,9 +56,7 @@ class MenuCardWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8),
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -67,37 +64,27 @@ class MenuCardWidget extends StatelessWidget {
                           style: ThemeService.tabBarCardWeightTextStyle(),
                         ),
                       ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              menuProduct.description == ''
-                                  ? 'Состав отсутствует'
-                                  : menuProduct.description,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: ThemeService.tabBarCardIngrTextStyle(),
-                            ),
-                          )
-                        ],
+                      const SizedBox(height: 8),
+                      Text(
+                        menuProduct.description == ''
+                            ? 'Состав отсутствует'
+                            : menuProduct.description,
+                        maxLines: 2,
+                        style: ThemeService.tabBarCardIngrTextStyle(),
                       ),
-                      const SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          width: 74,
-                          height: 30,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.color26282F,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Text(
-                            '${menuProduct.itemSizes.first.prices.first.price.toInt()} ₽',
-                            style: ThemeService
-                                .detailPageStatusBarItemCountTextStyle(),
-                          ),
+                      const Spacer(),
+                      Container(
+                        width: 74,
+                        height: 30,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColors.color26282F,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Text(
+                          '${menuProduct.itemSizes.first.prices.first.price.toInt()} ₽',
+                          style: ThemeService
+                              .detailPageStatusBarItemCountTextStyle(),
                         ),
                       ),
                     ],

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/discounts_page.dart';
 import 'package:medvezhiy_ugol/pages/map/map_page/map_page.dart';
-
 import '../home/home_page/home_page.dart';
 import '../menu/menu_page/menu_page.dart';
 import '../more/more_page.dart';
@@ -113,7 +112,6 @@ class _CustomNavbarState extends State<CustomNavbar> {
                             child: Container(
                                 height: 80,
                                 width: double.infinity,
-                                margin: const EdgeInsets.only(top: 10),
                                 decoration: BoxDecoration(
                                     color: Colors.black,
                                     boxShadow: [

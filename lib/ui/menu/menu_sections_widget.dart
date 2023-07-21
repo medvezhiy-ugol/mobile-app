@@ -58,10 +58,10 @@ class _MenuSectionState extends State<MenuSection> {
                         menuProduct: widget.menuCategory.items[i],
                         onTap: () {
                           showModalBottomSheet(
-                              context: context,
+                              context: state.context,
                               isScrollControlled: true,
                               builder: (sheetContext) => Container(
-                                color: Color(0xff000000),
+                                color: const Color(0xff000000),
                                 padding: EdgeInsets.only(
                                   top: MediaQuery.of(state.context).padding.top,
                                 ),
