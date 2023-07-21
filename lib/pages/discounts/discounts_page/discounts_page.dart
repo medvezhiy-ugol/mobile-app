@@ -289,6 +289,34 @@ class _StockPageState extends State<StockPage> {
               SizedBox(
                 height: 15,
               ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
+                child:   Text('Две лучше, чем одна',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
+                  ),),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10
+                ),
+                child:   Text('Скидлка на вторую пиццу 20%',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF808080)
+                  ),),
+              ),
+              SizedBox(
+                height: 16,
+              ),
               InkWell(
                 onTap: () {
                   showModalBottomSheet(
@@ -377,6 +405,20 @@ class _StockPageState extends State<StockPage> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                ),
+                child:   Text('Две лучше, чем одна',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
+                  ),),
               ),
               SizedBox(
                 height: 8,
@@ -516,25 +558,6 @@ SizedBox(
   height: 16,
 ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SizedBox(
-                  height: 186,
-                  width: 355,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
-                    child: Container(
-                      child: Image.asset(
-                        'assets/images/home_page/Пицца мафия.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
                 padding: const EdgeInsets.only(
                   left: 10,
                 ),
@@ -559,6 +582,7 @@ SizedBox(
                       color: Color(0xFF808080)
                   ),),
               ),
+
 
 //NO Sales
               // const SizedBox(
