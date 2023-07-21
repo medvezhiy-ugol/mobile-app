@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
+import '../../../ui/back_arrow_button.dart';
 import '../../../ui/close_circle_button.dart';
 import '../../../utils/app_colors.dart';
 
@@ -19,40 +20,43 @@ class OrderDeliveredPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String formattedDateTime = DateFormat('d MMMM HH:mm').format(dateTime);
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Color(0xff000000),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 22,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CloseCircleButton(
-                    onTap: () => Navigator.of(context).pop(),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Доставлен',
-                    style: TextStyle(
-                      fontFamily: 'Unbounded',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    BackArrowButton(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10,
+                ),
+                child: Text(
+                  'Доставлен',
+                  style: TextStyle(
+                      fontFamily: 'Unbounded',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff)
                   ),
-                ],
+                ),
               ),
               const SizedBox(
-                height: 38,
+                height: 24,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -66,6 +70,7 @@ class OrderDeliveredPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
+                            color: Color(0xffffffff)
                           ),
                         ),
                         Text(
@@ -73,6 +78,7 @@ class OrderDeliveredPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
+                            color: Color(0xffffffff)
                           ),
                         ),
                       ],
@@ -117,6 +123,7 @@ class OrderDeliveredPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
+                            color: Color(0xffffffff)
                           ),
                         ),
                         SizedBox(
@@ -124,25 +131,26 @@ class OrderDeliveredPage extends StatelessWidget {
                         ),
                         Icon(
                           Icons.arrow_forward_ios,
-                          size: 18,
+                          size: 12,
+                          color: Color(0xffffffff),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Очистить корзину',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.color808080,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // SizedBox(
+                    //   height: 30,
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       'Очистить корзину',
+                    //       style: TextStyle(
+                    //         fontSize: 16,
+                    //         fontWeight: FontWeight.w400,
+                    //         color: AppColors.color808080,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 24,
                     ),
@@ -157,6 +165,7 @@ class OrderDeliveredPage extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
+                                color: Color(0xffffffff)
                               ),
                             ),
                           ),
@@ -170,6 +179,7 @@ class OrderDeliveredPage extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
+                                color: Color(0xffffffff)
                               ),
                             ),
                           ),
@@ -183,7 +193,7 @@ class OrderDeliveredPage extends StatelessWidget {
                 height: 24,
               ),
               ListView.separated(
-                itemCount: 3,
+                itemCount: 1,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, i) {
@@ -193,15 +203,15 @@ class OrderDeliveredPage extends StatelessWidget {
                 },
                 itemBuilder: (context, i) {
                   return _buildDeliveredOrderItem(
-                    imgUrl: 'assets/images/stock_page/pizza.png',
-                    itemName: 'Doner',
-                    price: 120.0,
+                    imgUrl: 'assets/images/detail_menu_page/doner.png',
+                    itemName: 'Донер с курицей',
+                    price: 192,
                     quantity: 2,
                   );
                 },
               ),
               SizedBox(
-                height: 36,
+                height: 24,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -212,27 +222,27 @@ class OrderDeliveredPage extends StatelessWidget {
                       sum: 932.70,
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 16,
                     ),
                     _buildDeliveryCoastRow(
                       title: 'Стоимость доставки',
-                      sum: 932.70,
+                      sum: 0,
                       address:
-                          'Ярославль, ул. Ньютона, 44, под.4, домофон 74, этаж 10',
+                      'Ярославль, ул. Ньютона, 44, под.4, домофон 74, этаж 10',
                       context: context,
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 16,
                     ),
                     _buildSubSumRow(
                       title: 'Сервисный сбор',
-                      sum: 39,
+                      sum: 0,
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 18,
                     ),
                     _buildTotalRow(
-                      sum: 39,
+                      sum: 1047.70,
                     ),
                   ],
                 ),
@@ -256,12 +266,17 @@ class OrderDeliveredPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Container(
-            height: 96,
-            width: 110,
-            child: Image.asset(
-              imgUrl,
-              fit: BoxFit.fill,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 10,
+            ),
+            child: Container(
+              height: 78,
+              width: 108,
+              child: Image.asset(
+                imgUrl,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           SizedBox(
@@ -282,6 +297,7 @@ class OrderDeliveredPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w500,
+                      color: Color(0xffffffff)
                     ),
                   ),
                   Row(
@@ -292,6 +308,7 @@ class OrderDeliveredPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
+                          color: Color(0xffffffff)
                         ),
                       ),
                       Text(
@@ -299,6 +316,7 @@ class OrderDeliveredPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
+                          color: Color(0xffffffff)
                         ),
                       ),
                     ],

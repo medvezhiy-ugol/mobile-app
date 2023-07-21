@@ -12,6 +12,7 @@
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Акции done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/more/my_orders/order_delivered_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/my_orders/order_delivered_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +67,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
+    "flutter.view.tool.window.visible": "true",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Users/yarin/StudioProjects/mobile-app/assets/images/more_page",
     "settings.editor.selected.configurable": "dart.settings",
@@ -390,7 +392,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689964511224</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Акции done">
+      <created>1689965203771</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1689965203771</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
