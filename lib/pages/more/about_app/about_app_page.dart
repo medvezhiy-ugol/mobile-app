@@ -202,7 +202,7 @@ class _AboutAppPageState extends State<AboutAppPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 3,
                   ),
 
                   // "Пользовательское соглашение" Plate

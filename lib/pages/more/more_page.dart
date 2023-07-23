@@ -281,40 +281,31 @@ class MorePage extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      // context.push(Routes.myOrders);
-                      _showSnackBar(
-                        context: context,
-                        text: 'Данный раздел пока недоступен',
-                      );
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> HistoryOrder()));
                     },
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> HistoryOrder()));
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(18),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 21,
-                              height: 24,
-                              child: Image.asset(
-                                'assets/images/more_page/my_orders_icon.png',
-                              ),
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 21,
+                            height: 24,
+                            child: Image.asset(
+                              'assets/images/more_page/my_orders_icon.png',
                             ),
-                            const SizedBox(
-                              width: 26,
-                            ),
-                            const Text(
-                              'Мои заказы',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(
+                            width: 26,
+                          ),
+                          const Text(
+                            'Мои заказы',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
                       ),
                     ),
                   ),

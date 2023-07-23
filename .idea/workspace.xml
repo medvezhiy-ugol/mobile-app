@@ -9,18 +9,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Акции done">
-      <change afterPath="$PROJECT_DIR$/assets/images/more_page/Frame.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/more/about_app/empty_order.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/about_app/about_app_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/about_app/about_app_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Условия доставик update">
       <change beforePath="$PROJECT_DIR$/lib/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/more_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/my_orders/order_delivered_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/my_orders/order_delivered_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/over_pages/contact_us_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/over_pages/contact_us_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/over_pages/delivery_info_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/over_pages/delivery_info_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/profile/profile_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -421,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689968534757</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Условия доставик update">
+      <created>1690132213371</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1690132213371</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -456,7 +453,8 @@
     <MESSAGE value="fix basket navigation" />
     <MESSAGE value="fix base url" />
     <MESSAGE value="Акции done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Акции done" />
+    <MESSAGE value="Условия доставик update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Условия доставик update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
