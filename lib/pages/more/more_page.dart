@@ -35,7 +35,7 @@ class MorePage extends StatelessWidget {
         return WillPopScope(
           onWillPop: () async => false,
           child: Scaffold(
-            backgroundColor: Color(0xff151515),
+            backgroundColor: Color(0xff111216),
             body: SafeArea(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(10),
@@ -515,44 +515,35 @@ class MorePage extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/home');
-                  // _showSnackBar(
-                  //   context: context,
-                  //   text: 'Данный раздел пока недоступен',
-                  // );
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoyaltyCardPage()));
                 },
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoyaltyCardPage()));
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Icon(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Icon(
                               MorePageIcons.loyal,
                               size: 28,
-                                color: Color(0xffFFFFFF)
-                            ),
-                            Expanded(
-                              child: SizedBox(),
-                            ),
-                            Text(
-                              'Лояльность', // 'Мои карты' (на будущее записал),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                              color: Color(0xffFFFFFF)
+                          ),
+                          Expanded(
+                            child: SizedBox(),
+                          ),
+                          Text(
+                            'Мои Карты', // 'Мои карты' (на будущее записал),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ),

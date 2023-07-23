@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
+import '../../../ui/back_arrow_button.dart';
 import '../../../ui/close_circle_button.dart';
 
 class DeliveryInfoPage extends StatelessWidget {
@@ -8,7 +9,7 @@ class DeliveryInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff000000),
+      backgroundColor: Color(0xff111216),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -20,9 +21,9 @@ class DeliveryInfoPage extends StatelessWidget {
                       height: 22,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        CloseCircleButton(
+                        BackArrowButton(
                           onTap: () => Navigator.of(context).pop(),
                         ),
                         const SizedBox(
@@ -30,12 +31,25 @@ class DeliveryInfoPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    Text(
-                      "Условия доставки",
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Условия доставки",
+                            style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 40,
@@ -177,183 +191,180 @@ class DeliveryInfoPage extends StatelessWidget {
               ),
 
               // Middle Page content
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    // "Delivery Time" Plate
-                    Container(
-                      color: AppColors.color191A1F,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                                width: 40,
-                                child: Image.asset(
-                                  'assets/images/active_order_page/cooking_off.png',
-                                  height: 40,
-                                )),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Время доставки',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                  maxLines: 2,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.7,
-                                  child: const Text(
-                                    'По Ярославлю - 45 минут, по остальной территории - не доставляем',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.color808080,
-                                    ),
-                                    // maxLines: 2,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-
-                    // "Delivery by courer" Plate
-                    Container(
-                      color: AppColors.color191A1F,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            // Image.asset(Icon(), width: 40),
-                            SizedBox(
+              Column(
+                children: [
+                  // "Delivery Time" Plate
+                  Container(
+                    color: AppColors.color191A1F,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
                               width: 40,
-                              // child: Icon(MorePageIcons.car, size: 25,)
                               child: Image.asset(
-                                'assets/images/delivery_info_page/scooter.png',
-                                height: 18,
+                                'assets/images/active_order_page/cooking_off.png',
+                                height: 40,
+                              )),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Время доставки',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                                maxLines: 2,
                               ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Доставка курьером',
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width * 0.8,
+                                child: const Text(
+                                  'По Ярославлю - 45 минут, по остальной территории - не доставляем',
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.color808080,
                                   ),
-                                  maxLines: 2,
+                                  // maxLines: 2,
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.7,
-                                  child: const Text(
-                                    'Вы оплачиваете только заказ, доставка - бесплатная',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.color808080,
-                                    ),
-                                    // maxLines: 2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
 
-                    // "Take away with 10% discount" Plate
-                    Container(
-                      color: AppColors.color191A1F,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 40,
-                              child: Image.asset(
-                                  'assets/images/active_order_page/delivery_off.png',
-                                  width: 40),
+                  // "Delivery by courer" Plate
+                  Container(
+                    color: AppColors.color191A1F,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          // Image.asset(Icon(), width: 40),
+                          SizedBox(
+                            width: 40,
+                            // child: Icon(MorePageIcons.car, size: 25,)
+                            child: Image.asset(
+                              'assets/images/delivery_info_page/scooter.png',
+                              height: 18,
                             ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'С собой со скидкой 10%',
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Доставка курьером',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                                maxLines: 2,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width * 0.8,
+                                child: const Text(
+                                  'Вы оплачиваете только заказ, доставка - бесплатная',
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.color808080,
                                   ),
-                                  maxLines: 2,
+                                  // maxLines: 2,
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+
+                  // "Take away with 10% discount" Plate
+                  Container(
+                    color: AppColors.color191A1F,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 40,
+                            child: Image.asset(
+                                'assets/images/active_order_page/delivery_off.png',
+                                width: 40),
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'С собой со скидкой 10%',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
                                 ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.7,
-                                  child: const Text(
-                                    '''Вы можете сами забрать заказ из ближайшего ресторана со скидкой в 10%.
+                                maxLines: 2,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width * 0.8,
+                                child: const Text(
+                                  '''Вы можете сами забрать заказ из ближайшего ресторана со скидкой в 10%.
 Время приготовления заказа - 15 минут.
       
 *скидки не распространяются на раздел меню “Напитки”''',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.color808080,
-                                    ),
-                                    // maxLines: 2,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.color808080,
                                   ),
+                                  // maxLines: 2,
                                 ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                  ],
-                ),
-              )
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                ],
+              ),
             ],
           ),
         ),

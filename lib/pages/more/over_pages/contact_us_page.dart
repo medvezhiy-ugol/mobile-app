@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,7 +13,7 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff000000),
+      backgroundColor: Color(0xff111216),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -22,13 +23,13 @@ class ContactUsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                      BackArrowButton(onTap: () => Navigator.of(context).pop()),
                     ],
                   ),
                   const SizedBox(
-                    height: 34,
+                    height: 24,
                   ),
                   const Text(
                     'Связаться с нами',
@@ -42,7 +43,7 @@ class ContactUsPage extends StatelessWidget {
                     height: 13,
                   ),
                   const Text(
-                    'Если у Вас остались вопросы или пожелания, Вы можете связаться с нами.',
+                    'Если у Вас остались вопросы или \nпожелания, Вы можете связаться с нами.',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -72,7 +73,7 @@ class ContactUsPage extends StatelessWidget {
                       textCapitalization: TextCapitalization.sentences,
                       maxLines: 1,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 14),
+                          fontWeight: FontWeight.w400, fontSize: 14,color: Color(0xffffffff)),
                       decoration: const InputDecoration(
                         isCollapsed: true,
                         contentPadding: EdgeInsets.all(10),
@@ -103,7 +104,7 @@ class ContactUsPage extends StatelessWidget {
                       textCapitalization: TextCapitalization.sentences,
                       maxLines: 5,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 14),
+                          fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xffffffff)),
                       decoration: const InputDecoration(
                         isCollapsed: true,
                         contentPadding: EdgeInsets.all(10),
@@ -149,10 +150,6 @@ class ContactUsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  Image.asset(
-                    'assets/images/contact_us_page/bear.png',
-                    height: 291,
                   ),
                 ],
               ),

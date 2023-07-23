@@ -2,18 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/personal_data_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/privacy_policy.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/term_of_service_page.dart';
+import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../../common_setup/routes.dart';
 import '../../../ui/close_circle_button.dart';
 
-class AboutAppPage extends StatelessWidget {
+class AboutAppPage extends StatefulWidget {
   const AboutAppPage({super.key});
 
   @override
+  State<AboutAppPage> createState() => _AboutAppPageState();
+}
+
+class _AboutAppPageState extends State<AboutAppPage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff000000),
+      backgroundColor: Color(0xff111216),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Column(
@@ -28,9 +34,9 @@ class AboutAppPage extends StatelessWidget {
                   ),
                   //  Button
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      CloseCircleButton(
+                      BackArrowButton(
                         onTap: () => Navigator.of(context).pop(),
                       ),
                       const SizedBox(
@@ -40,15 +46,20 @@ class AboutAppPage extends StatelessWidget {
                   ),
 
                   // Title
-                  Text(
-                    "О приложении",
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "О приложении",
+                        style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ),
+                    ],
                   ),
                   const SizedBox(
-                    height: 22,
+                    height: 24,
                   ),
 
                   Row(
@@ -58,7 +69,7 @@ class AboutAppPage extends StatelessWidget {
                         height: 120,
                       ),
                       const SizedBox(
-                        width: 17,
+                        width: 20,
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
@@ -82,10 +93,58 @@ class AboutAppPage extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => TermsOfServicePage()));
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            builder: (context) => Container(
+                              color: Color(0xff111216),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 14,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CloseCircleButton(onTap: () => Navigator.of(context).pop()),
+                                      const SizedBox(width: 8,)
+                                    ],
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text('Пользовательское соглашение',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xffffffff)
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text('1. Общие положения \n1.1. Настоящее Пользовательское Соглашение регулирует отношения между Администрацией сайта https://bearcorner.ru и пользователями (далее – «Пользователь», «Пользователи») по использованию сервисов, расположенных на сайте https://bearcorner.ru (далее – «Интернет- ресурс», «сайт»). \n\n1.2. Сайт https://bearcorner.ru является собственностью ИП Красильщиков (ОГРН 2478372483728, ИНН/КПП 348294389/342893959, Юридический адрес: 150046, г. Ярославль, ул. 2-я комсомолькая, д. 30, 2-й эт., пом. VIII, ком. 1). \n\n1.3. Администрация сайта оставляет за собой право в любое время изменять, добавлять или удалять пункты настоящего Пользовательского Соглашения без уведомления Пользователя. \n\n1.4. Перед использованием Интернет-ресурса Пользователь обязан ознакомиться с настоящим Пользовательским соглашением и в случае согласия с его положениями присоединиться к нему путем проставления специальной отметки (галочки) напротив фразы: «Я даю свое согласие на обработку персональных данных. Я ознакомился и принимаю условия Политики конфиденциальности в отношении обработки персональных данных и пользовательского соглашения».',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xffffffff,)
+                                    ),)
+                                  ),
+                                ],
+                              ),
+                            ), context: context,
+                          );
                         },
                         child: Padding(
-                            padding: const EdgeInsets.all(18.0),
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              top: 18,
+                              bottom: 18,
+                            ),
                             child: Row(
                               children: [
                                 SizedBox(
@@ -105,7 +164,7 @@ class AboutAppPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 3,
                   ),
 
                   // "Пользовательское соглашение" Plate
@@ -118,12 +177,17 @@ class AboutAppPage extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
                         },
                         child: Padding(
-                            padding: const EdgeInsets.all(18.0),
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              top: 18,
+                              bottom: 18,
+                            ),
                             child: Row(
                               children: [
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.7,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   child: const Text(
                                     'Политика конфеденциональности',
                                     style: TextStyle(
@@ -151,12 +215,17 @@ class AboutAppPage extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => PersonalDataPolicyPage()));
                         },
                         child: Padding(
-                            padding: const EdgeInsets.all(18.0),
+                            padding: const EdgeInsets.only(
+                            left: 10,
+                            right: 10,
+                            top: 18,
+                            bottom: 18,
+                            ),
                             child: Row(
                               children: [
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.7,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   child: const Text(
                                     'Положение об обработке персональных данных',
                                     style: TextStyle(

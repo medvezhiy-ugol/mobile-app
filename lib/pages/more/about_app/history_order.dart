@@ -14,7 +14,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff000000),
+      backgroundColor: Color(0xff111216),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

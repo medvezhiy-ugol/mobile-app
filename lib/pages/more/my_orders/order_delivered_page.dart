@@ -21,7 +21,7 @@ class OrderDeliveredPage extends StatelessWidget {
   Widget build(BuildContext context) {
     String formattedDateTime = DateFormat('d MMMM HH:mm').format(dateTime);
     return Scaffold(
-      backgroundColor: Color(0xff000000),
+      backgroundColor: Color(0xff111216),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
