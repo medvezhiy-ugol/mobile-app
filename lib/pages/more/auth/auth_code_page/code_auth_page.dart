@@ -8,6 +8,7 @@ import '../../../../services/auth_service.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 
+
 import '../../more_page.dart';
 import '../auth_page/auth_page.dart';
 import 'bloc/code_auth_bloc.dart';
@@ -80,11 +81,20 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                       ),
                     ),
                     SizedBox(
-                      height: screenSize.height * 0.2,
+                      height: 116
                     ),
                     _buildCodeTextField(context, state),
                     const SizedBox(
-                      height: 28,
+                      height: 96,
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text('Новый код можно получить через 00:59',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color(0xffB8B8B9)
+                      ),),
                     ),
                     if (state is CodeAuthWithButtonState)
                       Padding(
@@ -131,38 +141,43 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
         color: Color(0xffFFFFFF)
       ),
       decoration: BoxDecoration(
-        color: AppColors.color222222,
+        color: Color(0xff191A1F),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.transparent),
       ),
     );
 
     return Center(
-      child: SizedBox(
-        height: 68,
-        child: Pinput(
-          length: length,
-          controller: CodeAuthPage.codeController,
-          defaultPinTheme: defaultPinTheme,
-          focusedPinTheme: defaultPinTheme.copyWith(
-            height: 68,
-            width: 64,
-            decoration: defaultPinTheme.decoration!.copyWith(
-              border: Border.all(color: borderColor),
+      child: Container(
+        height: 63,
+        width: double.infinity,
+        color: Color(0xff191A1F),
+        child: SizedBox(
+          height: 68,
+          child: Pinput(
+            length: length,
+            controller: CodeAuthPage.codeController,
+            defaultPinTheme: defaultPinTheme,
+            focusedPinTheme: defaultPinTheme.copyWith(
+              height: 68,
+              width: 64,
+              decoration: defaultPinTheme.decoration!.copyWith(
+                border: Border.all(color: borderColor),
+              ),
             ),
-          ),
-          forceErrorState: (state is CodeAuthErrorState),
-          onChanged: (value) {
-            if (CodeAuthPage.codeController!.text.length == 4) {
-              context.read<CodeAuthBloc>().add(CodeAuthShowButtonEvent());
-            } else if (CodeAuthPage.codeController!.text.length == 3) {
-              context.read<CodeAuthBloc>().add(CodeAuthHideButtonEvent());
-            }
-          },
-          errorPinTheme: defaultPinTheme.copyWith(
-            decoration: BoxDecoration(
-              color: AppColors.colorBD3232,
-              borderRadius: BorderRadius.circular(8),
+            forceErrorState: (state is CodeAuthErrorState),
+            onChanged: (value) {
+              if (CodeAuthPage.codeController!.text.length == 4) {
+                context.read<CodeAuthBloc>().add(CodeAuthShowButtonEvent());
+              } else if (CodeAuthPage.codeController!.text.length == 3) {
+                context.read<CodeAuthBloc>().add(CodeAuthHideButtonEvent());
+              }
+            },
+            errorPinTheme: defaultPinTheme.copyWith(
+              decoration: BoxDecoration(
+                color: AppColors.colorBD3232,
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         ),

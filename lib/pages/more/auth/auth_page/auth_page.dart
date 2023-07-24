@@ -186,7 +186,8 @@ class _AuthPageState extends State<AuthPage> {
   ) {
     return Container(
       height: 63,
-      color: AppColors.color222222,
+      width: double.infinity,
+      color: Color(0xff191A1F),
       alignment: Alignment.center,
       child: TextField(
         controller: AuthPage.phoneController,

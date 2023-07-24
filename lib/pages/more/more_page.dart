@@ -13,6 +13,7 @@ import '../../common_setup/routes.dart';
 import '../../services/auth_service.dart';
 import '../../utils/icons/more_page_icons.dart';
 import '../../utils/icons/social_icons_icons.dart';
+import 'auth/auth_code_page/code_auth_page.dart';
 import 'auth/auth_page/auth_page.dart';
 import 'auth/bloc/more_bloc.dart';
 import 'over_pages/delivery_info_page.dart';
@@ -160,12 +161,17 @@ class MorePage extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text(
-                "Наши соцсети",
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600),
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthPage()));
+                },
+                child: Text(
+                  "Наши соцсети",
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
               const SizedBox(
                 height: 16,
