@@ -475,15 +475,8 @@ class MorePage extends StatelessWidget {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          ImageIcon(
-                            AssetImage('assets/images/more_page/Location.png'),
-                            size: 24,
-                            color: Color(0xffffffff),
-                          ),
-                          Expanded(
-                            child: SizedBox(),
-                          ),
+                        children: [
+                          Image.asset('assets/images/more_page/Location.png'),
                           Text(
                             'Адреса',
                             style: TextStyle(
