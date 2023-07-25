@@ -28,9 +28,9 @@ class MorePage extends StatelessWidget {
   create: (context) => MoreBloc(),
   child: BlocBuilder<MoreBloc, MoreState>(
       builder: (context, state) {
-        if (state is MoreDefaultState && authService.token != '') {
+        if (state is MoreDefaultState && authService.accessToken != '') {
           context.read<MoreBloc>().add(MoreRegisteredEvent());
-        } else if (state is MoreRegisteredState && authService.token == '') {
+        } else if (state is MoreRegisteredState && authService.accessToken == '') {
           context.read<MoreBloc>().add(MoreUnRegisteredEvent());
         }
         return WillPopScope(

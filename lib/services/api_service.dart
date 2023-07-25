@@ -12,17 +12,25 @@ class APIService {
   static Future<dynamic> postRequest({
     required String request,
     Map<String, String> queryParameters = const {},
-    Map<String, String> data = const {},
+    Map<String, dynamic> data = const {},
     int serverIndex = 0,
+    Map<String, String>? headers = const {},
   }) async {
     try {
+      print('${url[serverIndex]}/$request');
+      print(headers);
+      print(queryParameters);
+      print(data);
       var response = await Dio().post(
         '${url[serverIndex]}/$request',
         queryParameters: queryParameters,
         data: data,
+        options: Options(
+          headers: headers,
+        ),
       );
+      log(response.statusCode.toString());
       debugPrint(response.data.toString());
-      print(response.statusCode);
       if (response.statusCode == 200) {
         return response.data;
       }
@@ -44,11 +52,8 @@ class APIService {
       var response = await Dio().get(
         '${url[serverIndex]}/$request',
         queryParameters: queryParameters,
-        options: Options(
-          headers: headers,
-        ),
       );
-      log(response.toString());
+      log(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }

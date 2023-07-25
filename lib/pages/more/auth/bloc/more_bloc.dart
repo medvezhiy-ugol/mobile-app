@@ -13,7 +13,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     on<MoreEvent>((event, emit) {
       if (event is MoreUnRegisteredEvent) {
         emit(MoreDefaultState());
-      } else if (event is MoreRegisteredEvent || authService.token != '') {
+      } else if (event is MoreRegisteredEvent || authService.accessToken != '') {
         emit(MoreRegisteredState());
       }
     });

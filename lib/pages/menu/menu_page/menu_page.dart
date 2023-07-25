@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
-import '../../../ui/widgets/receiving_sheet.dart';
+import '../../../ui/widgets/sheets/receiving_sheet.dart';
 import '../../../utils/app_colors.dart';
 import '../../../ui/menu/menu_sections_widget.dart';
 import '../../../ui/menu/scale_tabbar_module.dart';
@@ -81,52 +81,54 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   Widget _loadedBuildBody({required MenuLoadedState state}) {
     return Stack(
       children: [
-        Column(
-          children: [
-            const SizedBox(
-              height: 5,
-            ),
-            const ToggleSwitcher(),
-            const SizedBox(
-              height: 6,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            _buildTabBar(context, state),
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.fromSwatch(
-                    accentColor: AppColors.color191A1F,
+        SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 5,
+              ),
+              const ToggleSwitcher(),
+              const SizedBox(
+                height: 6,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _buildTabBar(context, state),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: ColorScheme.fromSwatch(
+                      accentColor: AppColors.color191A1F,
+                    ),
+                  ),
+                  child: ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    controller: context.read<MenuBloc>().listController,
+                    itemCount: state.menu.length,
+                    separatorBuilder: (context, i) {
+                      return const SizedBox(
+                        height: 15,
+                      );
+                    },
+                    itemBuilder: (context, i) {
+                      return AutoScrollTag(
+                        key: ValueKey(i),
+                        controller: context.read<MenuBloc>().listController,
+                        index: i,
+                        child: MenuSection(
+                          menuCategory: state.menu[i],
+                        ),
+                      );
+                    },
                   ),
                 ),
-                child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  controller: context.read<MenuBloc>().listController,
-                  itemCount: state.menu.length,
-                  separatorBuilder: (context, i) {
-                    return const SizedBox(
-                      height: 15,
-                    );
-                  },
-                  itemBuilder: (context, i) {
-                    return AutoScrollTag(
-                      key: ValueKey(i),
-                      controller: context.read<MenuBloc>().listController,
-                      index: i,
-                      child: MenuSection(
-                        menuCategory: state.menu[i],
-                      ),
-                    );
-                  },
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         if (state.order.isNotEmpty)
           Positioned(
@@ -146,7 +148,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                         child: Stack(
                           children: [
-                            BasketPage(),
+                            const BasketPage(),
                             Positioned(
                               bottom: MediaQuery.of(context).padding.bottom,
                               left: 0,

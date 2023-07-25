@@ -36,6 +36,8 @@ dependencies:
   barcode: ^2.2.3
   flutter_svg: ^2.0.5
   equatable: ^2.0.5
+  http:
+  webview_flutter: ^4.2.2
 
 dev_dependencies:
   flutter_test:

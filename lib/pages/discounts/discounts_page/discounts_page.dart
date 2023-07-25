@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/discounts_detail_page.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
+import 'package:medvezhiy_ugol/ui/widgets/sheets/delivery_terms.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 class StockPage extends StatefulWidget {
@@ -22,152 +23,6 @@ class _StockPageState extends State<StockPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-        //       SizedBox(
-        //         height: 259,
-        //           width: MediaQuery.of(context).size.width,
-        //         child: Stack(
-        //           children: [
-        //             Image.asset('assets/images/draw_result.png',
-        //                 width: double.infinity,
-        //                 height: 259,
-        //             fit: BoxFit.cover,
-        //             ),
-        //             Center(
-        //               child: GestureDetector(
-        //                 onTap: () {
-        //                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => DrawPage()));
-        //                 },
-        //                 child: const Text('Результаты \n'
-        //                     'розыгрыша',
-        //                 style: TextStyle(
-        //                   fontSize: 24,
-        //                   fontWeight: FontWeight.w600,
-        //                   color: Color(0xffffffff)
-        //                 ),
-        //                 ),
-        //               ),
-        //             ),
-        //             Padding(
-        //               padding: const EdgeInsets.only(
-        //                   left: 22.75,
-        //                   bottom: 33.75,
-        //               ),
-        //               child: Column(
-        //                 mainAxisAlignment: MainAxisAlignment.end,
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 children: [
-        //                   Row(
-        //                     children: [
-        //                       Icon(Icons.history,
-        //                       color: Color(0xff808080)
-        //                         ,),
-        //                       SizedBox(
-        //                         width: 6.75,
-        //                       ),
-        //                       Text('16:30:16',
-        //                       style: TextStyle(
-        //                         fontSize: 16,
-        //                         fontWeight: FontWeight.w700,
-        //                         color: Color(0xffffffff)
-        //                       ),
-        //                       ),
-        //                       SizedBox(
-        //                         width: 10,
-        //                       ),
-        //                       Text('ДО НАЧАЛА СЛЕДУЮЩЕГО РОЗЫГРЫША',
-        //                       style: TextStyle(
-        //                         fontSize: 10,
-        //                         fontWeight: FontWeight.w500,
-        //                         color: Color(0xff808080,)
-        //                       ),
-        //                       ),
-        //                     ],
-        //                   ),
-        //                   SizedBox(
-        //                     height: 11,
-        //                   ),
-        //                   Text('7 мар 10:00',
-        //                   style: TextStyle(
-        //                     fontSize: 10,
-        //                     fontWeight: FontWeight.w400,
-        //                     color: Color(0xff808080,
-        //                     ),
-        //                   ),
-        //                   ),
-        //                 ],
-        //               ),
-        //             )
-        //           ],
-        //         ),
-        //       ),
-        //       SizedBox(
-        //         height: 13,
-        //       ),
-        //       Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         children: [
-        //           GestureDetector(
-        //             onTap: () {
-        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotHistoryPage()));
-        // },
-        //             child: Container(
-        //               height: 50,
-        //               width: MediaQuery.of(context).size.width / 2 - 16,
-        //               color: Color(0xff26282F),
-        //               child: Center(
-        //                 child: Text('История',
-        //                 style: TextStyle(
-        //                   fontWeight: FontWeight.w600,
-        //                   fontSize: 14,
-        //                   color: Color(0xffffffff)
-        //                 ),),
-        //               ),
-        //             ),
-        //           ),
-        //           SizedBox(
-        //             width: 5,
-        //           ),
-        //           GestureDetector(
-        //               onTap: () {
-        //                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoryDraw()));
-        //               },
-        //             child: Container(
-        //               height: 50,
-        //               width: MediaQuery.of(context).size.width / 2 - 16,
-        //               color: Color(0xff26282F),
-        //               child: Center(
-        //                 child: Text('Предыдущая лотерея',
-        //                   style: TextStyle(
-        //                       fontWeight: FontWeight.w600,
-        //                       fontSize: 14,
-        //                       color: Color(0xffffffff)
-        //                   ),),
-        //               ),
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //       SizedBox(
-        //         height: 42,
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => leto()));
-        //         },
-        //         child: Container(
-        //           height: 60,
-        //           width: double.infinity,
-        //           color: Color(0xff191A1F),
-        //           child: Center(
-        //             child: Text('Введите промокод',
-        //             style: TextStyle(
-        //               fontSize: 16,
-        //               fontWeight: FontWeight.w600,
-        //               color: Color(0xff808080)
-        //             ),),
-        //           ),
-        //         ),
-        //       ),
               SizedBox(
                 height: 26,
               ),
@@ -197,75 +52,15 @@ class _StockPageState extends State<StockPage> {
               const SizedBox(
                 height: 24,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
-                    builder: (context) => Container(
-                      color: Color(0xff111216),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 14,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CloseCircleButton(onTap: () => Navigator.of(context).pop()),
-                              const SizedBox(width: 8,)
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 10,
-                                ),
-                                child: Text('Условия достаки',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xffffffff)
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          SizedBox(
-                            height: 214,
-                            width: 375,
-                            child: Container(
-                                child: Image.asset('assets/images/home_page/Пицца мафия.png',
-                                  fit: BoxFit.cover,)
-                            ),
-                          ), SizedBox(
-                            height: 24,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                            ),
-                            child: Text(
-                              '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
-                      
-Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
-                      
-При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
-                      ''',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    backgroundColor: Colors.transparent,
+                    builder: (sheetContext) => Padding(
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                      child: const DeliveryTerms(),
                     ),
                   );
                 },

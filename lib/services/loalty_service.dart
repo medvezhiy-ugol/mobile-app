@@ -26,7 +26,7 @@ class LoyaltyCardService {
     final data = await APIService.getRequest(
       serverIndex: 0,
       request: 'v1/whoiam',
-      headers: {"Authorization": "Bearer ${authService.token}"},
+      headers: {"Authorization": "Bearer ${authService.accessToken}"},
     );
     if (data != null) {
       var loyaltyCard = LoaltyCard.fromJson(data);

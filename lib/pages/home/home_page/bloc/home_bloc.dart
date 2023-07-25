@@ -39,7 +39,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeUnAuthState());
       }
     });
-    if (authService.token != '' && loyaltyCardService.cardId == '') {
+    if (authService.accessToken != '' && loyaltyCardService.cardId == '') {
       add(HomeLoadingLoyaltyCardEvent());
     } else if (loyaltyCardService.cardId != '') {
       add(HomeAuthEvent());

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:medvezhiy_ugol/services/api_service.dart';
 
 import '../models/get_menu.dart';
@@ -43,7 +41,6 @@ class MenuService {
     if (response != null) {
       final List<ExternalMenu> menus = [];
       for (final menu in response['externalMenus']) {
-        log("ывфы $menu");
         menus.add(ExternalMenu.fromJson(menu));
       }
       return menus;

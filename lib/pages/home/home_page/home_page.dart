@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../../models/loalty_card.dart';
 import '../../../services/api_service.dart';
@@ -39,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     final data = await APIService.getRequest(
       serverIndex: 0,
       request: 'v1/whoiam',
-      headers: {"Authorization": "Bearer ${authService.token}"},
+      headers: {"Authorization": "Bearer ${authService.accessToken}"},
     );
     if (data != null) {
       var loyaltyCard = LoaltyCard.fromJson(data);
@@ -51,6 +54,72 @@ class _HomePageState extends State<HomePage> {
 
       });
     }
+  }
+
+  void da() async {
+    final data1 = await APIService.getRequest(
+      serverIndex: 1,
+      request: 'v1/refresh',
+      headers: {"Authorization": "Bearer ${authService.refreshToken}"},
+    );
+    final data = await post(
+      Uri.parse('http://77.75.230.205:8080/v1/create'),
+      headers: {"Authorization": "Bearer ${authService.accessToken}"},
+      body: {
+    "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
+    "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
+    "order": {
+    "items": [
+    {
+    "productId": "6b5b4afd-1d41-4927-a005-2ff4d42e19a9",
+    "type": "Product",
+    "price": 1,
+    "amount": 1
+    }
+    ],
+    "payments": [
+    {
+    "paymentTypeKind": "Card",
+    "sum": 295,
+    "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
+    "isProcessedExternally": true,
+    "isFiscalizedExternally": true
+    }
+    ],
+    "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
+    }
+    },
+    );
+    // final data = await APIService.postRequest(
+    //   serverIndex: 1,
+    //   request: 'v1/create',
+    //   data: {
+    //     "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
+    //     "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
+    //     "order": {
+    //       "items": [
+    //         {
+    //           "productId": "6b5b4afd-1d41-4927-a005-2ff4d42e19a9",
+    //           "type": "Product",
+    //           "price": 1,
+    //           "amount": 1
+    //         }
+    //       ],
+    //       "payments": [
+    //         {
+    //           "paymentTypeKind": "Card",
+    //           "sum": 295,
+    //           "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
+    //           "isProcessedExternally": true,
+    //           "isFiscalizedExternally": true
+    //         }
+    //       ],
+    //       "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
+    //     }
+    //   },
+    //   headers: {"Authorization": "Bearer ${authService.accessToken}"},
+    // );
+    print(data);
   }
 
   final PageController _controller = PageController(
@@ -129,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 46,
                     ),
-                    authService.token == ""
+                    authService.accessToken == ""
                         ? ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Container(

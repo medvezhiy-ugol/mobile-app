@@ -5,16 +5,19 @@ import 'api_service.dart';
 class AuthService {
   final SharedPreferences prefs;
 
-  String _token = '';
+  String _accessToken = '';
+  String _refreshToken = '';
   String _phone = '';
 
-  get token => _token;
+  get accessToken => _accessToken;
+  get refreshToken => _refreshToken;
   get phone => _phone;
 
   AuthService({
     required this.prefs,
   }) {
-    _token = prefs.getString('token') ?? '';
+    _accessToken = prefs.getString('token') ?? '';
+    _refreshToken = prefs.getString('refresh') ?? '';
     _phone = prefs.getString('phone') ?? '';
   }
 
@@ -56,9 +59,10 @@ class AuthService {
         },
       );
       if (data != '' && data['access_token'] != '') {
-        _token = data['access_token'];
+        _accessToken = data['access_token'];
         _phone = phone;
         await prefs.setString('token', data['access_token']);
+        await prefs.setString('refresh', data['refresh_token']);
         await prefs.setString('phone', phone);
         return 'Token: ${data['access_token']}';
       }
@@ -69,9 +73,11 @@ class AuthService {
   }
 
   signOut() async {
-    _token = '';
+    _accessToken = '';
+    _refreshToken = '';
     _phone = '';
-    await prefs.setString('token', _token);
+    await prefs.setString('token', _accessToken);
+    await prefs.setString('refresh', _accessToken);
     await prefs.setString('phone', _phone);
   }
 }
