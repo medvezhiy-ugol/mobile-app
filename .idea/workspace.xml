@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="Условия доставик update">
-      <change afterPath="$PROJECT_DIR$/lib/pages/more/my_orders/CartDelete.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/more_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/more/my_orders/CartDelete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/my_orders/CartDelete.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,13 +96,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677934220958</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Скрыть кнопки &quot;доставка и самовывоз&quot; из меню заведения и адрес">
-      <created>1684348606751</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1684348606751</updated>
     </task>
     <task id="LOCAL-00002" summary="Скрыть кнопки &quot;доставка и самовывоз&quot; из меню заведения и адрес">
       <created>1684428474560</created>
@@ -444,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690303331718</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Условия доставик update">
+      <created>1690399089540</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1690399089540</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -479,9 +475,9 @@
     <MESSAGE value="fix basket navigation" />
     <MESSAGE value="fix base url" />
     <MESSAGE value="Акции done" />
-    <MESSAGE value="Условия доставик update" />
     <MESSAGE value="add payment" />
-    <option name="LAST_COMMIT_MESSAGE" value="add payment" />
+    <MESSAGE value="Условия доставик update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Условия доставик update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
