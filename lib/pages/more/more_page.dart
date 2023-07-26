@@ -16,6 +16,7 @@ import '../../utils/icons/social_icons_icons.dart';
 import 'auth/auth_code_page/code_auth_page.dart';
 import 'auth/auth_page/auth_page.dart';
 import 'auth/bloc/more_bloc.dart';
+import 'my_orders/CartDelete.dart';
 import 'over_pages/delivery_info_page.dart';
 
 class MorePage extends StatelessWidget {
@@ -163,7 +164,7 @@ class MorePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthPage()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CartDelete()));
                 },
                 child: Text(
                   "Наши соцсети",
