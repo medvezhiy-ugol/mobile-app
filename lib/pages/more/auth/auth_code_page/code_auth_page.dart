@@ -9,7 +9,7 @@ import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 
 
-import '../../more_page.dart';
+import '../../../../ui/pages/more/more_page.dart';
 import '../auth_page/auth_page.dart';
 import 'bloc/code_auth_bloc.dart';
 

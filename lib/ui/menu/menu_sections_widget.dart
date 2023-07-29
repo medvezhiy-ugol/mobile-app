@@ -5,7 +5,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/services/theme_service.dart';
 import '../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import '../../pages/menu/detail_menu_page/detail_menu_page.dart';
+import '../pages/product_page.dart';
 import 'menu_card_widget.dart';
 
 class MenuSection extends StatefulWidget {
@@ -58,14 +58,14 @@ class _MenuSectionState extends State<MenuSection> {
                         menuProduct: widget.menuCategory.items[i],
                         onTap: () {
                           showModalBottomSheet(
-                              context: state.context,
+                              context: state.context!,
                               isScrollControlled: true,
                               builder: (sheetContext) => Container(
                                 color: const Color(0xff000000),
                                 padding: EdgeInsets.only(
-                                  top: MediaQuery.of(state.context).padding.top,
+                                  top: MediaQuery.of(state.context!).padding.top,
                                 ),
-                                child: DetailMenuPage(id: widget.menuCategory.items[i].id),
+                                child: ProductPage(id: widget.menuCategory.items[i].id),
                               )
                           );
                           // Navigator.of(state.context).push(

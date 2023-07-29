@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medvezhiy_ugol/pages/discounts/discounts_detail_page/discounts_detail_page.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/delivery_terms.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
@@ -12,7 +11,6 @@ class StockPage extends StatefulWidget {
 }
 
 class _StockPageState extends State<StockPage> {
-  // final TextEditingController _textMailBodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -278,7 +276,8 @@ SizedBox(
                                 child: Image.asset('assets/images/home_page/Пицца мафия.png',
                                   fit: BoxFit.cover,)
                             ),
-                          ), SizedBox(
+                          ),
+                          SizedBox(
                             height: 24,
                           ),
                           Padding(
@@ -377,25 +376,6 @@ SizedBox(
                       color: Color(0xFF808080)
                   ),),
               ),
-
-
-//NO Sales
-              // const SizedBox(
-              //   height: 250,
-              // ),
-
-              // const Center(
-              //   child: Text(
-              //     'Акций пока нет', //'Акции и комбо',
-              //     style: TextStyle(
-              //       fontSize: 20,
-              //       fontWeight: FontWeight.w400,
-              //       fontFamily: AppFonts.unbounded,
-              //       color: AppColors.color808080,
-              //     ),
-              //   ),
-              // ),
-//-----
             ],
           ),
         ),
@@ -410,96 +390,6 @@ SizedBox(
     5,
     45,
   );
-
-  Stack _buildStockItem(BuildContext context, String id) {
-    return Stack(
-      children: [
-        Container(
-          height: 130,
-          color: AppColors.color191A1F,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                'assets/images/stock_page/pizza.png',
-                height: 130,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      'Две лучше, чем одна $id',
-                      maxLines: 2,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Unbounded',
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      "Скидка на вторую пиццу 20%",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: AppColors.color808080,
-                          fontWeight: FontWeight.w500,
-                          overflow: TextOverflow.ellipsis),
-                      maxLines: 2,
-                    ),
-                    const Spacer(),
-                    const Text(
-                      'Действует до 07.04.2023 г.',
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: AppColors.color808080,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
-        ),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (context) => DetailStockPage(id: id)
-              );
-              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailStockPage(id: id)));
-              // Navigator.of(context).pushNamed(
-              //   Routes.detailStockName,
-              //   arguments: id,
-              // );
-            },
-            child: Container(
-              height: 127,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 
   Container promoTextField(BuildContext context) {
     return Container(

@@ -27,8 +27,8 @@ class _PayPageState extends State<PayPage> {
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
+            if (request.url.contains('https://play.google.com/store/apps/details?id=com.bearcorner_mobile')) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
             }
             return NavigationDecision.navigate;
           },

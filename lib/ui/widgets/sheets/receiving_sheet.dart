@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/ui/pages/pay_page.dart';
-
-import '../../../services/api_service.dart';
 import '../../../services/auth_service.dart';
-import '../../../utils/app_colors.dart';
 
 class ReceivingSheet extends StatelessWidget {
   const ReceivingSheet({super.key, required this.sum});
@@ -152,19 +149,9 @@ class ReceivingSheet extends StatelessWidget {
           GestureDetector(
             onTap: () async {
               final authService = Injector().get<AuthService>();
-              print(authService.refreshToken);
-              var data = await post(
-                Uri.parse("http://77.75.230.205:8080/v1/refresh"),
-                headers: {"Authorization": "Bearer ${authService.refreshToken}"},
-              );
-              String token = jsonDecode(data.body)["access_token"];
-              print(data.statusCode);
-              print(data.body);
-              print(token);
-              final data1 = await APIService.postRequest(
-                serverIndex: 1,
-                request: 'v1/create',
-                data: {
+              var request = await post(
+                Uri.parse("http://77.75.230.205:8080/v1/create"),
+                body: jsonEncode({
                   "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
                   "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
                   "order": {
@@ -187,11 +174,27 @@ class ReceivingSheet extends StatelessWidget {
                     ],
                     "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
                   }
+                }),
+                headers: {
+                  "Authorization": "Bearer ${authService.accessToken}",
+                  'Content-Type': 'application/json'
                 },
-                headers: {"Authorization": "Bearer ${authService.accessToken}"},
               );
-              print(data1["PaymentURL"]);
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PayPage(url: data1["PaymentURL"])));
+              print(request.statusCode);
+              print(request.body);
+              if (request.statusCode == 401) {
+                final refresh = await post(
+                  Uri.parse("http://77.75.230.205:8080/v1/refresh"),
+                  headers: {"Authorization": "Bearer ${authService.refreshToken}"},
+                );
+                final body = jsonDecode(refresh.body);
+                authService.setTokens(body['access_token'], body['refresh_token']);
+                request = await get(
+                  Uri.parse("http://77.75.230.205:8080/v1/whoiam"),
+                  headers: {"Authorization": "Bearer ${body['access_token']}"},
+                );
+              }
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PayPage(url: jsonDecode(request.body)["PaymentURL"])));
             },
             child: Container(
               height: 56,

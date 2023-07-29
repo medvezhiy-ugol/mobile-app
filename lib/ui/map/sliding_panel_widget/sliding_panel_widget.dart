@@ -4,7 +4,7 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../services/theme_service.dart';
 import '../../../utils/app_colors.dart';
-import '../../../pages/map/map_page/map_page.dart';
+import '../../../pages/map_page.dart';
 
 class SlidingPanelWidget extends StatefulWidget {
   const SlidingPanelWidget({super.key});

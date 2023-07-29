@@ -1,9 +1,16 @@
+import 'dart:convert';
+
+import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/services/api_service.dart';
 
 import '../models/get_menu.dart';
+import '../models/loalty_card.dart';
 import '../models/menu.dart';
+import 'auth_service.dart';
 
 class MenuService {
+
   Future<List<MenuCategory>> getFullMenu() async {
     final List<ExternalMenu> externalMenus = await _getAllMenus();
     final response = await APIService.postRequest(
@@ -46,5 +53,31 @@ class MenuService {
       return menus;
     }
     return [];
+  }
+
+  Future<LoyaltyCard?> getUserCard(String accessToken) async {
+    final authService = Injector().get<AuthService>();
+    var request = await get(
+      Uri.parse("http://77.75.230.205:8080/v1/whoiam"),
+      headers: {"Authorization": "Bearer ${authService.accessToken}"},
+    );
+    if (request.statusCode == 401) {
+      final refresh = await post(
+        Uri.parse("http://77.75.230.205:8080/v1/refresh"),
+        headers: {"Authorization": "Bearer ${authService.refreshToken}"},
+      );
+      final body = jsonDecode(refresh.body);
+      authService.setTokens(body['access_token'], body['refresh_token']);
+      request = await get(
+        Uri.parse("http://77.75.230.205:8080/v1/whoiam"),
+        headers: {"Authorization": "Bearer ${body['access_token']}"},
+      );
+    }
+    if (request.statusCode == 200) {
+      return LoyaltyCard.fromJson(jsonDecode(request.body));
+    }
+    else {
+      return null;
+    }
   }
 }

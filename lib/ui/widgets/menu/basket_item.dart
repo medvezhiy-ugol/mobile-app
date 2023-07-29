@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
-
-import '../../../pages/menu/menu_page/bloc/menu_bloc.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../../utils/app_colors.dart';
 import '../add_button.dart';
 import '../remove_button.dart';
@@ -30,7 +29,7 @@ class _BasketItemState extends State<BasketItem> {
         children: [
           SlidableAction(
             onPressed: (BuildContext context) {
-              context.read<MenuBloc>().add(MenuRemoveAllEvent(menuProduct: widget.product));
+              context.read<CustomNavbarCubit>().removeAllFromOrder(widget.product);
             },
             backgroundColor: const Color(0xFFE64646),
             foregroundColor: Colors.white,
@@ -77,7 +76,7 @@ class _BasketItemState extends State<BasketItem> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          context.read<MenuBloc>().add(MenuRemoveEvent(menuProduct: widget.product));
+                          context.read<CustomNavbarCubit>().removeFromOrder(widget.product);
                         },
                         child: const RemoveButton(),
                       ),
@@ -91,7 +90,7 @@ class _BasketItemState extends State<BasketItem> {
                       const SizedBox(width: 13),
                       GestureDetector(
                           onTap: () {
-                            context.read<MenuBloc>().add(MenuAddToOrderEvent(menuProduct: widget.product));
+                            context.read<CustomNavbarCubit>().addToOrder(widget.product);
                           },
                           child: const AddButton()
                       ),

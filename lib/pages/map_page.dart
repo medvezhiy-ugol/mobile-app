@@ -3,10 +3,9 @@ import 'package:medvezhiy_ugol/ui/map/map_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/sliding_panel_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
+import 'package:medvezhiy_ugol/ui/widgets/delivery_switcher.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../../../ui/toggle_switcher/toggle_switcher_widget.dart';
-import '../../../utils/app_colors.dart';
+import '../utils/app_colors.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({super.key});
@@ -119,7 +118,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           ),
           const Positioned(
           top: 60,
-          child: ToggleSwitcher(),
+          child: DeliverySwitcher(),
           ),
         ],
       ),

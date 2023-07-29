@@ -1,12 +1,7 @@
-import 'dart:isolate';
-
 import 'package:bloc/bloc.dart';
-import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/loalty_card.dart';
 import 'package:medvezhiy_ugol/services/loalty_service.dart';
 import 'package:meta/meta.dart';
-
-import '../../../../services/auth_service.dart';
 
 part 'loalty_event.dart';
 part 'loyalty_state.dart';
@@ -17,7 +12,7 @@ class LoyaltyBloc extends Bloc<LoyaltyEvent, LoyaltyState> {
   String name = '';
   String cardId = '';
   double cardBalance = 0;
-  LoaltyCard? _card;
+  LoyaltyCard? _card;
 
   LoyaltyBloc({
     required this.loyaltyCardService,
@@ -41,7 +36,7 @@ class LoyaltyBloc extends Bloc<LoyaltyEvent, LoyaltyState> {
 
   Future<void> _initLoaltyCard() async {
     try {
-      _card = await Isolate.run(loyaltyCardService.getUserCard);
+      _card = await loyaltyCardService.getUserCard();
       if (_card != null) {
         name = _card!.name;
         cardId = _card!.id;

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/discounts_page.dart';
-import 'package:medvezhiy_ugol/pages/map/map_page/map_page.dart';
-import '../home/home_page/home_page.dart';
-import '../menu/menu_page/menu_page.dart';
-import '../more/more_page.dart';
+import 'package:medvezhiy_ugol/pages/map_page.dart';
+import 'home/home_page.dart';
+import 'menu/menu_page.dart';
+import 'more/more_page.dart';
 import '../../utils/icons/bottom_bar_icons.dart';
 
 class CustomNavbar extends StatefulWidget {
@@ -26,13 +26,22 @@ class _CustomNavbarState extends State<CustomNavbar> {
   bool isLoading = false;
 
   @override
+  void initState() {
+    super.initState();
+    context.read<CustomNavbarCubit>().getContext(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CustomNavbarCubit(context),
-      child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-        buildWhen: (previous, current) => previous.index != current.index,
+    return BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
         builder: (context, state) {
-          return WillPopScope(
+          return state.isLoading
+              ? const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+              : WillPopScope(
               onWillPop: () async {
                 switch (state.index) {
                   case 0:
@@ -65,7 +74,9 @@ class _CustomNavbarState extends State<CustomNavbar> {
               },
               child: Scaffold(
                   backgroundColor: Colors.grey,
-                  body: Stack(
+                  body: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return Stack(
                       children: [
                         CupertinoTabView(
                           builder: (BuildContext context) {
@@ -200,11 +211,12 @@ class _CustomNavbarState extends State<CustomNavbar> {
                             )
                         )
                       ]
-                  )
+                  );
+  },
+)
               )
           );
         },
-      ),
-    );
+      );
   }
 }

@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
-import 'package:medvezhiy_ugol/pages/more/about_app/about_app_page.dart';
+import 'package:medvezhiy_ugol/ui/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/history_order.dart';
-import 'package:medvezhiy_ugol/pages/more/my_orders/my_orders_page.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/profile/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../utils/app_colors.dart';
-import '../../common_setup/routes.dart';
-import '../../services/auth_service.dart';
-import '../../utils/icons/more_page_icons.dart';
-import '../../utils/icons/social_icons_icons.dart';
-import 'auth/auth_code_page/code_auth_page.dart';
-import 'auth/auth_page/auth_page.dart';
-import 'auth/bloc/more_bloc.dart';
-import 'my_orders/CartDelete.dart';
-import 'over_pages/delivery_info_page.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../services/auth_service.dart';
+import '../../../utils/icons/more_page_icons.dart';
+import '../../../utils/icons/social_icons_icons.dart';
+import '../../../pages/more/auth/auth_page/auth_page.dart';
+import '../../../pages/more/auth/bloc/more_bloc.dart';
+import '../../../pages/more/my_orders/CartDelete.dart';
+import '../../../pages/more/over_pages/delivery_info_page.dart';
 
 class MorePage extends StatelessWidget {
   MorePage({super.key});
@@ -463,11 +461,7 @@ class MorePage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed('/map');
-                  // _showSnackBar(
-                  //   context: context,
-                  //   text: 'Данный раздел пока недоступен',
-                  // );
+                  context.read<CustomNavbarCubit>().changeIndex(3);
                 },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
@@ -581,50 +575,22 @@ class MorePage extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 6.87 ,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'User',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Unbounded'
-              ),
-            ),
-            // Material(
-            //   color: Colors.transparent,
-            //   child: InkWell(
-            //     onTap: () {
-            //       Navigator.of(context).pushNamed(Routes.profilePage);
-            //     },
-            //     customBorder: const CircleBorder(),
-            //     child: Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: SizedBox(
-            //         width: 24,
-            //         height: 24,
-            //         child: DecoratedBox(
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(100),
-            //             color: Colors.transparent,
-            //           ),
-            //           child: const Icon(
-            //             Icons.more_horiz,
-            //             size: 25,
-            //             color: Color(0xffEFEFEF),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-          ],
-        ),
+        BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return Text(
+          state.card!.name,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Unbounded'
+          ),
+        );
+  },
+),
         const SizedBox(
           height: 8,
         ),
@@ -648,15 +614,5 @@ class MorePage extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  _showSnackBar({required BuildContext context, required String text}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        text,
-        textAlign: TextAlign.center,
-      ),
-      behavior: SnackBarBehavior.floating,
-    ));
   }
 }

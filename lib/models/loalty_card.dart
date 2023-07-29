@@ -5,11 +5,11 @@
 
 import 'dart:convert';
 
-LoaltyCard loaltyCardFromJson(String str) => LoaltyCard.fromJson(json.decode(str));
+LoyaltyCard loaltyCardFromJson(String str) => LoyaltyCard.fromJson(json.decode(str));
 
-String loaltyCardToJson(LoaltyCard data) => json.encode(data.toJson());
+String loaltyCardToJson(LoyaltyCard data) => json.encode(data.toJson());
 
-class LoaltyCard {
+class LoyaltyCard {
     String id;
     dynamic referrerId;
     String name;
@@ -36,7 +36,7 @@ class LoaltyCard {
     // dynamic personalDataProcessingTo;
     bool isDeleted;
 
-    LoaltyCard({
+    LoyaltyCard({
         required this.id,
         this.referrerId,
         required this.name,
@@ -64,7 +64,7 @@ class LoaltyCard {
         required this.isDeleted,
     });
 
-    factory LoaltyCard.fromJson(Map<String, dynamic> json) => LoaltyCard(
+    factory LoyaltyCard.fromJson(Map<String, dynamic> json) => LoyaltyCard(
         id: json["id"],
         referrerId: json["referrerId"],
         name: json["name"],

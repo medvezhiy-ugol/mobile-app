@@ -2,24 +2,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../services/menu_service.dart';
-import '../../../services/theme_service.dart';
-import '../../../ui/close_circle_button.dart';
-import '../../../utils/app_colors.dart';
-import '../menu_page/bloc/menu_bloc.dart';
-import 'bloc/menu_detail_bloc.dart';
+import '../../services/menu_service.dart';
+import '../../services/theme_service.dart';
+import '../close_circle_button.dart';
+import '../../utils/app_colors.dart';
+import '../../pages/menu/detail_menu_page/bloc/menu_detail_bloc.dart';
 
-class DetailMenuPage extends StatefulWidget {
-  const DetailMenuPage({super.key, required this.id});
+class ProductPage extends StatefulWidget {
+  const ProductPage({super.key, required this.id});
 
   final String id;
 
   @override
-  State<DetailMenuPage> createState() => _DetailMenuPageState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
-class _DetailMenuPageState extends State<DetailMenuPage> {
+class _ProductPageState extends State<ProductPage> {
   final ThemeService themeService = Injector().get<ThemeService>();
 
   final MenuService menuService = Injector().get<MenuService>();
@@ -33,13 +33,13 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     return BlocProvider(
       create: (context) => MenuDetailBloc(menuService: menuService, id: widget.id),
       child: BlocBuilder<MenuDetailBloc, MenuDetailState>(
-        builder: (context, state) {
+        builder: (blocContext, state) {
           if (state is MenuDetailLoadedState) {
-            return _buildLoadedBody(context, state);
+            return _buildLoadedBody(blocContext, state);
           } else if (state is MenuDetailErrorState) {
-            return _buildErrorBody(context);
+            return _buildErrorBody(blocContext);
           } else if (state is MenuDetailLoadingState) {
-            return _buildLoadingBody(context);
+            return _buildLoadingBody(blocContext);
           } else {
             return Container();
           }
@@ -48,7 +48,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     );
   }
 
-  Widget _buildLoadingBody(BuildContext context) {
+  Widget _buildLoadingBody(BuildContext blocContext) {
     return Container(
       color: const Color(0xff000000),
       child: Column(
@@ -135,7 +135,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     );
   }
 
-  Widget _buildLoadedBody(BuildContext context, MenuDetailLoadedState state) {
+  Widget _buildLoadedBody(BuildContext blocContext, MenuDetailLoadedState state) {
     return Stack(
       children: [
         Column(
@@ -514,8 +514,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        context.read<MenuBloc>().add(MenuAddToOrderEvent(menuProduct: state.menuProduct));
-                        Navigator.of(context).pop();
+                        context.read<CustomNavbarCubit>().addToOrder(state.menuProduct);
+                        Navigator.of(context).pop(true);
                       },
                       child: Container(
                         color: const Color(0xffFFB627),

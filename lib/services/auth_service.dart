@@ -72,6 +72,13 @@ class AuthService {
     return 'Ошибка. Введите корректный код из смс и повторите попытку.';
   }
 
+  void setTokens(String accessToken, String refreshToken) async {
+    _accessToken = accessToken;
+    _refreshToken = refreshToken;
+    await prefs.setString('token', accessToken);
+    await prefs.setString('refresh', refreshToken);
+  }
+
   signOut() async {
     _accessToken = '';
     _refreshToken = '';

@@ -3,7 +3,7 @@ import '../../../../common_setup/routes.dart';
 import '../../../../ui/close_circle_button.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
-import '../../../pages/map/map_page/map_page.dart';
+import '../../../pages/map_page.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
   const ViewRestaurantWidget({super.key});

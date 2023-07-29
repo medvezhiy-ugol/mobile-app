@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 
 class APIService {
   static const List<String> url = [
@@ -30,7 +29,7 @@ class APIService {
         ),
       );
       log(response.statusCode.toString());
-      debugPrint(response.data.toString());
+      log(response.data.toString());
       if (response.statusCode == 200) {
         return response.data;
       }
@@ -47,19 +46,18 @@ class APIService {
     int serverIndex = 0,
     Map<String, String> headers = const {},
   }) async {
-    try {
-      print("ывфывфыв ${'${url[serverIndex]}/$request'}");
-      var response = await Dio().get(
-        '${url[serverIndex]}/$request',
-        queryParameters: queryParameters,
-      );
-      log(response.data.toString());
-      if (response.statusCode == 200) {
-        return response.data;
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
+    print("ывфывфыв ${'${url[serverIndex]}/$request'}");
+    var response = await Dio().get(
+      '${url[serverIndex]}/$request',
+      queryParameters: queryParameters,
+      options: Options(
+        headers: headers
+      )
+    );
+    print("llll ${response.data.toString()}");
+    log(response.data.toString());
+    if (response.statusCode == 200) {
+      return response.data;
     }
     return null;
   }
