@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
@@ -8,6 +10,7 @@ import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
 import '../../close_circle_button.dart';
 import '../../../utils/app_colors.dart';
+import '../../widgets/flip_countdown_clock.dart';
 import '../product_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,36 +26,42 @@ class _HomePageState extends State<HomePage> {
 
   Widget test = Container();
 
-  // @override
-  // void initState() {
-  //   _initLoaltyCard();
-  //   super.initState();
-  // }
+  late final Timer timer;
 
-  // Future<void> _initLoaltyCard() async {
-  //   final data = await APIService.getRequest(
-  //     serverIndex: 0,
-  //     request: 'v1/whoiam',
-  //     headers: {"Authorization": "Bearer ${authService.accessToken}"},
-  //   );
-  //   if (data != null) {
-  //     var loyaltyCard = LoyaltyCard.fromJson(data);
-  //     cardId = loyaltyCard.id;
-  //     name = loyaltyCard.name;
-  //     cardBalance = loyaltyCard.walletBalances[0].balance;
-  //     phone = loyaltyCard.phone;
-  //     setState(() {
-  //
-  //     });
-  //   }
-  // }
+  int _index = 1;
 
   final PageController _controller = PageController(
       viewportFraction: 0.8,
       initialPage: 1
   );
+
   final loyaltyCardService = Injector().get<LoyaltyCardService>();
   final authService = Injector().get<AuthService>();
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(
+        const Duration(seconds: 5),
+            (timer) {
+          if (_index == 4) {
+            _controller.animateToPage(
+              0,
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.ease
+            );
+            _index = 0;
+          }
+          else {
+            _controller.nextPage(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.ease
+            );
+            _index++;
+          }
+            }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +80,14 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const SizedBox(height: 13),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -109,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             'Джекпот',
                             style: TextStyle(
                                 fontSize: 16,
@@ -117,7 +126,44 @@ class _HomePageState extends State<HomePage> {
                                 color: Color(0xfffffffff)
                             ),
                           ),
-                          Image.asset('assets/images/drum.png')
+                          SizedBox(
+                            height: 110,
+                            width: 250,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Image.asset(
+                                    'assets/images/drum.png',
+                                  fit: BoxFit.cover,
+                                  height: 110,
+                                  width: 250,
+                                ),
+                                Positioned(
+                                  right: 12.5,
+                                  bottom: 29,
+                                  child: FlipCountdownClock(
+                                    duration: const Duration(days: 1),
+                                    digitSize: 36.0,
+                                    width: 30.0,
+                                    height: 61.0,
+                                    digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
+                                    separatorWidth: 0,
+                                    digitColor: const Color(0xff26252B),
+                                    backgroundColor: const Color(0xffF3CF7F),
+                                    onDone: () => print('Buzzzz!'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Text(
+                            'Осталось ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 10,
+                              color: Color(0xff808080)
+                            ),
+                          )
                         ],
                       )
                     ],

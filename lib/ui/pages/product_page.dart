@@ -9,6 +9,7 @@ import '../../services/theme_service.dart';
 import '../close_circle_button.dart';
 import '../../utils/app_colors.dart';
 import '../../pages/menu/detail_menu_page/bloc/menu_detail_bloc.dart';
+import '../widgets/menu/ingredient.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id});
@@ -279,81 +280,15 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             Row(
                               children: [
-                                Container(
-                                  height: 36,
-                                  width: 63,
-                                  color: Color(0xff26282f),
-                                  child: Center(
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          child: Icon(
-                                            Icons.close,
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 9.33,
-                                        ),
-                                        Text('Лук',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 12,
-                                              color: Color(0xffffffff)
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                Ingredient(text: 'Лук'),
                                 SizedBox(
                                   width: 8,
                                 ),
-                                Container(
-                                  height: 36,
-                                  width: 75,
-                                  color: Color(0xff26282f),
-                                  child: Center(
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          child: Icon(
-                                            Icons.close,
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 9.33,
-                                        ),
-                                        Text('Салат',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 12,
-                                              color: Color(0xffffffff)
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                Ingredient(text: 'Cалат'),
                                 SizedBox(
                                   width: 8,
                                 ),
-                                Container(
-                                  height: 36,
-                                  width: 158,
-                                  color: Color(0xff26282f),
-                                  child: Center(
-                                    child: Text('Огурцы маринованные',
-                                      style: TextStyle(
-                                          decoration: TextDecoration.lineThrough,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12,
-                                          color: Color(0xffffffff)
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                Ingredient(text: 'Огурцы маринованные'),
                               ],
                             ),
                             SizedBox(
@@ -361,63 +296,11 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             Row(
                               children: [
-                                Container(
-                                  height: 36,
-                                  width: 70,
-                                  color: Color(0xff26282f),
-                                  child: Center(
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          child: Icon(
-                                            Icons.close,
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 9.33,
-                                        ),
-                                        Text('Соус',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 12,
-                                              color: Color(0xffffffff)
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                Ingredient(text: 'Соус'),
                                 SizedBox(
                                   width: 8,
                                 ),
-                                Container(
-                                  height: 36,
-                                  width: 84,
-                                  color: Color(0xff26282f),
-                                  child: Center(
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          child: Icon(
-                                            Icons.close,
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 9.33,
-                                        ),
-                                        Text('Томаты',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 12,
-                                              color: Color(0xffffffff)
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                Ingredient(text: 'Томаты'),
                               ],
                             ),
                             SizedBox(

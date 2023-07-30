@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../services/auth_service.dart';
@@ -21,8 +24,23 @@ class CodeAuthPage extends StatefulWidget {
 }
 
 class _CodeAuthPageState extends State<CodeAuthPage> {
+  late final Timer timer;
+
+  int time = 59;
+
+  bool isSendAgain = false;
+
   @override
   void initState() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (time == 0) {
+        isSendAgain = true;
+      }
+      else {
+        time--;
+      }
+      setState(() {});
+    });
     CodeAuthPage.codeController = TextEditingController();
     super.initState();
   }
@@ -41,6 +59,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
               _showSnackBar(context: context, text: state.error);
               CodeAuthPage.codeController!.clear();
             } else if (state is CodeAuthSuccessState) {
+              context.read<CustomNavbarCubit>().getUser();
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => MorePage()));
             }
           },
@@ -89,12 +108,30 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child: Text('Новый код можно получить через 00:59',
-                      style: TextStyle(
+                      child: isSendAgain
+                          ? GestureDetector(
+                        onTap: () {
+                          isSendAgain = false;
+                          time = 59;
+                          setState(() {});
+                        },
+                        child: const Text(
+                            'Выслать код повторно',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: Color(0xffB8B8B9)
+                          ),
+                        ),
+                      )
+                          : Text(
+                        'Новый код можно получить через 00:$time',
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                         color: Color(0xffB8B8B9)
-                      ),),
+                      ),
+                      ),
                     ),
                     if (state is CodeAuthWithButtonState)
                       Padding(
@@ -168,7 +205,12 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
             forceErrorState: (state is CodeAuthErrorState),
             onChanged: (value) {
               if (CodeAuthPage.codeController!.text.length == 4) {
-                context.read<CodeAuthBloc>().add(CodeAuthShowButtonEvent());
+                context.read<CodeAuthBloc>().add(
+                  CodeAuthVerificationEvent(
+                    phone: AuthPage.phoneController!.text,
+                    code: CodeAuthPage.codeController!.text,
+                  ),
+                );
               } else if (CodeAuthPage.codeController!.text.length == 3) {
                 context.read<CodeAuthBloc>().add(CodeAuthHideButtonEvent());
               }

@@ -7,7 +7,6 @@ import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 import '../../../../../utils/app_colors.dart';
 import '../../../../services/auth_service.dart';
-import '../../../../ui/close_circle_button.dart';
 import '../auth_code_page/code_auth_page.dart';
 import 'bloc/auth_bloc.dart';
 
@@ -190,6 +189,7 @@ class _AuthPageState extends State<AuthPage> {
       color: Color(0xff191A1F),
       alignment: Alignment.center,
       child: TextField(
+        maxLength: 18,
         controller: AuthPage.phoneController,
         autofocus: true,
         textAlign: TextAlign.center,
@@ -198,7 +198,7 @@ class _AuthPageState extends State<AuthPage> {
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: '+7 (###) ###-##-##',
+          //hintText: '+7 (###) ###-##-##',
           hintStyle: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24,

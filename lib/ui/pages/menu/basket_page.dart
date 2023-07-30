@@ -454,7 +454,7 @@ class _BasketPageState extends State<BasketPage> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.color808080,
+                      color: Colors.black,
                     ),
                   ),
                 ],

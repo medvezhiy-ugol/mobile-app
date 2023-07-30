@@ -38,6 +38,7 @@ dependencies:
   equatable: ^2.0.5
   http:
   webview_flutter: ^4.2.2
+  flip_board: ^1.0.0
 
 dev_dependencies:
   flutter_test:

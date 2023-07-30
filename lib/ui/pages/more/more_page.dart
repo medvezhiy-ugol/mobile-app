@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
+import 'package:medvezhiy_ugol/pages/more/auth/auth_code_page/code_auth_page.dart';
 import 'package:medvezhiy_ugol/ui/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/history_order.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
@@ -14,11 +15,16 @@ import '../../../utils/icons/more_page_icons.dart';
 import '../../../utils/icons/social_icons_icons.dart';
 import '../../../pages/more/auth/auth_page/auth_page.dart';
 import '../../../pages/more/auth/bloc/more_bloc.dart';
-import '../../../pages/more/my_orders/CartDelete.dart';
 import '../../../pages/more/over_pages/delivery_info_page.dart';
 
-class MorePage extends StatelessWidget {
+class MorePage extends StatefulWidget {
   MorePage({super.key});
+
+  @override
+  State<MorePage> createState() => _MorePageState();
+}
+
+class _MorePageState extends State<MorePage> {
   final authService = Injector().get<AuthService>();
 
   @override
@@ -35,7 +41,7 @@ class MorePage extends StatelessWidget {
         return WillPopScope(
           onWillPop: () async => false,
           child: Scaffold(
-            backgroundColor: Color(0xff111216),
+            backgroundColor: const Color(0xff111216),
             body: SafeArea(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(10),
@@ -162,7 +168,7 @@ class MorePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CartDelete()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CodeAuthPage()));
                 },
                 child: Text(
                   "Наши соцсети",
@@ -581,7 +587,7 @@ class MorePage extends StatelessWidget {
         BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
   builder: (context, state) {
     return Text(
-          state.card!.name,
+          state.card?.name ?? "",
           style: TextStyle(
               color: Colors.white,
               fontSize: 24,

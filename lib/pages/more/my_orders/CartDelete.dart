@@ -4,8 +4,6 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../../services/auth_service.dart';
-import '../../../ui/back_arrow_button.dart';
-
 class CartDelete extends StatefulWidget {
   const CartDelete({super.key});
 
@@ -175,7 +173,7 @@ class _CartDeleteState extends State<CartDelete> {
                     padding: EdgeInsets.symmetric(
                       horizontal: 16,
                     ),
-                    height: 64,
+                    height: 65,
                     width: double.infinity,
                     color: Color(0xff191a1f),
                     child: Row(
@@ -450,15 +448,29 @@ class _CartDeleteState extends State<CartDelete> {
                               setState(() {});
                             },
                             children: [
-                              Center(
-                                  child: Text(
-                                    "Сегодня",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                        color: Color(0xffFFFFFF)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 50),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Сегодня",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Color(0xffFFFFFF)
+                                      ),
                                     ),
-                                  )
+                                    Text(
+                                      "Сегодня",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Color(0xffFFFFFF)
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               Center(
                                 child: Text(

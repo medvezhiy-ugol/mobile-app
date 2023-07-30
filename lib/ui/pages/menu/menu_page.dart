@@ -185,7 +185,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.color808080,
+                            color: Colors.black,
                           ),
                         ),
                       ],

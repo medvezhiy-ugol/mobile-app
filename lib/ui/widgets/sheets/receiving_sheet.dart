@@ -223,7 +223,7 @@ class ReceivingSheet extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                        color: Color(0xff121212),
+                        color: Colors.black,
                     ),
                   ),
                 ],

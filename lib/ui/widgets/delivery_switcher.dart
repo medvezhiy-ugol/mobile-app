@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/more/over_pages/delivery_info_page.dart';
+import '../../pages/more/my_orders/CartDelete.dart';
 
 class DeliverySwitcher extends StatelessWidget {
   const DeliverySwitcher({super.key});
@@ -17,7 +17,7 @@ class DeliverySwitcher extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DeliveryInfoPage())),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartDelete())),
             child: Container(
               color: Colors.transparent,
               padding: const EdgeInsets.symmetric(
