@@ -28,8 +28,9 @@ class DeliveryTerms extends StatelessWidget {
                 padding: const EdgeInsets.only(
                   left: 10,
                 ),
-                child: Text('Условия достаки',
+                child: Text('Условия доставки',
                   style: TextStyle(
+                      fontFamily: 'Unbounded',
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
                       color: Color(0xffffffff)

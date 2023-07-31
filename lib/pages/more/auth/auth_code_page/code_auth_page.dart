@@ -6,12 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
-import 'package:pinput/pinput.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../ui/primary_button.dart';
-import '../../../../utils/app_colors.dart';
-
-
 import '../../../../ui/pages/more/more_page.dart';
 import '../auth_page/auth_page.dart';
 import 'bloc/code_auth_bloc.dart';
@@ -29,6 +25,7 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
   int time = 59;
 
   bool isSendAgain = false;
+  bool isError = false;
 
   @override
   void initState() {
@@ -103,8 +100,19 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                       height: 116
                     ),
                     _buildCodeTextField(context, state),
+                    SizedBox(height: 4),
+                    Center(
+                      child: Text(
+                        isError ? 'Неверный код' : '',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xffFB2D2D)
+                        ),
+                      ),
+                    ),
                     const SizedBox(
-                      height: 96,
+                      height: 78,
                     ),
                     Align(
                       alignment: Alignment.center,
@@ -167,63 +175,41 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
   }
 
   Widget _buildCodeTextField(BuildContext context, CodeAuthState state) {
-    const length = 4;
-    const Color borderColor = AppColors.color222222;
-
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 60,
-      textStyle: const TextStyle(
-        fontSize: 24,
-        color: Color(0xffFFFFFF)
-      ),
-      decoration: BoxDecoration(
-        color: Color(0xff191A1F),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.transparent),
-      ),
-    );
-
-    return Center(
-      child: Container(
+    return Container(
         height: 63,
         width: double.infinity,
         color: Color(0xff191A1F),
-        child: SizedBox(
-          height: 68,
-          child: Pinput(
-            length: length,
-            controller: CodeAuthPage.codeController,
-            defaultPinTheme: defaultPinTheme,
-            focusedPinTheme: defaultPinTheme.copyWith(
-              height: 68,
-              width: 64,
-              decoration: defaultPinTheme.decoration!.copyWith(
-                border: Border.all(color: borderColor),
-              ),
-            ),
-            forceErrorState: (state is CodeAuthErrorState),
-            onChanged: (value) {
-              if (CodeAuthPage.codeController!.text.length == 4) {
-                context.read<CodeAuthBloc>().add(
-                  CodeAuthVerificationEvent(
-                    phone: AuthPage.phoneController!.text,
-                    code: CodeAuthPage.codeController!.text,
-                  ),
-                );
-              } else if (CodeAuthPage.codeController!.text.length == 3) {
-                context.read<CodeAuthBloc>().add(CodeAuthHideButtonEvent());
-              }
-            },
-            errorPinTheme: defaultPinTheme.copyWith(
-              decoration: BoxDecoration(
-                color: AppColors.colorBD3232,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
+        alignment: Alignment.center,
+        child: TextField(
+          maxLength: 4,
+          textAlign: TextAlign.center,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
           ),
-        ),
-      ),
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 24,
+              color: Color(isError ? 0xffFB2D2D : 0xffFFFFFF)
+          ),
+          onChanged: (value) async {
+            if (value.length == 4) {
+              String response = 'error';
+              response = await authService.authUser(
+                phone: AuthPage.phoneController!.text,
+                code: value,
+              );
+              if (response.contains('Token: ')) {
+                context.read<CustomNavbarCubit>().getUser();
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              } else {
+                isError = true;
+                setState(() {});
+              }
+            } else if (CodeAuthPage.codeController!.text.length == 3) {
+              context.read<CodeAuthBloc>().add(CodeAuthHideButtonEvent());
+            }
+          },
+        )
     );
   }
 

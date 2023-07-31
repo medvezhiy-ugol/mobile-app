@@ -213,7 +213,8 @@ class _AuthPageState extends State<AuthPage> {
           MaskTextInputFormatter(
               mask: '+7 (###) ###-##-##',
               filter: {"#": RegExp(r'[0-9]')},
-              type: MaskAutoCompletionType.lazy)
+              type: MaskAutoCompletionType.lazy
+          )
         ],
         onChanged: (value) {
           if (value.length == 18) {

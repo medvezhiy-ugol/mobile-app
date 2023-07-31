@@ -124,7 +124,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                 height: 80,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                    color: Colors.black,
+                                    color: Color(0xff111216),
                                     boxShadow: [
                                       BoxShadow(
                                           offset: const Offset(4, 0),

@@ -278,28 +278,14 @@ class _ProductPageState extends State<ProductPage> {
                             SizedBox(
                               height: 10,
                             ),
-                            Row(
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
                               children: [
                                 Ingredient(text: 'Лук'),
-                                SizedBox(
-                                  width: 8,
-                                ),
                                 Ingredient(text: 'Cалат'),
-                                SizedBox(
-                                  width: 8,
-                                ),
                                 Ingredient(text: 'Огурцы маринованные'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              children: [
                                 Ingredient(text: 'Соус'),
-                                SizedBox(
-                                  width: 8,
-                                ),
                                 Ingredient(text: 'Томаты'),
                               ],
                             ),
@@ -397,6 +383,9 @@ class _ProductPageState extends State<ProductPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
+                        for (int i = 1; i < _count; i++) {
+                          context.read<CustomNavbarCubit>().addToOrder(state.menuProduct);
+                        }
                         context.read<CustomNavbarCubit>().addToOrder(state.menuProduct);
                         Navigator.of(context).pop(true);
                       },

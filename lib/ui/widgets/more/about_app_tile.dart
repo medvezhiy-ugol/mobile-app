@@ -24,7 +24,7 @@ class AboutAppTile extends StatelessWidget {
       onTap: () {
         showModalBottomSheet(
           isScrollControlled: true,
-          context: context,
+          context: state.context!,
           backgroundColor: Colors.transparent,
           builder: (context) => Padding(
             padding: EdgeInsets.only(
@@ -32,7 +32,7 @@ class AboutAppTile extends StatelessWidget {
             ),
             child: Container(
               color: Color(0xff111216),
-              child: Column(
+              child: ListView(
                 children: [
                   SizedBox(
                     height: 14,

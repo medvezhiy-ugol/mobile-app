@@ -18,7 +18,7 @@ import '../../../pages/more/auth/bloc/more_bloc.dart';
 import '../../../pages/more/over_pages/delivery_info_page.dart';
 
 class MorePage extends StatefulWidget {
-  MorePage({super.key});
+  const MorePage({super.key});
 
   @override
   State<MorePage> createState() => _MorePageState();

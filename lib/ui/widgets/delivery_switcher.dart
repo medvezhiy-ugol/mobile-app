@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../pages/more/my_orders/CartDelete.dart';
+import '../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import '../pages/delivery_page.dart';
 
 class DeliverySwitcher extends StatelessWidget {
   const DeliverySwitcher({super.key});
@@ -14,26 +16,33 @@ class DeliverySwitcher extends StatelessWidget {
           borderRadius: BorderRadius.circular(30)
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartDelete())),
-            child: Container(
-              color: Colors.transparent,
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 12,
-              ),
-              child: const Text(
-                'Доставка',
-                style: TextStyle(
-                  fontFamily: 'Unbounded',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                  color: Color(0xffFFFFFF),
+          BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+            builder: (context, state) {
+              return GestureDetector(
+                onTap: () =>
+                    Navigator.of(state.context!).push(MaterialPageRoute(
+                        builder: (context) => const DeliveryPage())),
+                child: Container(
+                  color: Colors.transparent,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 12,
+                  ),
+                  child: const Text(
+                    'Доставка',
+                    style: TextStyle(
+                      fontFamily: 'Unbounded',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      color: Color(0xffFFFFFF),
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
           const SizedBox(width: 10),
           Container(

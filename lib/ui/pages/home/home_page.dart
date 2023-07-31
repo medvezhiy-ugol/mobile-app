@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   int _index = 1;
 
   final PageController _controller = PageController(
-      viewportFraction: 0.8,
+      viewportFraction: 0.95,
       initialPage: 1
   );
 
@@ -53,11 +53,13 @@ class _HomePageState extends State<HomePage> {
             _index = 0;
           }
           else {
-            _controller.nextPage(
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.ease
-            );
-            _index++;
+            if (_controller.hasClients) {
+              _controller.nextPage(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.ease
+              );
+              _index++;
+            }
           }
             }
     );
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff000000),
+        backgroundColor: const Color(0xff111216),
         body: Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.fromSwatch(
@@ -353,7 +355,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: 5,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: InkWell(
                           onTap: () {
                             showModalBottomSheet(
@@ -365,7 +367,9 @@ class _HomePageState extends State<HomePage> {
                                     top: MediaQuery.of(state.context!).padding.top
                                 ),
                                 child: Container(
-                                  color: Color(0xff111216),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff111216),
+                                  ),
                                   child: Column(
                                     children: [
                                       SizedBox(
@@ -385,8 +389,9 @@ class _HomePageState extends State<HomePage> {
                                             padding: const EdgeInsets.only(
                                               left: 10,
                                             ),
-                                            child: Text('Условия достаки',
+                                            child: Text('Условия доставки',
                                               style: TextStyle(
+                                                  fontFamily: 'Unbounded',
                                                   fontSize: 24,
                                                   fontWeight: FontWeight.w600,
                                                   color: Color(0xffffffff)
@@ -432,15 +437,18 @@ class _HomePageState extends State<HomePage> {
                               ),
                             );
                           },
-                          child: Image.asset(
-                            [
-                              'assets/images/home_page/Большая шаурма.png',
-                              'assets/images/home_page/Вок0.png',
-                              'assets/images/home_page/Золотая шаурма.png',
-                              'assets/images/home_page/Пицца мафия.png',
-                              'assets/images/home_page/promo_img.png'
-                            ][index],
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              [
+                                'assets/images/home_page/Большая шаурма.png',
+                                'assets/images/home_page/Вок0.png',
+                                'assets/images/home_page/Золотая шаурма.png',
+                                'assets/images/home_page/Пицца мафия.png',
+                                'assets/images/home_page/promo_img.png'
+                              ][index],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       );
@@ -491,44 +499,48 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 12,
                       ),
-                      LayoutGrid(
-                        columnSizes: [1.fr, 1.fr],
-                        rowSizes: List.generate(
-                          2,
-                              (index) => auto,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: LayoutGrid(
+                          columnSizes: [1.fr, 1.fr],
+                          rowSizes: List.generate(
+                            2,
+                                (index) => auto,
+                          ),
+                          columnGap: 10,
+                          rowGap: 10,
+                          children: [
+                            for (var category in state.menu)
+                              for (var item in category.items)
+                                if (item.name == 'Пицца Мафия' || item.name == 'В булке Говядина')
+                                  GestureDetector(
+                                    onTap: () async {
+                                      final addToOrder = await showModalBottomSheet(
+                                          context: state.context!,
+                                          isScrollControlled: true,
+                                          builder: (sheetContext) => Container(
+                                            color: const Color(0xff000000),
+                                            padding: EdgeInsets.only(
+                                              top: MediaQuery.of(state.context!).padding.top,
+                                            ),
+                                            child: ProductPage(id: item.id),
+                                          )
+                                      );
+                                      if (addToOrder) {
+                                        context.read<CustomNavbarCubit>().changeIndex(2);
+                                      }
+                                    },
+                                    child: PopularItem(
+                                      srcImg: item.itemSizes[0].buttonImageUrl!,
+                                      name: item.name,
+                                      gram: item.itemSizes.first.portionWeightGrams.toString(),
+                                      description: item.description,
+                                      price: item.itemSizes[0].prices[0].price,
+                                      isBadge: false,
+                                    ),
+                                  )
+                          ],
                         ),
-                        columnGap: 10,
-                        rowGap: 10,
-                        children: [
-                          for (var category in state.menu)
-                            for (var item in category.items)
-                              if (item.name == 'Пицца Мафия' || item.name == 'В булке Говядина')
-                                GestureDetector(
-                                  onTap: () async {
-                                    final addToOrder = await showModalBottomSheet(
-                                        context: state.context!,
-                                        isScrollControlled: true,
-                                        builder: (sheetContext) => Container(
-                                          color: const Color(0xff000000),
-                                          padding: EdgeInsets.only(
-                                            top: MediaQuery.of(state.context!).padding.top,
-                                          ),
-                                          child: ProductPage(id: item.id),
-                                        )
-                                    );
-                                    if (addToOrder) {
-                                      context.read<CustomNavbarCubit>().changeIndex(2);
-                                    }
-                                  },
-                                  child: PopularItem(
-                                    srcImg: item.itemSizes[0].buttonImageUrl!,
-                                    name: item.name,
-                                    description: item.description,
-                                    price: item.itemSizes[0].prices[0].price,
-                                    isBadge: false,
-                                  ),
-                                )
-                        ],
                       ),
                       const SizedBox(
                         height: 32,

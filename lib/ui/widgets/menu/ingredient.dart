@@ -16,50 +16,47 @@ class _IngredientState extends State<Ingredient> {
     return GestureDetector(
       onTap: (){
         isline = !isline;
-        setState(() {
-
-        });
+        setState(() {});
       },
       child: Container(
         height: 36,
         color: Color(0xff26282f),
-        child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: isline
-              ? Container(
-            height: 36,
-            color: Color(0xff26282f),
-            child: Text(widget.text,
+        child: isline
+            ? Container(
+          height: 36,
+          color: Color(0xff26282f),
+          child: Text(widget.text,
+            style: TextStyle(
+                fontWeight: FontWeight.w400,
+                decoration: TextDecoration.lineThrough,
+                fontSize: 12,
+                color: Color(0xffffffff)
+            ),
+          ),
+        )
+            : Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              child: Icon(
+                Icons.close,
+                color: Color(0xffffffff),
+                size: 16,
+              ),
+            ),
+            SizedBox(
+              width: 9.33,
+            ),
+            Text(widget.text,
               style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  decoration: TextDecoration.lineThrough,
                   fontSize: 12,
                   color: Color(0xffffffff)
               ),
             ),
-          )
-              : Row(
-            children: [
-              SizedBox(
-                child: Icon(
-                  Icons.close,
-                  color: Color(0xffffffff),
-                  size: 16,
-                ),
-              ),
-              SizedBox(
-                width: 9.33,
-              ),
-              Text(widget.text,
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: Color(0xffffffff)
-                ),
-              ),
-            ],
-          ),
-                )
+          ],
+        ),
       )
     );
   }

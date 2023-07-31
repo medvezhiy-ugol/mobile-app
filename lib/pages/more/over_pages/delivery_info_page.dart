@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import '../../../ui/back_arrow_button.dart';
-import '../../../ui/close_circle_button.dart';
 
 class DeliveryInfoPage extends StatelessWidget {
   const DeliveryInfoPage({super.key});
@@ -43,10 +42,12 @@ class DeliveryInfoPage extends StatelessWidget {
                         children: [
                           Text(
                             "Условия доставки",
-                            style: const TextStyle(
+                            style: TextStyle(
+                              fontFamily: 'Unbounded',
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white),
+                                color: Colors.white,
+                            ),
                           ),
                         ],
                       ),

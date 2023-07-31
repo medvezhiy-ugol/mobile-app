@@ -8,6 +8,7 @@ class PopularItem extends StatelessWidget {
     super.key,
     required this.srcImg,
     required this.name,
+    required this.gram,
     required this.description,
     required this.price,
     required this.isBadge,
@@ -15,6 +16,7 @@ class PopularItem extends StatelessWidget {
 
   final String srcImg;
   final String name;
+  final String gram;
   final String description;
   final int price;
   final bool isBadge;
@@ -22,7 +24,7 @@ class PopularItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 315.22,
+        height: 300,
         decoration: const BoxDecoration(
           color: AppColors.color191A1F,
         ),
@@ -32,61 +34,52 @@ class PopularItem extends StatelessWidget {
               srcImg,
               fit: BoxFit.fitWidth,
             ),
-            Padding(
+            Container(
+              height: 168,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 6),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
                     height: 8,
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            name,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: ThemeService.detailPageAddButtonTextStyle(),
-                          ),
-                        ),
-                      ],
-                    ),
+                  Text(
+                    name,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: ThemeService.detailPageAddButtonTextStyle(),
                   ),
                   const SizedBox(
                     height: 8,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          description == ''
-                              ? 'Состав отсутствует'
-                              : description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: ThemeService.tabBarCardIngrTextStyle(),
-                        ),
-                      )
-                    ],
+                  Text(
+                    '$gram г.',
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: ThemeService.tabBarCardIngrTextStyle(),
+                  ),
+                  const Spacer(),
+                  Text(
+                    description == ''
+                        ? 'Состав отсутствует'
+                        : description,
+                    maxLines: 2,
+                    //overflow: TextOverflow.ellipsis,
+                    style: ThemeService.tabBarCardIngrTextStyle(),
                   ),
                   const SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      width: 74,
-                      height: 30,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.color26282F,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text(
-                        '$price ₽',
-                        style: ThemeService
-                            .detailPageStatusBarItemCountTextStyle(),
-                      ),
+                  Container(
+                    width: 74,
+                    height: 30,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColors.color26282F,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
+                      '$price ₽',
+                      style: ThemeService
+                          .detailPageStatusBarItemCountTextStyle(),
                     ),
                   ),
                 ],

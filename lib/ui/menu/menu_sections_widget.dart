@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
-import 'package:medvezhiy_ugol/services/theme_service.dart';
 import '../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../pages/product_page.dart';
 import 'menu_card_widget.dart';
@@ -29,17 +28,19 @@ class _MenuSectionState extends State<MenuSection> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10, bottom: 12, top: 36),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 widget.menuCategory.name,
-                style: ThemeService.tabBarTitleSectionTextStyle(),
+                style: TextStyle(
+                  fontFamily: 'Unbounded',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Color(0xff808080)
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 5,
           ),
           BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
   builder: (context, state) {

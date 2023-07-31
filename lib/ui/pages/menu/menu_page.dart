@@ -21,6 +21,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   late List<List<int>> indexList;
   final Color taBarBackgroundColor = AppColors.color111216;
   final AutoScrollController _controller = AutoScrollController();
+  late final TabController _tabController;
 
   int goIndex() {
     return 1;
@@ -28,6 +29,17 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
 
   void onAddressTap() {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage()));
+  }
+
+  @override
+  void initState() {
+    _tabController = TabController(
+        length: 4,
+        vsync: this,
+        initialIndex: 1
+    );
+    Future.delayed(const Duration(milliseconds: 100)).then((value) => _controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin));
+    super.initState();
   }
 
   @override
@@ -39,7 +51,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff000000),
+      backgroundColor: const Color(0xff111216),
       body: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
   builder: (context, state) {
     List<String> tabs = [];
@@ -65,12 +77,10 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                   padding: const EdgeInsets.only(right: 10),
                   child: ScaleTabBar(
                     onTap: (value) {
-                      _controller.scrollToIndex(value);
+                      _controller.scrollToIndex(value, preferPosition: AutoScrollPosition.begin);
+                      _tabController.animateTo(value);
                     },
-                    controller: TabController(
-                        length: tabs.length,
-                        vsync: this
-                    ),
+                    controller: _tabController,
                     tabs: [
                       for (int i = 0; i < tabs.length; i++)
                         Tab(text: tabs[i])
@@ -114,15 +124,10 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         accentColor: AppColors.color191A1F,
                       ),
                     ),
-                    child: ListView.separated(
+                    child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       controller: _controller,
                       itemCount: state.menu.length,
-                      separatorBuilder: (context, i) {
-                        return const SizedBox(
-                          height: 15,
-                        );
-                      },
                       itemBuilder: (context, i) {
                         return AutoScrollTag(
                           key: ValueKey(i),
