@@ -39,6 +39,7 @@ dependencies:
   http:
   webview_flutter: ^4.2.2
   flip_board: ^1.0.0
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:

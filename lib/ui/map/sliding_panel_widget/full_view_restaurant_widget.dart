@@ -43,9 +43,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               Text(
                 '1,3 км - 150023, Ярославль, улица Свободы, 45',
                 style: TextStyle(

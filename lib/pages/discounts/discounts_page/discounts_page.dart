@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/delivery_terms.dart';
@@ -57,7 +58,7 @@ class _StockPageState extends State<StockPage> {
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (sheetContext) => Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                       child: const DeliveryTerms(),
                     ),
                   );
@@ -190,11 +191,9 @@ class _StockPageState extends State<StockPage> {
                     width: 355,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12), // Здесь задайте нужный вам радиус скругления
-                      child: Container(
-                        child: Image.asset(
-                          'assets/images/home_page/Пицца мафия.png',
-                          fit: BoxFit.cover,
-                        ),
+                      child: Image.asset(
+                        'assets/images/home_page/Пицца мафия.png',
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -228,9 +227,9 @@ class _StockPageState extends State<StockPage> {
                       color: Color(0xFF808080)
                   ),),
               ),
-SizedBox(
-  height: 16,
-),
+              SizedBox(
+                height: 16,
+              ),
               InkWell(
                 onTap: () {
                   showModalBottomSheet(
@@ -350,9 +349,9 @@ SizedBox(
                       color: Color(0xFF808080)
                   ),),
               ),
-SizedBox(
-  height: 16,
-),
+              SizedBox(
+                height: 16,
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 10,
@@ -378,6 +377,7 @@ SizedBox(
                       color: Color(0xFF808080)
                   ),),
               ),
+              SizedBox(height: 40)
             ],
           ),
         ),

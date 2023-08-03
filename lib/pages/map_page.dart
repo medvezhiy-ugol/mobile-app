@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:medvezhiy_ugol/ui/map/map_widget.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/sliding_panel_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/widgets/delivery_switcher.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 import '../utils/app_colors.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({super.key});
+
   static final PageController pageController = PageController();
   static final PanelController panelController = PanelController();
   static bool fullViewIsVisible = true;
@@ -18,11 +20,52 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
-  // bool _showRestFilter = true;
-  // bool _isRunning = true;
+
+  late final YandexMapController _mapController;
+  double lat = 0;
+  double lon = 0;
+  bool isLoading = true;
+
+  Future<Position> _determinePosition() async {
+
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition();
+  }
 
   bool _isDraged = false;
   bool isFadeAnimated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getPosition();
+  }
+
+  void getPosition() async {
+    Position position = await _determinePosition();
+    lat = position.latitude;
+    lon = position.longitude;
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +76,58 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       body: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: MapWidget(),
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: YandexMap(
+                  mapObjects: [
+                    PlacemarkMapObject(
+                      mapId: const MapObjectId('org_0'),
+                      point: Point(latitude: lat, longitude: lon),
+                      opacity: 1,
+                      isDraggable: false,
+                      icon: PlacemarkIcon.single(
+                        PlacemarkIconStyle(
+                          scale: 0.7,
+                          image: BitmapDescriptor.fromAssetImage('assets/images/map_page/point.png'),
+                          rotationType: RotationType.noRotation,
+                          anchor: const Offset(0.5, 1),
+                        ),
+                      ),
+                    ),
+                  ],
+                  nightModeEnabled: true,
+                  onMapCreated: (YandexMapController controller) {
+                    _mapController = controller;
+                    _mapController.moveCamera(
+                      CameraUpdate.newCameraPosition(CameraPosition(
+                        target: Point(
+                          latitude: lat,
+                          longitude: lon,
+                        ),
+                        zoom: 14.4746,
+                      ),
+                      ),
+                    );
+                  },
+
+                  onCameraPositionChanged: (CameraPosition position, CameraUpdateReason reason, bool value) async {
+                    lat = position.target.latitude;
+                    lon = position.target.longitude;
+                    setState(() {
+                    });
+                    final searchResult = YandexSearch.searchByPoint(
+                      point: position.target,
+                      zoom: 15,
+                      searchOptions: const SearchOptions(
+                        searchType: SearchType.geo,
+                        geometry: false,
+                      ),
+                    );
+                    // final result = await searchResult.result;
+                  }
+              )
           ),
           SlidingUpPanel(
             onPanelSlide: (double point) {
@@ -117,8 +209,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             },
           ),
           const Positioned(
-          top: 60,
-          child: DeliverySwitcher(),
+            top: 60,
+            child: DeliverySwitcher(),
           ),
         ],
       ),

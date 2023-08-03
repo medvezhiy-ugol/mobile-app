@@ -30,7 +30,7 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     final List<MapObject> mapObjects = [
       PlacemarkMapObject(
-        mapId: MapObjectId('org_0'),
+        mapId: const MapObjectId('org_0'),
         point: MapWidget.points[0],
         opacity: 1,
         isDraggable: false,
@@ -50,7 +50,10 @@ class _MapWidgetState extends State<MapWidget> {
           // );
           await MapWidget.mapController.moveCamera(
             CameraUpdate.newCameraPosition(
-              CameraPosition(target: point, zoom: 17),
+              CameraPosition(
+                  target: point,
+                  zoom: 17
+              ),
             ),
             animation: MapWidget.animation,
           );

@@ -10,25 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix auth">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_07_2023_19_52_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_07_2023_19_52__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023__21_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023__21_39__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_05_2023__20_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_05_2023__20_46__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/auth/auth_code_page/code_auth_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/auth/auth_code_page/code_auth_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/auth/auth_page/auth_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/auth/auth_page/auth_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/my_orders/CartDelete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/delivery_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/over_pages/delivery_info_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/over_pages/delivery_info_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/menu/menu_sections_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/custom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/custom_navbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/more/more_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/more/more_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/product_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/product_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/map_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/map/map_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/map/map_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/sliding_panel_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/sliding_panel_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/widgets/delivery_switcher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/delivery_switcher.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/home/popular_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/home/popular_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/menu/ingredient.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/menu/ingredient.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/more/about_app_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/more/about_app_tile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/sheets/delivery_terms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/delivery_terms.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +83,7 @@
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
     "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "/Users/mindykfam/Desktop/Developer/Medvezhi-ugol/mobile-app",
+    "last_opened_file_path": "C:/Users/DIGMA/Documents/voices_fix_bags/voices-mobile",
     "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }
@@ -514,11 +513,6 @@
           <url>file://$PROJECT_DIR$/lib/pages/discounts/discounts_page/Leto.dart</url>
           <line>186</line>
           <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart</url>
-          <line>413</line>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -38,11 +38,9 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
           child: ListView(
             physics: ClampingScrollPhysics(),
             children: <Widget>[
-              SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: 50,
                 color: AppColors.color191A1F,
                 child: TextField(
@@ -51,7 +49,12 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
                   },
                   cursorColor: AppColors.colorFFB627,
                   controller: controller,
-                  decoration: InputDecoration(
+                  style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white
+                  ),
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.search,
                       color: AppColors.color808080,
@@ -64,30 +67,73 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: AppColors.color808080),
-                    contentPadding: const EdgeInsets.symmetric(
+                    contentPadding: EdgeInsets.symmetric(
                       horizontal: 39,
                       vertical: 20,
                     ),
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 12,
+              const SizedBox(height: 12),
+              RestaurantInfo(
+                openInfo: DateTime.now().hour > 23 ? 'Откроется в 10:00' : 'Открыто с 10:00 до 23:00',
+                color: DateTime.now().hour > 23 ? const Color(0xffFF3838) : const Color(0xff32CD43),
+                distance: '1,3 км',
+                adress: 'Улица Свободы, 16',
+                index: 0,
+                onTap: () async {
+                  if (MapPage.panelController.isAttached) {
+                    MapPage.panelController.animatePanelToPosition(
+                      0,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                    await MapWidget.mapController.moveCamera(
+                      CameraUpdate.newCameraPosition(
+                        CameraPosition(target: MapWidget.points[1], zoom: 15),
+                      ),
+                      animation: animation,
+                    );
+                  }
+                  MapPage.pageController.animateToPage(
+                    1,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.bounceIn,
+                  );
+                },
               ),
-              ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(
-                  height: 10,
-                ),
-                itemCount: 2,
-                shrinkWrap: true,
-                itemBuilder: (ctx, index) => listRestaurantInfo[index],
-              )
+              RestaurantInfo(
+                openInfo: DateTime.now().hour > 22 ? 'Откроется в 9:00' : 'Открыто с 9:00 до 22:00',
+                color: DateTime.now().hour > 22 ? const Color(0xffFF3838) : const Color(0xff32CD43),
+                distance: '1,3 км',
+                adress: 'Ленинградский просп., 62',
+                index: 1,
+                onTap: () async {
+                  if (MapPage.panelController.isAttached) {
+                    MapPage.panelController.animatePanelToPosition(
+                      0,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  }
+                  await MapWidget.mapController.moveCamera(
+                    CameraUpdate.newCameraPosition(
+                      CameraPosition(target: MapWidget.points[0], zoom: 15),
+                    ),
+                    animation: animation,
+                  );
+
+                  MapPage.pageController.animateToPage(
+                    1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -98,61 +144,6 @@ class _SlidingPanelWidgetState extends State<SlidingPanelWidget> {
     type: MapAnimationType.smooth,
     duration: 0.5,
   );
-
-  List<Widget> listRestaurantInfo = [
-     RestaurantInfo(
-      openInfo: 'Открыто с 10:00 до 23:00',
-      distance: '1,3 км',
-      adress: 'Улица Свободы, 16',
-      index: 0,
-      onTap: () async {
-        if (MapPage.panelController.isAttached) {
-          MapPage.panelController.animatePanelToPosition(
-            0,
-            duration: const Duration(milliseconds: 300),
-          );
-          await MapWidget.mapController.moveCamera(
-            CameraUpdate.newCameraPosition(
-              CameraPosition(target: MapWidget.points[1], zoom: 15),
-            ),
-            animation: animation,
-          );
-        }
-        MapPage.pageController.animateToPage(
-          1,
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.bounceIn,
-        );
-      },
-    ),
-
-    RestaurantInfo(
-      openInfo: 'Открыто с 9:00 до 22:00',
-      distance: '1,3 км',
-      adress: 'Ленинградский просп., 62',
-      index: 1,
-      onTap: () async {
-        if (MapPage.panelController.isAttached) {
-          MapPage.panelController.animatePanelToPosition(
-            0,
-            duration: const Duration(milliseconds: 300),
-          );
-        }
-        await MapWidget.mapController.moveCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(target: MapWidget.points[0], zoom: 15),
-          ),
-          animation: animation,
-        );
-
-        MapPage.pageController.animateToPage(
-          1,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.linear,
-        );
-      },
-    ),
-   ];
 }
 
 class RestaurantInfo extends StatelessWidget {
@@ -163,8 +154,9 @@ class RestaurantInfo extends StatelessWidget {
     required this.adress,
     required this.index,
     required this.onTap,
+    required this.color,
   });
-
+  final Color color;
   final String openInfo;
   final String distance;
   final String adress;
@@ -174,7 +166,7 @@ class RestaurantInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       height: 68,
       color: AppColors.color191A1F,
       child: Row(
@@ -185,11 +177,11 @@ class RestaurantInfo extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '$openInfo',
-                    style: const TextStyle(
+                    openInfo,
+                    style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w400,
-                      color: AppColors.color32CD43,
+                      color: color,
                     ),
                   ),
                   // Text(
@@ -204,7 +196,7 @@ class RestaurantInfo extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                '$adress',
+                adress,
                 style: ThemeService.detailPageStatusBarItemCountTextStyle(),
               ),
             ],
