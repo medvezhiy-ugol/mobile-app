@@ -1,11 +1,21 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:map_launcher/map_launcher.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 
 class FullViewRestaurantWidget extends StatefulWidget {
-  FullViewRestaurantWidget({super.key});
+  const FullViewRestaurantWidget({super.key, required this.latStart, required this.latEnd, required this.lonStart, required this.lonEnd, required this.isCenter});
+
+  final double latStart;
+  final double lonStart;
+  final double latEnd;
+  final double lonEnd;
+  final bool isCenter;
 
   @override
   State<FullViewRestaurantWidget> createState() =>
@@ -45,7 +55,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
               ),
               const SizedBox(height: 16),
               Text(
-                '1,3 км - 150023, Ярославль, улица Свободы, 45',
+                widget.isCenter ? '150023, Ярославль, улица Свободы, 45' : '150064, Ярославль, Ленинградский проспект, 62',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -68,11 +78,24 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                           color: Colors.white),
                     ),
                     Text(
-                      'Откроется в 9:00',
+                        widget.isCenter
+                        ? DateTime.now().hour > 22 || DateTime.now().hour < 10
+                            ? 'Откроется в 10:00'
+                        : 'Открыто до 22:00'
+                        :  DateTime.now().hour > 23 || DateTime.now().hour < 11
+                        ? 'Откроется в 11:00'
+                        : 'Открыто до 23:00',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.colorFF3838),
+                          color: widget.isCenter
+                              ? DateTime.now().hour > 22 || DateTime.now().hour < 10
+                              ? const Color(0xffFF3838)
+                              : const Color(0xff32CD43)
+                              :  DateTime.now().hour > 23 || DateTime.now().hour < 11
+                              ? const Color(0xffFF3838)
+                              : const Color(0xff32CD43)
+                      ),
                     )
                   ],
                 ),
@@ -105,17 +128,123 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
               SizedBox(
                 height: 24,
               ),
-              PrimaryButton.icon(
-                icon: Icons.map,
-                label: Text(
-                  'Построить маршрут',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {},
+              BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+                builder: (context, state) {
+                  return PrimaryButton.icon(
+                    icon: Icons.map,
+                    label: Text(
+                      'Построить маршрут',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () async {
+                      final coords = Coords(37.759392, -122.5107336);
+                      final title = "Ocean Beach";
+                      final availableMaps = await MapLauncher.installedMaps;
+
+                      showModalBottomSheet(
+                        context: state.context!,
+                        backgroundColor: Color(0xff191A1F),
+                        builder: (BuildContext context) {
+                          return SafeArea(
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 16),
+                                    Center(
+                                      child: Container(
+                                        height: 4,
+                                        width: 48,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(9),
+                                          color: Color(0xffD9D9D9).withOpacity(0.3)
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 36),
+                                    Text(
+                                      'Выберите сервис',
+                                      style: TextStyle(
+                                        fontFamily: 'Unbounded',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24,
+                                        color: Color(0xffEFEFEF)
+                                      ),
+                                    ),
+                                    SizedBox(height: 30),
+                                    for (var map in availableMaps)
+                                      Container(
+                                        height: 65,
+                                        margin: EdgeInsets.symmetric(
+                                          vertical: 1
+                                        ),
+                                        color: Color(0xff26282F),
+                                        child: ListTile(
+                                          onTap: () =>
+                                              map.showDirections(
+                              destination: Coords(
+                              widget.latStart,
+                              widget.lonStart,
+                            ),
+                            destinationTitle: "Медвежий угол",
+                            origin: Coords(widget.latEnd, widget.lonEnd),
+                            originTitle: "Вы",
+                            waypoints: [],
+                            directionsMode: DirectionsMode.driving,
+                          ),
+                                          title: Text(map.mapName),
+                                          leading: ClipRRect(
+                                            borderRadius: BorderRadius.circular(90),
+                                            child: SvgPicture.asset(
+                                              map.icon,
+                                              height: 30.0,
+                                              width: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    Container(
+                                      height: 65,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 1
+                                      ),
+                                      color: Color(0xff26282F),
+                                      child: ListTile(
+                                        onTap: () {
+                                          Clipboard.setData(ClipboardData(text: widget.isCenter ? '150023, Ярославль, улица Свободы, 45' : '150064, Ярославль, Ленинградский проспект, 62'));
+                                          Flushbar(
+                                            message:  "Адрес скопирован",
+                                            duration:  Duration(seconds: 3),
+                                            flushbarPosition: FlushbarPosition.TOP,
+                                          ).show(context);
+                                        },
+                                        title: Text("Скопировать адрес"),
+                                        leading: ClipRRect(
+                                          borderRadius: BorderRadius.circular(90),
+                                          child: SvgPicture.asset(
+                                            'assets/images/copt.svg',
+                                            height: 30.0,
+                                            width: 30.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
               ),
               SizedBox(
                 height: 24,
@@ -221,7 +350,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
 //     body: Center(
 //       child:
 
-  // ),
+// ),
 //     floatingActionButton: FloatingActionButton(
 //       onPressed: () {
 //         setState(() {

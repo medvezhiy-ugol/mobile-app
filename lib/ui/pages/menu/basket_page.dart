@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:medvezhiy_ugol/ui/pages/map/map_page.dart';
 import '../../close_circle_button.dart';
 import '../../widgets/menu/basket_item.dart';
 import '../../../utils/app_colors.dart';
@@ -21,6 +22,9 @@ class _BasketPageState extends State<BasketPage> {
   int _instrumentsCount = 0;
   
   bool isTakeaway = false;
+
+  String delivery = '';
+  String takeaway = '';
 
   @override
   Widget build(BuildContext context) {
@@ -237,8 +241,16 @@ class _BasketPageState extends State<BasketPage> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            isTakeaway = false;
-                            setState(() {});
+                            if (takeaway.isEmpty) {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage(
+                                  isDelivery: true,
+                                isOrder: true,
+                              )));
+                            }
+                            else {
+                              isTakeaway = false;
+                              setState(() {});
+                            }
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -282,8 +294,16 @@ class _BasketPageState extends State<BasketPage> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            isTakeaway = true;
-                            setState(() {});
+                            if (takeaway.isEmpty) {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage(
+                                isDelivery: false,
+                                isOrder: true,
+                              )));
+                            }
+                            else {
+                              isTakeaway = true;
+                              setState(() {});
+                            }
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -337,8 +357,8 @@ class _BasketPageState extends State<BasketPage> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      const Text(
-                        'ул. Республиканская, д46/3',
+                      Text(
+                        isTakeaway ? takeaway : delivery,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,

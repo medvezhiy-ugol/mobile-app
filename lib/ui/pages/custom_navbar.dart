@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/discounts/discounts_page/discounts_page.dart';
-import 'package:medvezhiy_ugol/pages/map_page.dart';
+import 'package:medvezhiy_ugol/ui/pages/map/map_page.dart';
 import 'home/home_page.dart';
 import 'menu/menu_page.dart';
 import 'more/more_page.dart';
@@ -102,7 +102,10 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                   case 3:
                                     return MaterialApp(
                                         navigatorKey: mapKey,
-                                        home: MapPage()
+                                        home: MapPage(
+                                            isDelivery: false,
+                                            isOrder: false,
+                                        )
                                     );
                                   case 4:
                                     return MaterialApp(

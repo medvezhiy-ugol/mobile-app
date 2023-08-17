@@ -24,7 +24,7 @@ class PopularItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
+        height: 312,
         decoration: const BoxDecoration(
           color: AppColors.color191A1F,
         ),

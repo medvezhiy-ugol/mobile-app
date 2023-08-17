@@ -1,13 +1,15 @@
 import 'package:container_tab_indicator/container_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/delivery_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import '../../../services/auth_service.dart';
 import '../../../utils/app_colors.dart';
 import '../../menu/menu_sections_widget.dart';
 import '../../menu/scale_tabbar_module.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import '../../../pages/map_page.dart';
 import 'basket_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -22,13 +24,10 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   final Color taBarBackgroundColor = AppColors.color111216;
   final AutoScrollController _controller = AutoScrollController();
   late final TabController _tabController;
+  final AuthService authService = Injector().get<AuthService>();
 
   int goIndex() {
     return 1;
-  }
-
-  void onAddressTap() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage()));
   }
 
   @override
@@ -38,7 +37,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         vsync: this,
         initialIndex: 1
     );
-    Future.delayed(const Duration(milliseconds: 100)).then((value) => _controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin));
+    Future.delayed(const Duration(milliseconds: 150)).then((value) => _controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin));
     super.initState();
   }
 
@@ -151,16 +150,21 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               bottom: 76,
               child: GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                      context: state.context!,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => Container(
-                          color: const Color(0xff111216),
-                          margin: EdgeInsets.only(top: MediaQuery.of(state.context!).padding.top),
-                          child: BasketPage()
-                      )
-                  );
+                  if (authService.accessToken.isEmpty) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => AuthPage()));
+                  }
+                  else {
+                    showModalBottomSheet(
+                        context: state.context!,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => Container(
+                            color: const Color(0xff111216),
+                            margin: EdgeInsets.only(top: MediaQuery.of(state.context!).padding.top),
+                            child: BasketPage()
+                        )
+                    );
+                  }
                 },
                 child: Container(
                     color: AppColors.colorFFB627,
