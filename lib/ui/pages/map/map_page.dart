@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
+import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../../utils/app_colors.dart';
 import '../../primary_button.dart';
 import '../../widgets/map/restaurant_info.dart';
@@ -26,9 +28,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   double latEnd = 0;
   double lonEnd = 0;
   bool isLoading = true;
-  bool isDeliver = false;
+  bool isDeliver = true;
   String adress = '';
-  static final PageController pageController = PageController(initialPage: 1);
+  static final PageController pageController = PageController(initialPage: 0);
   static final PanelController panelController = PanelController();
 
   Future<Position> _determinePosition() async {
@@ -253,9 +255,22 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 const SizedBox(height: 24),
+                                BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+                                  builder: (context, state) {
+                                    return state.adress.isEmpty
+                                        ? Container()
+                                        : Text(
+                                      'Ваш адрес: ${state.adress}',
+                                      style: TextStyle(
+                                          color: Colors.white
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 24),
                                 PrimaryButton(
                                   onTap: () {
-                                    //context.read<CustomNavbarCubit>().changeIndex(2);
+                                    context.read<CustomNavbarCubit>().deliverHere(adress);
                                   },
                                   color: AppColors.colorFFB627,
                                   child: const Text(
@@ -382,8 +397,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               isCenter: isCenter,
                             )
                                 : FullViewRestaurantWidget(
-                              latStart: lat,
-                              lonStart: lon,
                               latEnd: latEnd,
                               lonEnd: lonEnd,
                               isCenter: isCenter,
@@ -427,7 +440,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         Row(
                           children: [
                             GestureDetector(onTap: () {
-                              pageController.previousPage(
+                              pageController.animateToPage(
+                                0,
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.linear,
                               );
@@ -502,10 +516,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                 Text(
                   adress,
                   style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 24,
-                    color: Color(0xffEFEFEF),
-                    fontFamily: 'Unbounded'
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
+                      color: Color(0xffEFEFEF),
+                      fontFamily: 'Unbounded'
                   ),
                 )
               ],

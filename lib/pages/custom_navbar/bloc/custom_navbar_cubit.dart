@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/loalty_card.dart';
 import '../../../models/menu.dart';
@@ -35,7 +36,12 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   }
 
   void getContext(BuildContext context) {
-    emit(state.copyWith(context: context));
+    SharedPreferences.getInstance().then((value) {
+      emit(state.copyWith(
+          context: context,
+        adress: value.getString('adress'),
+      ));
+    });
   }
 
   void changeIndex(int index) {
@@ -77,6 +83,14 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     emit(state.copyWith(
       order: _order,
       orderSum: _orderSum,
+    ));
+  }
+
+  void deliverHere(String adress) {
+    emit(state.copyWith(adress: adress));
+    SharedPreferences.getInstance().then((value) => value.setString(
+        'adress',
+        adress
     ));
   }
 }

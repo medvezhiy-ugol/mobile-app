@@ -10,7 +10,9 @@ import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../widgets/sheets/receiving_sheet.dart';
 
 class BasketPage extends StatefulWidget {
-  const BasketPage({super.key});
+  const BasketPage({super.key, required this.isDelivery});
+
+  final bool isDelivery;
 
   @override
   State<BasketPage> createState() => _BasketPageState();
@@ -25,6 +27,12 @@ class _BasketPageState extends State<BasketPage> {
 
   String delivery = '';
   String takeaway = '';
+
+  @override
+  void initState() {
+    isTakeaway = !widget.isDelivery;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,16 +249,8 @@ class _BasketPageState extends State<BasketPage> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            if (takeaway.isEmpty) {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage(
-                                  isDelivery: true,
-                                isOrder: true,
-                              )));
-                            }
-                            else {
-                              isTakeaway = false;
-                              setState(() {});
-                            }
+                            isTakeaway = false;
+                            setState(() {});
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),

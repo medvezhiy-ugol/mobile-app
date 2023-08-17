@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
 import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 
 class FullViewRestaurantWidget extends StatefulWidget {
-  const FullViewRestaurantWidget({super.key, required this.latStart, required this.latEnd, required this.lonStart, required this.lonEnd, required this.isCenter});
+  const FullViewRestaurantWidget({super.key, required this.latEnd, required this.lonEnd, required this.isCenter});
 
-  final double latStart;
-  final double lonStart;
   final double latEnd;
   final double lonEnd;
   final bool isCenter;
@@ -23,6 +22,30 @@ class FullViewRestaurantWidget extends StatefulWidget {
 }
 
 class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
+
+  Future<Position> _determinePosition() async {
+
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery.removePadding(
@@ -132,7 +155,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                 builder: (context, state) {
                   return PrimaryButton.icon(
                     icon: Icons.map,
-                    label: Text(
+                    label: const Text(
                       'Построить маршрут',
                       style: TextStyle(
                         fontSize: 16,
@@ -141,13 +164,12 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                       ),
                     ),
                     onTap: () async {
-                      final coords = Coords(37.759392, -122.5107336);
-                      final title = "Ocean Beach";
+                      Position _position = await _determinePosition();
                       final availableMaps = await MapLauncher.installedMaps;
 
                       showModalBottomSheet(
                         context: state.context!,
-                        backgroundColor: Color(0xff191A1F),
+                        backgroundColor: const Color(0xff191A1F),
                         builder: (BuildContext context) {
                           return SafeArea(
                             child: SingleChildScrollView(
@@ -181,19 +203,22 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                                     for (var map in availableMaps)
                                       Container(
                                         height: 65,
-                                        margin: EdgeInsets.symmetric(
+                                        margin: const EdgeInsets.symmetric(
                                           vertical: 1
                                         ),
-                                        color: Color(0xff26282F),
+                                        color: const Color(0xff26282F),
                                         child: ListTile(
                                           onTap: () =>
                                               map.showDirections(
                               destination: Coords(
-                              widget.latStart,
-                              widget.lonStart,
+                              _position.latitude,
+                              _position.longitude,
                             ),
                             destinationTitle: "Медвежий угол",
-                            origin: Coords(widget.latEnd, widget.lonEnd),
+                            origin: Coords(
+                                widget.latEnd,
+                                widget.lonEnd
+                            ),
                             originTitle: "Вы",
                             waypoints: [],
                             directionsMode: DirectionsMode.driving,
@@ -224,11 +249,11 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                                             flushbarPosition: FlushbarPosition.TOP,
                                           ).show(context);
                                         },
-                                        title: Text("Скопировать адрес"),
+                                        title: const Text("Скопировать адрес"),
                                         leading: ClipRRect(
                                           borderRadius: BorderRadius.circular(90),
                                           child: SvgPicture.asset(
-                                            'assets/images/copt.svg',
+                                            'assets/images/copy.svg',
                                             height: 30.0,
                                             width: 30.0,
                                           ),
