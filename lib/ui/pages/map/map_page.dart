@@ -29,6 +29,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   double lonEnd = 0;
   bool isLoading = true;
   bool isDeliver = true;
+  bool isAddress = false;
   String adress = '';
   static final PageController pageController = PageController(initialPage: 0);
   static final PanelController panelController = PanelController();
@@ -223,12 +224,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                   color: AppColors.color191A1F,
                                   child: TextField(
                                     cursorColor: AppColors.colorFFB627,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white
                                     ),
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       prefixIcon: Icon(
                                         Icons.search,
                                         color: AppColors.color808080,
@@ -261,7 +262,80 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                         ? Container()
                                         : Text(
                                       'Ваш адрес: ${state.adress}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
+                                          color: Colors.white
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 24),
+                                PrimaryButton(
+                                  onTap: () {
+                                    panelController.open();
+                                    //context.read<CustomNavbarCubit>().deliverHere(adress);
+                                  },
+                                  color: AppColors.colorFFB627,
+                                  child: const Text(
+                                    'Доставить сюда',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 12),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  height: 50,
+                                  color: AppColors.color191A1F,
+                                  child: TextField(
+                                    cursorColor: AppColors.colorFFB627,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white
+                                    ),
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: AppColors.color808080,
+                                        size: 30,
+                                      ),
+                                      filled: true,
+                                      fillColor: AppColors.color191A1F,
+                                      hintText: 'Название улицы или ресторана',
+                                      hintStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.color808080),
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 39,
+                                        vertical: 20,
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.transparent),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.transparent),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+                                BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+                                  builder: (context, state) {
+                                    return state.adress.isEmpty
+                                        ? Container()
+                                        : Text(
+                                      'Ваш адрес: ${state.adress}',
+                                      style: const TextStyle(
                                           color: Colors.white
                                       ),
                                     );
