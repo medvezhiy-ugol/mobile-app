@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
@@ -29,7 +28,9 @@ class _HomePageState extends State<HomePage> {
 
   late final Timer _bannerTimer;
   late final Timer _popularTimer;
+  late final Timer countDownTimer;
 
+  int seconds = 86399;
   int _index = 1;
   int _popularIndex = 0;
 
@@ -75,6 +76,15 @@ class _HomePageState extends State<HomePage> {
           }
             }
     );
+    countDownTimer = Timer.periodic(
+        const Duration(seconds: 1),
+            (bannerTimer) {
+          seconds--;
+          setState(() {
+
+          });
+        }
+    );
     _popularTimer = Timer.periodic(
         const Duration(milliseconds: 3500),
             (timer) {
@@ -98,9 +108,17 @@ class _HomePageState extends State<HomePage> {
             });
   }
 
+  String convert(int seconds) {
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    return '${time.hour < 10 ? '0${time.hour}' : time.hour}:'
+        '${time.minute < 10 ? '0${time.minute}' : time.minute}:'
+        '${time.second < 10 ? '0${time.second}' : time.second}';
+  }
+
   @override
   void dispose() {
     _bannerTimer.cancel();
+    countDownTimer.cancel();
     _popularTimer.cancel();
     _controller.dispose();
     _popularController.dispose();
@@ -163,15 +181,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Text(
-                    'Осталось '
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10
+                    'Осталось ${convert(seconds)}',
+                    style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff808080)
                     ),
+                  ),
+                  const SizedBox(height: 12),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
                       children: [
                         authService.accessToken == ""
@@ -184,41 +203,19 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 63,
-                                      left: 21,
-                                      right: 16
-                                  ),
+                                  padding: const EdgeInsets.only(top: 63, left: 21, right: 16),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       const Text(
-                                        "У вас нет",
+                                        "У вас нет\nкарты\nлояльности :(",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16,
                                             color: Color(0xffFFFFFF)
                                         ),
                                       ),
-                                      const Text(
-                                        "карты",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16,
-                                            color: Color(0xffFFFFFF)
-                                        ),
-                                      ),
-                                      const Text(
-                                        "лояльности :(",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16,
-                                            color: Color(0xffFFFFFF)
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 13,
-                                      ),
+                                      const SizedBox(height: 13),
                                       GestureDetector(
                                         onTap: () => context.read<CustomNavbarCubit>().changeIndex(4),
                                         child: const Text(

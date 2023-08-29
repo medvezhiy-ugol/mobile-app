@@ -58,9 +58,7 @@ class _AuthPageState extends State<AuthPage> {
                         onTap: () => Navigator.of(context).pop(),
                       ),
                     ),
-                    SizedBox(
-                      height: screenSize.height * 0.05,
-                    ),
+                    SizedBox(height: screenSize.height * 0.05),
                     const Text(
                       'Авторизация',
                       style: TextStyle(
@@ -70,9 +68,7 @@ class _AuthPageState extends State<AuthPage> {
                         color: Color(0xffffffff)
                       ),
                     ),
-                    const SizedBox(
-                      height: 12,
-                    ),
+                    const SizedBox(height: 12),
                     const Text(
                       'Введите номер мобильного телефона',
                       style: TextStyle(
@@ -80,23 +76,20 @@ class _AuthPageState extends State<AuthPage> {
                           color: Color(0xffffffff)
                       ),
                     ),
-                    SizedBox(
-                      height: 116,
-                    ),
+                    const SizedBox(height: 116),
                     buildTextField(context, state),
-                    const SizedBox(
-                      height: 28,
-                    ),
+                    const SizedBox(height: 28),
                     if (showButton)
                       Expanded(
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 0.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 0.0),
                               child: PrimaryButton(
                                 onTap: () {
+                                  // Injector().get<AuthService>().getVerificationCode(phone: AuthPage.phoneController!.text);
                                   context.read<AuthBloc>().add(
+
                                         AuthSendCodeEvent(
                                           phone: AuthPage.phoneController!.text,
                                         ),
@@ -112,9 +105,7 @@ class _AuthPageState extends State<AuthPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 24,
-                            ),
+                            const SizedBox(height: 24),
                             Center(
                               child: Stack(
                                 alignment: Alignment.topCenter,
