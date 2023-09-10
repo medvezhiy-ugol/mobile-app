@@ -123,7 +123,7 @@ class ContactUsPage extends StatelessWidget {
                         onTap: () async {
                           final Uri mail = Uri(
                             scheme: 'mailto',
-                            path: 'egormizulin@mail.ru',
+                            path: '<email>',
                             query:
                                 'subject=${_textMailSubjectController.text}&body=${_textMailBodyController.text}',
                           );
