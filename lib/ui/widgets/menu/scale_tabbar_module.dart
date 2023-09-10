@@ -12,8 +12,6 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 
 const double _kTabHeight = 46.0;
 const double _kTextAndIconTabHeight = 72.0;
-const double _kDefaultLableFontSize = 20;
-const double _kDefaultUnselectLableFontSize = 14;
 
 /// Defines how the bounds of the selected tab indicator are computed.
 ///
@@ -122,8 +120,7 @@ class _TabLabelBarRenderer extends RenderFlex {
     required TextDirection super.textDirection,
     required super.verticalDirection,
     required this.onPerformLayout,
-  })  : assert(onPerformLayout != null),
-        assert(textDirection != null);
+  });
 
   _LayoutCallback onPerformLayout;
 
@@ -219,9 +216,7 @@ class _IndicatorPainter extends CustomPainter {
     required _IndicatorPainter? old,
     required this.indicatorPadding,
     this.dividerColor,
-  })  : assert(controller != null),
-        assert(indicator != null),
-        super(repaint: controller.animation) {
+  })  : super(repaint: controller.animation) {
     if (old != null) {
       saveTabOffsets(old._currentTabOffsets, old._currentTextDirection);
     }
@@ -428,8 +423,6 @@ class _TabBarScrollPosition extends ScrollPositionWithSingleContext {
   final _ScaleTabBarState tabBar;
 
   bool? _initialViewportDimensionWasZero;
-  // Position should be adjusted at least once.
-  bool _needsPixelsCorrection = true;
 
   @override
   bool applyContentDimensions(double minScrollExtent, double maxScrollExtent) {
@@ -452,7 +445,6 @@ class _TabBarScrollPosition extends ScrollPositionWithSingleContext {
   }
 
   void markNeedsPixelsCorrection() {
-    _needsPixelsCorrection = true;
   }
 }
 
@@ -550,11 +542,8 @@ class ScaleTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.physics,
     this.splashFactory,
     this.splashBorderRadius,
-  })  : assert(tabs != null),
-        assert(isScrollable != null),
-        assert(dragStartBehavior != null),
-        assert(indicator != null ||
-            (indicatorWeight != null && indicatorWeight > 0.0)),
+  })  : assert(indicator != null ||
+            (indicatorWeight > 0.0)),
         assert(indicator != null || (indicatorPadding != null));
 
   /// Typically a list of two or more [Tab] widgets.
@@ -1382,9 +1371,7 @@ class TabPageSelectorIndicator extends StatelessWidget {
     required this.borderColor,
     required this.size,
     this.borderStyle = BorderStyle.solid,
-  })  : assert(backgroundColor != null),
-        assert(borderColor != null),
-        assert(size != null);
+  });
 
   /// The indicator circle's background color.
   final Color backgroundColor;
@@ -1434,7 +1421,7 @@ class TabPageSelector extends StatelessWidget {
     this.color,
     this.selectedColor,
     this.borderStyle,
-  }) : assert(indicatorSize != null && indicatorSize > 0.0);
+  }) : assert(indicatorSize > 0.0);
 
   /// This widget's selection and animation state.
   ///
