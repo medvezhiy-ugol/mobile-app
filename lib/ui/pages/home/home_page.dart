@@ -5,6 +5,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import 'package:medvezhiy_ugol/ui/pages/jackpot/jackpot_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
@@ -143,33 +144,41 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 13),
-                  SizedBox(
-                    height: 70,
-                    width: 185,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/drum.png',
-                          fit: BoxFit.fill,
-                          height: 70,
-                          width: 185,
-                        ),
-                        Positioned(
-                          left: 30,
-                          top: 11,
-                          child: FlipCountdownClock(
-                            duration: const Duration(days: 1),
-                            digitSize: 36.0,
-                            width: 21,
-                            height: 40.0,
-                            digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
-                            separatorWidth: 0,
-                            digitColor: const Color(0xff26252B),
-                            backgroundColor: const Color(0xffF3CF7F),
-                            onDone: () => print('Buzzzz!'),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => JackpotPage()));
+                    },
+                    child: SizedBox(
+                      height: 70,
+                      width: 185,
+                      child: Stack(
+                        children: [
+                          Image.asset(
+                            'assets/images/drum.png',
+                            fit: BoxFit.fill,
+                            height: 70,
+                            width: 185,
                           ),
-                        )
-                      ],
+                          Positioned(
+                            left: 30,
+                            top: 11,
+                            child: FlipCountdownClock(
+                              duration: const Duration(days: 1),
+                              digitSize: 36.0,
+                              width: 21,
+                              height: 40.0,
+                              digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
+                              separatorWidth: 0,
+                              digitColor: const Color(0xff26252B),
+                              backgroundColor: const Color(0xffF3CF7F),
+                              onDone: () => print('Buzzzz!'),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   const Text(
