@@ -44,7 +44,8 @@ class MenuService {
   void getListOfOrgs() {}
 
   Future<List<ExternalMenu>> _getAllMenus() async {
-    final response = await APIService.getRequest(request: 'v1/menu');
+    final response = await APIService.customRequest('menu');
+
     if (response != null) {
       final List<ExternalMenu> menus = [];
       for (final menu in response['externalMenus']) {

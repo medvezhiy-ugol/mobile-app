@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:http/http.dart';
-import 'package:medvezhiy_ugol/ui/pages/pay_page.dart';
 import '../../../services/auth_service.dart';
+import '../../pages/map/pay_page.dart';
 
 class ReceivingSheet extends StatelessWidget {
   const ReceivingSheet({super.key, required this.sum});

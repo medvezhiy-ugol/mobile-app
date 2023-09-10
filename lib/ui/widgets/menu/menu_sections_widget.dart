@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
-import '../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import '../pages/product_page.dart';
+import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import '../../pages/product_page.dart';
 import 'menu_card_widget.dart';
 
 class MenuSection extends StatefulWidget {
@@ -33,7 +33,7 @@ class _MenuSectionState extends State<MenuSection> {
               alignment: Alignment.centerLeft,
               child: Text(
                 widget.menuCategory.name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Unbounded',
                   fontWeight: FontWeight.w600,
                   fontSize: 16,

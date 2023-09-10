@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-import '../../services/theme_service.dart';
+import '../../../services/theme_service.dart';
 
 class MenuCardWidget extends StatelessWidget {
   final MenuProduct menuProduct;

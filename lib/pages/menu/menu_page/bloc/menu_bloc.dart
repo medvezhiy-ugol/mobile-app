@@ -4,8 +4,8 @@ import 'dart:isolate';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
-import 'package:medvezhiy_ugol/ui/menu/menu_card_widget.dart';
-import 'package:medvezhiy_ugol/ui/menu/menu_sections_widget.dart';
+import 'package:medvezhiy_ugol/ui/widgets/menu/menu_card_widget.dart';
+import 'package:medvezhiy_ugol/ui/widgets/menu/menu_sections_widget.dart';
 import 'package:meta/meta.dart';
 
 import 'package:medvezhiy_ugol/services/menu_service.dart';

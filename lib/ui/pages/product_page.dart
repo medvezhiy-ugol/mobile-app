@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import 'package:medvezhiy_ugol/ui/widgets/product_page/additional_products.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../services/menu_service.dart';
 import '../../services/theme_service.dart';
 import '../close_circle_button.dart';
 import '../../utils/app_colors.dart';
 import '../../pages/menu/detail_menu_page/bloc/menu_detail_bloc.dart';
-import '../widgets/menu/ingredient.dart';
+import '../widgets/product_page/ingredient.dart';
+import '../widgets/product_page/product_size.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id});
@@ -168,7 +170,7 @@ class _ProductPageState extends State<ProductPage> {
                                   fontSize: 24,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: 'Unbounded',
-                                  color: Color(0xffffffff)
+                                  color: AppColors.colorFFFFFF,
                               ),
                             ),
                             const SizedBox(
@@ -181,12 +183,10 @@ class _ProductPageState extends State<ProductPage> {
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.color808080,
+                                color: AppColors.colorE0E0E0,
                               ),
                             ),
-                            SizedBox(
-                              height: 6,
-                            ),
+                            const SizedBox(height: 6),
                             Row(
                               children: [
                                 Expanded(
@@ -204,24 +204,22 @@ class _ProductPageState extends State<ProductPage> {
                                         borderRadius: BorderRadius.circular(30),
                                         color: isHalf ? Color(0xff000000) : Color(0xff2a2c2f)
                                       ),
-                                    child:
-                                      Text('Целая',
+                                    child: const Text(
+                                        'Стандартная',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xffffffff)
+                                        color: Color(0xffffffff),
                                       ),
                                       ),
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 4,
-                                ),
+                                const SizedBox(width: 4),
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      isHalf= true;
+                                      isHalf = true;
                                       setState(() {
 
                                       });
@@ -231,54 +229,65 @@ class _ProductPageState extends State<ProductPage> {
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(30),
-                                          color: isHalf ? Color(0xff2a2c2f) : Color(0xff000000)
+                                          color: isHalf ? const Color(0xff2a2c2f) : const Color(0xff000000)
                                       ),
-                                      child:
-                                      Text('Половина',
+                                      child: const Text(
+                                        'Большая',
                                         style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w600,
-                                            color: Color(0xffffffff)
+                                            color: Color(0xffffffff),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-
                               ],
                             ),
                             const SizedBox(height: 14),
-                            buildStatsBar(
-                              state.menuProduct.itemSizes.first
-                                  .portionWeightGrams
-                                  .toString(),
-                              state.menuProduct.itemSizes.first
-                                  .nutritionPerHundredGrams.energy
-                                  .toString(),
-                              state.menuProduct.itemSizes.first
-                                  .nutritionPerHundredGrams.proteins
-                                  .toString(),
-                              state.menuProduct.itemSizes.first
-                                  .nutritionPerHundredGrams.fats
-                                  .toString(),
-                              state.menuProduct.itemSizes.first
-                                  .nutritionPerHundredGrams.carbs
-                                  .toString(),
+                            Row(
+                              children: <Widget>[
+                                ProductSize(
+                                  title: "Размер",
+                                  value: state.menuProduct.itemSizes.first
+                                      .portionWeightGrams
+                                      .toString(),
+                                ),
+                                const SizedBox(width: 8),
+                                ProductSize(
+                                  title: "Вес",
+                                  value: state.menuProduct.itemSizes.first
+                                      .portionWeightGrams
+                                      .toString(),
+                                ),
+                                const SizedBox(width: 8),
+                                ProductSize(
+                                  title: "Ккал",
+                                  value: state.menuProduct.itemSizes.first
+                                      .nutritionPerHundredGrams.energy
+                                      .toString(),
+                                ),
+                                const SizedBox(width: 8),
+                                ProductSize(
+                                  title: "БЖУ",
+                                  value: '${state.menuProduct.itemSizes.first
+                                      .nutritionPerHundredGrams.proteins}/${state.menuProduct.itemSizes.first
+                                      .nutritionPerHundredGrams.fats}/${state.menuProduct.itemSizes.first
+                                      .nutritionPerHundredGrams.carbs}',
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 18,
-                            ),
-                            Text('Убрать инденгрендиенты',
+                            const SizedBox(height: 18),
+                            const Text(
+                              'Убрать инденгрендиенты',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
-                                  color: Color(0xffffffff)
+                                  color: Color(0xffffffff),
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Wrap(
+                            const SizedBox(height: 10),
+                            const Wrap(
                               spacing: 8,
                               runSpacing: 8,
                               children: [
@@ -289,19 +298,28 @@ class _ProductPageState extends State<ProductPage> {
                                 Ingredient(text: 'Томаты'),
                               ],
                             ),
-                            SizedBox(
-                              height: 14,
-                            ),
-                            Text('Добавить',
+                            const SizedBox(height: 14),
+                            const Text(
+                              'Добавить ингредиенты',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
-                                  color: Color(0xffffffff)
-                              ),),
-                            SizedBox(
-                              height: 11,
+                                  color: Color(0xffffffff),
+                              ),
                             ),
-                            _buildAddProduct()
+                            const SizedBox(height: 12),
+                            const AdditionalProducts(),
+                            const SizedBox(height: 36),
+                            const Text(
+                              'Заказать отдельно',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            const AdditionalProducts(),
                           ],
                         ),
                       )
@@ -367,7 +385,7 @@ class _ProductPageState extends State<ProductPage> {
                           child: Container(
                             height: 28,
                             width: 28,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color(0xff353535),
                               shape: BoxShape.circle,
                             ),
@@ -398,7 +416,7 @@ class _ProductPageState extends State<ProductPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               "Добавить",
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -407,8 +425,8 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             Text(
-                              '${state.menuProduct.itemSizes.first.prices.first.price} ₽',
-                              style: TextStyle(
+                              '${state.menuProduct.itemSizes.first.prices.first.price * _count} ₽',
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                                 color: Color(0xff000000),
@@ -512,88 +530,6 @@ class _ProductPageState extends State<ProductPage> {
       );
     }
   }
-
-  Row buildStatsBar(String weight, String calories, String protein, String fats,
-      String carbohydrates) {
-    return Row(
-      children: <Widget>[
-        buildStatsBarItem("Вес", '$weight г'),
-        const SizedBox(width: 8),
-        buildStatsBarItem("Ккал", '$calories г'),
-        const Spacer(),
-        buildStatsBarItem("Белки", '$protein г'),
-        const SizedBox(width: 8),
-        buildStatsBarItem("Жиры", '$fats г'),
-        const SizedBox(width: 8),
-        buildStatsBarItem("Углеводы", '$carbohydrates г'),
-      ],
-    );
-  }
-
-  Widget buildStatsBarItem(String title, String value) {
-    return IntrinsicWidth(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: AppColors.color808080,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Container(
-            alignment: Alignment.center,
-            height: 38,
-            padding: const EdgeInsets.all(10),
-            color: AppColors.color191A1F,
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAddProduct() {
-    return Column(
-      children: <Widget>[
-        OptionalProduct(
-          name: "Томатный соус",
-          price: 20,
-          imgPath: 'assets/images/detail_menu_page/souse.png',
-        ),
-        const SizedBox(
-          height: 2,
-        ),
-        OptionalProduct(
-          name: "Сырный соус",
-          price: 20,
-          imgPath: 'assets/images/detail_menu_page/souse.png',
-        ),
-        const SizedBox(
-          height: 2,
-        ),
-        OptionalProduct(
-          name: "Сырный соус",
-          price: 20,
-          imgPath: 'assets/images/detail_menu_page/souse.png',
-        ),
-        const SizedBox(
-          height: 100,
-        ),
-      ],
-    );
-  }
 }
 
 class ChipComponent extends StatefulWidget {
@@ -645,88 +581,6 @@ class _ChipComponentState extends State<ChipComponent> {
                 ),
                 const SizedBox(
                   width: 10,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class OptionalProduct extends StatefulWidget {
-  const OptionalProduct(
-      {super.key,
-      required this.name,
-      required this.imgPath,
-      required this.price});
-
-  final String name;
-  final double price;
-  final String imgPath;
-
-  @override
-  State<OptionalProduct> createState() => _OptionalProductState();
-}
-
-class _OptionalProductState extends State<OptionalProduct> {
-  bool _isToogle = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 65,
-      color: AppColors.color191A1F,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            setState(() {
-              _isToogle = !_isToogle;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: <Widget>[
-                Image.asset(widget.imgPath),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        widget.name,
-                      style: TextStyle(
-                        color: Color(0xffFFFFFF)
-                      ),
-                    ),
-                    Text(
-                        '+ ${widget.price} Р',
-                      style: TextStyle(
-                          color: Color(0xffFFFFFF)
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (_isToogle
-                          ? AppColors.colorFF9900
-                          : AppColors.color5D6377)),
-                  child: (_isToogle
-                      ? const Icon(
-                          Icons.done,
-                          size: 15,
-                        )
-                      : null),
                 ),
               ],
             ),

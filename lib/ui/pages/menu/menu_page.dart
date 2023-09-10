@@ -6,9 +6,9 @@ import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../services/auth_service.dart';
 import '../../../utils/app_colors.dart';
-import '../../menu/menu_sections_widget.dart';
-import '../../menu/scale_tabbar_module.dart';
+import '../../widgets/menu/menu_sections_widget.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import '../../widgets/menu/scale_tabbar_module.dart';
 import 'basket_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -37,7 +37,12 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         vsync: this,
         initialIndex: 1
     );
-    Future.delayed(const Duration(milliseconds: 150)).then((value) => _controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin));
+    Future
+        .delayed(const Duration(milliseconds: 150))
+        .then((value) => _controller.scrollToIndex(
+        1,
+        preferPosition: AutoScrollPosition.begin,
+    ));
     super.initState();
   }
 
@@ -112,7 +117,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                                       ),
                                     ),
                                   ),
-
                                   const SizedBox(width: 4),
                                   GestureDetector(onTap: () {
                                     isDeliver  = false;
@@ -142,7 +146,52 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => context.read<CustomNavbarCubit>().changeIndex(3),
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) => Column(
+                                children: [
+                                  Container(
+                                    height: 4,
+                                    width: 48,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(9),
+                                      color: const Color(0xffD9D9D9)
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Container(
+                                    color: AppColors.color191A1F,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 24,
+                                              left: 16,
+                                            bottom: 23,
+                                          ),
+                                          child: Text(
+                                            'Мои адреса',
+                                            style: TextStyle(
+                                              color: AppColors.colorEFEFEF,
+                                              fontFamily: 'Unbounded',
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          );
+                        },
                         child: Container(
                           color: Colors.transparent,
                           height: 55,
@@ -179,7 +228,10 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         padding: const EdgeInsets.only(right: 10),
                         child: ScaleTabBar(
                           onTap: (value) {
-                            _controller.scrollToIndex(value, preferPosition: AutoScrollPosition.begin);
+                            _controller.scrollToIndex(
+                              value,
+                              preferPosition: AutoScrollPosition.begin,
+                            );
                             _tabController.animateTo(value);
                           },
                           controller: _tabController,
@@ -254,7 +306,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                       child: GestureDetector(
                         onTap: () {
                           if (authService.accessToken.isEmpty) {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AuthPage()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AuthPage()));
                           }
                           else {
                             showModalBottomSheet(
@@ -278,7 +330,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  'Оформить заказ',
+                                  'Заказ',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,

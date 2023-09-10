@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 
 class APIService {
   static const List<String> url = [
@@ -34,7 +37,7 @@ class APIService {
         return response.data;
       }
     } catch (e) {
-      // debugPrint(e.toString());
+      debugPrint(e.toString());
       return null;
     }
     return null;
@@ -46,7 +49,7 @@ class APIService {
     int serverIndex = 0,
     Map<String, String> headers = const {},
   }) async {
-    print("ывфывфыв ${'${url[serverIndex]}/$request'}");
+    print("ргырыро ${'${url[serverIndex]}/$request'}");
     var response = await Dio().get(
       '${url[serverIndex]}/$request',
       queryParameters: queryParameters,
@@ -60,5 +63,15 @@ class APIService {
       return response.data;
     }
     return null;
+  }
+
+  static Future<dynamic> customRequest(String url) async {
+    final response = await http.get(Uri.parse('http://77.75.230.205:8080/v1/$url'));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+    else {
+      return null;
+    }
   }
 }

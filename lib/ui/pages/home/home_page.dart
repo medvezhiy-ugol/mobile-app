@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   late final Timer _popularTimer;
   late final Timer countDownTimer;
 
-  int seconds = 86399;
+  int seconds = 86401;
   int _index = 1;
   int _popularIndex = 0;
 
@@ -274,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 16,
-                                                color: Color(0xffFFFFFF)
+                                                color: AppColors.colorF3CF7F,
                                             ),
                                           ),
                                           const SizedBox(
@@ -288,37 +288,31 @@ class _HomePageState extends State<HomePage> {
                                                 style: const TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 16,
-                                                    color: Color(0xffEFEFEF)
+                                                    color: AppColors.colorF3CF7F,
                                                 ),
                                               ),
                                               const SizedBox(
                                                 width: 1,
                                               ),
-                                              const Text('бонусов',
+                                              const Text(
+                                                'бонусов',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w300,
                                                     fontSize: 10,
-                                                    color: Color(0xffEFEFEF)
+                                                    color: AppColors.colorF3CF7F,
                                                 ),
                                               ),
-                                              // Text(
-                                              //   "9834",
-                                              //   style: TextStyle(
-                                              //       fontWeight: FontWeight.w600,
-                                              //       fontSize: 9.14286,
-                                              //       color: Color(0xffFFFFFF)
-                                              //   ),
-                                              // ),
                                             ],
                                           ),
                                           const SizedBox(
                                             height: 2,
                                           ),
-                                          const Text('Bronze',
+                                          const Text(
+                                            'Bronze',
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400,
-                                                color: Color(0xffEFEFEF)
+                                                color: Color(0xffF3CF7F),
                                             ),
                                           ),
                                         ],

@@ -13,7 +13,7 @@ part 'custom_navbar_state.dart';
 
 class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   CustomNavbarCubit({required this.service})
-      : super(CustomNavbarState()) {
+      : super(const CustomNavbarState()) {
     init();
   }
 
