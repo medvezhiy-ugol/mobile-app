@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_code_page/code_auth_page.dart';
+import 'package:medvezhiy_ugol/search_address.dart';
 import 'package:medvezhiy_ugol/ui/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/history_order.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
@@ -424,7 +425,8 @@ class _MorePageState extends State<MorePage> {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutAppPage()));
+                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutAppPage()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchAddress()));
               },
               child: Container(
                 padding: const EdgeInsets.all(18),
