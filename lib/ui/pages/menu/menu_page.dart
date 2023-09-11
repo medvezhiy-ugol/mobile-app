@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
+import 'package:medvezhiy_ugol/ui/widgets/loading.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/my_addresses_sheet.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../services/auth_service.dart';
@@ -38,11 +39,8 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         vsync: this,
         initialIndex: 1
     );
-    Future
-        .delayed(const Duration(milliseconds: 150))
-        .then((value) => _controller.scrollToIndex(
-        1,
-        preferPosition: AutoScrollPosition.begin,
+    Future.delayed(const Duration(milliseconds: 150)).then((value) =>
+        _controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin,
     ));
     super.initState();
   }
@@ -61,9 +59,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
         body: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Loading();
             }
             else {
               List<String> tabs = [];
