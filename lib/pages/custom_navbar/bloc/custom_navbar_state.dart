@@ -3,13 +3,14 @@ part of 'custom_navbar_cubit.dart';
 class CustomNavbarState extends Equatable {
   const CustomNavbarState({
     this.context,
-    this.index = 0,
+    this.index = 2,
     this.isLoading = true,
     this.menu = const [],
     this.card,
     this.order = const [],
     this.orderSum = 0,
-    this.adress = '',
+    this.myAddress = '',
+    this.addresses = '',
   });
 
   final BuildContext? context;
@@ -19,7 +20,8 @@ class CustomNavbarState extends Equatable {
   final LoyaltyCard? card;
   final List<MenuProduct> order;
   final int orderSum;
-  final String adress;
+  final String myAddress;
+  final String addresses;
 
   CustomNavbarState copyWith({
     BuildContext? context,
@@ -29,7 +31,8 @@ class CustomNavbarState extends Equatable {
     LoyaltyCard? card,
     List<MenuProduct>? order,
     int? orderSum,
-    String? adress,
+    String? myAddress,
+    String? addresses,
   }) => CustomNavbarState(
     context: context ?? this.context,
     isLoading: isLoading ?? this.isLoading,
@@ -38,7 +41,8 @@ class CustomNavbarState extends Equatable {
     card: card ?? this.card,
     order: order ?? this.order,
     orderSum: orderSum ?? this.orderSum,
-    adress: adress ?? this.adress,
+    myAddress: myAddress ?? this.myAddress,
+    addresses: addresses ?? this.addresses,
   );
 
   @override
@@ -50,6 +54,7 @@ class CustomNavbarState extends Equatable {
     card,
     order,
     orderSum,
-    adress,
+    myAddress,
+    addresses,
   ];
 }

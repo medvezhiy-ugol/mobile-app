@@ -8,6 +8,7 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../../utils/app_colors.dart';
 import '../../primary_button.dart';
+import '../../widgets/buttons/custom_button.dart';
 import '../../widgets/map/restaurant_info.dart';
 
 class MapPage extends StatefulWidget {
@@ -158,6 +159,145 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   }
               )
           ),
+          SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                Container(
+                    height: 38,
+                    width: 240,
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        color: const Color(0xff000000),
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          AnimatedPositioned(
+                            left: isDeliver ? 0 : 118,
+                            duration: const Duration(milliseconds: 100),
+                            child: Container(
+                              height: 30,
+                              width: 114,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff2D2D2D),
+                                  borderRadius: BorderRadius.circular(30)
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(onTap: () {
+                                pageController.animateToPage(
+                                  0,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.linear,
+                                );
+                                getPosition();
+                                isDeliver = true;
+                                setState(() {
+
+                                });
+                              },
+                                child: Container(
+                                  width: 114,
+                                  height: 30,
+                                  color: Colors.transparent,
+                                  alignment: Alignment.center,
+                                  child: const Text(
+                                    'Доставка',
+                                    style: TextStyle(
+                                      fontFamily: 'Unbounded',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      color: Color(0xffFFFFFF),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(width: 4),
+                              GestureDetector(onTap: () {
+                                isDeliver  = false;
+                                lat = 57.625636;
+                                lon = 39.879540;
+                                _mapController.moveCamera(
+                                  CameraUpdate.newCameraPosition(CameraPosition(
+                                    target: Point(
+                                      latitude: 57.625636,
+                                      longitude: 39.879540,
+                                    ),
+                                    zoom: 14.4746,
+                                  ),
+                                  ),
+                                );
+                                pageController.nextPage(
+                                  duration: const Duration(milliseconds: 200),
+                                  curve: Curves.bounceIn,
+                                );
+                                setState(() {
+
+                                });
+                              },
+                                child: Container(
+                                  width: 114,
+                                  height: 30,
+                                  color: Colors.transparent,
+                                  alignment: Alignment.center,
+                                  child: const Text(
+                                    'Самовывоз',
+                                    style: TextStyle(
+                                      fontFamily: 'Unbounded',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      color: Color(0xffFFFFFF),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]
+                    ),
+                  ),
+                const SizedBox(height: 34),
+                Text(
+                  adress,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
+                      color: Color(0xffEFEFEF),
+                      fontFamily: 'Unbounded'
+                  ),
+                ),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 24,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    child: const Text(
+                      'Изменить адрес доставки',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: AppColors.color26282F,
+                        fontStyle: FontStyle.normal,
+                      ),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                const CustomButton(text: 'Готово'),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
           SlidingUpPanel(
             onPanelSlide: (double point) {
               isFadeAnimated = false;
@@ -222,7 +362,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
                                   height: 50,
                                   color: AppColors.color191A1F,
-                                  child: TextField(
+                                  child: const TextField(
                                     cursorColor: AppColors.colorFFB627,
                                     style: TextStyle(
                                         fontSize: 14,
@@ -258,10 +398,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                 const SizedBox(height: 24),
                                 BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
                                   builder: (context, state) {
-                                    return state.adress.isEmpty
+                                    return state.myAddress.isEmpty
                                         ? Container()
                                         : Text(
-                                      'Ваш адрес: ${state.adress}',
+                                      'Ваш адрес: ${state.myAddress}',
                                       style: const TextStyle(
                                           color: Colors.white
                                       ),
@@ -295,7 +435,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
                                   height: 50,
                                   color: AppColors.color191A1F,
-                                  child: TextField(
+                                  child: const TextField(
                                     cursorColor: AppColors.colorFFB627,
                                     style: TextStyle(
                                         fontSize: 14,
@@ -331,10 +471,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                 const SizedBox(height: 24),
                                 BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
                                   builder: (context, state) {
-                                    return state.adress.isEmpty
+                                    return state.myAddress.isEmpty
                                         ? Container()
                                         : Text(
-                                      'Ваш адрес: ${state.adress}',
+                                      'Ваш адрес: ${state.myAddress}',
                                       style: const TextStyle(
                                           color: Colors.white
                                       ),
@@ -483,121 +623,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                 ),
               );
             },
-          ),
-          Positioned(
-            top: 60,
-            child: Column(
-              children: [
-                Container(
-                  height: 38,
-                  width: 240,
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                      color: const Color(0xff000000),
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        AnimatedPositioned(
-                          left: isDeliver ? 0 : 118,
-                          duration: const Duration(milliseconds: 100),
-                          child: Container(
-                            height: 30,
-                            width: 114,
-                            decoration: BoxDecoration(
-                                color: const Color(0xff2D2D2D),
-                                borderRadius: BorderRadius.circular(30)
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            GestureDetector(onTap: () {
-                              pageController.animateToPage(
-                                0,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.linear,
-                              );
-                              getPosition();
-                              isDeliver = true;
-                              setState(() {
-
-                              });
-                            },
-                              child: Container(
-                                width: 114,
-                                height: 30,
-                                color: Colors.transparent,
-                                alignment: Alignment.center,
-                                child: const Text(
-                                  'Доставка',
-                                  style: TextStyle(
-                                    fontFamily: 'Unbounded',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12,
-                                    color: Color(0xffFFFFFF),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(width: 4),
-                            GestureDetector(onTap: () {
-                              isDeliver  = false;
-                              lat = 57.625636;
-                              lon = 39.879540;
-                              _mapController.moveCamera(
-                                CameraUpdate.newCameraPosition(CameraPosition(
-                                  target: Point(
-                                    latitude: 57.625636,
-                                    longitude: 39.879540,
-                                  ),
-                                  zoom: 14.4746,
-                                ),
-                                ),
-                              );
-                              pageController.nextPage(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.bounceIn,
-                              );
-                              setState(() {
-
-                              });
-                            },
-                              child: Container(
-                                width: 114,
-                                height: 30,
-                                color: Colors.transparent,
-                                alignment: Alignment.center,
-                                child: const Text(
-                                  'Самовывоз',
-                                  style: TextStyle(
-                                    fontFamily: 'Unbounded',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12,
-                                    color: Color(0xffFFFFFF),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ]
-                  ),
-                ),
-                SizedBox(height: 34),
-                Text(
-                  adress,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 24,
-                      color: Color(0xffEFEFEF),
-                      fontFamily: 'Unbounded'
-                  ),
-                )
-              ],
-            ),
           ),
         ],
       ),

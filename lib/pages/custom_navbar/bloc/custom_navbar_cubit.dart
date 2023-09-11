@@ -39,7 +39,8 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     SharedPreferences.getInstance().then((value) {
       emit(state.copyWith(
           context: context,
-        adress: value.getString('adress'),
+        myAddress: value.getString('myAddress'),
+        addresses: value.getString('addresses'),
       ));
     });
   }
@@ -86,11 +87,19 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     ));
   }
 
-  void deliverHere(String adress) {
-    emit(state.copyWith(adress: adress));
+  void deliverHere(String myAddress) {
+    emit(state.copyWith(myAddress: myAddress));
     SharedPreferences.getInstance().then((value) => value.setString(
-        'adress',
-        adress
+        'myAddress',
+        myAddress,
+    ));
+  }
+
+  void addAddress(String myAddress) {
+    emit(state.copyWith(myAddress: myAddress));
+    SharedPreferences.getInstance().then((value) => value.setString(
+      'myAddress',
+      myAddress,
     ));
   }
 }

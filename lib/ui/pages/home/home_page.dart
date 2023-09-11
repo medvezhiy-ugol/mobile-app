@@ -5,13 +5,14 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import 'package:medvezhiy_ugol/ui/pages/jackpot/jackpot_page.dart';
+import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
 import '../../close_circle_button.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/flip_countdown_clock.dart';
+import '../../widgets/sheets/loyalty_card_sheet.dart';
 import '../product_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -144,41 +145,33 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 13),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => JackpotPage()));
-                    },
-                    child: SizedBox(
-                      height: 70,
-                      width: 185,
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            'assets/images/drum.png',
-                            fit: BoxFit.fill,
-                            height: 70,
-                            width: 185,
+                  SizedBox(
+                    height: 70,
+                    width: 185,
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          'assets/images/drum.png',
+                          fit: BoxFit.fill,
+                          height: 70,
+                          width: 185,
+                        ),
+                        Positioned(
+                          left: 30,
+                          top: 11,
+                          child: FlipCountdownClock(
+                            duration: const Duration(days: 1),
+                            digitSize: 36.0,
+                            width: 21,
+                            height: 40.0,
+                            digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
+                            separatorWidth: 0,
+                            digitColor: const Color(0xff26252B),
+                            backgroundColor: const Color(0xffF3CF7F),
+                            onDone: () => print('Buzzzz!'),
                           ),
-                          Positioned(
-                            left: 30,
-                            top: 11,
-                            child: FlipCountdownClock(
-                              duration: const Duration(days: 1),
-                              digitSize: 36.0,
-                              width: 21,
-                              height: 40.0,
-                              digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
-                              separatorWidth: 0,
-                              digitColor: const Color(0xff26252B),
-                              backgroundColor: const Color(0xffF3CF7F),
-                              onDone: () => print('Buzzzz!'),
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
                   const Text(
@@ -203,140 +196,149 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         authService.accessToken == ""
-                            ? ClipRRect(
+                            ? GestureDetector(
+                          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AuthPage())),
+                              child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Container(
-                            height: 180,
-                            color: const Color(0xff191A1F),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 63, left: 21, right: 16),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        "У вас нет\nкарты\nлояльности :(",
-                                        style: TextStyle(
+                              height: 180,
+                              color: const Color(0xff191A1F),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 63, left: 21, right: 16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "У вас нет\nкарты\nлояльности :(",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              color: Color(0xffFFFFFF)
+                                          ),
+                                        ),
+                                        const SizedBox(height: 13),
+                                        GestureDetector(
+                                          onTap: () => context.read<CustomNavbarCubit>().changeIndex(4),
+                                          child: const Text(
+                                            "Войдите, чтобы получить",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8,
+                                              color: Color(0xffFFFFFF),
+                                              decoration: TextDecoration.underline,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    "assets/images/home_page/no_loyalty_card.png",
+                                    height: 180,
+                                    width: 180,
+                                  )
+                                ],
+                              ),
+                          ),
+                        ),
+                            )
+                            : GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (sheetContext) => Padding(
+                                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                                child: const LoyaltyCardSheet(),
+                              ),
+                            );
+                          },
+                              child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Container(
+                              height: 180,
+                              color: const Color(0xff191A1F),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 8,
+                                      left: 10.34,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Карта лояльности",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 10,
+                                              color: Color(0xffEFEFEF)
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 19,
+                                        ),
+                                        Text(
+                                          state.card!.name,
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16,
-                                            color: Color(0xffFFFFFF)
-                                        ),
-                                      ),
-                                      const SizedBox(height: 13),
-                                      GestureDetector(
-                                        onTap: () => context.read<CustomNavbarCubit>().changeIndex(4),
-                                        child: const Text(
-                                          "Войдите, чтобы получить",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 8,
-                                            color: Color(0xffFFFFFF),
-                                            decoration: TextDecoration.underline,
+                                            color: AppColors.colorF3CF7F,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Image.asset(
-                                  "assets/images/home_page/no_loyalty_card.png",
-                                  height: 180,
-                                  width: 180,
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                            : Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Container(
-                                height: 180,
-                                color: const Color(0xff191A1F),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 8,
-                                        left: 10.34,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "Карта лояльности",
-                                            style: TextStyle(
+                                        const SizedBox(
+                                          height: 33,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${state.card!.walletBalances[0].balance} ",
+                                              style: const TextStyle(
                                                 fontWeight: FontWeight.w400,
-                                                fontSize: 10,
-                                                color: Color(0xffEFEFEF)
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 19,
-                                          ),
-                                          Text(
-                                            state.card!.name,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w600,
                                                 fontSize: 16,
                                                 color: AppColors.colorF3CF7F,
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 33,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${state.card!.walletBalances[0].balance} ",
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 16,
-                                                    color: AppColors.colorF3CF7F,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 1,
-                                              ),
-                                              const Text(
-                                                'бонусов',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontSize: 10,
-                                                    color: AppColors.colorF3CF7F,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 2,
-                                          ),
-                                          const Text(
-                                            'Bronze',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                                color: Color(0xffF3CF7F),
+                                            const SizedBox(
+                                              width: 1,
                                             ),
+                                            const Text(
+                                              'бонусов',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 10,
+                                                color: AppColors.colorF3CF7F,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        const Text(
+                                          'Bronze',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xffF3CF7F),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                    Image.asset("assets/images/home_page/loyalty_card4.png")
-                                  ],
-                                ),
+                                  ),
+                                  Image.asset("assets/images/home_page/loyalty_card4.png")
+                                ],
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                          ),
                         ),
+                            ),
                         const SizedBox(height: 24),
                       ],
                     ),
@@ -347,6 +349,9 @@ class _HomePageState extends State<HomePage> {
                       controller: _controller,
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
+                      onPageChanged: (value) {
+                        _index = value;
+                      },
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -361,12 +366,12 @@ class _HomePageState extends State<HomePage> {
                                       top: MediaQuery.of(state.context!).padding.top
                                   ),
                                   child: Container(
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color(0xff111216),
                                     ),
                                     child: Column(
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 14,
                                         ),
                                         Row(
@@ -376,11 +381,11 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(width: 8,)
                                           ],
                                         ),
-                                        Row(
+                                        const Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(
+                                              padding: EdgeInsets.only(
                                                 left: 10,
                                               ),
                                               child: Text('Условия доставки',
@@ -476,6 +481,9 @@ class _HomePageState extends State<HomePage> {
                           child: PageView.builder(
                             controller: _popularController,
                             itemCount: menu.length ~/ 2,
+                            onPageChanged: (value) {
+                              _popularIndex = value;
+                            },
                             itemBuilder: (context, index) => LayoutGrid(
                               columnSizes: [1.fr, 1.fr],
                               rowSizes: List.generate(

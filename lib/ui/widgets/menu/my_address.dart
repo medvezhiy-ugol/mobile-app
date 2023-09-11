@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/app_colors.dart';
 
-class MyAddress extends StatefulWidget {
-  const MyAddress({super.key, required this.title, required this.subtitle});
+class MyAddress extends StatelessWidget {
+  const MyAddress({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.isTapped,
+  });
 
   final String title;
   final String subtitle;
-
-  @override
-  State<MyAddress> createState() => _MyAddressState();
-}
-
-class _MyAddressState extends State<MyAddress> {
-  bool isTapped = false;
+  final bool isTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class _MyAddressState extends State<MyAddress> {
           Column(
             children: [
               Text(
-                widget.title,
+                title,
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 14,
@@ -41,7 +40,7 @@ class _MyAddressState extends State<MyAddress> {
               ),
               const SizedBox(height: 8),
               Text(
-                widget.subtitle,
+                subtitle,
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
@@ -50,16 +49,9 @@ class _MyAddressState extends State<MyAddress> {
               ),
             ],
           ),
+          const Spacer(),
           isTapped
               ? Container(
-            height: 20,
-            width: 20,
-            decoration: const BoxDecoration(
-              color: AppColors.color5D6377,
-              shape: BoxShape.circle,
-            ),
-          )
-              : Container(
             height: 20,
             width: 20,
             alignment: Alignment.center,
@@ -74,6 +66,14 @@ class _MyAddressState extends State<MyAddress> {
                 color: AppColors.color000000,
                 shape: BoxShape.circle,
               ),
+            ),
+          )
+              : Container(
+            height: 20,
+            width: 20,
+            decoration: const BoxDecoration(
+              color: AppColors.color5D6377,
+              shape: BoxShape.circle,
             ),
           ),
         ],
