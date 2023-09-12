@@ -38,7 +38,7 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
       menu: menu,
       isLoading: false,
       card: card,
-      myAddress: box.get("address")!,
+      myAddress: box.get("address"),
     ));
   }
 
