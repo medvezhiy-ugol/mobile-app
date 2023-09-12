@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
@@ -14,7 +13,6 @@ import '../../close_circle_button.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/flip_countdown_clock.dart';
 import '../../widgets/sheets/loyalty_card_sheet.dart';
-import '../product_page.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -208,8 +206,9 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         authService.accessToken == ""
-                            ? GestureDetector(
-                          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AuthPage())),
+                            ? GestureDetector(onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                          const AuthPage())),
                               child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Container(
@@ -257,8 +256,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                             )
-                            : GestureDetector(
-                          onTap: () {
+                            : GestureDetector(onTap: () {
                             showModalBottomSheet(
                               context: context,
                               isScrollControlled: true,
@@ -278,10 +276,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 8,
-                                      left: 10.34,
-                                    ),
+                                    padding: const EdgeInsets.only(top: 8, left: 10.34),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -293,9 +288,7 @@ class _HomePageState extends State<HomePage> {
                                               color: Color(0xffEFEFEF)
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 19,
-                                        ),
+                                        const SizedBox(height: 19),
                                         Text(
                                           state.card!.name,
                                           style: const TextStyle(
@@ -304,9 +297,7 @@ class _HomePageState extends State<HomePage> {
                                             color: AppColors.colorF3CF7F,
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 33,
-                                        ),
+                                        const SizedBox(height: 33),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
@@ -318,9 +309,7 @@ class _HomePageState extends State<HomePage> {
                                                 color: AppColors.colorF3CF7F,
                                               ),
                                             ),
-                                            const SizedBox(
-                                              width: 1,
-                                            ),
+                                            const SizedBox(width: 1),
                                             const Text(
                                               'бонусов',
                                               style: TextStyle(
@@ -331,9 +320,7 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 2,
-                                        ),
+                                        const SizedBox(height: 2),
                                         const Text(
                                           'Bronze',
                                           style: TextStyle(
@@ -357,7 +344,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(
                     height: 186,
-                    child: PageView.builder(
+                    child:           
+                       PageView.builder(
                       controller: _controller,
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
@@ -383,9 +371,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     child: Column(
                                       children: [
-                                        const SizedBox(
-                                          height: 14,
-                                        ),
+                                        const SizedBox(height: 14),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
@@ -397,10 +383,9 @@ class _HomePageState extends State<HomePage> {
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 10,
-                                              ),
-                                              child: Text('Условия доставки',
+                                              padding: EdgeInsets.only(left: 10),
+                                              child: Text(
+                                                'Условия доставки',
                                                 style: TextStyle(
                                                     fontFamily: 'Unbounded',
                                                     fontSize: 24,
@@ -411,34 +396,29 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 12,
-                                        ),
+                                        const SizedBox(height: 12),
                                         SizedBox(
                                           height: 214,
                                           width: 375,
-                                          child: Container(
-                                              child: Image.asset('assets/images/home_page/Пицца мафия.png',
-                                                fit: BoxFit.cover,)
+                                          child: Image.asset(
+                                              'assets/images/home_page/Пицца мафия.png',
+                                              fit: BoxFit.cover
                                           ),
-                                        ), SizedBox(
-                                          height: 24,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 10,
-                                          ),
+                                        const SizedBox(height: 24),
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 10),
                                           child: Text(
                                             '''Сделайте заказ online (на сайте или в приложениях) и заберите его в любом удобном ресторане "Медвежий угол" со скидкой 20%.
-                        
+
 Акция не суммируется с другими скидками и специальными предложениями компании , не распространяется на раздел «Напитки», а так-же не суммируется с промокодами на подарочные пиццы.
-                        
+
 При заказе самовывоза в ресторане - минимальная сумма заказа - 1000 руб.
                         ''',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w500
                                             ),
                                           ),
                                         ),
@@ -466,9 +446,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     )
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 24),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
@@ -485,85 +463,105 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 12,
-                        ),
+                        const SizedBox(height: 12),
                         SizedBox(
                           height: 315.22,
-                          child: PageView.builder(
-                            controller: _popularController,
-                            itemCount: menu.length ~/ 2,
-                            onPageChanged: (value) {
-                              _popularIndex = value;
-                            },
-                            itemBuilder: (context, index) => LayoutGrid(
-                              columnSizes: [1.fr, 1.fr],
-                              rowSizes: List.generate(
-                                2,
-                                    (index) => auto,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: PopularItem(
+                                  srcImg: menu[2].itemSizes[0].buttonImageUrl!,
+                                  name: menu[2].name,
+                                  gram: menu[2].itemSizes.first.portionWeightGrams.toString(),
+                                  description: menu[2].description,
+                                  price: menu[2].itemSizes[0].prices[0].price,
+                                  isBadge: false,
+                                ),
                               ),
-                              columnGap: 10,
-                              rowGap: 10,
-                              children: [
-                                GestureDetector(
-                                  onTap: () async {
-                                    final addToOrder = await showModalBottomSheet(
-                                        context: state.context!,
-                                        isScrollControlled: true,
-                                        builder: (sheetContext) => Container(
-                                          color: const Color(0xff000000),
-                                          padding: EdgeInsets.only(
-                                            top: MediaQuery.of(state.context!).padding.top,
-                                          ),
-                                          child: ProductPage(id: menu[index * 2].id),
-                                        )
-                                    );
-                                    if (addToOrder) {
-                                      context.read<CustomNavbarCubit>().changeIndex(2);
-                                    }
-                                  },
-                                  child: PopularItem(
-                                    srcImg:  menu[index * 2].itemSizes[0].buttonImageUrl!,
-                                    name: menu[index * 2].name,
-                                    gram: menu[index * 2].itemSizes.first.portionWeightGrams.toString(),
-                                    description: menu[index * 2].description,
-                                    price: menu[index * 2].itemSizes[0].prices[0].price,
-                                    isBadge: false,
-                                  ),
+                              const SizedBox(width: 5),
+                              Expanded(
+                                child: PopularItem(
+                                  srcImg: menu[1].itemSizes[0].buttonImageUrl!,
+                                  name: menu[1].name,
+                                  gram: menu[1].itemSizes.first.portionWeightGrams.toString(),
+                                  description: menu[1].description,
+                                  price: menu[1].itemSizes[0].prices[0].price,
+                                  isBadge: false,
                                 ),
-                                GestureDetector(
-                                  onTap: () async {
-                                    final addToOrder = await showModalBottomSheet(
-                                        context: state.context!,
-                                        isScrollControlled: true,
-                                        builder: (sheetContext) => Container(
-                                          color: const Color(0xff000000),
-                                          padding: EdgeInsets.only(
-                                            top: MediaQuery.of(state.context!).padding.top,
-                                          ),
-                                          child: ProductPage(id: menu[index * 2 + 1].id),
-                                        )
-                                    );
-                                    if (addToOrder) {
-                                      context.read<CustomNavbarCubit>().changeIndex(2);
-                                    }
-                                  },
-                                  child: PopularItem(
-                                    srcImg: menu[index * 2 + 1].itemSizes[0].buttonImageUrl!,
-                                    name: menu[index * 2 + 1].name,
-                                    gram: menu[index * 2 + 1].itemSizes.first.portionWeightGrams.toString(),
-                                    description: menu[index * 2 + 1].description,
-                                    price: menu[index * 2 + 1].itemSizes[0].prices[0].price,
-                                    isBadge: false,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                              ),
+                            ],
+                          )
+                          // PageView.builder(
+                          //   controller: _popularController,
+                          //   itemCount: menu.length ~/ 2,
+                          //   onPageChanged: (value) {
+                          //     _popularIndex = value;
+                          //   },
+                          //   itemBuilder: (context, index) => LayoutGrid(
+                          //     columnSizes: [1.fr, 1.fr],
+                          //     rowSizes: List.generate(
+                          //       2,
+                          //           (index) => auto,
+                          //     ),
+                          //     columnGap: 10,
+                          //     rowGap: 10,
+                          //     children: [
+                          //       GestureDetector(
+                          //         onTap: () async {
+                          //           final addToOrder = await showModalBottomSheet(
+                          //               context: state.context!,
+                          //               isScrollControlled: true,
+                          //               builder: (sheetContext) => Container(
+                          //                 color: const Color(0xff000000),
+                          //                 padding: EdgeInsets.only(
+                          //                   top: MediaQuery.of(state.context!).padding.top,
+                          //                 ),
+                          //                 child: ProductPage(id: menu[index * 2].id),
+                          //               )
+                          //           );
+                          //           if (addToOrder) {
+                          //             context.read<CustomNavbarCubit>().changeIndex(2);
+                          //           }
+                          //         },
+                          //         child: PopularItem(
+                          //           srcImg:  menu[index * 2].itemSizes[0].buttonImageUrl!,
+                          //           name: menu[index * 2].name,
+                          //           gram: menu[index * 2].itemSizes.first.portionWeightGrams.toString(),
+                          //           description: menu[index * 2].description,
+                          //           price: menu[index * 2].itemSizes[0].prices[0].price,
+                          //           isBadge: false,
+                          //         ),
+                          //       ),
+                          //       GestureDetector(onTap: () async {
+                          //           final addToOrder = await showModalBottomSheet(
+                          //               context: state.context!,
+                          //               isScrollControlled: true,
+                          //               builder: (sheetContext) => Container(
+                          //                 color: const Color(0xff000000),
+                          //                 padding: EdgeInsets.only(
+                          //                   top: MediaQuery.of(state.context!).padding.top,
+                          //                 ),
+                          //                 child: ProductPage(id: menu[index * 2 + 1].id),
+                          //               )
+                          //           );
+                          //           if (addToOrder) {
+                          //             context.read<CustomNavbarCubit>().changeIndex(2);
+                          //           }
+                          //         },
+                          //         child: PopularItem(
+                          //           srcImg: menu[index * 2 + 1].itemSizes[0].buttonImageUrl!,
+                          //           name: menu[index * 2 + 1].name,
+                          //           gram: menu[index * 2 + 1].itemSizes.first.portionWeightGrams.toString(),
+                          //           description: menu[index * 2 + 1].description,
+                          //           price: menu[index * 2 + 1].itemSizes[0].prices[0].price,
+                          //           isBadge: false,
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ),
-                        const SizedBox(
-                          height: 32,
-                        ),
+                        const SizedBox(height: 32),
                       ],
                     ),
                   ),
