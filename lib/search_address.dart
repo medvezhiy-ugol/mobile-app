@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-class SearchAddress extends StatefulWidget {
-  const SearchAddress({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  State<SearchAddress> createState() => _SearchAddressState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchAddressState extends State<SearchAddress> {
+class _SearchPageState extends State<SearchPage> {
   TextEditingController controller = TextEditingController();
   List<SearchItem> streets = [];
 

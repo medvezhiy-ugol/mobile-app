@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:medvezhiy_ugol/search_address.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
-import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../../utils/app_colors.dart';
-import '../../primary_button.dart';
 import '../../widgets/buttons/custom_button.dart';
 import '../../widgets/map/restaurant_info.dart';
 
@@ -83,7 +81,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final _minSlidingPanelHeight = MediaQuery.of(context).size.height * 0.4;
+    final _minSlidingPanelHeight = 0.0;
     final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
 
     return Scaffold(
@@ -223,7 +221,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                 lat = 57.625636;
                                 lon = 39.879540;
                                 _mapController.moveCamera(
-                                  CameraUpdate.newCameraPosition(CameraPosition(
+                                  CameraUpdate.newCameraPosition(const CameraPosition(
                                     target: Point(
                                       latitude: 57.625636,
                                       longitude: 39.879540,
@@ -258,7 +256,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               ),
                             ],
                           ),
-                        ]
+                        ],
                     ),
                   ),
                 const SizedBox(height: 34),
@@ -273,12 +271,16 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                 ),
                 const SizedBox(height: 16),
                 GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage()));
+                  },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       vertical: 5,
                       horizontal: 24,
                     ),
                     decoration: BoxDecoration(
+                      color: AppColors.colorEFEFEF,
                         borderRadius: BorderRadius.circular(30)
                     ),
                     child: const Text(
@@ -353,149 +355,100 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: pageController,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 12),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  height: 50,
-                                  color: AppColors.color191A1F,
-                                  child: const TextField(
-                                    cursorColor: AppColors.colorFFB627,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white
-                                    ),
-                                    decoration: InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                        color: AppColors.color808080,
-                                        size: 30,
-                                      ),
-                                      filled: true,
-                                      fillColor: AppColors.color191A1F,
-                                      hintText: 'Название улицы или ресторана',
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.color808080),
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 39,
-                                        vertical: 20,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                      ),
-                                    ),
+                          MediaQuery.removePadding(
+                            context: context,
+                            removeTop: true,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              child: Theme(
+                                data: Theme.of(context).copyWith(
+                                  colorScheme: ColorScheme.fromSwatch(
+                                    accentColor: AppColors.color191A1F,
                                   ),
                                 ),
-                                const SizedBox(height: 24),
-                                BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-                                  builder: (context, state) {
-                                    return state.myAddress.isEmpty
-                                        ? Container()
-                                        : Text(
-                                      'Ваш адрес: ${state.myAddress}',
-                                      style: const TextStyle(
-                                          color: Colors.white
-                                      ),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(height: 24),
-                                PrimaryButton(
-                                  onTap: () {
-                                    panelController.open();
-                                    //context.read<CustomNavbarCubit>().deliverHere(adress);
-                                  },
-                                  color: AppColors.colorFFB627,
-                                  child: const Text(
-                                    'Доставить сюда',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 12),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  height: 50,
-                                  color: AppColors.color191A1F,
-                                  child: const TextField(
-                                    cursorColor: AppColors.colorFFB627,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white
+                                child: ListView(
+                                  physics: ClampingScrollPhysics(),
+                                  children: <Widget>[
+                                    const SizedBox(height: 12),
+                                    RestaurantInfo(
+                                      openInfo: DateTime.now().hour > 22 || DateTime.now().hour < 10 ? 'Откроется в 10:00' : 'Открыто до 22:00',
+                                      color: DateTime.now().hour > 22 || DateTime.now().hour < 10
+                                          ? Color(0xffFF3838)
+                                          : Color(0xff32CD43),
+                                      distance: '1,3 км',
+                                      adress: 'Улица Свободы, 16',
+                                      index: 0,
+                                      onTap: () async {
+                                        if (panelController.isAttached) {
+                                          panelController.animatePanelToPosition(
+                                            0,
+                                            duration: const Duration(milliseconds: 300),
+                                          );
+                                          await _mapController.moveCamera(
+                                            CameraUpdate.newCameraPosition(
+                                              CameraPosition(target: Point(latitude: 57.625636, longitude: 39.879540), zoom: 15),
+                                            ),
+                                            animation: MapAnimation(
+                                              type: MapAnimationType.smooth,
+                                              duration: 0.5,
+                                            ),
+                                          );
+                                        }
+                                        latEnd = 57.625636;
+                                        lonEnd = 39.879540;
+                                        isCenter = true;
+                                        pageController.animateToPage(
+                                          2,
+                                          duration: const Duration(milliseconds: 200),
+                                          curve: Curves.bounceIn,
+                                        );
+                                        setState(() {
+
+                                        });
+                                      },
                                     ),
-                                    decoration: InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                        color: AppColors.color808080,
-                                        size: 30,
-                                      ),
-                                      filled: true,
-                                      fillColor: AppColors.color191A1F,
-                                      hintText: 'Название улицы или ресторана',
-                                      hintStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.color808080),
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 39,
-                                        vertical: 20,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                      ),
+                                    RestaurantInfo(
+                                      openInfo: DateTime.now().hour > 23 || DateTime.now().hour < 11 ? 'Откроется в 11:00' : 'Открыто до 23:00',
+                                      color: DateTime.now().hour > 23 || DateTime.now().hour < 11
+                                          ? Color(0xffFF3838)
+                                          : Color(0xff32CD43),
+                                      distance: '1,3 км',
+                                      adress: 'Ленинградский просп., 62',
+                                      index: 1,
+                                      onTap: () async {
+                                        if (panelController.isAttached) {
+                                          panelController.animatePanelToPosition(
+                                            0,
+                                            duration: const Duration(milliseconds: 300),
+                                          );
+                                        }
+                                        await _mapController.moveCamera(
+                                          CameraUpdate.newCameraPosition(
+                                            CameraPosition(target: Point(
+                                              latitude: 57.693521,
+                                              longitude: 39.772742,
+                                            ), zoom: 15),
+                                          ),
+                                          animation: MapAnimation(
+                                            type: MapAnimationType.smooth,
+                                            duration: 0.5,
+                                          ),
+                                        );
+                                        latEnd = 57.693521;
+                                        lonEnd = 39.772742;
+                                        pageController.animateToPage(
+                                          2,
+                                          duration: const Duration(milliseconds: 300),
+                                          curve: Curves.linear,
+                                        );
+                                        isCenter = false;
+                                      },
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                const SizedBox(height: 24),
-                                BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-                                  builder: (context, state) {
-                                    return state.myAddress.isEmpty
-                                        ? Container()
-                                        : Text(
-                                      'Ваш адрес: ${state.myAddress}',
-                                      style: const TextStyle(
-                                          color: Colors.white
-                                      ),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(height: 24),
-                                PrimaryButton(
-                                  onTap: () {
-                                    context.read<CustomNavbarCubit>().deliverHere(adress);
-                                  },
-                                  color: AppColors.colorFFB627,
-                                  child: const Text(
-                                    'Доставить сюда',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                           MediaQuery.removePadding(
