@@ -11,7 +11,7 @@ class DeliveryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => DeliveryPage())),
+      // onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => DeliveryPage())),
       child: Container(
         height: 65,
         width: double.infinity,

@@ -43,6 +43,8 @@ dependencies:
   flutter_timer_countdown: ^1.0.5
   hive: ^2.0.0
   hive_flutter: ^1.1.0
+  external_app_launcher: ^3.1.0
+
 
 dev_dependencies:
   flutter_test:
