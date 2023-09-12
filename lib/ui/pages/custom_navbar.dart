@@ -113,7 +113,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                               home: MapPage(
                                                 isDelivery: false,
                                                 isOrder: false,
-                                              )
+                                              ),
                                           );
                                         case 4:
                                           return MaterialApp(

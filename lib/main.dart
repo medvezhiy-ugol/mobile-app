@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/ui/pages/custom_navbar.dart';
 
 import 'common_setup/module_container.dart';
+import 'models/address_model/address_model.dart';
 import 'services/menu_service.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
@@ -18,6 +23,8 @@ void main() async {
       systemNavigationBarColor: AppColors.color111216,
     ),
   );
+  await Hive.initFlutter();
+  Hive.registerAdapter(AddressModelAdapter());
   runApp(UgolApp());
 }
 
@@ -33,10 +40,6 @@ class _UgolAppState extends State<UgolApp> {
   final ThemeService themeService = Injector().get<ThemeService>();
 
   final MenuService menuService = Injector().get<MenuService>();
-
-  double a = 60.5;
-  bool b = false;
-  double c = 0;
 
   @override
   Widget build(BuildContext context) {

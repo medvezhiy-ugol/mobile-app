@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:medvezhiy_ugol/search_address.dart';
+import 'package:medvezhiy_ugol/ui/pages/map/search_page.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
+import 'package:medvezhiy_ugol/ui/widgets/sheets/map_sheet/deliver_here.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
+import '../../../models/map_model.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/buttons/custom_button.dart';
 import '../../widgets/map/restaurant_info.dart';
@@ -80,9 +82,15 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    panelController.close();
+    _mapController.dispose();
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _minSlidingPanelHeight = 0.0;
-    final _maxSlidingPanelHeight = MediaQuery.of(context).size.height * 0.7;
 
     return Scaffold(
       body: Stack(
@@ -139,8 +147,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
                   onCameraPositionChanged: (CameraPosition position, CameraUpdateReason reason, bool value) async {
                     if (isDeliver) {
+                      panelController.animatePanelToPosition(0);
                       lat = position.target.latitude;
                       lon = position.target.longitude;
+                      setState(() {
+                      });
                       final searchResult = YandexSearch.searchByPoint(
                         point: position.target,
                         zoom: 15,
@@ -150,154 +161,179 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         ),
                       );
                       final result = await searchResult.result;
-                      adress = result.items!.first.name;
-                      setState(() {
-                      });
+                      if (result.items != null) {
+                        adress = result.items!.first.name;
+                        setState(() {});
+                      }
                     }
                   }
               )
           ),
           SafeArea(
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                Container(
-                    height: 38,
-                    width: 240,
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                        color: const Color(0xff000000),
-                        borderRadius: BorderRadius.circular(30)
-                    ),
-                    child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          AnimatedPositioned(
-                            left: isDeliver ? 0 : 118,
-                            duration: const Duration(milliseconds: 100),
-                            child: Container(
-                              height: 30,
-                              width: 114,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xff2D2D2D),
-                                  borderRadius: BorderRadius.circular(30)
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  const SizedBox(height: 30),
+                  Container(
+                      height: 38,
+                      width: 240,
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          color: const Color(0xff000000),
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            AnimatedPositioned(
+                              left: isDeliver ? 0 : 118,
+                              duration: const Duration(milliseconds: 100),
+                              child: Container(
+                                height: 30,
+                                width: 114,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff2D2D2D),
+                                    borderRadius: BorderRadius.circular(30)
+                                ),
                               ),
                             ),
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(onTap: () {
-                                pageController.animateToPage(
-                                  0,
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.linear,
-                                );
-                                getPosition();
-                                isDeliver = true;
-                                setState(() {
+                            Row(
+                              children: [
+                                GestureDetector(onTap: () {
+                                  pageController.animateToPage(
+                                    0,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.linear,
+                                  );
+                                  getPosition();
+                                  isDeliver = true;
+                                  setState(() {
 
-                                });
-                              },
-                                child: Container(
-                                  width: 114,
-                                  height: 30,
-                                  color: Colors.transparent,
-                                  alignment: Alignment.center,
-                                  child: const Text(
-                                    'Доставка',
-                                    style: TextStyle(
-                                      fontFamily: 'Unbounded',
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      color: Color(0xffFFFFFF),
+                                  });
+                                },
+                                  child: Container(
+                                    width: 114,
+                                    height: 30,
+                                    color: Colors.transparent,
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      'Доставка',
+                                      style: TextStyle(
+                                        fontFamily: 'Unbounded',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        color: Color(0xffFFFFFF),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
 
-                              const SizedBox(width: 4),
-                              GestureDetector(onTap: () {
-                                isDeliver  = false;
-                                lat = 57.625636;
-                                lon = 39.879540;
-                                _mapController.moveCamera(
-                                  CameraUpdate.newCameraPosition(const CameraPosition(
-                                    target: Point(
-                                      latitude: 57.625636,
-                                      longitude: 39.879540,
+                                const SizedBox(width: 4),
+                                GestureDetector(onTap: () {
+                                  isDeliver  = false;
+                                  lat = 57.625636;
+                                  lon = 39.879540;
+                                  _mapController.moveCamera(
+                                    CameraUpdate.newCameraPosition(const CameraPosition(
+                                      target: Point(
+                                        latitude: 57.625636,
+                                        longitude: 39.879540,
+                                      ),
+                                      zoom: 14.4746,
                                     ),
-                                    zoom: 14.4746,
-                                  ),
-                                  ),
-                                );
-                                pageController.nextPage(
-                                  duration: const Duration(milliseconds: 200),
-                                  curve: Curves.bounceIn,
-                                );
-                                setState(() {
+                                    ),
+                                  );
+                                  pageController.nextPage(
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.bounceIn,
+                                  );
+                                  setState(() {
 
-                                });
-                              },
-                                child: Container(
-                                  width: 114,
-                                  height: 30,
-                                  color: Colors.transparent,
-                                  alignment: Alignment.center,
-                                  child: const Text(
-                                    'Самовывоз',
-                                    style: TextStyle(
-                                      fontFamily: 'Unbounded',
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      color: Color(0xffFFFFFF),
+                                  });
+                                },
+                                  child: Container(
+                                    width: 114,
+                                    height: 30,
+                                    color: Colors.transparent,
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      'Самовывоз',
+                                      style: TextStyle(
+                                        fontFamily: 'Unbounded',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        color: Color(0xffFFFFFF),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                      ),
                     ),
-                  ),
-                const SizedBox(height: 34),
-                Text(
-                  adress,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 24,
-                      color: Color(0xffEFEFEF),
-                      fontFamily: 'Unbounded'
-                  ),
-                ),
-                const SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage()));
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 24,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.colorEFEFEF,
-                        borderRadius: BorderRadius.circular(30)
-                    ),
-                    child: const Text(
-                      'Изменить адрес доставки',
-                      style: TextStyle(
+                  const SizedBox(height: 34),
+                  Text(
+                    adress,
+                    style: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: AppColors.color26282F,
-                        fontStyle: FontStyle.normal,
+                        fontSize: 24,
+                        color: Color(0xffEFEFEF),
+                        fontFamily: 'Unbounded'
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  GestureDetector(
+                    onTap: () async {
+                      panelController.animatePanelToPosition(0);
+                      MapModel? mapModel = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchPage(address: adress)));
+                      if (mapModel != null) {
+                        adress = mapModel.name;
+                        lat = mapModel.lat;
+                        lon = mapModel.lon;
+                        _mapController.moveCamera(
+                          CameraUpdate.newCameraPosition(CameraPosition(
+                            target: Point(
+                              latitude: lat,
+                              longitude: lon,
+                            ),
+                            zoom: 14.4746,
+                          ),
+                          ),
+                        );
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 24,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.colorEFEFEF,
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      child: const Text(
+                        'Изменить адрес доставки',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: AppColors.color26282F,
+                          fontStyle: FontStyle.normal,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Spacer(),
-                const CustomButton(text: 'Готово'),
-                const SizedBox(height: 8),
-              ],
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      panelController.animatePanelToPosition(1);
+                    },
+                      child: const CustomButton(text: 'Готово'),
+                  ),
+                  const SizedBox(height: 84),
+                ],
+              ),
             ),
           ),
           SlidingUpPanel(
@@ -321,8 +357,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               }
             },
             defaultPanelState: PanelState.CLOSED,
-            minHeight: _minSlidingPanelHeight,
-            maxHeight: _maxSlidingPanelHeight,
+            minHeight: 0,
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
             controller: panelController,
             color: AppColors.color111216,
             panelBuilder: (sc) {
@@ -355,6 +391,31 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: pageController,
                         children: <Widget>[
+                          DeliverHere(
+                              onTap: () async {
+                                panelController.animatePanelToPosition(0);
+                                MapModel? mapModel = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchPage(address: adress)));
+                                if (mapModel != null) {
+                                  adress = mapModel.name;
+                                  lat = mapModel.lat;
+                                  lon = mapModel.lon;
+                                  _mapController.moveCamera(
+                                    CameraUpdate.newCameraPosition(CameraPosition(
+                                      target: Point(
+                                        latitude: lat,
+                                        longitude: lon,
+                                      ),
+                                      zoom: 14.4746,
+                                    ),
+                                    ),
+                                  );
+                                  setState(() {
+
+                                  });
+                                }
+                          },
+                            address: adress,
+                          ),
                           MediaQuery.removePadding(
                             context: context,
                             removeTop: true,

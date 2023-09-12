@@ -2,9 +2,11 @@ import 'package:container_tab_indicator/container_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/loading.dart';
-import 'package:medvezhiy_ugol/ui/widgets/sheets/my_addresses_sheet.dart';
+import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/address_confirmation_sheet.dart';
+import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/my_addresses_sheet.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../services/auth_service.dart';
 import '../../../utils/app_colors.dart';
@@ -151,13 +153,23 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         ),
                         GestureDetector(
                           onTap: () {
-                            showModalBottomSheet(
+                            state.myAddress.isEmpty
+                                ? showModalBottomSheet(
                               context: context.read<CustomNavbarCubit>().state.context!,
                               backgroundColor: Colors.transparent,
                               builder: (sheetContext) => Padding(
                                 padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                                child: const MyAddressesSheet(),
-                              ),
+                                child: const MyAddressesSheet()),
+                            )
+                                : showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                builder: (sheetContext) => Container(
+                                  height: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
+                                  alignment: Alignment.topCenter,
+                                  child: const AddressConfirmationSheet(),
+                                )
                             );
                           },
                           child: Container(
@@ -167,18 +179,23 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                                 ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                if (state.myAddress.isNotEmpty)
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 7),
+                                    child: SvgPicture.asset('assets/images/dining.svg'),
+                                  ),
                                 Text(
                                   state.myAddress.isEmpty ? "Указать адрес доставки" : state.myAddress,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12,
-                                    color: Color(0xffFF9900),
+                                    color: state.myAddress.isEmpty ? AppColors.colorFF9900 : AppColors.colorFFFFFF,
                                   ),
                                 ),
                                 const SizedBox(width: 7),
-                                const Icon(
+                                Icon(
                                   Icons.arrow_forward_ios,
-                                  color: Color(0xffFF9900),
+                                  color: state.myAddress.isEmpty ? AppColors.colorFF9900 : AppColors.colorFFFFFF,
                                   size: 8.67,
                                 )
                               ],

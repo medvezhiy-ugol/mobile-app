@@ -10,8 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix menu page">
-      <change beforePath="$PROJECT_DIR$/lib/search_address.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/search_address.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/dining.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/address_model/address_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/map_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/pages/map/deliver_here_block.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/pages/map/search_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/menu/delivery_tile.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/map_sheet/deliver_here.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/address_confirmation_sheet.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/delivery_sheet.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/my_addresses_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_09_2023__07_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_09_2023__07_17__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023__21_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2023__21_39__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_05_2023__20_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_05_2023__20_46__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_cubit.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/search_address.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/custom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/custom_navbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/delivery_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/delivery_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/pay_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/pay_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/menu/my_address.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/menu/my_address.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/sheets/my_addresses_sheet.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/sheets/receiving_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/receiving_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +97,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DIGMA/Documents/medved/mobile-app&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Developer/mobile-app&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
@@ -80,11 +110,11 @@
       <recent name="$PROJECT_DIR$/lib/widgets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/ui/widgets/menu" />
-      <recent name="$PROJECT_DIR$/lib/ui/widgets/product_page" />
-      <recent name="$PROJECT_DIR$/lib/ui/pages/map" />
-      <recent name="$PROJECT_DIR$/assets/images" />
-      <recent name="$PROJECT_DIR$/lib/ui/pages" />
+      <recent name="D:\Developer\mobile-app\assets\images" />
+      <recent name="D:\Developer\mobile-app\lib\ui\widgets\sheets\menu_sheets" />
+      <recent name="D:\Developer\mobile-app\lib\models\address_model" />
+      <recent name="D:\Developer\mobile-app\lib\ui\pages\map" />
+      <recent name="D:\Developer\mobile-app\lib\ui\widgets\sheets\map_sheet" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
+import '../../../models/map_model.dart';
+import '../../../utils/app_colors.dart';
+
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  const SearchPage({super.key, required this.address});
+
+  final String address;
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
   List<SearchItem> streets = [];
 
   @override
   void initState() {
-    // TODO: implement initState
+    controller.text = widget.address;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff111216),
+      backgroundColor: AppColors.color111216,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 30),
@@ -93,11 +98,11 @@ class _SearchPageState extends State<SearchPage> {
                       itemCount: streets.length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(onTap: () {
-                          // Navigator.of(context).pop(MapModel(
-                          //     adress: streets[index].name,
-                          //     lat: streets[index].geometry.first.point!.latitude,
-                          //     lon: streets[index].geometry.first.point!.longitude
-                          // ));
+                          Navigator.of(context).pop(MapModel(
+                              name: streets[index].name,
+                              lat: streets[index].geometry.first.point!.latitude,
+                              lon: streets[index].geometry.first.point!.longitude
+                          ));
                         },
                           child: Container(
                               padding: const EdgeInsets.only(top: 10, bottom: 10),

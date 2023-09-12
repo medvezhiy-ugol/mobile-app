@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:hive/hive.dart';
+import '../../../models/address_model/address_model.dart';
 import '../../../models/loalty_card.dart';
 import '../../../models/menu.dart';
 import '../../../services/auth_service.dart';
@@ -23,6 +23,7 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   int _orderSum = 0;
 
   void init() async {
+    Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
     List<MenuCategory> menu = await service.getFullMenu();
     LoyaltyCard? card;
     if (authService.accessToken.isNotEmpty) {
@@ -32,17 +33,22 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
       menu: menu,
       isLoading: false,
       card: card,
+      myAddress: box.get("address") == null ? "" : box.get("address")!.name,
     ));
   }
 
-  void getContext(BuildContext context) {
-    SharedPreferences.getInstance().then((value) {
-      emit(state.copyWith(
-          context: context,
-        myAddress: value.getString('myAddress'),
-        addresses: value.getString('addresses'),
-      ));
-    });
+  void getContext(BuildContext context) async {
+    emit(state.copyWith(
+      context: context,
+    ));
+  }
+
+  void changeAddress(AddressModel addressModel) async {
+    Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
+    await box.put("address", addressModel);
+    emit(state.copyWith(
+      myAddress: addressModel.name
+    ));
   }
 
   void changeIndex(int index) {
@@ -84,22 +90,6 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     emit(state.copyWith(
       order: _order,
       orderSum: _orderSum,
-    ));
-  }
-
-  void deliverHere(String myAddress) {
-    emit(state.copyWith(myAddress: myAddress));
-    SharedPreferences.getInstance().then((value) => value.setString(
-        'myAddress',
-        myAddress,
-    ));
-  }
-
-  void addAddress(String myAddress) {
-    emit(state.copyWith(myAddress: myAddress));
-    SharedPreferences.getInstance().then((value) => value.setString(
-      'myAddress',
-      myAddress,
     ));
   }
 }

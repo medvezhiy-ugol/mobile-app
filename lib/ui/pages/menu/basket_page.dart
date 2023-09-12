@@ -54,7 +54,6 @@ class _BasketPageState extends State<BasketPage> {
     List<BasketItem> basket = [];
     int count = 1;
     for (int i = 0; i < state.order.length - 1; i++) {
-      print("фффффф ${state.order[i].id}");
       if (state.order[i].id == state.order[i + 1].id) {
         count++;
       }

@@ -10,7 +10,6 @@ class CustomNavbarState extends Equatable {
     this.order = const [],
     this.orderSum = 0,
     this.myAddress = '',
-    this.addresses = '',
   });
 
   final BuildContext? context;
@@ -21,7 +20,6 @@ class CustomNavbarState extends Equatable {
   final List<MenuProduct> order;
   final int orderSum;
   final String myAddress;
-  final String addresses;
 
   CustomNavbarState copyWith({
     BuildContext? context,
@@ -32,7 +30,6 @@ class CustomNavbarState extends Equatable {
     List<MenuProduct>? order,
     int? orderSum,
     String? myAddress,
-    String? addresses,
   }) => CustomNavbarState(
     context: context ?? this.context,
     isLoading: isLoading ?? this.isLoading,
@@ -42,7 +39,6 @@ class CustomNavbarState extends Equatable {
     order: order ?? this.order,
     orderSum: orderSum ?? this.orderSum,
     myAddress: myAddress ?? this.myAddress,
-    addresses: addresses ?? this.addresses,
   );
 
   @override
@@ -55,6 +51,5 @@ class CustomNavbarState extends Equatable {
     order,
     orderSum,
     myAddress,
-    addresses,
   ];
 }

@@ -9,7 +9,7 @@ import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
 import '../../services/auth_service.dart';
-import 'map/pay_page.dart';
+import 'pay_page.dart';
 class DeliveryPage extends StatefulWidget {
   const DeliveryPage({super.key});
 
