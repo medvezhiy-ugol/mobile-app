@@ -99,24 +99,28 @@ class _BasketPageState extends State<BasketPage> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 children: [
-                  const Text(
-                    'Корзина',
-                    style: TextStyle(
-                      fontFamily: 'Unbounded',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                  const Center(
+                    child: Text(
+                      'Корзина',
+                      style: TextStyle(
+                        fontFamily: 'Unbounded',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'Очистить корзину',
-                    style: TextStyle(
-                      // fontFamily: 'Unbounded',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.color808080,
+                  const Center(
+                    child: Text(
+                      'Очистить корзину',
+                      style: TextStyle(
+                        // fontFamily: 'Unbounded',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.color808080,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -127,14 +131,14 @@ class _BasketPageState extends State<BasketPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    "Приборы",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: Color(0xffFFFFFF)
-                    ),
-                  ),
+                  // const Text(
+                  //   "Приборы",
+                  //   style: TextStyle(
+                  //       fontWeight: FontWeight.w600,
+                  //       fontSize: 16,
+                  //       color: Color(0xffFFFFFF)
+                  //   ),
+                  // ),
                   // Row(
                   //   children: [
                   //     SvgPicture.asset('assets/images/instruments.svg'),

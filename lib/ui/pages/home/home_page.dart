@@ -5,6 +5,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import 'package:medvezhiy_ugol/pages/home/active_order_page/active_order_page.dart';
 import 'package:medvezhiy_ugol/ui/pages/jackpot/jackpot_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';
 import '../../../services/auth_service.dart';
@@ -26,14 +27,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   Widget test = Container();
+  bool isOrdered = true;
+  int animation = 12;
+  double value= 0;
+
+
+
+
 
   late final Timer _bannerTimer;
   late final Timer _popularTimer;
   late final Timer countDownTimer;
+  late final Timer countDownTimer2;
 
   int seconds = 86401;
   int _index = 1;
   int _popularIndex = 0;
+
+  int secondsForOrder = 20;
+
+
 
   final PageController _controller = PageController(
       viewportFraction: 0.95,
@@ -47,14 +60,32 @@ class _HomePageState extends State<HomePage> {
 
   List<MenuProduct> menu = [];
 
+  void determinateIndicator(){
+    new Timer.periodic(
+        Duration(seconds: 1),
+            (Timer timer){
+          setState(() {
+            if(value == 1) {
+              timer.cancel();
+            }
+            else {
+              value = value + 0.1;
+            }
+          });
+        }
+    );
+  }
+
   @override
   void initState() {
     super.initState();
+    determinateIndicator();
     for (var category in context.read<CustomNavbarCubit>().state.menu) {
       for (var item in category.items) {
         menu.add(item);
       }
     }
+
     _bannerTimer = Timer.periodic(
         const Duration(seconds: 5),
             (bannerTimer) {
@@ -84,6 +115,17 @@ class _HomePageState extends State<HomePage> {
           setState(() {
 
           });
+
+        }
+    );
+    countDownTimer2 = Timer.periodic(
+        const Duration(seconds: 1),
+            (bannerTimer) {
+          secondsForOrder--;
+          setState(() {
+
+          });
+
         }
     );
     _popularTimer = Timer.periodic(
@@ -116,10 +158,17 @@ class _HomePageState extends State<HomePage> {
         '${time.second < 10 ? '0${time.second}' : time.second}';
   }
 
+  String convertWithOutHours(int seconds) {
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    return '${time.minute < 10 ? '0${time.minute}' : time.minute}:'
+        '${time.second < 10 ? '0${time.second}' : time.second}';
+  }
+
   @override
   void dispose() {
     _bannerTimer.cancel();
     countDownTimer.cancel();
+    countDownTimer2.cancel();
     _popularTimer.cancel();
     _controller.dispose();
     _popularController.dispose();
@@ -198,6 +247,42 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  isOrdered? Container(
+                    child: Column(children: [
+                      SizedBox(height: 25,),
+                      Text("Заказ принят", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
+                      SizedBox(height: 10),
+                      GestureDetector(onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ActiveOrderPage()));
+                      },
+                                      child: Image.asset("assets/images/icons.png")),
+                      SizedBox(height: 12),
+                      Text(
+                        convertWithOutHours(secondsForOrder),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                          fontFamily: 'Unbounded',
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 120),
+                        child: LinearProgressIndicator(
+                          value: value,
+
+                          backgroundColor: AppColors.color191A1F, color: AppColors.colorFF9900,),
+                      ),
+                      SizedBox(height: 30,)
+
+
+
+                    ],),
+                  ): Container(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(

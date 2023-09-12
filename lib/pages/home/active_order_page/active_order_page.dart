@@ -1,15 +1,60 @@
+import 'dart:async';
+
+
 import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import '../../../ui/close_circle_button.dart';
 
-class ActiveOrderPage extends StatelessWidget {
-  const ActiveOrderPage({super.key});
+class ActiveOrderPage extends StatefulWidget {
+   ActiveOrderPage({super.key});
+
+  @override
+  State<ActiveOrderPage> createState() => _ActiveOrderPageState();
+}
+
+class _ActiveOrderPageState extends State<ActiveOrderPage> {
+  late final Timer countDownTimer;
+
+   int seconds = 720;
+   double startSeconds = 720;
+   double valNotifire = 0;
+  late ValueNotifier<double> valueNotifier;
+
+  String convert(int seconds) {
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    return '${time.minute < 10 ? '0${time.minute}' : time.minute}:'
+        '${time.second < 10 ? '0${time.second}' : time.second}';
+  }
+
+  @override
+  void initState() {
+    valueNotifier = ValueNotifier(0.0);
+    countDownTimer = Timer.periodic(
+         Duration(seconds: 1),
+            (bannerTimer) {
+          seconds--;
+          valNotifire++;
+          valueNotifier.value = valNotifire;
+          setState(() {
+
+          });
+        }
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    countDownTimer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color(0xff111216),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -98,31 +143,33 @@ class ActiveOrderPage extends StatelessWidget {
           progressStrokeWidth: 12,
           backStrokeWidth: 12,
           backColor: AppColors.color191A1F,
-          animationDuration: 0,
-          progressColors: const [AppColors.colorFF9900],
-          maxValue: 100,
-          valueNotifier: ValueNotifier(30),
+          animationDuration: 3,
+          progressColors: const [AppColors.colorFF9900, AppColors.colorFF3838],
+          maxValue: startSeconds,
+          valueNotifier: valueNotifier,
         ),
         Column(
-          children: const <Widget>[
-            Text(
-              'D-72',
-              style: TextStyle(
-                fontSize: 48,
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+          children: <Widget>[
+            // Text(
+            //   'D-72',
+            //   style: TextStyle(
+            //     fontSize: 48,
+            //     color: Colors.white,
+            //     fontWeight: FontWeight.w600,
+            //   ),
+            // ),
             SizedBox(
               height: 10,
             ),
             Text(
-              '24:38',
+              convert(seconds),
               style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 35,
+                  fontWeight: FontWeight.w400,
                   color: Colors.white,
-                  fontWeight: FontWeight.w200),
-            )
+                fontFamily: 'Unbounded',
+              ),
+            ),
           ],
         )
       ],
