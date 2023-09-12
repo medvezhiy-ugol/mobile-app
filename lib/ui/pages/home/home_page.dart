@@ -9,6 +9,7 @@ import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
+import '../../../utils/formatter.dart';
 import '../../close_circle_button.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/flip_countdown_clock.dart';
@@ -190,7 +191,18 @@ class _HomePageState extends State<HomePage> {
                         color: Color(0xff808080)
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 37),
+                  if (state.seconds != 1800)
+                    Column(
+                      children: [
+                        Text(
+                          Formatter.formattedTime(timeInSecond: state.seconds),
+                          style: const TextStyle(
+                            color: AppColors.colorE3E3E3,
+                          ),
+                        )
+                      ],
+                    ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(

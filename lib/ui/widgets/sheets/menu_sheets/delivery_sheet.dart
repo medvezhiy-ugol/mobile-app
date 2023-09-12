@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medvezhiy_ugol/ui/widgets/menu/delivery_tile.dart';
 
 import '../../../../utils/app_colors.dart';
 
@@ -8,6 +9,7 @@ class DeliverySheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           height: 4,
@@ -19,6 +21,7 @@ class DeliverySheet extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Container(
+          height: 327,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: const BoxDecoration(
             color: AppColors.color191A1F,
@@ -26,13 +29,13 @@ class DeliverySheet extends StatelessWidget {
               top: Radius.circular(12),
             ),
           ),
-          child: Column(
+          child: const Column(
             children: [
               Padding(
                 padding: EdgeInsets.only(
     top: 32,
     left: 15,
-    bottom: 24,
+    bottom: 23,
     ),
                 child: Text(
                   'Доставка',
@@ -43,7 +46,10 @@ class DeliverySheet extends StatelessWidget {
                     color: AppColors.colorEFEFEF,
                   ),
                 ),
-              )
+              ),
+              DeliveryTile(icon: 'yandex', text: 'Яндекс Еда'),
+              DeliveryTile(icon: 'sber', text: 'Деливери'),
+              DeliveryTile(icon: 'sber', text: 'Сбер Мега Маркет'),
             ],
           ),
         )

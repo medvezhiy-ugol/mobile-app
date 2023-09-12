@@ -1,13 +1,17 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medvezhiy_ugol/ui/pages/map/map_page.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:map_launcher/map_launcher.dart';
+import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/delivery_sheet.dart';
 import '../../close_circle_button.dart';
 import '../../widgets/menu/basket_item.dart';
 import '../../../utils/app_colors.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import '../../widgets/sheets/receiving_sheet.dart';
+import '../../widgets/sheets/menu_sheets/my_addresses_sheet.dart';
 
 class BasketPage extends StatefulWidget {
   const BasketPage({super.key, required this.isDelivery});
@@ -32,6 +36,29 @@ class _BasketPageState extends State<BasketPage> {
   void initState() {
     isTakeaway = !widget.isDelivery;
     super.initState();
+  }
+
+  Future<Position> _determinePosition() async {
+
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
@@ -98,28 +125,24 @@ class _BasketPageState extends State<BasketPage> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 children: [
-                  const Center(
-                    child: Text(
-                      'Корзина',
-                      style: TextStyle(
-                        fontFamily: 'Unbounded',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  const Text(
+                    'Корзина',
+                    style: TextStyle(
+                      fontFamily: 'Unbounded',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Center(
-                    child: Text(
-                      'Очистить корзину',
-                      style: TextStyle(
-                        // fontFamily: 'Unbounded',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.color808080,
-                      ),
+                  const Text(
+                    'Очистить корзину',
+                    style: TextStyle(
+                      // fontFamily: 'Unbounded',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.color808080,
                     ),
                   ),
                   const SizedBox(
@@ -252,8 +275,16 @@ class _BasketPageState extends State<BasketPage> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            isTakeaway = false;
-                            setState(() {});
+                            if (state.myAddress == null) {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) => const MyAddressesSheet()
+                              );
+                            }
+                            else {
+                              isTakeaway = false;
+                              setState(() {});
+                            }
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -297,16 +328,8 @@ class _BasketPageState extends State<BasketPage> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            if (takeaway.isEmpty) {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage(
-                                isDelivery: false,
-                                isOrder: true,
-                              )));
-                            }
-                            else {
-                              isTakeaway = true;
-                              setState(() {});
-                            }
+                            isTakeaway = true;
+                            setState(() {});
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -332,7 +355,7 @@ class _BasketPageState extends State<BasketPage> {
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
-                                      'Московский пр. 178',
+                                      'Свободы, 16',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
@@ -349,25 +372,160 @@ class _BasketPageState extends State<BasketPage> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  Row(
+                  isTakeaway
+                      ? GestureDetector(
+                    onTap: () async {
+                      Position _position = await _determinePosition();
+                      final availableMaps = await MapLauncher.installedMaps;
+
+                      showModalBottomSheet(
+                        context: state.context!,
+                        backgroundColor: const Color(0xff191A1F),
+                        builder: (BuildContext context) {
+                          return SafeArea(
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 16),
+                                    Center(
+                                      child: Container(
+                                        height: 4,
+                                        width: 48,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(9),
+                                            color: Color(0xffD9D9D9).withOpacity(0.3)
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 36),
+                                    Text(
+                                      'Выберите сервис',
+                                      style: TextStyle(
+                                          fontFamily: 'Unbounded',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 24,
+                                          color: Color(0xffEFEFEF)
+                                      ),
+                                    ),
+                                    SizedBox(height: 30),
+                                    for (var map in availableMaps)
+                                      Container(
+                                        height: 65,
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 1
+                                        ),
+                                        color: const Color(0xff26282F),
+                                        child: ListTile(
+                                          onTap: () =>
+                                              map.showDirections(
+                                                destination: Coords(
+                                                  _position.latitude,
+                                                  _position.longitude,
+                                                ),
+                                                destinationTitle: "Медвежий угол",
+                                                origin: Coords(
+                                                  _position.latitude,
+                                                  _position.longitude,
+                                                ),
+                                                originTitle: "Вы",
+                                                waypoints: [],
+                                                directionsMode: DirectionsMode.driving,
+                                              ),
+                                          title: Text(map.mapName),
+                                          leading: ClipRRect(
+                                            borderRadius: BorderRadius.circular(90),
+                                            child: SvgPicture.asset(
+                                              map.icon,
+                                              height: 30.0,
+                                              width: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    Container(
+                                      height: 65,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 1
+                                      ),
+                                      color: Color(0xff26282F),
+                                      child: ListTile(
+                                        onTap: () {
+                                          Clipboard.setData(const ClipboardData(text: '150023, Ярославль, улица Свободы, 45'));
+                                          Flushbar(
+                                            message:  "Адрес скопирован",
+                                            duration:  Duration(seconds: 3),
+                                            flushbarPosition: FlushbarPosition.TOP,
+                                          ).show(context);
+                                        },
+                                        title: const Text("Скопировать адрес"),
+                                        leading: ClipRRect(
+                                          borderRadius: BorderRadius.circular(90),
+                                          child: SvgPicture.asset(
+                                            'assets/images/copy.svg',
+                                            height: 30.0,
+                                            width: 30.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      height: 56,
+                      decoration: BoxDecoration(
+                        color: AppColors.color26282F,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('assets/images/takeaway.svg'),
+                          const SizedBox(width: 12),
+                          const Text(
+                            'Построить маршрут',
+                            style: TextStyle(
+                              color: AppColors.colorFFFFFF,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                      : Row(
                     children: [
-                      Text(
-                        isTakeaway ? "Навынос:" : "Доставка:",
-                        style: const TextStyle(
+                      const Text(
+                        "Доставка:",
+                        style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             color: Color(0xffFFFFFF)
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        isTakeaway ? takeaway : delivery,
-                        style: TextStyle(
+                      BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return Text(
+      state.myAddress == null ? "" : state.myAddress!.name,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: Color(0xff808080)
                         ),
-                      ),
+                      );
+  },
+),
                     ],
                   ),
                   const SizedBox(height: 47),
@@ -435,19 +593,7 @@ class _BasketPageState extends State<BasketPage> {
               showModalBottomSheet(
                 context: context,
                 backgroundColor: Colors.transparent,
-                builder: (context) => Container(
-                  padding: EdgeInsets.only(
-                    top: 24,
-                    bottom: MediaQuery.of(state.context!).padding.bottom,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0xff111216),
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(40)
-                    ),
-                  ),
-                  child: ReceivingSheet(sum: state.orderSum.toInt()),
-                ),
+                builder: (context) => const DeliverySheet(),
               );
             },
             child: Container(

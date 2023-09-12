@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +22,10 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   final MenuService service;
   final AuthService authService = Injector().get<AuthService>();
   final List<MenuProduct> _order = [];
+  final List<List<MenuProduct>> orders = [];
   int _orderSum = 0;
+  late Timer timer;
+  int seconds = 1800;
 
   void init() async {
     Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
@@ -33,7 +38,7 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
       menu: menu,
       isLoading: false,
       card: card,
-      myAddress: box.get("address") == null ? "" : box.get("address")!.name,
+      myAddress: box.get("address")!,
     ));
   }
 
@@ -47,7 +52,7 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
     await box.put("address", addressModel);
     emit(state.copyWith(
-      myAddress: addressModel.name
+      myAddress: addressModel
     ));
   }
 
@@ -90,6 +95,23 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     emit(state.copyWith(
       order: _order,
       orderSum: _orderSum,
+    ));
+  }
+
+  void pay() {
+    orders.add(_order);
+    _order.clear();
+    timer = Timer.periodic(
+        const Duration(seconds: 1),
+            (timer) {
+      if (seconds > 0) {
+        seconds--;
+        emit(state.copyWith(seconds: seconds));
+      }
+    });
+    emit(state.copyWith(
+      orders: orders,
+      order: _order,
     ));
   }
 }

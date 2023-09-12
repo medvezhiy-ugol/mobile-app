@@ -153,7 +153,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         ),
                         GestureDetector(
                           onTap: () {
-                            state.myAddress.isEmpty
+                            state.myAddress == null
                                 ? showModalBottomSheet(
                               context: context.read<CustomNavbarCubit>().state.context!,
                               backgroundColor: Colors.transparent,
@@ -179,23 +179,23 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                                 ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                if (state.myAddress.isNotEmpty)
+                                if (state.myAddress != null)
                                   Padding(
                                     padding: const EdgeInsets.only(right: 7),
                                     child: SvgPicture.asset('assets/images/dining.svg'),
                                   ),
                                 Text(
-                                  state.myAddress.isEmpty ? "Указать адрес доставки" : state.myAddress,
+                                  state.myAddress == null ? "Указать адрес доставки" : state.myAddress!.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12,
-                                    color: state.myAddress.isEmpty ? AppColors.colorFF9900 : AppColors.colorFFFFFF,
+                                    color: state.myAddress == null ? AppColors.colorFF9900 : AppColors.colorFFFFFF,
                                   ),
                                 ),
                                 const SizedBox(width: 7),
                                 Icon(
                                   Icons.arrow_forward_ios,
-                                  color: state.myAddress.isEmpty ? AppColors.colorFF9900 : AppColors.colorFFFFFF,
+                                  color: state.myAddress == null ? AppColors.colorFF9900 : AppColors.colorFFFFFF,
                                   size: 8.67,
                                 )
                               ],
@@ -300,39 +300,60 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                               );
                             }
                           },
-                          child: Container(
-                              color: AppColors.colorFFB627,
-                              height: 56,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.5, vertical: 17.5),
-                              child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Заказ',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 34,
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: AppColors.color26282F,
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(14),
                                   ),
-                                  const Expanded(child: SizedBox()),
-                                  Text(
-                                    '${state.orderSum.toInt()} ₽ · ',
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
+                                ),
+                                child: Text(
+                                  'Доставка 178 ₽',
+                                  style: TextStyle(
+                                    color: AppColors.color808080,
                                   ),
-                                  const Text(
-                                    '25-30 мин',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              )
+                                ),
+                              ),
+                              Container(
+                                  color: AppColors.colorFFB627,
+                                  height: 56,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.5, vertical: 17.5),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Заказать',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                      ),
+                                      const Expanded(child: SizedBox()),
+                                      Text(
+                                        '${state.orderSum.toInt()} ₽ · ',
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                      ),
+                                      const Text(
+                                        '25-30 мин',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                              ),
+                            ],
                           ),
                         )
                     )

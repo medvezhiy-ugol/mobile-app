@@ -82,14 +82,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   @override
-  void dispose() {
-    panelController.close();
-    _mapController.dispose();
-    pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
 
     return Scaffold(

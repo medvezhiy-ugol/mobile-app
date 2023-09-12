@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import 'package:medvezhiy_ugol/ui/widgets/product_page/additional_products.dart';
+import 'package:medvezhiy_ugol/ui/widgets/dotted_circle.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../services/menu_service.dart';
 import '../../services/theme_service.dart';
 import '../close_circle_button.dart';
 import '../../utils/app_colors.dart';
 import '../../pages/menu/detail_menu_page/bloc/menu_detail_bloc.dart';
+import '../widgets/product_page/additional_product.dart';
 import '../widgets/product_page/ingredient.dart';
 import '../widgets/product_page/product_size.dart';
 
@@ -27,9 +28,11 @@ class _ProductPageState extends State<ProductPage> {
 
   final MenuService menuService = Injector().get<MenuService>();
 
-  int _count = 0;
+  int _count = 1;
+  bool isBig = true;
 
-  bool isHalf = false;
+  List<bool> additionalProducts = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  int additionalProductsPrice = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +142,12 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Widget _buildLoadedBody(BuildContext blocContext, MenuDetailLoadedState state) {
+    additionalProductsPrice = 0;
+    for (int i = 0; i < additionalProducts.length; i++) {
+      if (additionalProducts[i]) {
+        additionalProductsPrice += 30;
+      }
+    }
     return Stack(
       children: [
         Column(
@@ -155,7 +164,25 @@ class _ProductPageState extends State<ProductPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      _buildCachedImg(state),
+                      Stack(
+                        children: [
+                          const DottedCircle(),
+                          CachedNetworkImage(
+                            height: isBig ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width / 3,
+                            width: isBig ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width / 3,
+                            imageUrl: state.menuProduct.itemSizes.first.buttonImageUrl ?? '',
+                            placeholder: (context, url) => Container(
+                              height: 200,
+                              color: AppColors.color26282F,
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              height: 200,
+                              color: AppColors.color26282F,
+                            ),
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ],
+                      ),
                       const SizedBox(
                         height: 38,
                       ),
@@ -192,7 +219,7 @@ class _ProductPageState extends State<ProductPage> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      isHalf = false;
+                                      isBig = false;
                                       setState(() {
 
                                       });
@@ -202,7 +229,7 @@ class _ProductPageState extends State<ProductPage> {
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
-                                        color: isHalf ? Color(0xff000000) : Color(0xff2a2c2f)
+                                        color: isBig ? const Color(0xff000000) : Color(0xff2a2c2f)
                                       ),
                                     child: const Text(
                                         'Стандартная',
@@ -219,7 +246,7 @@ class _ProductPageState extends State<ProductPage> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      isHalf = true;
+                                      isBig = true;
                                       setState(() {
 
                                       });
@@ -229,7 +256,7 @@ class _ProductPageState extends State<ProductPage> {
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(30),
-                                          color: isHalf ? const Color(0xff2a2c2f) : const Color(0xff000000)
+                                          color: isBig ? const Color(0xff2a2c2f) : const Color(0xff000000)
                                       ),
                                       child: const Text(
                                         'Большая',
@@ -308,7 +335,87 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             const SizedBox(height: 12),
-                            const AdditionalProducts(),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[0] = !additionalProducts[0]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[0],
+                                name: "Соус острый/сырный",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[1] = !additionalProducts[1]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[1],
+                                name: "Кетчуп",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[2] = !additionalProducts[2]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[2],
+                                name: "Соус чесночный",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[3] = !additionalProducts[3]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[3],
+                                name: "Соус сальса",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[4] = !additionalProducts[4]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[4],
+                                name: "Картофель фри",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[5] = !additionalProducts[5]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[5],
+                                name: "Халапенью",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[6] = !additionalProducts[6]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[6],
+                                name: "Сыр",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[7] = !additionalProducts[7]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[7],
+                                name: "Маринованный огурец",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[8] = !additionalProducts[8]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[8],
+                                name: "Чили Перец",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
                             const SizedBox(height: 36),
                             const Text(
                               'Заказать отдельно',
@@ -319,7 +426,87 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             const SizedBox(height: 12),
-                            const AdditionalProducts(),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[9] = !additionalProducts[9]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[9],
+                                name: "Соус острый/сырный",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[10] = !additionalProducts[10]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[10],
+                                name: "Кетчуп",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[11] = !additionalProducts[11]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[11],
+                                name: "Соус чесночный",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[12] = !additionalProducts[12]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[12],
+                                name: "Соус сальса",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[13] = !additionalProducts[13]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[13],
+                                name: "Картофель фри",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[14] = !additionalProducts[14]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[14],
+                                name: "Халапенью",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[15] = !additionalProducts[15]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[15],
+                                name: "Сыр",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[16] = !additionalProducts[16]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[16],
+                                name: "Маринованный огурец",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() => additionalProducts[17] = !additionalProducts[17]),
+                              child: AdditionalProduct(
+                                isTapped: additionalProducts[17],
+                                name: "Чили Перец",
+                                price: 30,
+                                imgPath: 'assets/images/detail_menu_page/souse.png',
+                              ),
+                            ),
                           ],
                         ),
                       )
@@ -425,7 +612,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             Text(
-                              '${state.menuProduct.itemSizes.first.prices.first.price * _count} ₽',
+                              '${state.menuProduct.itemSizes.first.prices.first.price * _count + additionalProductsPrice} ₽',
                               style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -507,28 +694,6 @@ class _ProductPageState extends State<ProductPage> {
         ),
       ),
     );
-  }
-
-  Widget _buildCachedImg(MenuDetailLoadedState state) {
-    if (state.menuProduct.itemSizes.first.buttonImageUrl != null) {
-      return CachedNetworkImage(
-        imageUrl: state.menuProduct.itemSizes.first.buttonImageUrl ?? '',
-        placeholder: (context, url) => Container(
-          height: 200,
-          color: AppColors.color26282F,
-        ),
-        errorWidget: (context, url, error) => Container(
-          height: 200,
-          color: AppColors.color26282F,
-        ),
-        fit: BoxFit.fitWidth,
-      );
-    } else {
-      return Container(
-        height: 200,
-        color: AppColors.color26282F,
-      );
-    }
   }
 }
 

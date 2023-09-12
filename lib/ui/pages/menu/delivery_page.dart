@@ -8,8 +8,10 @@ import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-import '../../services/auth_service.dart';
-import 'pay_page.dart';
+import '../../../models/address_model/address_model.dart';
+import '../../../services/auth_service.dart';
+import '../map/deliver_here_block.dart';
+import '../pay_page.dart';
 class DeliveryPage extends StatefulWidget {
   const DeliveryPage({super.key});
 
@@ -25,6 +27,23 @@ class _DeliveryPageState extends State<DeliveryPage> {
   DateTime date = DateTime(2016, 10, 26);
 
   get onTap => null;
+
+  final TextEditingController apartment = TextEditingController();
+  final TextEditingController entrance = TextEditingController();
+  final TextEditingController floor = TextEditingController();
+  final TextEditingController intercom = TextEditingController();
+  final TextEditingController comment = TextEditingController();
+
+  @override
+  void initState() {
+    AddressModel myAddress = context.read<CustomNavbarCubit>().state.myAddress!;
+    apartment.text = myAddress.apartment;
+    entrance.text = myAddress.entrance;
+    floor.text = myAddress.floor;
+    intercom.text = myAddress.intercom;
+    comment.text = myAddress.comment;
+    super.initState();
+  }
 
 
   void _showDialog(Widget child) {
@@ -84,7 +103,9 @@ class _DeliveryPageState extends State<DeliveryPage> {
             padding: const EdgeInsets.symmetric(
                 horizontal: 10
             ),
-            child: Column(
+            child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -274,17 +295,19 @@ class _DeliveryPageState extends State<DeliveryPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('улица Республиканская, 46/3',
-                              style: TextStyle(
+                            Text(
+                              state.myAddress!.name,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
                                   color: Color(0xffFFFFFF)
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2,
                             ),
-                            Text('Ярославль',
+                            const Text(
+                              'Ярославль',
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 12,
@@ -294,11 +317,10 @@ class _DeliveryPageState extends State<DeliveryPage> {
                           ],
                         ),
                       ),
-                      Spacer(
-                      ),
-                      SizedBox(
+                      const Spacer(),
+                      const SizedBox(
                         height: 13,
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_forward_ios,
                           size: 13,
                           color: Color(0xffffffff),
@@ -307,207 +329,52 @@ class _DeliveryPageState extends State<DeliveryPage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 26,
-                ),
+                const SizedBox(height: 26),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 72,
-                            child: Text(
-                              'Квартира',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.color808080,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Container(
-                            height: 38,
-                            width: 72,
-                            color: AppColors.color191A1F,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Center(
-                                child: Text(
-                                  '28',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                    DeliverHereBlock(
+                        text: "Квартира",
+                        controller: apartment
                     ),
-                    const SizedBox(
-                      width: 12,
+                    DeliverHereBlock(
+                        text: "Подъезд",
+                        controller: entrance
                     ),
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 72,
-                            child: Text(
-                              'Подъезд',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.color808080,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Container(
-                            height: 38,
-                            width: 72,
-                            color: AppColors.color191A1F,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Center(
-                                child: Text(
-                                  '3',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                    DeliverHereBlock(
+                        text: "Этаж",
+                        controller: floor
                     ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 72,
-                            child: Text(
-                              'Этаж',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.color808080,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Container(
-                            height: 38,
-                            width: 72,
-                            color: AppColors.color191A1F,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Center(
-                                child: Text(
-                                  '10',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 72,
-                            child: Text(
-                              'Домофон',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.color808080,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Container(
-                            height: 38,
-                            width: 72,
-                            color: AppColors.color191A1F,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Center(
-                                child: Text(
-                                  '28',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                    DeliverHereBlock(
+                        text: "Домофон",
+                        controller: intercom
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 24,
-                ),
-                Text(
-                  'Комментарий к заказу',
+                const SizedBox(height: 24),
+                const Text(
+                  'Комментарий для курьера',
                   style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.color808080,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      color: Color(0xff808080)
                   ),
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                const SizedBox(height: 2),
                 Container(
-                  height: 64,
-                  width: double.infinity,
+                  height: 112,
                   color: AppColors.color191A1F,
                   child: TextField(
-                    controller: _textTimeController,
+                    controller: comment,
+                    maxLines: 5,
                     style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: Color(0xffffffff)
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: AppColors.colorFFFFFF,
                     ),
                     decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
                       border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
                     ),
                   ),
                 ),
@@ -603,7 +470,9 @@ class _DeliveryPageState extends State<DeliveryPage> {
   },
 ),
               ],
-            ),
+            );
+  },
+),
           ),
       )
     );

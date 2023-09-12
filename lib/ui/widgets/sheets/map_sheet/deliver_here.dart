@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:medvezhiy_ugol/models/address_model/address_model.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/ui/pages/map/deliver_here_block.dart';
 import 'package:medvezhiy_ugol/ui/widgets/buttons/custom_button.dart';
 import '../../../../utils/app_colors.dart';
@@ -56,10 +58,22 @@ class _DeliverHereState extends State<DeliverHere> {
           const SizedBox(height: 36),
           Row(
             children: [
-              DeliverHereBlock(controller: apartment),
-              DeliverHereBlock(controller: entrance),
-              DeliverHereBlock(controller: floor),
-              DeliverHereBlock(controller: intercom),
+              DeliverHereBlock(
+                text: "Квартира",
+                  controller: apartment
+              ),
+              DeliverHereBlock(
+                  text: "Подъезд",
+                  controller: entrance
+              ),
+              DeliverHereBlock(
+                  text: "Этаж",
+                  controller: floor
+              ),
+              DeliverHereBlock(
+                  text: "Домофон",
+                  controller: intercom
+              ),
             ],
           ),
           const SizedBox(height: 24),
@@ -102,7 +116,7 @@ class _DeliverHereState extends State<DeliverHere> {
                 intercom: intercom.text,
                 comment: comment.text,
               ));
-              Navigator.of(context).pop();
+              context.read<CustomNavbarCubit>().changeIndex(2);
             },
               child: const CustomButton(text: 'Доставить сюда')
           ),

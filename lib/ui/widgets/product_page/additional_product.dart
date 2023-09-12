@@ -7,28 +7,22 @@ class AdditionalProduct extends StatefulWidget {
       {super.key,
         required this.name,
         required this.imgPath,
-        required this.price});
+        required this.price, required this.isTapped});
 
   final String name;
   final double price;
   final String imgPath;
+  final bool isTapped;
 
   @override
   State<AdditionalProduct> createState() => _AdditionalProductState();
 }
 
 class _AdditionalProductState extends State<AdditionalProduct> {
-  bool _isToogle = false;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _isToogle = !_isToogle;
-        });
-      },
-      child: Container(
+    return Container(
         height: 65,
         color: AppColors.color191A1F,
         margin: const EdgeInsets.only(bottom: 2),
@@ -63,10 +57,10 @@ class _AdditionalProductState extends State<AdditionalProduct> {
               width: 20,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: (_isToogle
+                  color: (widget.isTapped
                       ? AppColors.colorFF9900
                       : AppColors.color5D6377)),
-              child: (_isToogle
+              child: (widget.isTapped
                   ? const Icon(
                 Icons.done,
                 size: 15,
@@ -75,7 +69,6 @@ class _AdditionalProductState extends State<AdditionalProduct> {
             ),
           ],
         )
-      ),
     );
   }
 }
