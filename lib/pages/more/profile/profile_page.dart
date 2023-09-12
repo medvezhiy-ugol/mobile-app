@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
-import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
 
 import '../../../services/auth_service.dart';
@@ -279,24 +278,24 @@ class _ProfilePageState extends State<ProfilePage> {
                       //   ),
                       // ),
                       SizedBox(
-                        height: 30,
+                        height: 200,
                       ),
-                      // PrimaryButton.icon(
-                      //   onTap: () {
-                      //     context.read<ProfileBloc>().add(
-                      //           ProfileLogoutEvent(),
-                      //         );
-                      //     Navigator.of(context).pop();
-                      //   },
-                      //   icon: Icons.exit_to_app_rounded,
-                      //   label: Text(
-                      //     'Выйти',
-                      //     style: TextStyle(
-                      //       fontSize: 16,
-                      //       fontWeight: FontWeight.w600,
-                      //     ),
-                      //   ),
-                      // ),
+                      PrimaryButton(
+                        onTap: () {
+                          context.read<ProfileBloc>().add(
+                                ProfileLogoutEvent(),
+                              );
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                            'Выйти',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white
+                            ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -42,7 +42,7 @@ class _LotteryHistoryState extends State<LotteryHistory> {
               SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),),
+                child: Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'Unbounded'),),
               ),
               SizedBox(height: 15,),
               Padding(

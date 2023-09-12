@@ -40,7 +40,7 @@ class _IndividualHistoryPageState extends State<IndividualHistoryPage> {
               SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: Center(child: Text("История", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),)),
+                child: Center(child: Text("История", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'Unbounded'),)),
               ),
               SizedBox(
                 height: 36,

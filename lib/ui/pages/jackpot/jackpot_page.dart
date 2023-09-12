@@ -82,7 +82,7 @@ class _JackpotPageState extends State<JackpotPage> {
                       SizedBox(height: 39),
                       Padding(
                         padding: const EdgeInsets.only(left: 12),
-                        child: Text("Победители", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),),
+                        child: Text("Победители", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'Unbounded'),),
                       ),
                         SizedBox(height: 21),
                         WinnerLotteryCard(ticket: ticket, name: name, data: data, color: AppColors.color29FF24,),
