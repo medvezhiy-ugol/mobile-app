@@ -9,22 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="jackpot screens added">
-      <change afterPath="$PROJECT_DIR$/assets/images/icons.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/bearcorner_mobile_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/bearcorner_mobile_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bearcorner_mobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bearcorner_mobile.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/more/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/profile/profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/jackpot/individual_history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/jackpot/individual_history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/jackpot/jackpot_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/jackpot/jackpot_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/jackpot/lottery_history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/jackpot/lottery_history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix menu page">
+      <change beforePath="$PROJECT_DIR$/lib/search_address.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/search_address.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,23 +58,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "AnalyzeApkAction.lastApkPath": "/Users/tw0ch/Documents/GitHub/mobile-app/build/app/outputs/flutter-apk/app-debug.apk",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "/Users/tanya/StudioProjects/Work/bear/mobile-app/assets/images",
-    "settings.editor.selected.configurable": "dart.settings",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;AnalyzeApkAction.lastApkPath&quot;: &quot;/Users/tw0ch/Documents/GitHub/mobile-app/build/app/outputs/flutter-apk/app-debug.apk&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DIGMA/Documents/medved/mobile-app&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="C:\Users\yarin\StudioProjects\mobile-app\assets\images\more_page" />
       <recent name="C:\Users\yarin\StudioProjects\mobile-app\assets\images\home_page" />
       <recent name="$PROJECT_DIR$/assets/images/home_page" />
@@ -446,12 +432,12 @@
       <option name="project" value="LOCAL" />
       <updated>1692296764073</updated>
     </task>
-    <task id="LOCAL-00057" summary="jackpot screens added">
-      <created>1694390069932</created>
+    <task id="LOCAL-00057" summary="fix menu page">
+      <created>1694454600377</created>
       <option name="number" value="00057" />
       <option name="presentableId" value="LOCAL-00057" />
       <option name="project" value="LOCAL" />
-      <updated>1694390069933</updated>
+      <updated>1694454600377</updated>
     </task>
     <option name="localTasksCounter" value="58" />
     <servers />
@@ -497,8 +483,7 @@
     <MESSAGE value="fix ios" />
     <MESSAGE value="fix map" />
     <MESSAGE value="fix menu page" />
-    <MESSAGE value="jackpot screens added" />
-    <option name="LAST_COMMIT_MESSAGE" value="jackpot screens added" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix menu page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

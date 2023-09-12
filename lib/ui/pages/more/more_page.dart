@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import 'package:medvezhiy_ugol/pages/home/loalty_card/loalty_card_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_code_page/code_auth_page.dart';
 import 'package:medvezhiy_ugol/ui/pages/more/about_app_page.dart';
 import 'package:medvezhiy_ugol/pages/more/about_app/history_order.dart';
@@ -30,118 +29,114 @@ class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => MoreBloc(),
-  child: BlocBuilder<MoreBloc, MoreState>(
-      builder: (context, state) {
-        if (state is MoreDefaultState && authService.accessToken != '') {
-          context.read<MoreBloc>().add(MoreRegisteredEvent());
-        } else if (state is MoreRegisteredState && authService.accessToken == '') {
-          context.read<MoreBloc>().add(MoreUnRegisteredEvent());
-        }
-        return WillPopScope(
-          onWillPop: () async => false,
-          child: Scaffold(
-            backgroundColor: const Color(0xff111216),
-            body: SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    (state is MoreDefaultState)
-                        ? _buildAuthRow(context)
-                        : Container(),
-                    SizedBox(
-                      height: (state is MoreDefaultState) ? 16 : 0,
-                    ),
-                    (state is MoreRegisteredState)
-                        ? _buildProfileWidget(context)
-                        : Container(),
-                    SizedBox(
-                      height: (state is MoreRegisteredState) ? 84 : 0,
-                    ),
-                    (state is MoreRegisteredState)
-                        ? _buildRegisteredRow(context)
-                        : Container(),
-                    SizedBox(
-                      height: (state is MoreRegisteredState) ? 10 : 0,
-                    ),
-                    _buildDefaultRows(context, state),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    (state is MoreRegisteredState)
-                        ? _buildOurSocials(context)
-                        : Container()
-                  ],
+      create: (context) => MoreBloc(),
+      child: BlocBuilder<MoreBloc, MoreState>(
+        builder: (context, state) {
+          if (state is MoreDefaultState && authService.accessToken != '') {
+            context.read<MoreBloc>().add(MoreRegisteredEvent());
+          } else if (state is MoreRegisteredState && authService.accessToken == '') {
+            context.read<MoreBloc>().add(MoreUnRegisteredEvent());
+          }
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              backgroundColor: const Color(0xff111216),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      (state is MoreDefaultState)
+                          ? _buildAuthRow(context)
+                          : Container(),
+                      SizedBox(
+                        height: (state is MoreDefaultState) ? 16 : 0,
+                      ),
+                      (state is MoreRegisteredState)
+                          ? _buildProfileWidget(context)
+                          : Container(),
+                      SizedBox(
+                        height: (state is MoreRegisteredState) ? 84 : 0,
+                      ),
+                      (state is MoreRegisteredState)
+                          ? _buildRegisteredRow(context)
+                          : Container(),
+                      SizedBox(
+                        height: (state is MoreRegisteredState) ? 10 : 0,
+                      ),
+                      _buildDefaultRows(context, state),
+                      const SizedBox(
+                        height: 7,
+                      ),
+                      (state is MoreRegisteredState)
+                          ? _buildOurSocials(context)
+                          : Container()
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-    ),
-);
+          );
+        },
+      ),
+    );
   }
 
   Column _buildAuthRow(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
-        Text(
+        const Text(
           'Профиль',
-          style: const TextStyle(
+          style: TextStyle(
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w600,
               fontFamily: 'Unbounded'
           ),
         ),
-        const SizedBox(
-          height: 26,
-        ),
+        const SizedBox(height: 26),
         Container(
           color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
-            child: GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AuthPage())),
+            child: GestureDetector(onTap: () =>
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                const AuthPage())),
               child: Container(
                 color: Colors.transparent,
                 padding: const EdgeInsets.all(17),
                 child: Row(
                   children: [
                     const Icon(
-                      MorePageIcons.person,
-                      color: Color(0xffffffff),
-                      size: 32,
+                        MorePageIcons.person,
+                        color: Color(0xffffffff),
+                        size: 32
                     ),
-                    const SizedBox(
-                      width: 25,
-                    ),
+                    const SizedBox(width: 25),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Войти",
-                          style: const TextStyle(
+                          style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600
+                          ),
                         ),
-                        const SizedBox(
-                          height: 3,
-                        ),
+                        const SizedBox(height: 3),
                         SizedBox(
                           width: screenWidth * 0.6,
                           // color: Colors.blue,
-                          child: Text(
+                          child: const Text(
                             'Чтобы стать ближе, получать бонусы',
-                            style: const TextStyle(
-                              color: AppColors.color808080,
-                              fontSize: 14,
+                            style: TextStyle(
+                                color: AppColors.color808080,
+                                fontSize: 14
                             ),
                           ),
                         ),
@@ -166,16 +161,17 @@ class _MorePageState extends State<MorePage> {
         children: [
           Column(
             children: [
-              GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CodeAuthPage()));
-                },
-                child: Text(
+              GestureDetector(onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                const CodeAuthPage()));
+              },
+                child: const Text(
                   "Наши соцсети",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w600
+                  ),
                 ),
               ),
               const SizedBox(
@@ -205,7 +201,7 @@ class _MorePageState extends State<MorePage> {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
-                          SocialIcons.vk,
+                            SocialIcons.vk,
                             color: Color(0xffFFFFFF)
                         ),
                       ),
@@ -216,22 +212,21 @@ class _MorePageState extends State<MorePage> {
                   ),
                   Material(
                     color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () async {
-                        var url = Uri.parse(
-                            'https://www.instagram.com/medvezh.ugol/');
-                        try {
-                          await launchUrl(
-                            url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        } catch (e) {
-                          await launchUrl(
-                            url,
-                            mode: LaunchMode.platformDefault,
-                          );
-                        }
-                      },
+                    child: InkWell(onTap: () async {
+                      var url = Uri.parse(
+                          'https://www.instagram.com/medvezh.ugol/');
+                      try {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } catch (e) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.platformDefault,
+                        );
+                      }
+                    },
                       customBorder: const CircleBorder(),
                       child: Container(
                         padding: const EdgeInsets.all(10),
@@ -267,7 +262,7 @@ class _MorePageState extends State<MorePage> {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
-                          SocialIcons.instagram,
+                            SocialIcons.instagram,
                             color: Color(0xffFFFFFF)
                         ),
                       ),
@@ -288,40 +283,36 @@ class _MorePageState extends State<MorePage> {
         //My Orders
         (state is MoreRegisteredState)
             ? Container(
-                color: AppColors.color191A1F,
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> HistoryOrder()));
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(18),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 21,
-                            height: 24,
-                            child: Image.asset(
-                              'assets/images/more_page/my_orders_icon.png',
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 26,
-                          ),
-                          const Text(
-                            'Мои заказы',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
+          color: AppColors.color191A1F,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
+              const HistoryOrder()));
+            },
+              child: Container(
+                padding: const EdgeInsets.all(18),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 21,
+                      height: 24,
+                      child: Image.asset('assets/images/more_page/my_orders_icon.png'),
                     ),
-                  ),
+                    const SizedBox(width: 26),
+                    const Text(
+                      'Мои заказы',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
                 ),
-              )
+              ),
+            ),
+          ),
+        )
             : Container(),
         // Container(
         //   color: AppColors.color191A1F,
@@ -357,28 +348,27 @@ class _MorePageState extends State<MorePage> {
           color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => DeliveryInfoPage()));
-              },
+            child: InkWell(onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+              const DeliveryInfoPage()));
+            },
               child: Container(
                 padding: const EdgeInsets.all(18),
-                child: Row(
+                child: const Row(
                   children: [
-                    const Icon(
-                      MorePageIcons.car,
-                      color: Color(0xffffffff),
-                      size: 28,
+                    Icon(
+                        MorePageIcons.car,
+                        color: Color(0xffffffff),
+                        size: 28
                     ),
-                    const SizedBox(
-                      width: 26,
-                    ),
+                    SizedBox(width: 26),
                     Text(
                       'Условия доставки',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600
+                      ),
                     ),
                   ],
                 ),
@@ -392,26 +382,26 @@ class _MorePageState extends State<MorePage> {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContactUsPage()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                    ContactUsPage()));
               },
               child: Container(
                 padding: const EdgeInsets.all(18),
-                child: Row(
+                child: const Row(
                   children: [
-                    const Icon(
-                      MorePageIcons.star,
-                      color: Color(0xffffffff),
-                      size: 28,
+                    Icon(
+                        MorePageIcons.star,
+                        color: Color(0xffffffff),
+                        size: 28
                     ),
-                    const SizedBox(
-                      width: 26,
-                    ),
+                    SizedBox(width: 26),
                     Text(
                       'Связаться с нами',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600
+                      ),
                     ),
                   ],
                 ),
@@ -423,28 +413,27 @@ class _MorePageState extends State<MorePage> {
           color: AppColors.color191A1F,
           child: Material(
             color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutAppPage()));
-              },
+            child: InkWell(onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+              const AboutAppPage()));
+            },
               child: Container(
                 padding: const EdgeInsets.all(18),
-                child: Row(
+                child: const Row(
                   children: [
-                    const Icon(
-                      MorePageIcons.info,
-                      color: Color(0xffffffff),
-                      size: 28,
+                    Icon(
+                        MorePageIcons.info,
+                        color: Color(0xffffffff),
+                        size: 28
                     ),
-                    const SizedBox(
-                      width: 26,
-                    ),
+                    SizedBox(width: 26),
                     Text(
                       'О приложении',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600
+                      ),
                     ),
                   ],
                 ),
@@ -465,10 +454,9 @@ class _MorePageState extends State<MorePage> {
             color: AppColors.color191A1F,
             child: Material(
               color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  context.read<CustomNavbarCubit>().changeIndex(3);
-                },
+              child: InkWell(onTap: () {
+                context.read<CustomNavbarCubit>().changeIndex(3);
+              },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
                   child: Row(
@@ -478,12 +466,12 @@ class _MorePageState extends State<MorePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset('assets/images/more_page/Location.png'),
-                          Text(
+                          const Text(
                             'Адреса',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600
                             ),
                           ),
                         ],
@@ -506,17 +494,17 @@ class _MorePageState extends State<MorePage> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoyaltyCardPage()));
+                onTap: () {
+                  context.read<CustomNavbarCubit>().changeIndex(0);
                 },
                 child: Container(
                   padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Icon(
                               MorePageIcons.loyal,
                               size: 28,
@@ -554,10 +542,10 @@ class _MorePageState extends State<MorePage> {
           children: [
             Material(
               color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
-                },
+              child: InkWell(onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                const ProfilePage()));
+              },
                 customBorder: const CircleBorder(),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -585,18 +573,18 @@ class _MorePageState extends State<MorePage> {
           height: 6.87 ,
         ),
         BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-  builder: (context, state) {
-    return Text(
-          state.card?.name ?? "",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Unbounded'
-          ),
-        );
-  },
-),
+          builder: (context, state) {
+            return Text(
+              state.card?.name ?? "",
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Unbounded'
+              ),
+            );
+          },
+        ),
         const SizedBox(
           height: 8,
         ),
@@ -606,7 +594,7 @@ class _MorePageState extends State<MorePage> {
             Text(
               (authService.phone == '') ? 'phone' : authService.phone,
               style:
-                  const TextStyle(color: AppColors.color808080, fontSize: 14),
+              const TextStyle(color: AppColors.color808080, fontSize: 14),
             ),
             // const SizedBox(
             //   width: 17,
