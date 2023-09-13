@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/ui/back_arrow_button.dart';
 import 'package:medvezhiy_ugol/ui/primary_button.dart';
+import 'package:medvezhiy_ugol/ui/widgets/buttons/custom_button.dart';
 
 import '../../../services/auth_service.dart';
 import '../../../utils/app_colors.dart';
@@ -23,6 +25,14 @@ class _ProfilePageState extends State<ProfilePage> {
   final authService = Injector().get<AuthService>();
 
   DateTime date = DateTime(2016, 10, 26);
+
+  @override
+  void initState() {
+    _textNameController.text = context.read<CustomNavbarCubit>().state.name;
+    _textBirthController.text = context.read<CustomNavbarCubit>().state.birthday;
+    _textSexController.text = context.read<CustomNavbarCubit>().state.sex ? "Мужской" : "Женский";
+    super.initState();
+  }
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
@@ -280,6 +290,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       SizedBox(
                         height: 200,
                       ),
+                      GestureDetector(
+                        onTap: () {
+                          context.read<CustomNavbarCubit>().changeUser(
+                              _textNameController.text,
+                              _textBirthController.text,
+                              _textSexController.text == "Мужской"
+                          );
+                          Navigator.of(context).pop();
+                        },
+                          child: CustomButton(text: 'Готово')
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       PrimaryButton(
                         onTap: () {
                           context.read<ProfileBloc>().add(
@@ -330,15 +354,5 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-  }
-
-  _showSnackBar({required BuildContext context, required String text}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        text,
-        textAlign: TextAlign.center,
-      ),
-      behavior: SnackBarBehavior.floating,
-    ));
   }
 }

@@ -66,7 +66,7 @@ class _MenuSectionState extends State<MenuSection> {
                                 padding: EdgeInsets.only(
                                   top: MediaQuery.of(state.context!).padding.top,
                                 ),
-                                child: ProductPage(id: widget.menuCategory.items[i].id),
+                                child: ProductPage(id: widget.menuCategory.items[i].id, isPizza: widget.menuCategory.name == "Пицца"),
                               )
                           );
                           // Navigator.of(state.context).push(

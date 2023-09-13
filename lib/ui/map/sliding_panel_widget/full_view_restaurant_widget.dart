@@ -10,11 +10,10 @@ import '../../../../utils/app_colors.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 
 class FullViewRestaurantWidget extends StatefulWidget {
-  const FullViewRestaurantWidget({super.key, required this.latEnd, required this.lonEnd, required this.isCenter});
+  const FullViewRestaurantWidget({super.key, required this.latEnd, required this.lonEnd});
 
   final double latEnd;
   final double lonEnd;
-  final bool isCenter;
 
   @override
   State<FullViewRestaurantWidget> createState() =>
@@ -78,7 +77,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
               ),
               const SizedBox(height: 16),
               Text(
-                widget.isCenter ? '150023, Ярославль, улица Свободы, 45' : '150064, Ярославль, Ленинградский проспект, 62',
+                '150023, Ярославль, улица Свободы, 45',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -101,21 +100,13 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                           color: Colors.white),
                     ),
                     Text(
-                        widget.isCenter
-                        ? DateTime.now().hour > 22 || DateTime.now().hour < 10
+                        DateTime.now().hour > 22 || DateTime.now().hour < 10
                             ? 'Откроется в 10:00'
-                        : 'Открыто до 22:00'
-                        :  DateTime.now().hour > 23 || DateTime.now().hour < 11
-                        ? 'Откроется в 11:00'
-                        : 'Открыто до 23:00',
+                        : 'Открыто до 22:00',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: widget.isCenter
-                              ? DateTime.now().hour > 22 || DateTime.now().hour < 10
-                              ? const Color(0xffFF3838)
-                              : const Color(0xff32CD43)
-                              :  DateTime.now().hour > 23 || DateTime.now().hour < 11
+                          color: DateTime.now().hour > 22 || DateTime.now().hour < 10
                               ? const Color(0xffFF3838)
                               : const Color(0xff32CD43)
                       ),
@@ -123,9 +114,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 3,
-              ),
+              const SizedBox(height: 3),
               InfoBox(
                 title: 'Особенности',
                 child: RestaurantAttributes(height: 21),
@@ -236,16 +225,14 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                                       ),
                                     Container(
                                       height: 65,
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 1
-                                      ),
-                                      color: Color(0xff26282F),
+                                      margin: const EdgeInsets.symmetric(vertical: 1),
+                                      color: const Color(0xff26282F),
                                       child: ListTile(
                                         onTap: () {
-                                          Clipboard.setData(ClipboardData(text: widget.isCenter ? '150023, Ярославль, улица Свободы, 45' : '150064, Ярославль, Ленинградский проспект, 62'));
+                                          Clipboard.setData(const ClipboardData(text: '150023, Ярославль, улица Свободы, 45'));
                                           Flushbar(
                                             message:  "Адрес скопирован",
-                                            duration:  Duration(seconds: 3),
+                                            duration:  const Duration(seconds: 3),
                                             flushbarPosition: FlushbarPosition.TOP,
                                           ).show(context);
                                         },

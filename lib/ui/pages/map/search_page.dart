@@ -53,9 +53,15 @@ class _SearchPageState extends State<SearchPage> {
                             searchText: value,
                             geometry: Geometry.fromBoundingBox(
                                 const BoundingBox(
-                                  southWest: Point(latitude: 55.76996383933034, longitude: 37.57483142322235),
-                                  northEast: Point(latitude: 55.785322774728414, longitude: 37.590924677311705),
-                                )
+                                  southWest: Point(
+                                      latitude: 55.76996383933034,
+                                      longitude: 37.57483142322235,
+                                  ),
+                                  northEast: Point(
+                                      latitude: 55.785322774728414,
+                                      longitude: 37.590924677311705,
+                                  ),
+                                ),
                             ),
                             searchOptions: const SearchOptions(
                               searchType: SearchType.geo,
@@ -98,11 +104,13 @@ class _SearchPageState extends State<SearchPage> {
                       itemCount: streets.length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(onTap: () {
-                          Navigator.of(context).pop(MapModel(
+                          Navigator.of(context).pop(
+                              MapModel(
                               name: streets[index].name,
                               lat: streets[index].geometry.first.point!.latitude,
                               lon: streets[index].geometry.first.point!.longitude
-                          ));
+                          ),
+                          );
                         },
                           child: Container(
                               padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -114,12 +122,12 @@ class _SearchPageState extends State<SearchPage> {
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16,
                                       color: Colors.white
-                                  )
-                              )
+                                  ),
+                              ),
                           ),
                         );
                       }
-                  )
+                  ),
               ),
             ],
           ),

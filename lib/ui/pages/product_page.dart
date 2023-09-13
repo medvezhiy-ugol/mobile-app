@@ -15,9 +15,10 @@ import '../widgets/product_page/ingredient.dart';
 import '../widgets/product_page/product_size.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key, required this.id});
+  const ProductPage({super.key, required this.id, required this.isPizza});
 
   final String id;
+  final bool isPizza;
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -214,6 +215,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             const SizedBox(height: 6),
+                            if (widget.isPizza)
                             Row(
                               children: [
                                 Expanded(
@@ -612,7 +614,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             Text(
-                              '${state.menuProduct.itemSizes.first.prices.first.price * _count + additionalProductsPrice} ₽',
+                              '${(state.menuProduct.itemSizes.first.prices.first.price * _count / (isBig ? 1 : 1.3) + additionalProductsPrice).toInt()} ₽',
                               style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,

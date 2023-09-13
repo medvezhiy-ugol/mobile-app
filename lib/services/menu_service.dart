@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/services/api_service.dart';
 
 import '../models/get_menu.dart';
-import '../models/loalty_card.dart';
+import '../models/loyalty_card.dart';
 import '../models/menu.dart';
 import 'auth_service.dart';
 
@@ -74,6 +75,7 @@ class MenuService {
         headers: {"Authorization": "Bearer ${body['access_token']}"},
       );
     }
+    log(request.body);
     if (request.statusCode == 200) {
       return LoyaltyCard.fromJson(jsonDecode(request.body));
     }

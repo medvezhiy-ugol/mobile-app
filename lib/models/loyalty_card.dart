@@ -1,14 +1,4 @@
 
-// To parse this JSON data, do
-//
-//     final loaltyCard = loaltyCardFromJson(jsonString);
-
-import 'dart:convert';
-
-LoyaltyCard loaltyCardFromJson(String str) => LoyaltyCard.fromJson(json.decode(str));
-
-String loaltyCardToJson(LoyaltyCard data) => json.encode(data.toJson());
-
 class LoyaltyCard {
     String id;
     dynamic referrerId;

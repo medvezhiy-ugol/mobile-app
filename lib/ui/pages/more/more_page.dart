@@ -13,7 +13,6 @@ import '../../../services/auth_service.dart';
 import '../../../utils/icons/more_page_icons.dart';
 import '../../../utils/icons/social_icons_icons.dart';
 import '../../../pages/more/auth/auth_page/auth_page.dart';
-import '../../../pages/more/auth/bloc/more_bloc.dart';
 import '../../../pages/more/over_pages/delivery_info_page.dart';
 
 class MorePage extends StatefulWidget {
@@ -28,585 +27,543 @@ class _MorePageState extends State<MorePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MoreBloc(),
-      child: BlocBuilder<MoreBloc, MoreState>(
-        builder: (context, state) {
-          if (state is MoreDefaultState && authService.accessToken != '') {
-            context.read<MoreBloc>().add(MoreRegisteredEvent());
-          } else if (state is MoreRegisteredState && authService.accessToken == '') {
-            context.read<MoreBloc>().add(MoreUnRegisteredEvent());
-          }
-          return WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              backgroundColor: const Color(0xff111216),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      (state is MoreDefaultState)
-                          ? _buildAuthRow(context)
-                          : Container(),
-                      SizedBox(
-                        height: (state is MoreDefaultState) ? 16 : 0,
-                      ),
-                      (state is MoreRegisteredState)
-                          ? _buildProfileWidget(context)
-                          : Container(),
-                      SizedBox(
-                        height: (state is MoreRegisteredState) ? 84 : 0,
-                      ),
-                      (state is MoreRegisteredState)
-                          ? _buildRegisteredRow(context)
-                          : Container(),
-                      SizedBox(
-                        height: (state is MoreRegisteredState) ? 10 : 0,
-                      ),
-                      _buildDefaultRows(context, state),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      (state is MoreRegisteredState)
-                          ? _buildOurSocials(context)
-                          : Container()
-                    ],
-                  ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: const Color(0xff111216),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Column _buildAuthRow(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    return Column(
-      children: <Widget>[
-        const Text(
-          'Профиль',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Unbounded'
-          ),
-        ),
-        const SizedBox(height: 26),
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: GestureDetector(onTap: () =>
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                const AuthPage())),
-              child: Container(
-                color: Colors.transparent,
-                padding: const EdgeInsets.all(17),
-                child: Row(
+                authService.accessToken == ""
+                    ? Column(
                   children: [
-                    const Icon(
-                        MorePageIcons.person,
-                        color: Color(0xffffffff),
-                        size: 32
+                    const Text(
+                      'Профиль',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Unbounded'
+                      ),
                     ),
-                    const SizedBox(width: 25),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Войти",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600
+                    const SizedBox(height: 26),
+                    Container(
+                      color: AppColors.color191A1F,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: GestureDetector(onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            const AuthPage())),
+                          child: Container(
+                            color: Colors.transparent,
+                            padding: const EdgeInsets.all(17),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                    MorePageIcons.person,
+                                    color: Color(0xffffffff),
+                                    size: 32
+                                ),
+                                const SizedBox(width: 25),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Войти",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600
+                                      ),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      // color: Colors.blue,
+                                      child: const Text(
+                                        'Чтобы стать ближе, получать бонусы',
+                                        style: TextStyle(
+                                            color: AppColors.color808080,
+                                            fontSize: 14
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 3),
-                        SizedBox(
-                          width: screenWidth * 0.6,
-                          // color: Colors.blue,
-                          child: const Text(
-                            'Чтобы стать ближе, получать бонусы',
-                            style: TextStyle(
-                                color: AppColors.color808080,
-                                fontSize: 14
+                      ),
+                    ),
+                  ],
+                )
+                    : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            const ProfilePage()));
+                          },
+                            customBorder: const CircleBorder(),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: Colors.transparent,
+                                  ),
+                                  child: const Icon(
+                                    Icons.more_horiz,
+                                    size: 25,
+                                    color: Color(0xffEFEFEF),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Container _buildOurSocials(BuildContext context) {
-    return Container(
-      color: AppColors.color191A1F,
-      padding: const EdgeInsets.all(15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            children: [
-              GestureDetector(onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                const CodeAuthPage()));
-              },
-                child: const Text(
-                  "Наши соцсети",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () async {
-                        var url = Uri.parse('https://vk.com/medvezh_ugol');
-                        try {
-                          await launchUrl(
-                            url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        } catch (e) {
-                          await launchUrl(
-                            url,
-                            mode: LaunchMode.platformDefault,
-                          );
-                        }
-                      },
-                      customBorder: const CircleBorder(),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Icon(
-                            SocialIcons.vk,
-                            color: Color(0xffFFFFFF)
-                        ),
-                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(onTap: () async {
-                      var url = Uri.parse(
-                          'https://www.instagram.com/medvezh.ugol/');
-                      try {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
+                    const SizedBox(
+                      height: 6.87 ,
+                    ),
+                    BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.name,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Unbounded'
+                          ),
                         );
-                      } catch (e) {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.platformDefault,
-                        );
-                      }
-                    },
-                      customBorder: const CircleBorder(),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Icon(
-                            SocialIcons.youtube,
-                            color: Color(0xffFFFFFF)
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () async {
-                        var url = Uri.parse(
-                            'https://www.instagram.com/medvezh.ugol/');
-                        try {
-                          await launchUrl(
-                            url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        } catch (e) {
-                          await launchUrl(
-                            url,
-                            mode: LaunchMode.platformDefault,
-                          );
-                        }
                       },
-                      customBorder: const CircleBorder(),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          (authService.phone == '') ? 'phone' : authService.phone,
+                          style:
+                          const TextStyle(color: AppColors.color808080, fontSize: 14),
+                        ),
+                        // const SizedBox(
+                        //   width: 17,
+                        // ),
+                        // const Text('youremail@mail.com',
+                        //     style: TextStyle(
+                        //       color: AppColors.color808080,
+                        //       fontSize: 14,
+                        //     )),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  height: 84,
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Icon(
-                            SocialIcons.instagram,
-                            color: Color(0xffFFFFFF)
+                        height: 100,
+                        color: AppColors.color191A1F,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(onTap: () {
+                            context.read<CustomNavbarCubit>().changeIndex(3);
+                          },
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset('assets/images/more_page/Location.png'),
+                                      const Text(
+                                        'Адреса',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Column _buildDefaultRows(BuildContext context, MoreState state) {
-    return Column(
-      children: <Widget>[
-        //My Orders
-        (state is MoreRegisteredState)
-            ? Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
-              const HistoryOrder()));
-            },
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 21,
-                      height: 24,
-                      child: Image.asset('assets/images/more_page/my_orders_icon.png'),
+                    const SizedBox(
+                      width: 2,
                     ),
-                    const SizedBox(width: 26),
-                    const Text(
-                      'Мои заказы',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        )
-            : Container(),
-        // Container(
-        //   color: AppColors.color191A1F,
-        //   child: Material(
-        //     color: Colors.transparent,
-        //     child: InkWell(
-        //       onTap: () {},
-        //       child: Container(
-        //         padding: const EdgeInsets.all(18),
-        //         child: Row(
-        //           children: [
-        //             const Icon(
-        //               MorePageIcons.settings,
-        //               size: 28,
-        //             ),
-        //             const SizedBox(
-        //               width: 26,
-        //             ),
-        //             Text(
-        //               S.current.profileScreenSettings,  // Настройки
-        //               style: const TextStyle(
-        //                   color: Colors.white,
-        //                   fontSize: 18,
-        //                   fontWeight: FontWeight.w600),
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-              const DeliveryInfoPage()));
-            },
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                child: const Row(
-                  children: [
-                    Icon(
-                        MorePageIcons.car,
-                        color: Color(0xffffffff),
-                        size: 28
-                    ),
-                    SizedBox(width: 26),
-                    Text(
-                      'Условия доставки',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                    ContactUsPage()));
-              },
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                child: const Row(
-                  children: [
-                    Icon(
-                        MorePageIcons.star,
-                        color: Color(0xffffffff),
-                        size: 28
-                    ),
-                    SizedBox(width: 26),
-                    Text(
-                      'Связаться с нами',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: AppColors.color191A1F,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-              const AboutAppPage()));
-            },
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                child: const Row(
-                  children: [
-                    Icon(
-                        MorePageIcons.info,
-                        color: Color(0xffffffff),
-                        size: 28
-                    ),
-                    SizedBox(width: 26),
-                    Text(
-                      'О приложении',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Row _buildRegisteredRow(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Container(
-            height: 100,
-            color: AppColors.color191A1F,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(onTap: () {
-                context.read<CustomNavbarCubit>().changeIndex(3);
-              },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset('assets/images/more_page/Location.png'),
-                          const Text(
-                            'Адреса',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        color: AppColors.color191A1F,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              context.read<CustomNavbarCubit>().changeIndex(0);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                          MorePageIcons.loyal,
+                                          size: 28,
+                                          color: Color(0xffFFFFFF)
+                                      ),
+                                      Expanded(
+                                        child: SizedBox(),
+                                      ),
+                                      Text(
+                                        'Мои Карты', // 'Мои карты' (на будущее записал),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 2,
-        ),
-        Expanded(
-          child: Container(
-            height: 100,
-            color: AppColors.color191A1F,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  context.read<CustomNavbarCubit>().changeIndex(0);
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 17, left: 20, bottom: 20),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                              MorePageIcons.loyal,
-                              size: 28,
-                              color: Color(0xffFFFFFF)
-                          ),
-                          Expanded(
-                            child: SizedBox(),
-                          ),
-                          Text(
-                            'Мои Карты', // 'Мои карты' (на будущее записал),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Column _buildProfileWidget(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Material(
-              color: Colors.transparent,
-              child: InkWell(onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                const ProfilePage()));
-              },
-                customBorder: const CircleBorder(),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.transparent,
-                      ),
-                      child: const Icon(
-                        Icons.more_horiz,
-                        size: 25,
-                        color: Color(0xffEFEFEF),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ),
+                SizedBox(
+                  height: 10
+                ),
+                Column(
+                  children: <Widget>[
+                    //My Orders
+                    Container(
+                      color: AppColors.color191A1F,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
+                          const HistoryOrder()));
+                        },
+                          child: Container(
+                            padding: const EdgeInsets.all(18),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 21,
+                                  height: 24,
+                                  child: Image.asset('assets/images/more_page/my_orders_icon.png'),
+                                ),
+                                const SizedBox(width: 26),
+                                const Text(
+                                  'Мои заказы',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Container(
+                    //   color: AppColors.color191A1F,
+                    //   child: Material(
+                    //     color: Colors.transparent,
+                    //     child: InkWell(
+                    //       onTap: () {},
+                    //       child: Container(
+                    //         padding: const EdgeInsets.all(18),
+                    //         child: Row(
+                    //           children: [
+                    //             const Icon(
+                    //               MorePageIcons.settings,
+                    //               size: 28,
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 26,
+                    //             ),
+                    //             Text(
+                    //               S.current.profileScreenSettings,  // Настройки
+                    //               style: const TextStyle(
+                    //                   color: Colors.white,
+                    //                   fontSize: 18,
+                    //                   fontWeight: FontWeight.w600),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    Container(
+                      color: AppColors.color191A1F,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                          const DeliveryInfoPage()));
+                        },
+                          child: Container(
+                            padding: const EdgeInsets.all(18),
+                            child: const Row(
+                              children: [
+                                Icon(
+                                    MorePageIcons.car,
+                                    color: Color(0xffffffff),
+                                    size: 28
+                                ),
+                                SizedBox(width: 26),
+                                Text(
+                                  'Условия доставки',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      color: AppColors.color191A1F,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                ContactUsPage()));
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(18),
+                            child: const Row(
+                              children: [
+                                Icon(
+                                    MorePageIcons.star,
+                                    color: Color(0xffffffff),
+                                    size: 28
+                                ),
+                                SizedBox(width: 26),
+                                Text(
+                                  'Связаться с нами',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      color: AppColors.color191A1F,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                          const AboutAppPage()));
+                        },
+                          child: Container(
+                            padding: const EdgeInsets.all(18),
+                            child: const Row(
+                              children: [
+                                Icon(
+                                    MorePageIcons.info,
+                                    color: Color(0xffffffff),
+                                    size: 28
+                                ),
+                                SizedBox(width: 26),
+                                Text(
+                                  'О приложении',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                Container(
+                  color: AppColors.color191A1F,
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          GestureDetector(onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            const CodeAuthPage()));
+                          },
+                            child: const Text(
+                              "Наши соцсети",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () async {
+                                    var url = Uri.parse('https://vk.com/medvezh_ugol');
+                                    try {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    } catch (e) {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.platformDefault,
+                                      );
+                                    }
+                                  },
+                                  customBorder: const CircleBorder(),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: const Icon(
+                                        SocialIcons.vk,
+                                        color: Color(0xffFFFFFF)
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 24,
+                              ),
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(onTap: () async {
+                                  var url = Uri.parse(
+                                      'https://www.instagram.com/medvezh.ugol/');
+                                  try {
+                                    await launchUrl(
+                                      url,
+                                      mode: LaunchMode.externalApplication,
+                                    );
+                                  } catch (e) {
+                                    await launchUrl(
+                                      url,
+                                      mode: LaunchMode.platformDefault,
+                                    );
+                                  }
+                                },
+                                  customBorder: const CircleBorder(),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: const Icon(
+                                        SocialIcons.youtube,
+                                        color: Color(0xffFFFFFF)
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 24,
+                              ),
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () async {
+                                    var url = Uri.parse(
+                                        'https://www.instagram.com/medvezh.ugol/');
+                                    try {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    } catch (e) {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.platformDefault,
+                                      );
+                                    }
+                                  },
+                                  customBorder: const CircleBorder(),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: const Icon(
+                                        SocialIcons.instagram,
+                                        color: Color(0xffFFFFFF)
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
+          ),
         ),
-        const SizedBox(
-          height: 6.87 ,
-        ),
-        BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-          builder: (context, state) {
-            return Text(
-              state.card?.name ?? "",
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Unbounded'
-              ),
-            );
-          },
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              (authService.phone == '') ? 'phone' : authService.phone,
-              style:
-              const TextStyle(color: AppColors.color808080, fontSize: 14),
-            ),
-            // const SizedBox(
-            //   width: 17,
-            // ),
-            // const Text('youremail@mail.com',
-            //     style: TextStyle(
-            //       color: AppColors.color808080,
-            //       fontSize: 14,
-            //     )),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

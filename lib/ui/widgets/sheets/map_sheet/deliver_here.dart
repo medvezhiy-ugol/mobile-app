@@ -8,10 +8,11 @@ import 'package:medvezhiy_ugol/ui/widgets/buttons/custom_button.dart';
 import '../../../../utils/app_colors.dart';
 
 class DeliverHere extends StatefulWidget {
-  const DeliverHere({super.key, required this.onTap, required this.address});
+  const DeliverHere({super.key, required this.onTap, required this.address, required this.fromPage});
 
   final Function() onTap;
   final String address;
+  final bool fromPage;
 
   @override
   State<DeliverHere> createState() => _DeliverHereState();
@@ -108,15 +109,24 @@ class _DeliverHereState extends State<DeliverHere> {
           GestureDetector(
             onTap: () async {
               Box<AddressModel> box = await Hive.openBox<AddressModel>('addresses');
-              await box.add(AddressModel(
+              AddressModel addressModel = AddressModel(
                 name: widget.address,
                 apartment: apartment.text,
                 entrance: entrance.text,
                 floor: floor.text,
                 intercom: intercom.text,
                 comment: comment.text,
-              ));
-              context.read<CustomNavbarCubit>().changeIndex(2);
+              );
+              await box.add(addressModel);
+              box = await Hive.openBox<AddressModel>('myAddress');
+              box.put("address", addressModel);
+              context.read<CustomNavbarCubit>().changeAddress(addressModel);
+              if (widget.fromPage) {
+                Navigator.of(context).pop();
+              }
+              else {
+                context.read<CustomNavbarCubit>().changeIndex(2);
+              }
             },
               child: const CustomButton(text: 'Доставить сюда')
           ),

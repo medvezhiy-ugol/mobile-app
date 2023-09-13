@@ -6,10 +6,9 @@ import '../../../../ui/primary_button.dart';
 import '../../../../utils/app_colors.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
-  const ViewRestaurantWidget({super.key, required this.pageController, required this.isCenter});
+  const ViewRestaurantWidget({super.key, required this.pageController});
 
   final PageController pageController;
-  final bool isCenter;
 
   @override
   Widget build(BuildContext context) {
@@ -56,52 +55,38 @@ class ViewRestaurantWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                isCenter ? '150023, Ярославль, улица Свободы, 45' : '150064, Ярославль, Ленинградский проспект, 62',
+              const SizedBox(height: 15),
+              const Text(
+                '150023, Ярославль, улица Свободы, 45',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: AppColors.color808080,
                 ),
               ),
-              SizedBox(
-                height: 5,
-              ),
+              const SizedBox(height: 5),
               Text(
-                isCenter
-                    ? DateTime.now().hour > 22 || DateTime.now().hour < 10
+                DateTime.now().hour > 22 || DateTime.now().hour < 10
                     ? 'Откроется в 10:00'
-                    : 'Открыто до 22:00'
-                    :  DateTime.now().hour > 23 || DateTime.now().hour < 11
-                    ? 'Откроется в 11:00'
-                    : 'Открыто до 23:00',
+                    : 'Открыто до 22:00',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: isCenter
-                        ? DateTime.now().hour > 22 || DateTime.now().hour < 10
-                        ? Color(0xffFF3838)
-                        : Color(0xff32CD43)
-                        :  DateTime.now().hour > 23 || DateTime.now().hour < 11
-                        ? Color(0xffFF3838)
-                        : Color(0xff32CD43)
+                    color: DateTime.now().hour > 22 || DateTime.now().hour < 10
+                        ? const Color(0xffFF3838)
+                        : const Color(0xff32CD43)
                 ),
               ),
+              const SizedBox(height: 22),
               SizedBox(
-                height: 22,
-              ),
-              Container(
                 height: 30,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       color: AppColors.color26282F,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Есть завтрак',
                           style: TextStyle(

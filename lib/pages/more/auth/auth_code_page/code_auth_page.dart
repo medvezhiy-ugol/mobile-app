@@ -89,8 +89,8 @@ class _CodeAuthPageState extends State<CodeAuthPage> {
                     const SizedBox(
                       height: 12,
                     ),
-                    const Text(
-                      'Мы отправили код на номер +79301032835',
+                    Text(
+                      'Мы отправили код на номер ${CodeAuthPage.codeController!.text}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xffFFFFFF)

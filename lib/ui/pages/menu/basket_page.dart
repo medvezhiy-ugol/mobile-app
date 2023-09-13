@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/delivery_sheet.dart';
+import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/promocode_sheet.dart';
 import '../../close_circle_button.dart';
 import '../../widgets/menu/basket_item.dart';
 import '../../../utils/app_colors.dart';
@@ -31,6 +32,7 @@ class _BasketPageState extends State<BasketPage> {
 
   String delivery = '';
   String takeaway = '';
+  String promocode = '';
 
   @override
   void initState() {
@@ -226,16 +228,24 @@ class _BasketPageState extends State<BasketPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Container(
-                    height: 60,
-                    color: const Color(0xff191A1F),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "LETO2023",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: Color(0xffFFFFFF)
+                  GestureDetector(
+                    onTap: () async {
+                      promocode = await showModalBottomSheet(
+                          context: context,
+                          builder: (context) => PromocodeSheet()
+                      ) ?? promocode;
+                    },
+                    child: Container(
+                      height: 60,
+                      color: const Color(0xff191A1F),
+                      alignment: Alignment.center,
+                      child: Text(
+                        promocode,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Color(0xffFFFFFF)
+                        ),
                       ),
                     ),
                   ),
@@ -385,11 +395,11 @@ class _BasketPageState extends State<BasketPage> {
                           return SafeArea(
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     Center(
                                       child: Container(
                                         height: 4,
@@ -400,17 +410,17 @@ class _BasketPageState extends State<BasketPage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 36),
-                                    Text(
+                                    const SizedBox(height: 36),
+                                    const Text(
                                       'Выберите сервис',
                                       style: TextStyle(
                                           fontFamily: 'Unbounded',
                                           fontWeight: FontWeight.w600,
                                           fontSize: 24,
-                                          color: Color(0xffEFEFEF)
+                                          color: Color(0xffEFEFEF),
                                       ),
                                     ),
-                                    SizedBox(height: 30),
+                                    const SizedBox(height: 30),
                                     for (var map in availableMaps)
                                       Container(
                                         height: 65,
@@ -447,7 +457,7 @@ class _BasketPageState extends State<BasketPage> {
                                       ),
                                     Container(
                                       height: 65,
-                                      margin: EdgeInsets.symmetric(
+                                      margin: const EdgeInsets.symmetric(
                                           vertical: 1
                                       ),
                                       color: Color(0xff26282F),
@@ -554,30 +564,6 @@ class _BasketPageState extends State<BasketPage> {
                         ],
                       ),
                     ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "При самовывозе",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Color(0xffFFFFFF)
-                          ),
-                        ),
-                        Text(
-                          "360 ₽",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color(0xffFFFFFF)
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(height: 100),
                 ],
               ),
@@ -593,6 +579,7 @@ class _BasketPageState extends State<BasketPage> {
               showModalBottomSheet(
                 context: context,
                 backgroundColor: Colors.transparent,
+                isScrollControlled: true,
                 builder: (context) => const DeliverySheet(),
               );
             },
