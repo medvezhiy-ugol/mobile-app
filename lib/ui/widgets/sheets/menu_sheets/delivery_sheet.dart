@@ -22,7 +22,7 @@ class DeliverySheet extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Container(
-          height: 327,
+          height: 400,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: const BoxDecoration(
             color: AppColors.color191A1F,
@@ -32,7 +32,7 @@ class DeliverySheet extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(
                   top: 32,
                   left: 15,
@@ -50,7 +50,6 @@ class DeliverySheet extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  print("kdjfng");
                   await LaunchApp.openApp(
                     androidPackageName: 'ru.foodfox.client&;hl=ru&;gl=US',
                     iosUrlScheme: 'яндекс-еда-доставка-еды://',
@@ -58,7 +57,10 @@ class DeliverySheet extends StatelessWidget {
                     // openStore: false
                   );
                 },
-                  child: DeliveryTile(icon: 'yandex', text: 'Яндекс Еда')),
+                  child: const DeliveryTile(
+                      icon: 'yandex',
+                      text: 'Яндекс Еда',
+                  )),
               GestureDetector(
                 onTap: () async {
                   await LaunchApp.openApp(
@@ -68,7 +70,10 @@ class DeliverySheet extends StatelessWidget {
                     // openStore: false
                   );
                 },
-                  child: DeliveryTile(icon: 'sber', text: 'Деливери')),
+                  child: const DeliveryTile(
+                      icon: 'sber',
+                      text: 'Деливери',
+                  )),
               GestureDetector(
                 onTap: () async {
                   await LaunchApp.openApp(
@@ -78,7 +83,23 @@ class DeliverySheet extends StatelessWidget {
                     // openStore: false
                   );
                 },
-                  child: DeliveryTile(icon: 'sber', text: 'Сбер Мега Маркет')),
+                  child: const DeliveryTile(
+                      icon: 'sber',
+                      text: 'Сбер Мега Маркет',
+                  )),
+              GestureDetector(
+                  onTap: () async {
+                    await LaunchApp.openApp(
+                      androidPackageName: 'ru.megamarket.marketplace',
+                      iosUrlScheme: 'мегамаркет-маркетплейс://',
+                      appStoreLink: 'itms-apps://itunes.apple.com/us/app/мегамаркет-маркетплейс/id1438856489',
+                      // openStore: false
+                    );
+                  },
+                  child: const DeliveryTile(
+                      icon: 'ugol',
+                      text: 'Медвежий угол',
+                  )),
             ],
           ),
         )

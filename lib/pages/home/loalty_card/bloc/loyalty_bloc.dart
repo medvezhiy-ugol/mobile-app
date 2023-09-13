@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:medvezhiy_ugol/models/loalty_card.dart';
+import 'package:medvezhiy_ugol/models/loyalty_card_model/loyalty_card.dart';
 import 'package:medvezhiy_ugol/services/loalty_service.dart';
 import 'package:meta/meta.dart';
 

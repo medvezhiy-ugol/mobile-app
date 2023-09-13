@@ -13,6 +13,7 @@ import '../../close_circle_button.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/flip_countdown_clock.dart';
 import '../../widgets/sheets/loyalty_card_sheet.dart';
+import '../product_page.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
           child: SafeArea(
             child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
   builder: (context, state) {
-    return SingleChildScrollView(
+    return state.isLoading ? Container() : SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -452,14 +453,17 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Популярно',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.colorE3E3E3,
+                          child: GestureDetector(
+                            onTap: () => context.read<CustomNavbarCubit>().changeIndex(2),
+                            child: const Text(
+                              'Популярно',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.colorE3E3E3,
+                              ),
                             ),
                           ),
                         ),
@@ -469,24 +473,54 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             children: [
                               Expanded(
-                                child: PopularItem(
-                                  srcImg: menu[2].itemSizes[0].buttonImageUrl!,
-                                  name: menu[2].name,
-                                  gram: menu[2].itemSizes.first.portionWeightGrams.toString(),
-                                  description: menu[2].description,
-                                  price: menu[2].itemSizes[0].prices[0].price,
-                                  isBadge: false,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: state.context!,
+                                        isScrollControlled: true,
+                                        builder: (sheetContext) => Container(
+                                          color: const Color(0xff000000),
+                                          padding: EdgeInsets.only(
+                                            top: MediaQuery.of(state.context!).padding.top,
+                                          ),
+                                          child: ProductPage(id: menu[2].id, isPizza: false),
+                                        )
+                                    );
+    },
+                                  child: PopularItem(
+                                    srcImg: menu[2].itemSizes[0].buttonImageUrl!,
+                                    name: menu[2].name,
+                                    gram: menu[2].itemSizes.first.portionWeightGrams.toString(),
+                                    description: menu[2].description,
+                                    price: menu[2].itemSizes[0].prices[0].price,
+                                    isBadge: false,
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 5),
                               Expanded(
-                                child: PopularItem(
-                                  srcImg: menu[1].itemSizes[0].buttonImageUrl!,
-                                  name: menu[1].name,
-                                  gram: menu[1].itemSizes.first.portionWeightGrams.toString(),
-                                  description: menu[1].description,
-                                  price: menu[1].itemSizes[0].prices[0].price,
-                                  isBadge: false,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: state.context!,
+                                        isScrollControlled: true,
+                                        builder: (sheetContext) => Container(
+                                          color: const Color(0xff000000),
+                                          padding: EdgeInsets.only(
+                                            top: MediaQuery.of(state.context!).padding.top,
+                                          ),
+                                          child: ProductPage(id: menu[2].id, isPizza: false),
+                                        )
+                                    );
+                                  },
+                                  child: PopularItem(
+                                    srcImg: menu[1].itemSizes[0].buttonImageUrl!,
+                                    name: menu[1].name,
+                                    gram: menu[1].itemSizes.first.portionWeightGrams.toString(),
+                                    description: menu[1].description,
+                                    price: menu[1].itemSizes[0].prices[0].price,
+                                    isBadge: false,
+                                  ),
                                 ),
                               ),
                             ],

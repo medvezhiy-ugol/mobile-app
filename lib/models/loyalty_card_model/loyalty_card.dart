@@ -1,39 +1,74 @@
 
-// To parse this JSON data, do
-//
-//     final loaltyCard = loaltyCardFromJson(jsonString);
+import 'package:hive/hive.dart';
+part 'loyalty_card.g.dart';
 
-import 'dart:convert';
-
-LoyaltyCard loaltyCardFromJson(String str) => LoyaltyCard.fromJson(json.decode(str));
-
-String loaltyCardToJson(LoyaltyCard data) => json.encode(data.toJson());
-
-class LoyaltyCard {
+@HiveType(typeId: 2)
+class LoyaltyCard extends HiveObject {
+    @HiveField(0)
     String id;
+
+    @HiveField(1)
     dynamic referrerId;
+
+    @HiveField(2)
     String name;
+
+    @HiveField(3)
     String? surname;
+
+    @HiveField(4)
     dynamic middleName;
+
+    @HiveField(5)
     dynamic comment;
+
+    @HiveField(6)
     String phone;
+
+    @HiveField(7)
     String cultureName;
+
+    @HiveField(8)
     dynamic birthday;
+
+    @HiveField(9)
     dynamic email;
+
+    @HiveField(10)
     int sex;
+
+    @HiveField(11)
     int consentStatus;
+
+    @HiveField(12)
     bool anonymized;
+
+    @HiveField(13)
     List<dynamic> cards;
+
+    @HiveField(14)
     List<Category> categories;
+
+    @HiveField(15)
     List<WalletBalance> walletBalances;
+
+    @HiveField(16)
     dynamic userData;
+
+    @HiveField(17)
     bool shouldReceivePromoActionsInfo;
+
+    @HiveField(18)
     bool shouldReceiveLoyaltyInfo;
+
+    @HiveField(19)
     bool shouldReceiveOrderStatusInfo;
     // DateTime? personalDataConsentFrom;
     // DateTime personalDataConsentTo;
     // dynamic personalDataProcessingFrom;
     // dynamic personalDataProcessingTo;
+
+    @HiveField(20)
     bool isDeleted;
 
     LoyaltyCard({

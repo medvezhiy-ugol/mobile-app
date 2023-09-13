@@ -110,9 +110,8 @@ class _CustomNavbarState extends State<CustomNavbar> {
                                         case 3:
                                           return MaterialApp(
                                               navigatorKey: mapKey,
-                                              home: MapPage(
-                                                isDelivery: false,
-                                                isOrder: false,
+                                              home: const MapPage(
+                                                fromPage: false,
                                               ),
                                           );
                                         case 4:

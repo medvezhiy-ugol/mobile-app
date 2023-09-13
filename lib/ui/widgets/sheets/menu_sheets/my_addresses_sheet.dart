@@ -102,9 +102,8 @@ class _MyAddressesSheetState extends State<MyAddressesSheet> {
                 GestureDetector(
                   onTap: () async {
     await Navigator.of(context).push(MaterialPageRoute(
-    builder: (context) => MapPage(
-    isOrder: true,
-    isDelivery: true
+    builder: (context) => const MapPage(
+    fromPage: true,
     )));
     setState(() {
 

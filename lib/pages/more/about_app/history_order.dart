@@ -4,6 +4,7 @@ import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart
 import 'package:medvezhiy_ugol/pages/more/my_orders/order_delivered_page.dart';
 
 import '../../../ui/back_arrow_button.dart';
+import '../../../utils/app_colors.dart';
 
 class HistoryOrder extends StatefulWidget {
   const HistoryOrder({super.key});
@@ -16,7 +17,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff111216),
+      backgroundColor: const Color(0xff111216),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -56,12 +57,22 @@ class _HistoryOrderState extends State<HistoryOrder> {
             ),
             BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
               builder: (context, state) {
-                return Expanded(
+                return state.orders.isEmpty ? const Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    'У вас нет заказов, давайте это исправим?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: AppColors.colorFFFFFF,
+                      fontStyle: FontStyle.normal,
+                    ),
+                  ),
+                ) : Expanded(
                   child: ListView.builder(
                       itemCount: state.orders.length,
                       itemBuilder: (context, index) {
                         String names = "";
-                        print(state.orders);
                         for (int j = 0; j < state.orders[index].length; j++) {
                           names += '${state.orders[index][j].name}${j == state.orders[index].length ? "" : ", "}';
                         }

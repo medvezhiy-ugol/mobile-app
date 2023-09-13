@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +9,7 @@ import 'package:medvezhiy_ugol/ui/pages/custom_navbar.dart';
 
 import 'common_setup/module_container.dart';
 import 'models/address_model/address_model.dart';
+import 'models/loyalty_card_model/loyalty_card.dart';
 import 'services/menu_service.dart';
 import 'services/theme_service.dart';
 import 'utils/app_colors.dart';
@@ -25,6 +24,7 @@ void main() async {
   );
   await Hive.initFlutter();
   Hive.registerAdapter(AddressModelAdapter());
+  Hive.registerAdapter(LoyaltyCardAdapter());
   runApp(UgolApp());
 }
 

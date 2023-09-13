@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:hive/hive.dart';
 import '../../../models/address_model/address_model.dart';
-import '../../../models/loalty_card.dart';
+import '../../../models/loyalty_card_model/loyalty_card.dart';
 import '../../../models/menu.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/menu_service.dart';
@@ -26,11 +26,11 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   int _orderSum = 0;
   late Timer timer;
   int seconds = 1800;
+  LoyaltyCard? card;
 
   void init() async {
     Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
     List<MenuCategory> menu = await service.getFullMenu();
-    LoyaltyCard? card;
     if (authService.accessToken.isNotEmpty) {
       card = await service.getUserCard(authService.accessToken);
     }
@@ -61,7 +61,17 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   }
 
   void getUser() async {
-    LoyaltyCard? card = await service.getUserCard(authService.accessToken);
+    card = await service.getUserCard(authService.accessToken);
+    // Box<LoyaltyCard> box = await Hive.openBox<LoyaltyCard>('user');
+    // await box.put("user", card!);
+    emit(state.copyWith(
+      card: card,
+    ));
+  }
+
+  void changeUser(String name, String date, int sex) {
+    // Box<LoyaltyCard> box = await Hive.openBox<LoyaltyCard>('user');
+    // await box.put("user", card!);
     emit(state.copyWith(
       card: card,
     ));

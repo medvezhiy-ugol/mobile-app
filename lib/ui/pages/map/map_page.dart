@@ -12,10 +12,9 @@ import '../../widgets/buttons/custom_button.dart';
 import '../../widgets/map/restaurant_info.dart';
 
 class MapPage extends StatefulWidget {
-  MapPage({super.key, required this.isOrder, required this.isDelivery});
+  const MapPage({super.key, required this.fromPage});
 
-  final bool isOrder;
-  final bool isDelivery;
+  final bool fromPage;
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -60,7 +59,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
   bool _isDraged = false;
   bool isFadeAnimated = false;
-  bool isCenter = false;
 
   void getPosition() async {
     Position position = await _determinePosition();
@@ -192,12 +190,14 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                             ),
                             Row(
                               children: [
-                                GestureDetector(onTap: () {
+                                GestureDetector(
+                                  onTap: () {
                                   pageController.animateToPage(
                                     0,
                                     duration: const Duration(milliseconds: 300),
                                     curve: Curves.linear,
                                   );
+                                  panelController.animatePanelToPosition(0);
                                   getPosition();
                                   isDeliver = true;
                                   setState(() {
@@ -240,6 +240,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                     duration: const Duration(milliseconds: 200),
                                     curve: Curves.bounceIn,
                                   );
+                                  panelController.animatePanelToPosition(0.7);
                                   setState(() {
 
                                   });
@@ -407,6 +408,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                 }
                           },
                             address: adress,
+                            fromPage: widget.fromPage,
                           ),
                           MediaQuery.removePadding(
                             context: context,
@@ -434,24 +436,23 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                       adress: 'Улица Свободы, 16',
                                       index: 0,
                                       onTap: () async {
-                                        if (panelController.isAttached) {
-                                          panelController.animatePanelToPosition(
-                                            0,
-                                            duration: const Duration(milliseconds: 300),
-                                          );
-                                          await _mapController.moveCamera(
-                                            CameraUpdate.newCameraPosition(
-                                              CameraPosition(target: Point(latitude: 57.625636, longitude: 39.879540), zoom: 15),
+                                        await _mapController.moveCamera(
+                                          CameraUpdate.newCameraPosition(
+                                            const CameraPosition(
+                                                target: Point(
+                                                    latitude: 57.625636,
+                                                    longitude: 39.879540
+                                                ),
+                                                zoom: 15,
                                             ),
-                                            animation: MapAnimation(
-                                              type: MapAnimationType.smooth,
-                                              duration: 0.5,
-                                            ),
-                                          );
-                                        }
+                                          ),
+                                          animation: const MapAnimation(
+                                            type: MapAnimationType.smooth,
+                                            duration: 0.5,
+                                          ),
+                                        );
                                         latEnd = 57.625636;
                                         lonEnd = 39.879540;
-                                        isCenter = true;
                                         pageController.animateToPage(
                                           2,
                                           duration: const Duration(milliseconds: 200),
@@ -460,139 +461,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                         setState(() {
 
                                         });
-                                      },
-                                    ),
-                                    RestaurantInfo(
-                                      openInfo: DateTime.now().hour > 23 || DateTime.now().hour < 11 ? 'Откроется в 11:00' : 'Открыто до 23:00',
-                                      color: DateTime.now().hour > 23 || DateTime.now().hour < 11
-                                          ? Color(0xffFF3838)
-                                          : Color(0xff32CD43),
-                                      distance: '1,3 км',
-                                      adress: 'Ленинградский просп., 62',
-                                      index: 1,
-                                      onTap: () async {
-                                        if (panelController.isAttached) {
-                                          panelController.animatePanelToPosition(
-                                            0,
-                                            duration: const Duration(milliseconds: 300),
-                                          );
-                                        }
-                                        await _mapController.moveCamera(
-                                          CameraUpdate.newCameraPosition(
-                                            CameraPosition(target: Point(
-                                              latitude: 57.693521,
-                                              longitude: 39.772742,
-                                            ), zoom: 15),
-                                          ),
-                                          animation: MapAnimation(
-                                            type: MapAnimationType.smooth,
-                                            duration: 0.5,
-                                          ),
-                                        );
-                                        latEnd = 57.693521;
-                                        lonEnd = 39.772742;
-                                        pageController.animateToPage(
-                                          2,
-                                          duration: const Duration(milliseconds: 300),
-                                          curve: Curves.linear,
-                                        );
-                                        isCenter = false;
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          MediaQuery.removePadding(
-                            context: context,
-                            removeTop: true,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                              ),
-                              child: Theme(
-                                data: Theme.of(context).copyWith(
-                                  colorScheme: ColorScheme.fromSwatch(
-                                    accentColor: AppColors.color191A1F,
-                                  ),
-                                ),
-                                child: ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  children: <Widget>[
-                                    const SizedBox(height: 12),
-                                    RestaurantInfo(
-                                      openInfo: DateTime.now().hour > 22 || DateTime.now().hour < 10 ? 'Откроется в 10:00' : 'Открыто до 22:00',
-                                      color: DateTime.now().hour > 22 || DateTime.now().hour < 10
-                                          ? Color(0xffFF3838)
-                                          : Color(0xff32CD43),
-                                      distance: '1,3 км',
-                                      adress: 'Улица Свободы, 16',
-                                      index: 0,
-                                      onTap: () async {
-                                        if (panelController.isAttached) {
-                                          panelController.animatePanelToPosition(
-                                            0,
-                                            duration: const Duration(milliseconds: 300),
-                                          );
-                                          await _mapController.moveCamera(
-                                            CameraUpdate.newCameraPosition(
-                                              CameraPosition(target: Point(latitude: 57.625636, longitude: 39.879540), zoom: 15),
-                                            ),
-                                            animation: MapAnimation(
-                                              type: MapAnimationType.smooth,
-                                              duration: 0.5,
-                                            ),
-                                          );
-                                        }
-                                        latEnd = 57.625636;
-                                        lonEnd = 39.879540;
-                                        isCenter = true;
-                                        pageController.animateToPage(
-                                          2,
-                                          duration: const Duration(milliseconds: 200),
-                                          curve: Curves.bounceIn,
-                                        );
-                                        setState(() {
-
-                                        });
-                                      },
-                                    ),
-                                    RestaurantInfo(
-                                      openInfo: DateTime.now().hour > 23 || DateTime.now().hour < 11 ? 'Откроется в 11:00' : 'Открыто до 23:00',
-                                      color: DateTime.now().hour > 23 || DateTime.now().hour < 11
-                                          ? Color(0xffFF3838)
-                                          : Color(0xff32CD43),
-                                      distance: '1,3 км',
-                                      adress: 'Ленинградский просп., 62',
-                                      index: 1,
-                                      onTap: () async {
-                                        if (panelController.isAttached) {
-                                          panelController.animatePanelToPosition(
-                                            0,
-                                            duration: const Duration(milliseconds: 300),
-                                          );
-                                        }
-                                        await _mapController.moveCamera(
-                                          CameraUpdate.newCameraPosition(
-                                            CameraPosition(target: Point(
-                                              latitude: 57.693521,
-                                              longitude: 39.772742,
-                                            ), zoom: 15),
-                                          ),
-                                          animation: MapAnimation(
-                                            type: MapAnimationType.smooth,
-                                            duration: 0.5,
-                                          ),
-                                        );
-                                        latEnd = 57.693521;
-                                        lonEnd = 39.772742;
-                                        pageController.animateToPage(
-                                          2,
-                                          duration: const Duration(milliseconds: 300),
-                                          curve: Curves.linear,
-                                        );
-                                        isCenter = false;
                                       },
                                     ),
                                   ],
@@ -614,12 +482,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                             child: !isFadeAnimated
                                 ? ViewRestaurantWidget(
                               pageController: pageController,
-                              isCenter: isCenter,
                             )
                                 : FullViewRestaurantWidget(
                               latEnd: latEnd,
                               lonEnd: lonEnd,
-                              isCenter: isCenter,
                             ),
                           ),
                         ],
