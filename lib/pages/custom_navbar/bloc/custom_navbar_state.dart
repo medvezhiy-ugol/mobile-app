@@ -13,7 +13,7 @@ class CustomNavbarState extends Equatable {
     this.orders = const [],
     this.orderSum = 0,
     this.myAddress,
-    this.seconds = 1800,
+    this.orderSeconds = 1800,
     this.balance = 0.0,
     this.valueNotifier,
   });
@@ -26,7 +26,7 @@ class CustomNavbarState extends Equatable {
   final List<List<MenuProduct>> orders;
   final int orderSum;
   final AddressModel? myAddress;
-  final int seconds;
+  final int orderSeconds;
   final String name;
   final String birthday;
   final bool sex;
@@ -42,7 +42,7 @@ class CustomNavbarState extends Equatable {
     int? orderSum,
     AddressModel? myAddress,
     List<List<MenuProduct>>? orders,
-    int? seconds,
+    int? orderSeconds,
     String? name,
     String? birthday,
     bool? sex,
@@ -60,7 +60,7 @@ class CustomNavbarState extends Equatable {
     orderSum: orderSum ?? this.orderSum,
     myAddress: myAddress ?? this.myAddress,
     orders: orders ?? this.orders,
-    seconds: seconds ?? this.seconds,
+    orderSeconds: orderSeconds ?? this.orderSeconds,
     balance: balance ?? this.balance,
     valueNotifier: valueNotifier ?? this.valueNotifier,
   );
@@ -78,7 +78,7 @@ class CustomNavbarState extends Equatable {
     orderSum,
     myAddress,
     orders,
-    seconds,
+    orderSeconds,
     balance,
     valueNotifier,
   ];

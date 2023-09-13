@@ -9,14 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="added apps">
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix timer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_cubit.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/delivery_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/delivery_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/map/search_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,13 +99,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677934220958</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Корзина">
-      <created>1685476051191</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1685476051191</updated>
     </task>
     <task id="LOCAL-00012" summary="Корзина">
       <created>1685885513225</created>
@@ -444,7 +436,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694555323355</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="fix timer">
+      <created>1694600300557</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1694600300557</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -465,7 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Скрыть кнопки &quot;доставка и самовывоз&quot; из меню заведения и адрес" />
     <MESSAGE value="Штрих код" />
     <MESSAGE value="Fix icons" />
     <MESSAGE value="Розыгрыш" />
@@ -490,7 +488,8 @@
     <MESSAGE value="fix menu page" />
     <MESSAGE value="add address" />
     <MESSAGE value="added apps" />
-    <option name="LAST_COMMIT_MESSAGE" value="added apps" />
+    <MESSAGE value="fix timer" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix timer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

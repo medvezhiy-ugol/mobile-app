@@ -6,6 +6,7 @@ import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/home/active_order_page/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
+import 'package:medvezhiy_ugol/ui/pages/jackpot/jackpot_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/loalty_service.dart';
@@ -153,33 +154,36 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 13),
-                  SizedBox(
-                    height: 70,
-                    width: 185,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/drum.png',
-                          fit: BoxFit.fill,
-                          height: 70,
-                          width: 185,
-                        ),
-                        Positioned(
-                          left: 30,
-                          top: 11,
-                          child: FlipCountdownClock(
-                            duration: const Duration(days: 1),
-                            digitSize: 36.0,
-                            width: 21,
-                            height: 40.0,
-                            digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
-                            separatorWidth: 0,
-                            digitColor: const Color(0xff26252B),
-                            backgroundColor: const Color(0xffF3CF7F),
-                            onDone: () => print('Buzzzz!'),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => JackpotPage())),
+                    child: SizedBox(
+                      height: 70,
+                      width: 185,
+                      child: Stack(
+                        children: [
+                          Image.asset(
+                            'assets/images/drum.png',
+                            fit: BoxFit.fill,
+                            height: 70,
+                            width: 185,
                           ),
-                        )
-                      ],
+                          Positioned(
+                            left: 30,
+                            top: 11,
+                            child: FlipCountdownClock(
+                              duration: const Duration(days: 1),
+                              digitSize: 36.0,
+                              width: 21,
+                              height: 40.0,
+                              digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
+                              separatorWidth: 0,
+                              digitColor: const Color(0xff26252B),
+                              backgroundColor: const Color(0xffF3CF7F),
+                              onDone: () => print('Buzzzz!'),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   const Text(
@@ -199,33 +203,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(height: 37),
-                  BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-  builder: (context, state) {
-    return state.seconds == 1800 ? Container() : Container(
-                    child: Column(children: [
-                      Text("Заказ принят", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
-                      SizedBox(height: 10,),
-                      GestureDetector(onTap: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ActiveOrderPage()));
-                      },
-                          child: Image.asset("assets/images/icons.png")),
-                      SizedBox(height: 12,),
-                      Text(Formatter.formattedTime(timeInSecond: state.seconds), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
-                      SizedBox(height: 3),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 120),
-                        child: LinearProgressIndicator(
-                          value: (1800 - state.seconds) / 1800,
-                          backgroundColor: AppColors.color191A1F, color: AppColors.colorFF9900,),
-                      ),
-                      SizedBox(height: 32,)
-                    ],),
-                  );
-  },
-),
+                  state.orderSeconds == 1800 ? Container() : GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ActiveOrderPage()));
+                    },
+                    child: Container(
+                      child: Column(children: [
+                        Text("Заказ принят", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
+                        SizedBox(height: 10,),
+                        Image.asset("assets/images/icons.png"),
+                        SizedBox(height: 12,),
+                        Text(Formatter.formattedTime(timeInSecond: state.orderSeconds), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
+                        SizedBox(height: 3),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 120),
+                          child: LinearProgressIndicator(
+                            value: (1800 - state.orderSeconds) / 1800,
+                            backgroundColor: AppColors.color191A1F, color: AppColors.colorFF9900,),
+                        ),
+                        SizedBox(height: 32,)
+                      ],),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(

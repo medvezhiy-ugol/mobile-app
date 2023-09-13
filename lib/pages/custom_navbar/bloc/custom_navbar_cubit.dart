@@ -25,6 +25,7 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   final List<List<MenuProduct>> orders = [];
   int _orderSum = 0;
   late Timer timer;
+  late Timer orderTimer;
   int seconds = 1800;
   final ValueNotifier<double> valueNotifier = ValueNotifier(0.0);
 
@@ -121,13 +122,13 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   void pay() {
     orders.add(_order);
     _order.clear();
-    timer = Timer.periodic(
+    orderTimer = Timer.periodic(
         const Duration(seconds: 1),
             (timer) {
       if (seconds > 0) {
         seconds--;
         valueNotifier.value = 1800 - seconds.toDouble();
-        emit(state.copyWith(seconds: seconds, valueNotifier: valueNotifier));
+        emit(state.copyWith(orderSeconds: seconds, valueNotifier: valueNotifier));
       }
     });
     emit(state.copyWith(

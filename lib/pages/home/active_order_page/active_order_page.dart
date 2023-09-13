@@ -133,7 +133,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
             BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
   builder: (context, state) {
     return Text(
-      Formatter.formattedTime(timeInSecond: state.seconds),
+      Formatter.formattedTime(timeInSecond: state.orderSeconds),
               style: const TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.w400,
