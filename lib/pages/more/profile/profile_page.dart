@@ -26,6 +26,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   DateTime date = DateTime(2016, 10, 26);
 
+  @override
+  void initState() {
+    _textNameController.text = context.read<CustomNavbarCubit>().state.name;
+    _textBirthController.text = context.read<CustomNavbarCubit>().state.birthday;
+    _textSexController.text = context.read<CustomNavbarCubit>().state.sex ? "Мужской" : "Женский";
+    super.initState();
+  }
+
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
       context: context,
@@ -287,7 +295,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           context.read<CustomNavbarCubit>().changeUser(
                               _textNameController.text,
                               _textBirthController.text,
-                              _textSexController.text == "Мусжкой" ? 1 : 0
+                              _textSexController.text == "Мужской"
                           );
                           Navigator.of(context).pop();
                         },

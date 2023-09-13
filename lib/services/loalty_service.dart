@@ -1,7 +1,7 @@
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/loyalty_card_model/loyalty_card.dart';
+import '../models/loyalty_card.dart';
 import 'api_service.dart';
 import 'auth_service.dart';
 

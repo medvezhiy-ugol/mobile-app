@@ -291,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         const SizedBox(height: 19),
                                         Text(
-                                          state.card!.name,
+                                          state.name,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16,
@@ -303,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${state.card!.walletBalances[0].balance} ",
+                                              "${state.balance} ",
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 16,

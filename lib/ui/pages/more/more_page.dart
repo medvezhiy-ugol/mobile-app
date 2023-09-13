@@ -142,10 +142,9 @@ class _MorePageState extends State<MorePage> {
                       height: 6.87 ,
                     ),
                     BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-                      buildWhen: (previous, current) => previous.card?.name != current.card?.name,
                       builder: (context, state) {
                         return Text(
-                          state.card?.name ?? "",
+                          state.name,
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24,

@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/services/api_service.dart';
 
 import '../models/get_menu.dart';
-import '../models/loyalty_card_model/loyalty_card.dart';
+import '../models/loyalty_card.dart';
 import '../models/menu.dart';
 import 'auth_service.dart';
 

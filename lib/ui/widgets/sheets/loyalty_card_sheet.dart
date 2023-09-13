@@ -10,6 +10,7 @@ class LoyaltyCardSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 700,
       color: const Color(0xff111216),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -75,7 +76,7 @@ class LoyaltyCardSheet extends StatelessWidget {
                             ),
                             SizedBox(height: 19),
                             Text(
-                              state.card!.name,
+                              state.name,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -87,7 +88,7 @@ class LoyaltyCardSheet extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${state.card!.walletBalances[0].balance} ",
+                                  "${state.balance} ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16,
