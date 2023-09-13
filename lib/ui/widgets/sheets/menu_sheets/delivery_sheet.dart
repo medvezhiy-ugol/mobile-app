@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:medvezhiy_ugol/ui/widgets/menu/delivery_tile.dart';
 
 import '../../../../utils/app_colors.dart';
+import '../../../pages/menu/delivery_page.dart';
 
 class DeliverySheet extends StatelessWidget {
   const DeliverySheet({super.key});
@@ -89,12 +90,7 @@ class DeliverySheet extends StatelessWidget {
                   )),
               GestureDetector(
                   onTap: () async {
-                    await LaunchApp.openApp(
-                      androidPackageName: 'ru.megamarket.marketplace',
-                      iosUrlScheme: 'мегамаркет-маркетплейс://',
-                      appStoreLink: 'itms-apps://itunes.apple.com/us/app/мегамаркет-маркетплейс/id1438856489',
-                      // openStore: false
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DeliveryPage()));
                   },
                   child: const DeliveryTile(
                       icon: 'ugol',

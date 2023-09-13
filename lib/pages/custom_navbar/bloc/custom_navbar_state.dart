@@ -15,6 +15,7 @@ class CustomNavbarState extends Equatable {
     this.myAddress,
     this.seconds = 1800,
     this.balance = 0.0,
+    this.valueNotifier,
   });
 
   final BuildContext? context;
@@ -30,6 +31,7 @@ class CustomNavbarState extends Equatable {
   final String birthday;
   final bool sex;
   final double balance;
+  final ValueNotifier<double>? valueNotifier;
 
   CustomNavbarState copyWith({
     BuildContext? context,
@@ -45,6 +47,7 @@ class CustomNavbarState extends Equatable {
     String? birthday,
     bool? sex,
     double? balance,
+    ValueNotifier<double>? valueNotifier,
   }) => CustomNavbarState(
     context: context ?? this.context,
     isLoading: isLoading ?? this.isLoading,
@@ -59,6 +62,7 @@ class CustomNavbarState extends Equatable {
     orders: orders ?? this.orders,
     seconds: seconds ?? this.seconds,
     balance: balance ?? this.balance,
+    valueNotifier: valueNotifier ?? this.valueNotifier,
   );
 
   @override
@@ -76,5 +80,6 @@ class CustomNavbarState extends Equatable {
     orders,
     seconds,
     balance,
+    valueNotifier,
   ];
 }

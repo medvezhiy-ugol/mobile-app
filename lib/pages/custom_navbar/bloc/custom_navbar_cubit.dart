@@ -26,6 +26,7 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   int _orderSum = 0;
   late Timer timer;
   int seconds = 1800;
+  final ValueNotifier<double> valueNotifier = ValueNotifier(0.0);
 
   void init() async {
     Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
@@ -125,7 +126,8 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
             (timer) {
       if (seconds > 0) {
         seconds--;
-        emit(state.copyWith(seconds: seconds));
+        valueNotifier.value = 1800 - seconds.toDouble();
+        emit(state.copyWith(seconds: seconds, valueNotifier: valueNotifier));
       }
     });
     emit(state.copyWith(

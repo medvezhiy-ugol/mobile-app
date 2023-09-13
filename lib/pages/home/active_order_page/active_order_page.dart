@@ -1,10 +1,10 @@
-import 'dart:async';
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import '../../../ui/close_circle_button.dart';
+import '../../../utils/formatter.dart';
 
 class ActiveOrderPage extends StatefulWidget {
    ActiveOrderPage({super.key});
@@ -14,41 +14,6 @@ class ActiveOrderPage extends StatefulWidget {
 }
 
 class _ActiveOrderPageState extends State<ActiveOrderPage> {
-  late final Timer countDownTimer;
-
-   int seconds = 720;
-   double startSeconds = 720;
-   double valNotifire = 0;
-  late ValueNotifier<double> valueNotifier;
-
-  String convert(int seconds) {
-    DateTime time = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
-    return '${time.minute < 10 ? '0${time.minute}' : time.minute}:'
-        '${time.second < 10 ? '0${time.second}' : time.second}';
-  }
-
-  @override
-  void initState() {
-    valueNotifier = ValueNotifier(0.0);
-    countDownTimer = Timer.periodic(
-         Duration(seconds: 1),
-            (bannerTimer) {
-          seconds--;
-          valNotifire++;
-          valueNotifier.value = valNotifire;
-          setState(() {
-
-          });
-        }
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    countDownTimer.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,16 +103,20 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        SimpleCircularProgressBar(
+        BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return SimpleCircularProgressBar(
           size: 218,
           progressStrokeWidth: 12,
           backStrokeWidth: 12,
           backColor: AppColors.color191A1F,
           animationDuration: 3,
           progressColors: const [AppColors.colorFF9900, AppColors.colorFF3838],
-          maxValue: startSeconds,
-          valueNotifier: valueNotifier,
-        ),
+          maxValue: 1800,
+          valueNotifier: state.valueNotifier,
+        );
+  },
+),
         Column(
           children: <Widget>[
             // Text(
@@ -161,15 +130,19 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              convert(seconds),
-              style: TextStyle(
+            BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return Text(
+      Formatter.formattedTime(timeInSecond: state.seconds),
+              style: const TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.w400,
                   color: Colors.white,
                 fontFamily: 'Unbounded',
               ),
-            ),
+            );
+  },
+),
           ],
         )
       ],

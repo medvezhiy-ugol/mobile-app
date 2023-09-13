@@ -28,16 +28,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   Widget test = Container();
-  bool isOrdered = true;
 
   late final Timer _bannerTimer;
   late final Timer _popularTimer;
   late final Timer countDownTimer;
-  late final Timer countDownTimer2;
 
 
   int seconds = 86401;
-  int secondsForOrder = 720;
   int _index = 1;
   int _popularIndex = 0;
 
@@ -92,15 +89,6 @@ class _HomePageState extends State<HomePage> {
           });
         }
     );
-    countDownTimer2 = Timer.periodic(
-        const Duration(seconds: 1),
-            (bannerTimer) {
-          secondsForOrder--;
-          setState(() {
-
-          });
-        }
-    );
     _popularTimer = Timer.periodic(
         const Duration(milliseconds: 3500),
             (timer) {
@@ -141,7 +129,6 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _bannerTimer.cancel();
     countDownTimer.cancel();
-    countDownTimer2.cancel();
     _popularTimer.cancel();
     _controller.dispose();
     _popularController.dispose();
@@ -212,18 +199,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(height: 37),
-                  if (state.seconds != 1800)
-                    Column(
-                      children: [
-                        Text(
-                          Formatter.formattedTime(timeInSecond: state.seconds),
-                          style: const TextStyle(
-                            color: AppColors.colorE3E3E3,
-                          ),
-                        )
-                      ],
-                    ),
-                  isOrdered? Container(
+                  BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return state.seconds == 1800 ? Container() : Container(
                     child: Column(children: [
                       Text("Заказ принят", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
                       SizedBox(height: 10,),
@@ -235,17 +213,19 @@ class _HomePageState extends State<HomePage> {
                       },
                           child: Image.asset("assets/images/icons.png")),
                       SizedBox(height: 12,),
-                      Text(convertWithoutHours(secondsForOrder), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
+                      Text(Formatter.formattedTime(timeInSecond: state.seconds), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
                       SizedBox(height: 3),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 120),
                         child: LinearProgressIndicator(
-                          value: 0.7,
+                          value: (1800 - state.seconds) / 1800,
                           backgroundColor: AppColors.color191A1F, color: AppColors.colorFF9900,),
                       ),
                       SizedBox(height: 32,)
                     ],),
-                  ) : Container(),
+                  );
+  },
+),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(

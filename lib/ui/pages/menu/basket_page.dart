@@ -513,31 +513,43 @@ class _BasketPageState extends State<BasketPage> {
                       ),
                     ),
                   )
-                      : Row(
-                    children: [
-                      const Text(
-                        "Доставка:",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Color(0xffFFFFFF)
+                      : GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context.read<CustomNavbarCubit>().state.context!,
+                        backgroundColor: Colors.transparent,
+                        builder: (sheetContext) => Padding(
+                            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                            child: const MyAddressesSheet()
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+                      );
+                    },
+                        child: Row(
+                    children: [
+                        const Text(
+                          "Доставка:",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Color(0xffFFFFFF)
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
   builder: (context, state) {
     return Text(
       state.myAddress == null ? "" : state.myAddress!.name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: Color(0xff808080)
-                        ),
-                      );
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Color(0xff808080)
+                          ),
+                        );
   },
 ),
                     ],
                   ),
+                      ),
                   const SizedBox(height: 47),
                   for (int i = 0; i < _instrumentsCount; i++)
                     Padding(
