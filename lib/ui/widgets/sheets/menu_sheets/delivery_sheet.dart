@@ -50,7 +50,6 @@ class DeliverySheet extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  print("kdjfng");
                   await LaunchApp.openApp(
                     androidPackageName: 'ru.foodfox.client&;hl=ru&;gl=US',
                     iosUrlScheme: 'яндекс-еда-доставка-еды://',

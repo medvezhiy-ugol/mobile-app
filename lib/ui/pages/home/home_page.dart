@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import 'package:medvezhiy_ugol/pages/home/active_order_page/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';
 import '../../../services/auth_service.dart';
@@ -26,12 +27,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   Widget test = Container();
+  bool isOrdered = true;
 
   late final Timer _bannerTimer;
   late final Timer _popularTimer;
   late final Timer countDownTimer;
+  late final Timer countDownTimer2;
+
 
   int seconds = 86401;
+  int secondsForOrder = 720;
   int _index = 1;
   int _popularIndex = 0;
 
@@ -86,6 +91,15 @@ class _HomePageState extends State<HomePage> {
           });
         }
     );
+    countDownTimer2 = Timer.periodic(
+        const Duration(seconds: 1),
+            (bannerTimer) {
+          secondsForOrder--;
+          setState(() {
+
+          });
+        }
+    );
     _popularTimer = Timer.periodic(
         const Duration(milliseconds: 3500),
             (timer) {
@@ -116,10 +130,17 @@ class _HomePageState extends State<HomePage> {
         '${time.second < 10 ? '0${time.second}' : time.second}';
   }
 
+  String convertWithoutHours(int seconds) {
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    return '${time.minute < 10 ? '0${time.minute}' : time.minute}:'
+        '${time.second < 10 ? '0${time.second}' : time.second}';
+  }
+
   @override
   void dispose() {
     _bannerTimer.cancel();
     countDownTimer.cancel();
+    countDownTimer2.cancel();
     _popularTimer.cancel();
     _controller.dispose();
     _popularController.dispose();
@@ -201,6 +222,29 @@ class _HomePageState extends State<HomePage> {
                         )
                       ],
                     ),
+                  isOrdered? Container(
+                    child: Column(children: [
+                      Text("Заказ принят", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
+                      SizedBox(height: 10,),
+                      GestureDetector(onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ActiveOrderPage()));
+                      },
+                          child: Image.asset("assets/images/icons.png")),
+                      SizedBox(height: 12,),
+                      Text(convertWithoutHours(secondsForOrder), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
+                      SizedBox(height: 3),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 120),
+                        child: LinearProgressIndicator(
+                          value: 0.7,
+                          backgroundColor: AppColors.color191A1F, color: AppColors.colorFF9900,),
+                      ),
+                      SizedBox(height: 32,)
+                    ],),
+                  ) : Container(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
