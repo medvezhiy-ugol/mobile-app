@@ -101,6 +101,7 @@ class _MyAddressesSheetState extends State<MyAddressesSheet> {
                 const SizedBox(height: 1),
                 GestureDetector(
                   onTap: () async {
+                    context.read<CustomNavbarCubit>().changeIsTakeaway(false);
     await Navigator.of(context).push(MaterialPageRoute(
     builder: (context) => const MapPage(
     fromPage: true,

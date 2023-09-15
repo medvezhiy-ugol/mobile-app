@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 
 class DeliverySwitcher extends StatefulWidget {
-  const DeliverySwitcher({super.key});
+  const DeliverySwitcher({super.key, required this.onDelivery, required this.onTakeaway});
+
+  final Function() onDelivery;
+  final Function() onTakeaway;
 
   @override
   State<DeliverySwitcher> createState() => _DeliverySwitcherState();
 }
 
 class _DeliverySwitcherState extends State<DeliverySwitcher> {
-  bool isDeliver = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +28,27 @@ class _DeliverySwitcherState extends State<DeliverySwitcher> {
       child: Stack(
           fit: StackFit.expand,
           children: [
-            AnimatedPositioned(
-              left: isDeliver ? 0 : 118,
-              duration: const Duration(milliseconds: 100),
-              child: Container(
-                height: 30,
-                width: 114,
-                decoration: BoxDecoration(
-                    color: const Color(0xff2D2D2D),
-                    borderRadius: BorderRadius.circular(30)
-                ),
-              ),
+            BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+              builder: (context, state) {
+                return AnimatedPositioned(
+                  left: state.isTakeaway ? 118 : 0,
+                  duration: const Duration(milliseconds: 100),
+                  child: Container(
+                    height: 30,
+                    width: 114,
+                    decoration: BoxDecoration(
+                        color: const Color(0xff2D2D2D),
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                  ),
+                );
+              },
             ),
             Row(
               children: [
                 GestureDetector(onTap: () {
-                  isDeliver = true;
-                  setState(() {
-
-                  });
+                  context.read<CustomNavbarCubit>().changeIsTakeaway(false);
+                  widget.onDelivery();
                 },
                   child: Container(
                     width: 114,
@@ -62,10 +69,8 @@ class _DeliverySwitcherState extends State<DeliverySwitcher> {
 
                 const SizedBox(width: 4),
                 GestureDetector(onTap: () {
-                  isDeliver  = false;
-                  setState(() {
-
-                  });
+                  context.read<CustomNavbarCubit>().changeIsTakeaway(true);
+                  widget.onTakeaway();
                 },
                   child: Container(
                     width: 114,

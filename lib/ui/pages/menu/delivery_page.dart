@@ -393,8 +393,9 @@ class _DeliveryPageState extends State<DeliveryPage> {
                         "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
                         "order": {
                           "items": [
+                            for (int i = 0; i < state.order.length; i++)
                             {
-                              "productId": "6b5b4afd-1d41-4927-a005-2ff4d42e19a9",
+                              "productId": state.order[i].id,
                               "type": "Product",
                               "price": state.orderSum,
                               "amount": 1
@@ -403,7 +404,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
                           "payments": [
                             {
                               "paymentTypeKind": "Card",
-                              "sum": 295,
+                              "sum": state.orderSum,
                               "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
                               "isProcessedExternally": true,
                               "isFiscalizedExternally": true
@@ -417,6 +418,32 @@ class _DeliveryPageState extends State<DeliveryPage> {
                         'Content-Type': 'application/json'
                       },
                     );
+                    context.read<CustomNavbarCubit>().pay();
+                    print({
+                      "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
+                      "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
+                      "order": {
+                        "items": [
+                          for (int i = 0; i < state.order.length; i++)
+                            {
+                              "productId": state.order[i].id,
+                              "type": "Product",
+                              "price": state.orderSum,
+                              "amount": 1
+                            }
+                        ],
+                        "payments": [
+                          {
+                            "paymentTypeKind": "Card",
+                            "sum": state.orderSum,
+                            "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
+                            "isProcessedExternally": true,
+                            "isFiscalizedExternally": true
+                          }
+                        ],
+                        "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
+                      }
+                    });
                     print(request.statusCode);
                     print(request.body);
                     if (request.statusCode == 401) {

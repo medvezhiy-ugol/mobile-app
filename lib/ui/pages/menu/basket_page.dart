@@ -15,30 +15,16 @@ import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../widgets/sheets/menu_sheets/my_addresses_sheet.dart';
 
 class BasketPage extends StatefulWidget {
-  const BasketPage({super.key, required this.isDelivery});
-
-  final bool isDelivery;
+  const BasketPage({super.key});
 
   @override
   State<BasketPage> createState() => _BasketPageState();
 }
 
 class _BasketPageState extends State<BasketPage> {
-
-  bool isInstruments = false;
-  int _instrumentsCount = 0;
-  
-  bool isTakeaway = false;
-
   String delivery = '';
   String takeaway = '';
   String promocode = '';
-
-  @override
-  void initState() {
-    isTakeaway = !widget.isDelivery;
-    super.initState();
-  }
 
   Future<Position> _determinePosition() async {
 
@@ -124,7 +110,9 @@ class _BasketPageState extends State<BasketPage> {
               ],
             ),
             Expanded(
-              child: ListView(
+              child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 children: [
                   const Text(
@@ -292,20 +280,19 @@ class _BasketPageState extends State<BasketPage> {
                               );
                             }
                             else {
-                              isTakeaway = false;
-                              setState(() {});
+                              context.read<CustomNavbarCubit>().changeIsTakeaway(false);
                             }
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
-                              color: Color(isTakeaway ? 0xff000000 : 0xff2D2D2D),
+                              color: Color(state.isTakeaway ? 0xff000000 : 0xff2D2D2D),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset('assets/images/delivery${isTakeaway ? "" : "_enabled"}.svg'),
+                                SvgPicture.asset('assets/images/delivery${state.isTakeaway ? "" : "_enabled"}.svg'),
                                 const SizedBox(width: 8),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,7 +302,7 @@ class _BasketPageState extends State<BasketPage> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12,
-                                          color: Color(isTakeaway ? 0xff545456 : 0xffFFFFFF)
+                                          color: Color(state.isTakeaway ? 0xff545456 : 0xffFFFFFF)
                                       ),
                                     ),
                                     const SizedBox(width: 2),
@@ -324,7 +311,7 @@ class _BasketPageState extends State<BasketPage> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
-                                          color: Color(isTakeaway ? 0xff545456 : 0xff808080)
+                                          color: Color(state.isTakeaway ? 0xff545456 : 0xff808080)
                                       ),
                                     ),
                                   ],
@@ -338,19 +325,18 @@ class _BasketPageState extends State<BasketPage> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            isTakeaway = true;
-                            setState(() {});
+                            context.read<CustomNavbarCubit>().changeIsTakeaway(true);
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
-                              color: Color(isTakeaway ? 0xff2D2D2D : 0xff000000),
+                              color: Color(state.isTakeaway ? 0xff2D2D2D : 0xff000000),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset('assets/images/takeaway${isTakeaway ? "_enabled" : ""}.svg'),
+                                SvgPicture.asset('assets/images/takeaway${state.isTakeaway ? "_enabled" : ""}.svg'),
                                 const SizedBox(width: 8),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -360,7 +346,7 @@ class _BasketPageState extends State<BasketPage> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12,
-                                          color: Color(isTakeaway ? 0xffFFFFFF : 0xff545456)
+                                          color: Color(state.isTakeaway ? 0xffFFFFFF : 0xff545456)
                                       ),
                                     ),
                                     const SizedBox(height: 2),
@@ -369,7 +355,7 @@ class _BasketPageState extends State<BasketPage> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
-                                          color: Color(isTakeaway ? 0xff808080 : 0xff545456)
+                                          color: Color(state.isTakeaway ? 0xff808080 : 0xff545456)
                                       ),
                                     ),
                                   ],
@@ -382,7 +368,7 @@ class _BasketPageState extends State<BasketPage> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  isTakeaway
+                  state.isTakeaway
                       ? GestureDetector(
                     onTap: () async {
                       Position _position = await _determinePosition();
@@ -550,35 +536,11 @@ class _BasketPageState extends State<BasketPage> {
                     ],
                   ),
                       ),
-                  const SizedBox(height: 47),
-                  for (int i = 0; i < _instrumentsCount; i++)
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Сервисный сбор",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Color(0xff808080)
-                            ),
-                          ),
-                          Text(
-                            "30 ₽",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: Color(0xffFFFFFF)
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 147),
                 ],
-              ),
+              );
+  },
+),
             ),
           ],
         ),

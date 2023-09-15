@@ -9,13 +9,23 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="fix timer">
+    <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="last commits">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_cubit.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/custom_navbar/bloc/custom_navbar_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_history_page/discounts_history.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/more/my_orders/my_orders_page.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/map/search_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/jackpot/individual_history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/jackpot/individual_history.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/delivery_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/delivery_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/pay_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/pay_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/delivery_switcher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/delivery_switcher.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/my_addresses_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/my_addresses_sheet.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,13 +109,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677934220958</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Корзина">
-      <created>1685885513225</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1685885513225</updated>
     </task>
     <task id="LOCAL-00013" summary="Корзина">
       <created>1685885601277</created>
@@ -443,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694600300557</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="last commits">
+      <created>1694602658980</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1694602658980</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -464,7 +474,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Штрих код" />
     <MESSAGE value="Fix icons" />
     <MESSAGE value="Розыгрыш" />
     <MESSAGE value="Страница розыгрыша" />
@@ -489,7 +498,8 @@
     <MESSAGE value="add address" />
     <MESSAGE value="added apps" />
     <MESSAGE value="fix timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix timer" />
+    <MESSAGE value="last commits" />
+    <option name="LAST_COMMIT_MESSAGE" value="last commits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

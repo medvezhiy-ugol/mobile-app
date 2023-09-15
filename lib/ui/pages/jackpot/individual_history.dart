@@ -13,6 +13,8 @@ class IndividualHistoryPage extends StatefulWidget {
 }
 
 class _IndividualHistoryPageState extends State<IndividualHistoryPage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

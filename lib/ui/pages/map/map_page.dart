@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/ui/pages/map/search_page.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart';
 import 'package:medvezhiy_ugol/ui/map/sliding_panel_widget/view_restaurant_widget.dart';
@@ -9,6 +11,7 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 import '../../../models/map_model.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/buttons/custom_button.dart';
+import '../../widgets/delivery_switcher.dart';
 import '../../widgets/map/restaurant_info.dart';
 
 class MapPage extends StatefulWidget {
@@ -28,11 +31,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   double latEnd = 0;
   double lonEnd = 0;
   bool isLoading = true;
-  bool isDeliver = true;
   bool isAddress = false;
   String adress = '';
-  static final PageController pageController = PageController(initialPage: 0);
-  static final PanelController panelController = PanelController();
+  late final PageController pageController;
+  final PanelController panelController = PanelController();
 
   Future<Position> _determinePosition() async {
 
@@ -60,30 +62,33 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   bool _isDraged = false;
   bool isFadeAnimated = false;
 
-  void getPosition() async {
+  Future<void> getPosition() async {
     Position position = await _determinePosition();
     lat = position.latitude;
     lon = position.longitude;
-    _mapController.moveCamera(
-      CameraUpdate.newCameraPosition(CameraPosition(
-        target: Point(
-          latitude: position.latitude,
-          longitude: position.longitude,
-        ),
-        zoom: 14.4746,
-      ),
-      ),
-    );
     setState(() {
       isLoading = false;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    pageController = PageController(initialPage: context.read<CustomNavbarCubit>().state.isTakeaway ? 1 : 0);
+    if (!context.read<CustomNavbarCubit>().state.isTakeaway) {
+      getPosition();
+    }
+    else {
+      isLoading = false;
+    }
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
+    return isLoading ? const Center(child: CircularProgressIndicator()) : Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
           SizedBox(
@@ -104,21 +109,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    if (!isDeliver)
-                      PlacemarkMapObject(
-                        mapId: const MapObjectId('org_1'),
-                        point: const Point(latitude: 57.693521, longitude: 39.772742),
-                        opacity: 1,
-                        isDraggable: false,
-                        icon: PlacemarkIcon.single(
-                          PlacemarkIconStyle(
-                            scale: 0.7,
-                            image: BitmapDescriptor.fromAssetImage('assets/images/map_page/point.png'),
-                            rotationType: RotationType.noRotation,
-                            anchor: const Offset(0.5, 1),
-                          ),
-                        ),
-                      ),
                   ],
                   nightModeEnabled: true,
                   onMapCreated: (YandexMapController controller) {
@@ -136,7 +126,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   },
 
                   onCameraPositionChanged: (CameraPosition position, CameraUpdateReason reason, bool value) async {
-                    if (isDeliver) {
+                    if (!state.isTakeaway) {
                       panelController.animatePanelToPosition(0);
                       lat = position.target.latitude;
                       lon = position.target.longitude;
@@ -165,107 +155,38 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               child: Column(
                 children: [
                   const SizedBox(height: 30),
-                  Container(
-                      height: 38,
-                      width: 240,
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: const Color(0xff000000),
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            AnimatedPositioned(
-                              left: isDeliver ? 0 : 118,
-                              duration: const Duration(milliseconds: 100),
-                              child: Container(
-                                height: 30,
-                                width: 114,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xff2D2D2D),
-                                    borderRadius: BorderRadius.circular(30)
-                                ),
-                              ),
+                  DeliverySwitcher(
+                    onDelivery: () {
+                      panelController.animatePanelToPosition(0);
+                      pageController.jumpToPage(0);
+                      getPosition().then((value) {
+                        _mapController.moveCamera(
+                          CameraUpdate.newCameraPosition(CameraPosition(
+                            target: Point(
+                              latitude: lat,
+                              longitude: lon,
                             ),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                  pageController.animateToPage(
-                                    0,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.linear,
-                                  );
-                                  panelController.animatePanelToPosition(0);
-                                  getPosition();
-                                  isDeliver = true;
-                                  setState(() {
-
-                                  });
-                                },
-                                  child: Container(
-                                    width: 114,
-                                    height: 30,
-                                    color: Colors.transparent,
-                                    alignment: Alignment.center,
-                                    child: const Text(
-                                      'Доставка',
-                                      style: TextStyle(
-                                        fontFamily: 'Unbounded',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Color(0xffFFFFFF),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                const SizedBox(width: 4),
-                                GestureDetector(onTap: () {
-                                  isDeliver  = false;
-                                  lat = 57.625636;
-                                  lon = 39.879540;
-                                  _mapController.moveCamera(
-                                    CameraUpdate.newCameraPosition(const CameraPosition(
-                                      target: Point(
-                                        latitude: 57.625636,
-                                        longitude: 39.879540,
-                                      ),
-                                      zoom: 14.4746,
-                                    ),
-                                    ),
-                                  );
-                                  pageController.nextPage(
-                                    duration: const Duration(milliseconds: 200),
-                                    curve: Curves.bounceIn,
-                                  );
-                                  panelController.animatePanelToPosition(0.7);
-                                  setState(() {
-
-                                  });
-                                },
-                                  child: Container(
-                                    width: 114,
-                                    height: 30,
-                                    color: Colors.transparent,
-                                    alignment: Alignment.center,
-                                    child: const Text(
-                                      'Самовывоз',
-                                      style: TextStyle(
-                                        fontFamily: 'Unbounded',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Color(0xffFFFFFF),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                      ),
-                    ),
+                            zoom: 14.4746,
+                          ),
+                          ),
+                        );
+                      });
+                    },
+                    onTakeaway: () {
+                      panelController.animatePanelToPosition(0.5);
+                      pageController.jumpToPage(1);
+                      _mapController.moveCamera(
+                        CameraUpdate.newCameraPosition(const CameraPosition(
+                          target: Point(
+                            latitude: 57.625636,
+                            longitude: 39.879540,
+                          ),
+                          zoom: 14.4746,
+                        ),
+                        ),
+                      );
+                    },
+                  ),
                   const SizedBox(height: 34),
                   Text(
                     adress,
@@ -497,7 +418,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             },
           ),
         ],
-      ),
+      );
+  },
+),
     );
   }
 }

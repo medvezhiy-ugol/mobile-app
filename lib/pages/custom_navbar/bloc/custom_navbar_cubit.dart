@@ -25,26 +25,28 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
   final List<List<MenuProduct>> orders = [];
   int _orderSum = 0;
   late Timer timer;
-  late Timer orderTimer;
-  int seconds = 1800;
   final ValueNotifier<double> valueNotifier = ValueNotifier(0.0);
 
   void init() async {
-    Box<AddressModel> box = await Hive.openBox<AddressModel>('myAddress');
+    Box<AddressModel> boxAddress = await Hive.openBox<AddressModel>('myAddress');
+    Box<bool> boxIsTakeaway = await Hive.openBox<bool>('isTakeaway');
     List<MenuCategory> menu = await service.getFullMenu();
     if (authService.accessToken.isNotEmpty) {
+      Box<DateTime> boxPayTime = await Hive.openBox<DateTime>('payTime');
       LoyaltyCard? card = await service.getUserCard(authService.accessToken);
       emit(state.copyWith(
         name: card?.name,
         birthday: card?.birthday,
         sex: card?.sex == 1,
         balance: card?.walletBalances[0].balance,
+        payTime: boxPayTime.get("time"),
       ));
     }
     emit(state.copyWith(
       menu: menu,
       isLoading: false,
-      myAddress: box.get("address"),
+      isTakeaway: boxIsTakeaway.get("takeaway"),
+      myAddress: boxAddress.get("address"),
     ));
   }
 
@@ -119,21 +121,21 @@ class CustomNavbarCubit extends Cubit<CustomNavbarState> {
     ));
   }
 
-  void pay() {
+  void pay() async {
     orders.add(_order);
     _order.clear();
-    orderTimer = Timer.periodic(
-        const Duration(seconds: 1),
-            (timer) {
-      if (seconds > 0) {
-        seconds--;
-        valueNotifier.value = 1800 - seconds.toDouble();
-        emit(state.copyWith(orderSeconds: seconds, valueNotifier: valueNotifier));
-      }
-    });
+    Box<DateTime> box = await Hive.openBox<DateTime>('payTime');
+    box.put("time", DateTime.now());
     emit(state.copyWith(
       orders: orders,
       order: _order,
+      payTime: DateTime.now(),
     ));
+  }
+
+  void changeIsTakeaway(bool isTakeaway) async {
+    Box<bool> boxIsTakeaway = await Hive.openBox<bool>('isTakeaway');
+    boxIsTakeaway.put("takeaway", isTakeaway);
+    emit(state.copyWith(isTakeaway: isTakeaway));
   }
 }

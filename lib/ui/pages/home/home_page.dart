@@ -535,7 +535,7 @@ class _HomePageState extends State<HomePage> {
                                           padding: EdgeInsets.only(
                                             top: MediaQuery.of(state.context!).padding.top,
                                           ),
-                                          child: ProductPage(id: menu[2].id, isPizza: false),
+                                          child: ProductPage(id: menu[1].id, isPizza: false),
                                         )
                                     );
                                   },

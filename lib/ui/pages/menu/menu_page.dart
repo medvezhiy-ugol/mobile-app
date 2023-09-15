@@ -10,6 +10,7 @@ import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/my_addresses_sheet.
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../services/auth_service.dart';
 import '../../../utils/app_colors.dart';
+import '../../widgets/delivery_switcher.dart';
 import '../../widgets/menu/menu_sections_widget.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../widgets/menu/scale_tabbar_module.dart';
@@ -28,7 +29,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   final AutoScrollController _controller = AutoScrollController();
   late final TabController _tabController;
   final AuthService authService = Injector().get<AuthService>();
-  bool isDeliver = true;
 
   int goIndex() {
     return 1;
@@ -76,80 +76,9 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          height: 38,
-                          width: 240,
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              color: const Color(0xff000000),
-                              borderRadius: BorderRadius.circular(30)
-                          ),
-                          child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                AnimatedPositioned(
-                                  left: isDeliver ? 0 : 118,
-                                  duration: const Duration(milliseconds: 100),
-                                  child: Container(
-                                    height: 30,
-                                    width: 114,
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xff2D2D2D),
-                                        borderRadius: BorderRadius.circular(30)
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    GestureDetector(onTap: () {
-                                      isDeliver = true;
-                                      setState(() {
-
-                                      });
-                                    },
-                                      child: Container(
-                                        width: 114,
-                                        height: 30,
-                                        color: Colors.transparent,
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          'Доставка',
-                                          style: TextStyle(
-                                            fontFamily: 'Unbounded',
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 12,
-                                            color: Color(0xffFFFFFF),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    GestureDetector(onTap: () {
-                                      isDeliver  = false;
-                                      setState(() {
-
-                                      });
-                                    },
-                                      child: Container(
-                                        width: 114,
-                                        height: 30,
-                                        color: Colors.transparent,
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          'Самовывоз',
-                                          style: TextStyle(
-                                            fontFamily: 'Unbounded',
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 12,
-                                            color: Color(0xffFFFFFF),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ]
-                          ),
+                        DeliverySwitcher(
+                          onDelivery: () {},
+                          onTakeaway: () {},
                         ),
                         GestureDetector(
                           onTap: () {
@@ -175,7 +104,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                           child: Container(
                             color: Colors.transparent,
                             height: 55,
-                            child: isDeliver
+                            child: !state.isTakeaway
                                 ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -295,7 +224,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                                   builder: (context) => Container(
                                       color: const Color(0xff111216),
                                       margin: EdgeInsets.only(top: MediaQuery.of(state.context!).padding.top),
-                                      child: BasketPage(isDelivery: isDeliver)
+                                      child: BasketPage()
                                   )
                               );
                             }

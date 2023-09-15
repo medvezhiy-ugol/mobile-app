@@ -16,6 +16,11 @@ class ActiveOrderPage extends StatefulWidget {
 class _ActiveOrderPageState extends State<ActiveOrderPage> {
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -113,7 +118,6 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
           animationDuration: 3,
           progressColors: const [AppColors.colorFF9900, AppColors.colorFF3838],
           maxValue: 1800,
-          valueNotifier: state.valueNotifier,
         );
   },
 ),
