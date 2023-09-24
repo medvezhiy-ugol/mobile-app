@@ -4,7 +4,6 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_code_page/code_auth_page.dart';
 import 'package:medvezhiy_ugol/ui/pages/more/about_app_page.dart';
-import 'package:medvezhiy_ugol/pages/more/about_app/history_order.dart';
 import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/profile/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -178,10 +177,7 @@ class _MorePageState extends State<MorePage> {
                   ],
                 ),
                 SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  height: 84,
+                  height: 100,
                 ),
                 Row(
                   children: <Widget>[
@@ -268,43 +264,41 @@ class _MorePageState extends State<MorePage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10
-                ),
+                const SizedBox(height: 10),
                 Column(
                   children: <Widget>[
                     //My Orders
-                    Container(
-                      color: AppColors.color191A1F,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(onTap: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
-                          const HistoryOrder()));
-                        },
-                          child: Container(
-                            padding: const EdgeInsets.all(18),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 21,
-                                  height: 24,
-                                  child: Image.asset('assets/images/more_page/my_orders_icon.png'),
-                                ),
-                                const SizedBox(width: 26),
-                                const Text(
-                                  'Мои заказы',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   color: AppColors.color191A1F,
+                    //   child: Material(
+                    //     color: Colors.transparent,
+                    //     child: InkWell(onTap: (){
+                    //       Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
+                    //       const HistoryOrder()));
+                    //     },
+                    //       child: Container(
+                    //         padding: const EdgeInsets.all(18),
+                    //         child: Row(
+                    //           children: [
+                    //             SizedBox(
+                    //               width: 21,
+                    //               height: 24,
+                    //               child: Image.asset('assets/images/more_page/my_orders_icon.png'),
+                    //             ),
+                    //             const SizedBox(width: 26),
+                    //             const Text(
+                    //               'Мои заказы',
+                    //               style: TextStyle(
+                    //                   color: Colors.white,
+                    //                   fontSize: 18,
+                    //                   fontWeight: FontWeight.w600),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     // Container(
                     //   color: AppColors.color191A1F,
                     //   child: Material(
