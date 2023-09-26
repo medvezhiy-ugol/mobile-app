@@ -61,18 +61,18 @@ class MenuService {
   Future<LoyaltyCard?> getUserCard(String accessToken) async {
     final authService = Injector().get<AuthService>();
     var request = await get(
-      Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/whoiam"),
+      Uri.parse("http://193.37.71.108:8080/v1/whoiam"),
       headers: {"Authorization": "Bearer ${authService.accessToken}"},
     );
     if (request.statusCode == 401) {
       final refresh = await post(
-        Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/refresh"),
+        Uri.parse("http://193.37.71.108:8080/v1/refresh"),
         headers: {"Authorization": "Bearer ${authService.refreshToken}"},
       );
       final body = jsonDecode(refresh.body);
       authService.setTokens(body['access_token'], body['refresh_token']);
       request = await get(
-        Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/whoiam"),
+        Uri.parse("http://193.37.71.108:8080/v1/whoiam"),
         headers: {"Authorization": "Bearer ${body['access_token']}"},
       );
     }

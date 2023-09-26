@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 
 class APIService {
   static const List<String> url = [
-    'https://a8e3-109-161-111-52.ngrok-free.app',
-    'https://a8e3-109-161-111-52.ngrok-free.app',
+    'http://193.37.71.108:8080',
+    'http://193.37.71.108:8080',
   ];
 
   static Future<dynamic> postRequest({
@@ -65,10 +65,10 @@ class APIService {
     return null;
   }
 
-  //https://a8e3-109-161-111-52.ngrok-free.app
+  //http://193.37.71.108:8080
 
   static Future<dynamic> customRequest(String url) async {
-    final response = await http.get(Uri.parse('https://a8e3-109-161-111-52.ngrok-free.app/v1/$url'));
+    final response = await http.get(Uri.parse('http://193.37.71.108:8080/v1/$url'));
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {

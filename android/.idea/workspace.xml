@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b965716e-c3a5-4677-b7d3-0fae83be496d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+    <list default="true" id="b965716e-c3a5-4677-b7d3-0fae83be496d" name="Changes" comment="fix android">
       <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bearcorner_mobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../bearcorner_mobile.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/pages/more/about_app/history_order.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/pages/more/about_app/history_order.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/services/api_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/services/api_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/services/menu_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/services/menu_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/pages/menu/delivery_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/pages/menu/delivery_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/widgets/sheets/receiving_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/widgets/sheets/receiving_sheet.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +27,26 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="android" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="GenerateSignedApkSettings">
     <option name="EXPORT_PRIVATE_KEY" value="false" />
-    <option name="KEY_STORE_PATH" value="$USER_HOME$/Downloads/BearCorner_keystore.jks" />
+    <option name="KEY_STORE_PATH" value="$USER_HOME$/Downloads/BearCorner_keystore (1).jks" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
@@ -52,7 +68,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "memory.settings.postsync.last.time.stamp": "1695539884964",
+    "last_opened_file_path": "/Users/mindykfam/Desktop/Branches/mobile-app/android",
+    "memory.settings.postsync.last.time.stamp": "1695664660046",
     "show.migrate.to.gradle.popup": "false"
   },
   "keyToStringList": {

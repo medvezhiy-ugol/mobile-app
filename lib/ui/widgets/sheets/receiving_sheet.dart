@@ -150,7 +150,7 @@ class ReceivingSheet extends StatelessWidget {
             onTap: () async {
               final authService = Injector().get<AuthService>();
               var request = await post(
-                Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/create"),
+                Uri.parse("http://193.37.71.108:8080/v1/create"),
                 body: jsonEncode({
                   "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
                   "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
@@ -184,13 +184,13 @@ class ReceivingSheet extends StatelessWidget {
               print(request.body);
               if (request.statusCode == 401) {
                 final refresh = await post(
-                  Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/refresh"),
+                  Uri.parse("http://193.37.71.108:8080/v1/refresh"),
                   headers: {"Authorization": "Bearer ${authService.refreshToken}"},
                 );
                 final body = jsonDecode(refresh.body);
                 authService.setTokens(body['access_token'], body['refresh_token']);
                 request = await get(
-                  Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/whoiam"),
+                  Uri.parse("http://193.37.71.108:8080/v1/whoiam"),
                   headers: {"Authorization": "Bearer ${body['access_token']}"},
                 );
               }

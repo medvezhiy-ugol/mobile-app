@@ -23,7 +23,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   void getHistory() async {
     // final authService = Injector().get<AuthService>();
     // var request = await post(
-    //   Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/roulette/create"),
+    //   Uri.parse("http://193.37.71.108:8080/v1/roulette/create"),
     //   body: jsonEncode({
     //     "title": "string",
     //     "start": "2023-09-23",
@@ -38,7 +38,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
     // print(request.statusCode);
     // print(utf8.decode(request.bodyBytes));
     // request = await get(
-    //   Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/roulette/all"),
+    //   Uri.parse("http://193.37.71.108:8080/v1/roulette/all"),
     //   headers: {
     //     'Content-Type': 'application/json'
     //   },
@@ -46,7 +46,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
     // print(request.statusCode);
     // print(request.body);
     // var request = await get(
-    //   Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/get_history/0/20"),
+    //   Uri.parse("http://193.37.71.108:8080/v1/get_history/0/20"),
     //   headers: {
     //     "Authorization": "Bearer ${authService.accessToken}",
     //     'Content-Type': 'application/json'
@@ -56,13 +56,13 @@ class _HistoryOrderState extends State<HistoryOrder> {
     // print(request.body);
     // if (request.statusCode == 401) {
     //   final refresh = await post(
-    //     Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/refresh"),
+    //     Uri.parse("http://193.37.71.108:8080/v1/refresh"),
     //     headers: {"Authorization": "Bearer ${authService.refreshToken}"},
     //   );
     //   final body = jsonDecode(refresh.body);
     //   authService.setTokens(body['access_token'], body['refresh_token']);
     //   request = await get(
-    //     Uri.parse("https://a8e3-109-161-111-52.ngrok-free.app/v1/getHistory/0/20"),
+    //     Uri.parse("http://193.37.71.108:8080/v1/getHistory/0/20"),
     //     headers: {
     //       "Authorization": "Bearer ${authService.accessToken}",
     //       'Content-Type': 'application/json'

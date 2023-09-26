@@ -69,6 +69,12 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/geolocator_apple/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/geolocator_apple/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/geolocator_apple/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/external_app_launcher/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/external_app_launcher/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/external_app_launcher/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/external_app_launcher/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/external_app_launcher/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/external_app_launcher/example/.dart_tool" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Flutter Plugins" level="project" />
