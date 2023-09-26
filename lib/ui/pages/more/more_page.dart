@@ -8,6 +8,7 @@ import 'package:medvezhiy_ugol/pages/more/over_pages/contact_us_page.dart';
 import 'package:medvezhiy_ugol/pages/more/profile/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../utils/app_colors.dart';
+import '../../../pages/more/about_app/history_order.dart';
 import '../../../services/auth_service.dart';
 import '../../../utils/icons/more_page_icons.dart';
 import '../../../utils/icons/social_icons_icons.dart';
@@ -268,37 +269,37 @@ class _MorePageState extends State<MorePage> {
                 Column(
                   children: <Widget>[
                     //My Orders
-                    // Container(
-                    //   color: AppColors.color191A1F,
-                    //   child: Material(
-                    //     color: Colors.transparent,
-                    //     child: InkWell(onTap: (){
-                    //       Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
-                    //       const HistoryOrder()));
-                    //     },
-                    //       child: Container(
-                    //         padding: const EdgeInsets.all(18),
-                    //         child: Row(
-                    //           children: [
-                    //             SizedBox(
-                    //               width: 21,
-                    //               height: 24,
-                    //               child: Image.asset('assets/images/more_page/my_orders_icon.png'),
-                    //             ),
-                    //             const SizedBox(width: 26),
-                    //             const Text(
-                    //               'Мои заказы',
-                    //               style: TextStyle(
-                    //                   color: Colors.white,
-                    //                   fontSize: 18,
-                    //                   fontWeight: FontWeight.w600),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Container(
+                      color: AppColors.color191A1F,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (contex) =>
+                          const HistoryOrder()));
+                        },
+                          child: Container(
+                            padding: const EdgeInsets.all(18),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 21,
+                                  height: 24,
+                                  child: Image.asset('assets/images/more_page/my_orders_icon.png'),
+                                ),
+                                const SizedBox(width: 26),
+                                const Text(
+                                  'Мои заказы',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     // Container(
                     //   color: AppColors.color191A1F,
                     //   child: Material(

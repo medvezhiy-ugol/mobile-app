@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:http/http.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/more/my_orders/order_delivered_page.dart';
+import '../../../services/auth_service.dart';
 import '../../../ui/back_arrow_button.dart';
 import '../../../utils/app_colors.dart';
 
@@ -21,22 +26,22 @@ class _HistoryOrderState extends State<HistoryOrder> {
   }
 
   void getHistory() async {
-    // final authService = Injector().get<AuthService>();
-    // var request = await post(
-    //   Uri.parse("http://193.37.71.108:8080/v1/roulette/create"),
-    //   body: jsonEncode({
-    //     "title": "string",
-    //     "start": "2023-09-23",
-    //     "end": "2023-09-23",
-    //     "score": 0,
-    //     "winners_count": 0
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    // );
-    // print(request.statusCode);
-    // print(utf8.decode(request.bodyBytes));
+    final authService = Injector().get<AuthService>();
+    var request = await post(
+      Uri.parse("http://193.37.71.108:8080/v1/roulette/create"),
+      body: jsonEncode({
+        "title": "string",
+        "start": "2023-09-23",
+        "end": "2023-09-23",
+        "score": 0,
+        "winners_count": 0
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    );
+    print(request.statusCode);
+    print(utf8.decode(request.bodyBytes));
     // request = await get(
     //   Uri.parse("http://193.37.71.108:8080/v1/roulette/all"),
     //   headers: {

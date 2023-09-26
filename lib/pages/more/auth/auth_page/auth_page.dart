@@ -28,6 +28,7 @@ class _AuthPageState extends State<AuthPage> {
 
   final authService = Injector().get<AuthService>();
   bool showButton = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

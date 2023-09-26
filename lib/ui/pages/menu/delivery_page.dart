@@ -97,411 +97,412 @@ class _DeliveryPageState extends State<DeliveryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff111216),
-      body: SafeArea(
+        backgroundColor: const Color(0xff111216),
+        body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: 10
             ),
             child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-  builder: (context, state) {
-    return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 11,
-                ),
-                Row(
+              builder: (context, state) {
+                return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
+                    const SizedBox(
+                      height: 11,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          customBorder: const CircleBorder(),
+                          child: const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: Icon(
+                              Icons.arrow_back_ios_sharp,
+                              size: 22,
+                              color: Color(0xffffffff),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text('Доставка',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xffffffff)
+                      ),),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pop();
+                        setState(() {
+                          _textTimeController.text = "${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}'";
+                        });
+                        _showDialog(
+                          CupertinoPicker(
+                            magnification: 1.22,
+                            squeeze: 1.2,
+                            useMagnifier: true,
+                            itemExtent: 32.0,
+                            // This sets the initial item.
+                            scrollController: FixedExtentScrollController(
+                              initialItem: 0,
+                            ),
+                            // This is called when selected item is changed.
+                            onSelectedItemChanged: (int selectedItem) {
+                              switch (selectedItem) {
+                                case 0:
+                                  _textTimeController.text = "Сегодня";
+                                  break;
+                                case 1:
+                                  _textTimeController.text = "Завтра";
+                                  break;
+                                case 2:
+                                  _textTimeController.text = "Не выбрано";
+                                  break;
+                              }
+                              setState(() {});
+                            },
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 50),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Сегодня",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Color(0xffFFFFFF)
+                                      ),
+                                    ),
+                                    Text(
+                                      "Сегодня",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Color(0xffFFFFFF)
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Завтра",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Color(0xffFFFFFF)
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
                       },
-                      customBorder: const CircleBorder(),
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: const Icon(
-                          Icons.arrow_back_ios_sharp,
-                          size: 22,
-                          color: Color(0xffffffff),
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                        ),
+                        height: 64,
+                        width: double.infinity,
+                        color: const Color(0xff191a1f),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Image.asset('assets/images/delivery_info_page/scooter.png',
+                                width: 22,
+                                height: 15,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            const Text('Доставка 25-35 минут',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  color: Color(0xff808080)
+                              ),
+                            ),
+                            const Spacer(
+                            ),
+                            const SizedBox(
+                              height: 13,
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 13,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text('Доставка',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xffffffff)
-                  ),),
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _textTimeController.text = "${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}'";
-                    });
-                    _showDialog(
-                      CupertinoPicker(
-                        magnification: 1.22,
-                        squeeze: 1.2,
-                        useMagnifier: true,
-                        itemExtent: 32.0,
-                        // This sets the initial item.
-                        scrollController: FixedExtentScrollController(
-                          initialItem: 0,
-                        ),
-                        // This is called when selected item is changed.
-                        onSelectedItemChanged: (int selectedItem) {
-                          switch (selectedItem) {
-                            case 0:
-                              _textTimeController.text = "Сегодня";
-                              break;
-                            case 1:
-                              _textTimeController.text = "Завтра";
-                              break;
-                            case 2:
-                              _textTimeController.text = "Не выбрано";
-                              break;
-                          }
-                          setState(() {});
-                        },
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Text('Адрес',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xffffffff)
+                      ),),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      height: 65,
+                      width: double.infinity,
+                      color: const Color(0xff191a1f),
+                      child: Row(
                         children: [
+                          const SizedBox(
+                            height: 24,
+                            child: Icon(
+                              Icons.home,
+                              size: 24,
+                              color: Color(0xff808080),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 50),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Сегодня",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
+                                  state.myAddress!.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
                                       color: Color(0xffFFFFFF)
                                   ),
                                 ),
-                                Text(
-                                  "Сегодня",
+                                const SizedBox(
+                                  height: 2,
+                                ),
+                                const Text(
+                                  'Ярославль',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                      color: Color(0xffFFFFFF)
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      color: Color(0xFF808080)
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                "Завтра",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    color: Color(0xffFFFFFF)
-                                ),
-                              ),
-                            ],
+                          const Spacer(),
+                          const SizedBox(
+                            height: 13,
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 13,
+                              color: Color(0xffffffff),
+                            ),
                           ),
                         ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 10,
                     ),
-                    height: 64,
-                    width: double.infinity,
-                    color: Color(0xff191a1f),
-                    child: Row(
+                    const SizedBox(height: 26),
+                    Row(
                       children: [
-                        SizedBox(
-                          width: 40,
-                          child: Image.asset('assets/images/delivery_info_page/scooter.png',
-                            width: 22,
-                            height: 15,
-                          ),
+                        DeliverHereBlock(
+                            text: "Квартира",
+                            controller: apartment
                         ),
-                        SizedBox(
-                          width: 8,
+                        DeliverHereBlock(
+                            text: "Подъезд",
+                            controller: entrance
                         ),
-                        Text('Доставка 25-35 минут',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                              color: Color(0xff808080)
-                          ),
+                        DeliverHereBlock(
+                            text: "Этаж",
+                            controller: floor
                         ),
-                        Spacer(
-                        ),
-                        SizedBox(
-                          height: 13,
-                          child: const Icon(
-                            Icons.arrow_forward_ios,
-                            size: 13,
-                            color: Color(0xffffffff),
-                          ),
+                        DeliverHereBlock(
+                            text: "Домофон",
+                            controller: intercom
                         ),
                       ],
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                Text('Адрес',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xffffffff)
-                  ),),
-                SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  height: 65,
-                  width: double.infinity,
-                  color: Color(0xff191a1f),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 24,
-                        child: const Icon(
-                          Icons.home,
-                          size: 24,
-                          color: Color(0xff808080),
-                        ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'Комментарий для курьера',
+                      style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Color(0xff808080)
                       ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 16,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              state.myAddress!.name,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: Color(0xffFFFFFF)
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            const Text(
-                              'Ярославль',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                                  color: Color(0xFF808080)
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      const SizedBox(
-                        height: 13,
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 13,
-                          color: Color(0xffffffff),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 26),
-                Row(
-                  children: [
-                    DeliverHereBlock(
-                        text: "Квартира",
-                        controller: apartment
                     ),
-                    DeliverHereBlock(
-                        text: "Подъезд",
-                        controller: entrance
+                    const SizedBox(height: 2),
+                    Container(
+                      height: 112,
+                      color: AppColors.color191A1F,
+                      child: TextField(
+                        controller: comment,
+                        maxLines: 5,
+                        style: const TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: AppColors.colorFFFFFF,
+                        ),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      ),
                     ),
-                    DeliverHereBlock(
-                        text: "Этаж",
-                        controller: floor
-                    ),
-                    DeliverHereBlock(
-                        text: "Домофон",
-                        controller: intercom
+                    const Spacer(),
+                    BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+                      builder: (context, state) {
+                        if (state.order.isEmpty) {
+                          return Container();
+                        }
+                        return GestureDetector(
+                          onTap: () async {
+                            final authService = Injector().get<AuthService>();
+                            var request = await post(
+                              Uri.parse("http://193.37.71.108:8080/v1/create"),
+                              body: jsonEncode({
+                                "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
+                                "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
+                                "order": {
+                                  "items": [
+                                    for (int i = 0; i < state.order.length; i++)
+                                      {
+                                        "productId": state.order[i].id,
+                                        "type": "Product",
+                                        "price": state.orderSum,
+                                        "amount": 1
+                                      }
+                                  ],
+                                  "payments": [
+                                    {
+                                      "paymentTypeKind": "Card",
+                                      "sum": state.orderSum,
+                                      "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
+                                      "isProcessedExternally": true,
+                                      "isFiscalizedExternally": true
+                                    }
+                                  ],
+                                  "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
+                                }
+                              }),
+                              headers: {
+                                "Authorization": "Bearer ${authService.accessToken}",
+                                'Content-Type': 'application/json'
+                              },
+                            );
+                            context.read<CustomNavbarCubit>().pay();
+                            print({
+                              "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
+                              "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
+                              "order": {
+                                "items": [
+                                  for (int i = 0; i < state.order.length; i++)
+                                    {
+                                      "productId": state.order[i].id,
+                                      "type": "Product",
+                                      "price": state.orderSum,
+                                      "amount": 1
+                                    }
+                                ],
+                                "payments": [
+                                  {
+                                    "paymentTypeKind": "Card",
+                                    "sum": state.orderSum,
+                                    "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
+                                    "isProcessedExternally": true,
+                                    "isFiscalizedExternally": true
+                                  }
+                                ],
+                                "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
+                              }
+                            });
+                            print(request.statusCode);
+                            print(utf8.decode(request.bodyBytes));
+                            if (request.statusCode == 401) {
+                              final refresh = await post(
+                                Uri.parse("http://193.37.71.108:8080/v1/refresh"),
+                                headers: {"Authorization": "Bearer ${authService.refreshToken}"},
+                              );
+                              final body = jsonDecode(refresh.body);
+                              authService.setTokens(body['access_token'], body['refresh_token']);
+                              request = await get(
+                                Uri.parse("http://193.37.71.108:8080/v1/whoiam"),
+                                headers: {"Authorization": "Bearer ${body['access_token']}"},
+                              );
+                            }
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PayPage(url: jsonDecode(request.body)["PaymentURL"])));
+                          },
+                          child: Container(
+                            height: 56,
+                            color: const Color(0xffFFB627),
+                            padding: const EdgeInsets.symmetric(horizontal: 12.5),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  'Оплатить',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: Color(0xff121212)
+                                  ),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${state.orderSum} ₽ · ',
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                const Text(
+                                  '25-30 мин',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Комментарий для курьера',
-                  style: TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: Color(0xff808080)
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Container(
-                  height: 112,
-                  color: AppColors.color191A1F,
-                  child: TextField(
-                    controller: comment,
-                    maxLines: 5,
-                    style: const TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: AppColors.colorFFFFFF,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                Spacer(),
-                BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-  builder: (context, state) {
-    if (state.order.isEmpty)
-      return Container();
-    return GestureDetector(
-                  onTap: () async {
-                    final authService = Injector().get<AuthService>();
-                    var request = await post(
-                      Uri.parse("http://193.37.71.108:8080/v1/create"),
-                      body: jsonEncode({
-                        "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
-                        "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
-                        "order": {
-                          "items": [
-                            for (int i = 0; i < state.order.length; i++)
-                            {
-                              "productId": state.order[i].id,
-                              "type": "Product",
-                              "price": state.orderSum,
-                              "amount": 1
-                            }
-                          ],
-                          "payments": [
-                            {
-                              "paymentTypeKind": "Card",
-                              "sum": state.orderSum,
-                              "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
-                              "isProcessedExternally": true,
-                              "isFiscalizedExternally": true
-                            }
-                          ],
-                          "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
-                        }
-                      }),
-                      headers: {
-                        "Authorization": "Bearer ${authService.accessToken}",
-                        'Content-Type': 'application/json'
-                      },
-                    );
-                    context.read<CustomNavbarCubit>().pay();
-                    print({
-                      "organizationId": "0915d8a9-4ca7-495f-a75c-1ce684424781",
-                      "terminalGroupId": "cfb5492e-5fdb-4318-85af-3b4ae2d383ab",
-                      "order": {
-                        "items": [
-                          for (int i = 0; i < state.order.length; i++)
-                            {
-                              "productId": state.order[i].id,
-                              "type": "Product",
-                              "price": state.orderSum,
-                              "amount": 1
-                            }
-                        ],
-                        "payments": [
-                          {
-                            "paymentTypeKind": "Card",
-                            "sum": state.orderSum,
-                            "paymentTypeId": "6493abfa-ebd6-42ac-93b9-e96b7279c1e4",
-                            "isProcessedExternally": true,
-                            "isFiscalizedExternally": true
-                          }
-                        ],
-                        "orderTypeId": "5b1508f9-fe5b-d6af-cb8d-043af587d5c2"
-                      }
-                    });
-                    print(request.statusCode);
-                    print(request.body);
-                    if (request.statusCode == 401) {
-                      final refresh = await post(
-                        Uri.parse("http://193.37.71.108:8080/v1/refresh"),
-                        headers: {"Authorization": "Bearer ${authService.refreshToken}"},
-                      );
-                      final body = jsonDecode(refresh.body);
-                      authService.setTokens(body['access_token'], body['refresh_token']);
-                      request = await get(
-                        Uri.parse("http://193.37.71.108:8080/v1/whoiam"),
-                        headers: {"Authorization": "Bearer ${body['access_token']}"},
-                      );
-                    }
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PayPage(url: jsonDecode(request.body)["PaymentURL"])));
-                  },
-                  child: Container(
-                    height: 56,
-                    color: const Color(0xffFFB627),
-                    padding: const EdgeInsets.symmetric(horizontal: 12.5),
-                    child: Row(
-                      children: [
-                        const Text(
-                          'Оплатить',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color(0xff121212)
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${state.orderSum} ₽ · ',
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        const Text(
-                          '25-30 мин',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 );
-  },
-),
-              ],
-            );
-  },
-),
+              },
+            ),
           ),
-      )
+        )
     );
   }
 }
