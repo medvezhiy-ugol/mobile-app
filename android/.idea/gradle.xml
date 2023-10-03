@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -13,7 +12,7 @@
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/external_app_launcher-3.1.0/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_splash-2.3.2/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.16/android" />
-            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/geolocator_android-4.3.0/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/geolocator_android-4.3.1/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/map_launcher-2.5.0+1/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_android-2.2.0/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.1/android" />

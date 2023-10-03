@@ -86,6 +86,8 @@ class _BasketPageState extends State<BasketPage> {
           count: count
       ));
     }
+    return BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
+  builder: (context, state) {
     return Stack(
       children: [
         Column(
@@ -110,9 +112,7 @@ class _BasketPageState extends State<BasketPage> {
               ],
             ),
             Expanded(
-              child: BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-  builder: (context, state) {
-    return ListView(
+              child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 children: [
                   const Text(
@@ -400,10 +400,10 @@ class _BasketPageState extends State<BasketPage> {
                                     const Text(
                                       'Выберите сервис',
                                       style: TextStyle(
-                                          fontFamily: 'Unbounded',
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 24,
-                                          color: Color(0xffEFEFEF),
+                                        fontFamily: 'Unbounded',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24,
+                                        color: Color(0xffEFEFEF),
                                       ),
                                     ),
                                     const SizedBox(height: 30),
@@ -510,8 +510,8 @@ class _BasketPageState extends State<BasketPage> {
                         ),
                       );
                     },
-                        child: Row(
-                    children: [
+                    child: Row(
+                      children: [
                         const Text(
                           "Доставка:",
                           style: TextStyle(
@@ -522,28 +522,27 @@ class _BasketPageState extends State<BasketPage> {
                         ),
                         const SizedBox(width: 10),
                         BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
-  builder: (context, state) {
-    return Text(
-      state.myAddress == null ? "" : state.myAddress!.name,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Color(0xff808080)
-                          ),
-                        );
-  },
-),
-                    ],
+                          builder: (context, state) {
+                            return Text(
+                              state.myAddress == null ? "Укажите адрес доставки" : state.myAddress!.name,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Color(0xff808080)
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                      ),
                   const SizedBox(height: 147),
                 ],
-              );
-  },
-),
+              ),
             ),
           ],
         ),
+        if (state.myAddress != null)
         Positioned(
           bottom: MediaQuery.of(context).padding.bottom,
           left: 0,
@@ -594,6 +593,8 @@ class _BasketPageState extends State<BasketPage> {
         ),
       ],
     );
+  },
+);
   },
 );
   }

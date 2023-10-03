@@ -353,13 +353,13 @@ class _HomePageState extends State<HomePage> {
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: Color(0xffF3CF7F),
+                                            color: AppColors.colorF3CF7F,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Image.asset("assets/images/home_page/loyalty_card4.png")
+                                  Image.asset("assets/images/logo.png")
                                 ],
                               ),
                           ),
