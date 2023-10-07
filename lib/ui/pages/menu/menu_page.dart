@@ -14,7 +14,7 @@ import '../../widgets/delivery_switcher.dart';
 import '../../widgets/menu/menu_sections_widget.dart';
 import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import '../../widgets/menu/scale_tabbar_module.dart';
-import 'basket_page.dart';
+import '../../widgets/sheets/menu_sheets/basket_sheet.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -224,7 +224,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                                   builder: (context) => Container(
                                       color: const Color(0xff111216),
                                       margin: EdgeInsets.only(top: MediaQuery.of(state.context!).padding.top),
-                                      child: BasketPage()
+                                      child: const BasketSheet()
                                   )
                               );
                             }

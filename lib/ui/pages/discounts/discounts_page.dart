@@ -4,14 +4,14 @@ import 'package:medvezhiy_ugol/ui/close_circle_button.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/delivery_terms.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 
-class StockPage extends StatefulWidget {
-  StockPage({super.key});
+class DiscountsPage extends StatefulWidget {
+  const DiscountsPage({super.key});
 
   @override
-  State<StockPage> createState() => _StockPageState();
+  State<DiscountsPage> createState() => _DiscountsPageState();
 }
 
-class _StockPageState extends State<StockPage> {
+class _DiscountsPageState extends State<DiscountsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

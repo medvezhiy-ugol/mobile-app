@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:medvezhiy_ugol/models/menu.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import 'package:medvezhiy_ugol/pages/home/active_order_page/active_order_page.dart';
+import 'package:medvezhiy_ugol/ui/pages/home/active_order_page.dart';
 import 'package:medvezhiy_ugol/pages/more/auth/auth_page/auth_page.dart';
 import 'package:medvezhiy_ugol/ui/pages/jackpot/jackpot_page.dart';
 import 'package:medvezhiy_ugol/ui/widgets/home/popular_item.dart';

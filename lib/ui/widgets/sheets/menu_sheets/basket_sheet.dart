@@ -6,22 +6,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:medvezhiy_ugol/ui/widgets/menu/pay_button.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/delivery_sheet.dart';
 import 'package:medvezhiy_ugol/ui/widgets/sheets/menu_sheets/promocode_sheet.dart';
-import '../../close_circle_button.dart';
-import '../../widgets/menu/basket_item.dart';
-import '../../../utils/app_colors.dart';
-import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import '../../widgets/sheets/menu_sheets/my_addresses_sheet.dart';
+import '../../../close_circle_button.dart';
+import '../../menu/basket_item.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import 'my_addresses_sheet.dart';
 
-class BasketPage extends StatefulWidget {
-  const BasketPage({super.key});
+class BasketSheet extends StatefulWidget {
+  const BasketSheet({super.key});
 
   @override
-  State<BasketPage> createState() => _BasketPageState();
+  State<BasketSheet> createState() => _BasketPageState();
 }
 
-class _BasketPageState extends State<BasketPage> {
+class _BasketPageState extends State<BasketSheet> {
   String delivery = '';
   String takeaway = '';
   String promocode = '';
@@ -542,12 +543,11 @@ class _BasketPageState extends State<BasketPage> {
             ),
           ],
         ),
-        if (state.myAddress != null)
         Positioned(
           bottom: MediaQuery.of(context).padding.bottom,
           left: 0,
           right: 0,
-          child: GestureDetector(
+          child: state.isTakeaway ? const PayButton() : state.myAddress == null ? Container() : GestureDetector(
             onTap: () {
               showModalBottomSheet(
                 context: context,

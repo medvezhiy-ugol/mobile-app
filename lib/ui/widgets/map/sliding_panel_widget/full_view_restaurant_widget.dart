@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:map_launcher/map_launcher.dart';
-import '../../../../ui/primary_button.dart';
-import '../../../../utils/app_colors.dart';
-import '../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
+import '../../../../../ui/primary_button.dart';
+import '../../../../../utils/app_colors.dart';
+import '../../../../pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 
 class FullViewRestaurantWidget extends StatefulWidget {
   const FullViewRestaurantWidget({super.key, required this.latEnd, required this.lonEnd});

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/utils/app_colors.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import '../../../ui/close_circle_button.dart';
+import '../../close_circle_button.dart';
 import '../../../utils/formatter.dart';
 
 class ActiveOrderPage extends StatefulWidget {

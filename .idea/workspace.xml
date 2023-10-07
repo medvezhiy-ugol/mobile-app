@@ -10,43 +10,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ab48ef-6c5e-4c65-86a9-9c8a0f8cfe9a" name="Changes" comment="change splash">
-      <change afterPath="$PROJECT_DIR$/assets/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/order_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/menu/next_button.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/menu/pay_button.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-hdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-hdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-mdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-mdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xhdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xhdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/android12splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/android12splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_detail_page/discounts_detail_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_detail_page/draw_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_lottery_history_page/discounts_lottery_history_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_lottery_page/lottery_detail_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/Leto.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/discounts_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/discounts/discounts_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/history_draw.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/discounts/discounts_page/item_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home/active_order_page/active_order_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home/active_order_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home/loalty_card/bloc/loalty_event.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home/loalty_card/bloc/loyalty_bloc.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home/loalty_card/bloc/loyalty_state.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home/loalty_card/loalty_card_page.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/more/about_app/history_order.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/full_view_restaurant_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/map/sliding_panel_widget/full_view_restaurant_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/map/sliding_panel_widget/view_restaurant_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/map/sliding_panel_widget/view_restaurant_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/custom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/custom_navbar.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_colors.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/map/map_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/basket_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/sheets/menu_sheets/basket_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/delivery_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/delivery_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/menu/menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/pay_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/pay_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,20 +87,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;AnalyzeApkAction.lastApkPath&quot;: &quot;/Users/tw0ch/Documents/GitHub/mobile-app/build/app/outputs/flutter-apk/app-debug.apk&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mindykfam/Desktop/Branches/mobile-app&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "AnalyzeApkAction.lastApkPath": "/Users/tw0ch/Documents/GitHub/mobile-app/build/app/outputs/flutter-apk/app-debug.apk",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "D:/Developer/voices-mobile",
+    "settings.editor.selected.configurable": "coverage",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yarin\StudioProjects\mobile-app\assets\images\more_page" />
@@ -115,11 +109,11 @@
       <recent name="$PROJECT_DIR$/lib/widgets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Developer\mobile-app\lib\ui\widgets\sheets\menu_sheets" />
+      <recent name="D:\Developer\mobile-app\lib\ui\pages\home" />
+      <recent name="D:\Developer\mobile-app\lib\ui\pages\discounts" />
+      <recent name="D:\Developer\mobile-app\lib\ui\pages" />
       <recent name="$PROJECT_DIR$/assets/images" />
-      <recent name="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi" />
-      <recent name="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi" />
-      <recent name="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi" />
-      <recent name="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

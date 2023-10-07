@@ -24,8 +24,6 @@ class _PayPageState extends State<PayPage> {
           onProgress: (int progress) {
             // Update loading bar.
           },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.contains('https://play.google.com/store/apps/details?id=com.bearcorner_mobile')) {

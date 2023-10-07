@@ -1,10 +1,12 @@
 import 'dart:convert';
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:http/http.dart';
+import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
 import 'package:medvezhiy_ugol/pages/more/my_orders/order_delivered_page.dart';
-import '../../../models/order_model.dart';
+import '../../../models/menu.dart';
 import '../../../services/auth_service.dart';
 import '../../../ui/back_arrow_button.dart';
 import '../../../utils/app_colors.dart';
@@ -17,7 +19,7 @@ class HistoryOrder extends StatefulWidget {
 }
 
 class _HistoryOrderState extends State<HistoryOrder> {
-  List<OrderModel> orders = [];
+  List<MenuProduct> orders = [];
 
   @override
   void initState() {
@@ -27,19 +29,19 @@ class _HistoryOrderState extends State<HistoryOrder> {
 
   void getHistory() async {
     final authService = Injector().get<AuthService>();
-    // var request = await post(
-    //   Uri.parse("http://193.37.71.108:8080/v1/roulette/create"),
-    //   body: jsonEncode({
-    //     "title": "string",
-    //     "start": "2023-09-23",
-    //     "end": "2023-09-23",
-    //     "score": 0,
-    //     "winners_count": 0
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    // );
+    var response = await post(
+      Uri.parse("http://193.37.71.108:8080/v1/roulette/create"),
+      body: jsonEncode({
+        "title": "string",
+        "start": "2023-09-23",
+        "end": "2023-09-23",
+        "score": 0,
+        "winners_count": 0
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    );
     // print(request.statusCode);
     // print(utf8.decode(request.bodyBytes));
     // request = await get(
@@ -50,15 +52,15 @@ class _HistoryOrderState extends State<HistoryOrder> {
     // );
     // print(request.statusCode);
     // print(request.body);
-    var response = await get(
-      Uri.parse("http://193.37.71.108:8080/v1/get_history/0/20"),
-      headers: {
-        "Authorization": "Bearer ${authService.accessToken}",
-        'Content-Type': 'application/json'
-      },
-    );
+    // var response = await get(
+    //   Uri.parse("http://193.37.71.108:8080/v1/get_history/0/20"),
+    //   headers: {
+    //     "Authorization": "Bearer ${authService.accessToken}",
+    //     'Content-Type': 'application/json'
+    //   },
+    // );
     print(response.statusCode);
-    print(response.body);
+    log(utf8.decode(response.bodyBytes));
     if (response.statusCode == 401) {
       final refresh = await post(
         Uri.parse("http://193.37.71.108:8080/v1/refresh"),
@@ -76,9 +78,20 @@ class _HistoryOrderState extends State<HistoryOrder> {
     }
     if (response.statusCode == 200) {
       List feedModelsJson = json.decode(response.body);
+      List<String> ids = [];
       for (var modelJson in feedModelsJson) {
-        OrderModel feedModel = OrderModel.fromJson(modelJson["orderInfo"]);
-        orders.add(feedModel);
+        ids.add(modelJson["orderInfo"]["id"]);
+      }
+      final menu = context.read<CustomNavbarCubit>().state.menu;
+      for (var category in menu) {
+        for (var item in category.items) {
+          print(item.id);
+          for (var id in ids) {
+            if (item.id == id) {
+              orders.add(item);
+            }
+          }
+        }
       }
       setState(() {});
     }

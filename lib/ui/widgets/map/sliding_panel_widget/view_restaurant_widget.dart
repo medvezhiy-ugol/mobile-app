@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medvezhiy_ugol/pages/custom_navbar/bloc/custom_navbar_cubit.dart';
-import '../../../../ui/close_circle_button.dart';
-import '../../../../ui/primary_button.dart';
-import '../../../../utils/app_colors.dart';
+import '../../../../../ui/close_circle_button.dart';
+import '../../../../../ui/primary_button.dart';
+import '../../../../../utils/app_colors.dart';
 
 class ViewRestaurantWidget extends StatelessWidget {
   const ViewRestaurantWidget({super.key, required this.pageController});
