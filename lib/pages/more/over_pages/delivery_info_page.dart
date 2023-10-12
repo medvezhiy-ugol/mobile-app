@@ -89,7 +89,7 @@ class DeliveryInfoPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(20.0),
                                 child: Center(
                                   child: Text(
-                                    'Ежедневно с 10:00 до 23:00',
+                                    'Ежедневно с 11:00 до 23:00',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,

@@ -419,8 +419,8 @@ class _BasketPageState extends State<BasketSheet> {
                                           onTap: () =>
                                               map.showDirections(
                                                 destination: Coords(
-                                                  _position.latitude,
-                                                  _position.longitude,
+                                                  57.62914049506065,
+                                                    39.88227491507207,
                                                 ),
                                                 destinationTitle: "Медвежий угол",
                                                 origin: Coords(
@@ -447,13 +447,13 @@ class _BasketPageState extends State<BasketSheet> {
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 1
                                       ),
-                                      color: Color(0xff26282F),
+                                      color: const Color(0xff26282F),
                                       child: ListTile(
                                         onTap: () {
-                                          Clipboard.setData(const ClipboardData(text: '150023, Ярославль, улица Свободы, 45'));
+                                          Clipboard.setData(const ClipboardData(text: '150000, Ярославль, улица Свободы, 16'));
                                           Flushbar(
                                             message:  "Адрес скопирован",
-                                            duration:  Duration(seconds: 3),
+                                            duration:  const Duration(seconds: 3),
                                             flushbarPosition: FlushbarPosition.TOP,
                                           ).show(context);
                                         },

@@ -24,11 +24,12 @@ class PopularItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 312,
+        height: 315,
         decoration: const BoxDecoration(
           color: AppColors.color191A1F,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Image.network(
               srcImg,

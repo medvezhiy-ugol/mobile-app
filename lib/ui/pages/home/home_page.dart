@@ -34,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   late final Timer _popularTimer;
   late final Timer countDownTimer;
 
-
   int seconds = 86401;
   int _index = 1;
   int _popularIndex = 0;
@@ -111,6 +110,9 @@ class _HomePageState extends State<HomePage> {
             }
           }
             });
+    if (authService.accessToken == "") {
+
+    }
   }
 
   String convert(int seconds) {
@@ -155,26 +157,26 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const SizedBox(height: 13),
                   GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => JackpotPage())),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const JackpotPage())),
                     child: SizedBox(
-                      height: 70,
-                      width: 185,
+                      height: 90,
+                      width: 240,
                       child: Stack(
                         children: [
                           Image.asset(
                             'assets/images/drum.png',
                             fit: BoxFit.fill,
-                            height: 70,
-                            width: 185,
+                            height: 90,
+                            width: 240,
                           ),
                           Positioned(
-                            left: 30,
-                            top: 11,
+                            left: 42,
+                            top: 16,
                             child: FlipCountdownClock(
                               duration: const Duration(days: 1),
-                              digitSize: 36.0,
-                              width: 21,
-                              height: 40.0,
+                              digitSize: 40.0,
+                              width: 28,
+                              height: 50.0,
                               digitSpacing: const EdgeInsets.symmetric(horizontal: 1),
                               separatorWidth: 0,
                               digitColor: const Color(0xff26252B),
@@ -187,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Text(
-                    'Джекпот',
+                    'Розыгрыш',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -208,24 +210,36 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ActiveOrderPage()));
+                              builder: (context) => ActiveOrderPage()
+                          ),
+                      );
                     },
                     child: Container(
                       child: Column(children: [
-                        Text("Заказ принят", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
-                        SizedBox(height: 10,),
+                        const Text(
+                          "Заказ принят",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 10,),
                         Image.asset("assets/images/icons.png"),
-                        SizedBox(height: 12,),
+                        const SizedBox(height: 12,),
                         Text(Formatter.formattedTime(timeInSecond: state.orderSeconds), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),),
-                        SizedBox(height: 3),
+                        const SizedBox(height: 3),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 120),
                           child: LinearProgressIndicator(
                             value: (1800 - state.orderSeconds) / 1800,
-                            backgroundColor: AppColors.color191A1F, color: AppColors.colorFF9900,),
+                            backgroundColor: AppColors.color191A1F,
+                            color: AppColors.colorFF9900,
+                          ),
                         ),
-                        SizedBox(height: 32,)
-                      ],),
+                        const SizedBox(height: 32,)
+                      ],
+                      ),
                     ),
                   ),
                   Padding(
@@ -484,7 +498,7 @@ class _HomePageState extends State<HomePage> {
                           child: GestureDetector(
                             onTap: () => context.read<CustomNavbarCubit>().changeIndex(2),
                             child: const Text(
-                              'Популярно',
+                              'Топ продаж',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -509,16 +523,16 @@ class _HomePageState extends State<HomePage> {
                                           padding: EdgeInsets.only(
                                             top: MediaQuery.of(state.context!).padding.top,
                                           ),
-                                          child: ProductPage(id: menu[2].id, isPizza: false),
+                                          child: ProductPage(id: menu[0].id, isPizza: false),
                                         )
                                     );
     },
                                   child: PopularItem(
-                                    srcImg: menu[2].itemSizes[0].buttonImageUrl!,
-                                    name: menu[2].name,
-                                    gram: menu[2].itemSizes.first.portionWeightGrams.toString(),
+                                    srcImg: menu[0].itemSizes[0].buttonImageUrl!,
+                                    name: menu[0].name,
+                                    gram: menu[0].itemSizes.first.portionWeightGrams.toString(),
                                     description: menu[2].description,
-                                    price: menu[2].itemSizes[0].prices[0].price,
+                                    price: menu[0].itemSizes[0].prices[0].price,
                                     isBadge: false,
                                   ),
                                 ),
@@ -550,78 +564,67 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ],
-                          )
-                          // PageView.builder(
-                          //   controller: _popularController,
-                          //   itemCount: menu.length ~/ 2,
-                          //   onPageChanged: (value) {
-                          //     _popularIndex = value;
-                          //   },
-                          //   itemBuilder: (context, index) => LayoutGrid(
-                          //     columnSizes: [1.fr, 1.fr],
-                          //     rowSizes: List.generate(
-                          //       2,
-                          //           (index) => auto,
-                          //     ),
-                          //     columnGap: 10,
-                          //     rowGap: 10,
-                          //     children: [
-                          //       GestureDetector(
-                          //         onTap: () async {
-                          //           final addToOrder = await showModalBottomSheet(
-                          //               context: state.context!,
-                          //               isScrollControlled: true,
-                          //               builder: (sheetContext) => Container(
-                          //                 color: const Color(0xff000000),
-                          //                 padding: EdgeInsets.only(
-                          //                   top: MediaQuery.of(state.context!).padding.top,
-                          //                 ),
-                          //                 child: ProductPage(id: menu[index * 2].id),
-                          //               )
-                          //           );
-                          //           if (addToOrder) {
-                          //             context.read<CustomNavbarCubit>().changeIndex(2);
-                          //           }
-                          //         },
-                          //         child: PopularItem(
-                          //           srcImg:  menu[index * 2].itemSizes[0].buttonImageUrl!,
-                          //           name: menu[index * 2].name,
-                          //           gram: menu[index * 2].itemSizes.first.portionWeightGrams.toString(),
-                          //           description: menu[index * 2].description,
-                          //           price: menu[index * 2].itemSizes[0].prices[0].price,
-                          //           isBadge: false,
-                          //         ),
-                          //       ),
-                          //       GestureDetector(onTap: () async {
-                          //           final addToOrder = await showModalBottomSheet(
-                          //               context: state.context!,
-                          //               isScrollControlled: true,
-                          //               builder: (sheetContext) => Container(
-                          //                 color: const Color(0xff000000),
-                          //                 padding: EdgeInsets.only(
-                          //                   top: MediaQuery.of(state.context!).padding.top,
-                          //                 ),
-                          //                 child: ProductPage(id: menu[index * 2 + 1].id),
-                          //               )
-                          //           );
-                          //           if (addToOrder) {
-                          //             context.read<CustomNavbarCubit>().changeIndex(2);
-                          //           }
-                          //         },
-                          //         child: PopularItem(
-                          //           srcImg: menu[index * 2 + 1].itemSizes[0].buttonImageUrl!,
-                          //           name: menu[index * 2 + 1].name,
-                          //           gram: menu[index * 2 + 1].itemSizes.first.portionWeightGrams.toString(),
-                          //           description: menu[index * 2 + 1].description,
-                          //           price: menu[index * 2 + 1].itemSizes[0].prices[0].price,
-                          //           isBadge: false,
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
+                          ),
                         ),
                         const SizedBox(height: 32),
+                        SizedBox(
+                          height: 315.22,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: state.context!,
+                                        isScrollControlled: true,
+                                        builder: (sheetContext) => Container(
+                                          color: const Color(0xff000000),
+                                          padding: EdgeInsets.only(
+                                            top: MediaQuery.of(state.context!).padding.top,
+                                          ),
+                                          child: ProductPage(id: menu[2].id, isPizza: false),
+                                        )
+                                    );
+                                  },
+                                  child: PopularItem(
+                                    srcImg: menu[2].itemSizes[0].buttonImageUrl!,
+                                    name: menu[2].name,
+                                    gram: menu[2].itemSizes.first.portionWeightGrams.toString(),
+                                    description: menu[2].description,
+                                    price: menu[2].itemSizes[0].prices[0].price,
+                                    isBadge: false,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 5),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: state.context!,
+                                        isScrollControlled: true,
+                                        builder: (sheetContext) => Container(
+                                          color: const Color(0xff000000),
+                                          padding: EdgeInsets.only(
+                                            top: MediaQuery.of(state.context!).padding.top,
+                                          ),
+                                          child: ProductPage(id: menu[3].id, isPizza: false),
+                                        )
+                                    );
+                                  },
+                                  child: PopularItem(
+                                    srcImg: menu[3].itemSizes[0].buttonImageUrl!,
+                                    name: menu[3].name,
+                                    gram: menu[3].itemSizes.first.portionWeightGrams.toString(),
+                                    description: menu[3].description,
+                                    price: menu[3].itemSizes[0].prices[0].price,
+                                    isBadge: false,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),

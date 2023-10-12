@@ -57,7 +57,7 @@ class ViewRestaurantWidget extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               const Text(
-                '150023, Ярославль, улица Свободы, 45',
+                '150000, Ярославль, улица Свободы, 16',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -66,9 +66,9 @@ class ViewRestaurantWidget extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Text(
-                DateTime.now().hour > 22 || DateTime.now().hour < 10
-                    ? 'Откроется в 10:00'
-                    : 'Открыто до 22:00',
+                DateTime.now().hour > 23 || DateTime.now().hour < 11
+                    ? 'Откроется в 11:00'
+                    : 'Открыто до 23:00',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

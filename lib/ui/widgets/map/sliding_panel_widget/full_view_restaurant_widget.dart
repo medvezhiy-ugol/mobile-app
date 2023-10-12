@@ -63,10 +63,8 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                height: 27,
-              ),
-              Text(
+              const SizedBox(height: 27),
+              const Text(
                 'Медвежий угол Свободы Ярославль',
                 style: TextStyle(
                   fontFamily: 'Unbounded',
@@ -76,23 +74,21 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
-                '150023, Ярославль, улица Свободы, 45',
+              const Text(
+                '150000, Ярославль, улица Свободы, 16',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: AppColors.color808080,
                 ),
               ),
-              SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               InfoBox(
                 title: 'Режим работы',
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Зал',
                       style: TextStyle(
                           fontSize: 14,
@@ -100,9 +96,9 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                           color: Colors.white),
                     ),
                     Text(
-                        DateTime.now().hour > 22 || DateTime.now().hour < 10
-                            ? 'Откроется в 10:00'
-                        : 'Открыто до 22:00',
+                        DateTime.now().hour > 23 || DateTime.now().hour < 11
+                            ? 'Откроется в 11:00'
+                        : 'Открыто до 23:00',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -119,15 +115,13 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                 title: 'Особенности',
                 child: RestaurantAttributes(height: 21),
               ),
-              SizedBox(
-                height: 3,
-              ),
+              const SizedBox(height: 3),
               InfoBox(
                 title: 'Телефон',
-                child: Row(
+                child: const Row(
                   children: [
                     Text(
-                      '+79231235673',
+                      '+79012737777',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -137,9 +131,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 24,
-              ),
+              const SizedBox(height: 24),
               BlocBuilder<CustomNavbarCubit, CustomNavbarState>(
                 builder: (context, state) {
                   return PrimaryButton.icon(
@@ -163,23 +155,23 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                           return SafeArea(
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     Center(
                                       child: Container(
                                         height: 4,
                                         width: 48,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(9),
-                                          color: Color(0xffD9D9D9).withOpacity(0.3)
+                                          color: const Color(0xffD9D9D9).withOpacity(0.3)
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 36),
-                                    Text(
+                                    const SizedBox(height: 36),
+                                    const Text(
                                       'Выберите сервис',
                                       style: TextStyle(
                                         fontFamily: 'Unbounded',
@@ -188,7 +180,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                                         color: Color(0xffEFEFEF)
                                       ),
                                     ),
-                                    SizedBox(height: 30),
+                                    const SizedBox(height: 30),
                                     for (var map in availableMaps)
                                       Container(
                                         height: 65,
@@ -200,13 +192,13 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                                           onTap: () =>
                                               map.showDirections(
                               destination: Coords(
-                              _position.latitude,
-                              _position.longitude,
+                                  57.62914049506065,
+                                  39.88227491507207,
                             ),
                             destinationTitle: "Медвежий угол",
                             origin: Coords(
-                                widget.latEnd,
-                                widget.lonEnd
+                                _position.latitude,
+                                _position.longitude,
                             ),
                             originTitle: "Вы",
                             waypoints: [],
@@ -229,7 +221,7 @@ class _FullViewRestaurantWidgetState extends State<FullViewRestaurantWidget> {
                                       color: const Color(0xff26282F),
                                       child: ListTile(
                                         onTap: () {
-                                          Clipboard.setData(const ClipboardData(text: '150023, Ярославль, улица Свободы, 45'));
+                                          Clipboard.setData(const ClipboardData(text: '150000, Ярославль, улица Свободы, 16'));
                                           Flushbar(
                                             message:  "Адрес скопирован",
                                             duration:  const Duration(seconds: 3),
